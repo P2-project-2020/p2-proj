@@ -4,7 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += widgets
+
+QT_AUTO_SCREEN_SCALE_FACTOR=0 MyDispensary
+
+TARGET = MyDrink
+TEMPLATE = app
+CONFIG += c++11
+QMAKE_CXXFLAGS += -std=c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
