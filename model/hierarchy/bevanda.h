@@ -4,15 +4,16 @@
 
 class Bevanda{
 	
-	double prezzo;
-	std::string nome_generico;
-
+	double price;
+	std::string generic_name;
+	std::string brand;
+	
 public:
 
-	Bevanda(const std::string& nome, double prezzo);
+	Bevanda(const std::string& _name, double _price);
 	virtual ~Bevanda() = default;
 
-	virtual double prezzo_finale() const = 0;
+	virtual double final_price() const = 0;
 	
 };
 

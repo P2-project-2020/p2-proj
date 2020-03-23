@@ -3,7 +3,10 @@
 #include "bevanda.h"
 
 class Analcolico: virtual public Bevanda{
-	double zuccheri; 			// che attributi mettere? buh
+	double sugar; 			// che attributi mettere? buh
+public:
+	Analcolico(std::string _name, double _price, double sugar);
+	Analcolico(std::string _name, std::string brand, double _price, double sugar);
 };
 
 
