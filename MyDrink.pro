@@ -32,10 +32,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        piatto.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+        piatto.h
 
 FORMS += \
         mainwindow.ui
