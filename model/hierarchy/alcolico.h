@@ -4,12 +4,11 @@
 
 class Alcolico: virtual public Bevanda{
 
-	float grado;
+	double grado;
 	
 public:
 
-	Alcolico(std::string _nome, double _prezzo, float _grado);
-	Alcolico(std::string _nome, std::string _brand, double _prezzo, float _grado);
+	Alcolico(double _grado);
 
 	double percentualeAlcol() const;
 	std::string getNome() const;

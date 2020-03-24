@@ -2,6 +2,8 @@
 #define PRODOTTO_H
 #include <string>
 
+
+
 class Prodotto{
 	
     std::string nome,
@@ -14,8 +16,9 @@ class Prodotto{
     static void setCodice();	// per ora statico, pensavo di farlo in modo che "guardi" tutti i prodotti presenti o una cosa simile
 	
 public:
+	Prodotto();
     Prodotto(std::string, double, double);
-    //Prodotto(const std::string& _nome, double _kcal, double _prezzo);
+    
 	virtual ~Prodotto() = default;
 	
 	/* Forse i metodi qua sotto andranno rivisti, potremmo pensare ad avere il menù come 
