@@ -4,23 +4,25 @@
 
 class Prodotto{
 	
-	std::string nome,
-		descrizione,
+    std::string nome,
+        descrizione,
 		ingredienti,
-		codice_prodotto;		// Questo penso abbia senso inizializzarlo con un metodo nel costruttore
+        codice_prodotto;		// Questo penso abbia senso inizializzarlo con un metodo nel costruttore
 
-	double kcal, prezzo;
+    double kcal, prezzo;
 
-	static void setCodice();	// per ora statico, pensavo di farlo in modo che "guardi" tutti i prodotti presenti o una cosa simile
+    static void setCodice();	// per ora statico, pensavo di farlo in modo che "guardi" tutti i prodotti presenti o una cosa simile
 	
 public:
-	Prodotto(const std::string& _nome, double _prezzo);
+    Prodotto(std::string, double, double);
+    //Prodotto(const std::string& _nome, double _kcal, double _prezzo);
 	virtual ~Prodotto() = default;
 	
 	/* Forse i metodi qua sotto andranno rivisti, potremmo pensare ad avere il menù come 
 	   file (json o altro formato) che una volta parsato imposta questi campi */
 	void setDescrizione(const std::string& desc);
 	void setIngredienti(const std::string& ingr);
+
 
 	/* Ha senso che sia virtuale puro perchè cosi per le bibite può ritornare la marca, 
 	   mentre per i piatti solo il nome del piatto, nell'ottica di fare gli scontrini */ 
