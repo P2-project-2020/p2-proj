@@ -5,7 +5,12 @@
 
 class Drink: public Alcolico, public Analcolico {
 public:
-	Drink(std::string _name, Alcolico base1, Analcolico base2); // Non se se inserire anche il prezzo o fare in modo che di default venga calcolato in base alle quantità
+	Drink(std::string _name, double _prezzo);
+
+	double percentualeAlcol() const;
+	std::string getNome() const;
+	std::string dettaglio() const;
+	double getPrezzo() const;
 	
 }; 
 

@@ -10,7 +10,7 @@ class Bevanda: public Prodotto{
 	bool hot;
 	bool frizzante;
 
-	static double soglia_superalcolico; // buona pratica per le constanti per Ranzo
+	static double sogliaSuperalcolico; // buona pratica per le constanti per Ranzo
 	
 public:
 	
@@ -24,6 +24,6 @@ public:
 	bool isSuperalcolico() const;
 };
 
-double Bevanda::soglia_superalcolico = 40;
+double Bevanda::sogliaSuperalcolico = 40;
 
 #endif /* BEVANDA_H */
