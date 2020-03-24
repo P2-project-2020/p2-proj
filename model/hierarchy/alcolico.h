@@ -3,10 +3,18 @@
 #include "bevanda.h"
 
 class Alcolico: virtual public Bevanda{
-	float strength;
+
+	float grado;
+	
 public:
-	Alcolico(std::string _name, double _price, float _strength);
-	Alcolico(std::string _name, std::string _brand, double _price, float _strength);
+
+	Alcolico(std::string _nome, double _prezzo, float _grado);
+	Alcolico(std::string _nome, std::string _brand, double _prezzo, float _grado);
+
+	double percentualeAlcol() const;
+	std::string getNome() const;
+	double getPrezzo() const;
+	std::string dettaglio() const;
 };
 
 #endif /* ALCOLICO_H */

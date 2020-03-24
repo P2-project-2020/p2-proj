@@ -3,7 +3,7 @@
 #include "prodotto.h"
 #include <string>
 
-class Bevanda: virtual public Prodotto{
+class Bevanda: public Prodotto{
 	
 	std::string brand;
 	double volume;
@@ -13,7 +13,8 @@ class Bevanda: virtual public Prodotto{
 	static double soglia_superalcolico; // buona pratica per le constanti per Ranzo
 	
 public:
-
+	
+	// Il distruttore è già virtuale per Prodotto
 	Bevanda(const std::string& _brand, double _price, const std::string& _nome_generico_);
 
 	/* Ha anchesenso per i coctail dove la parte di alcol dipende da quanto alcolico c'è*/

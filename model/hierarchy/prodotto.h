@@ -24,12 +24,12 @@ public:
 
 	/* Ha senso che sia virtuale puro perchè cosi per le bibite può ritornare la marca, 
 	   mentre per i piatti solo il nome del piatto, nell'ottica di fare gli scontrini */ 
-	virtual const std::string& getNome() const = 0; 
+	virtual std::string getNome() const = 0; 
 	/* anche in questo caso, magari non vogliamo che ritorni solo il prezzo nei figli
 	   (tipo, coctail con limone: +50€ per il limone) */
 	virtual double getPrezzo() const = 0;
 	/* penso sempre agli scontrini dove mette "senza pane, formaggio, ecc" nei toast al mac donald*/
-	virtual const std::string& dettaglio() const = 0;
+	virtual std::string dettaglio() const = 0;
 };
 
 #endif /* PRODOTTO_H */
