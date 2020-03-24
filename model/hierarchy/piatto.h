@@ -5,7 +5,7 @@
 
 enum categoria {vegetariano, vegano, normale};
 
-class Piatto : virtual public Prodotto
+class Piatto : public Prodotto
 {
 private:
     categoria type;

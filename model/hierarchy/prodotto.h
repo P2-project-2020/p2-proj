@@ -7,7 +7,7 @@ class Prodotto{
     std::string nome,
         descrizione,
 		ingredienti,
-        codice_prodotto;		// Questo penso abbia senso inizializzarlo con un metodo nel costruttore
+        codiceProdotto;		// Questo penso abbia senso inizializzarlo con un metodo nel costruttore
 
     double kcal, prezzo;
 
