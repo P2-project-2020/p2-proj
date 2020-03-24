@@ -1,20 +1,19 @@
 #ifndef BEVANDA_H
 #define BEVANDA_H
+#include "prodotto.h"
 #include <string>
 
-class Bevanda{
+class Bevanda: public Prodotto{
 	
-	double price;
-	std::string generic_name;
 	std::string brand;
+	double volume;
+	bool hot;
+	bool frizzante;
 	
 public:
 
-	Bevanda(const std::string& _name, double _price);
-	virtual ~Bevanda() = default;
-
-	virtual double final_price() const = 0;
-	
+	Bevanda(const std::string& _brand, double _price, const std::string& _nome_generico_, );
+	double percentualeAlcol() const;
 };
 
 #endif /* BEVANDA_H */
