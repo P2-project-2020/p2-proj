@@ -16,7 +16,7 @@ public:
 	
 	// Il distruttore è già virtuale per Prodotto
 	Bevanda(); // Per ora tengo quello vuoto, sennò diventa bloat subito
-
+	Bevanda(const std::string& _nome, double prezzo, double kcal = 0);
 	/* Ha anche senso per i coctail dove la parte di alcol dipende da quanto alcolico c'è*/
 	virtual double percentualeAlcol() const = 0;
 	/* Questo lo possiamo implementare già qui in modo che guardi il metodo sopra e decida
