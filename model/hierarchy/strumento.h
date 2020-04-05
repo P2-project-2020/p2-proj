@@ -8,11 +8,16 @@ private:
 protected:
 	double price;
 public:
+	
+	enum Tune {sporano, contralto, tenor, baritone, bass};
+	
 	Strumento(double, const std::string&, bool = false);
 	virtual ~Strumento();
 	
-	virtual bool isUsed() const { return used; }
+	bool isUsed() const { return used; }
+	std::string getBrand() const { return brand; }
+
 	virtual std::string description() const = 0;
 	virtual std::string className() const = 0;
-	std::string getBrand() const { return brand; }
+	virtual Strumento::Tune tune() const = 0;
 };
