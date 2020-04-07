@@ -1,7 +1,7 @@
 #include "chitarra.h"
 
 Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, bool _used, unsigned int _stringsNumber):
-	Corda(_stringsNumber,_price,_brand,_used), type(_type), model(_model){}
+	Strumento(_price,_brand,_used), Corda(_stringsNumber), type(_type), model(_model){}
 
 Strumento::Tune Chitarra::tune() const { return undefined; }
 

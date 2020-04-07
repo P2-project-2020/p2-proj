@@ -1,7 +1,7 @@
 #pragma once
 #include "corda.h"
 
-class Chitarra: virtual public Corda{
+class Chitarra: public Corda{
 public:
 	enum guitarType {electric, acoustic, classic};
 

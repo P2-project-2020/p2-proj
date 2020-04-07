@@ -1,9 +1,9 @@
 #pragma once
 #include "strumento.h"
 
-class Arco: virtual public Strumento{
+class Arco: virtual public Strumento{ // dato che ereditarietà virtuale e classe astratta il costruttore di strumento non verrà mai chiamato da lei
 protected:
-	std::string specificDescription;
+	bool lutherie;
 public:
-	Arco(double, const std::string&, const std::string& = "", bool = false);
+	Arco(bool = false);
 };

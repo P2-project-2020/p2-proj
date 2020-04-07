@@ -4,5 +4,5 @@
 class Percussione: virtual public Strumento{
 	bool tuned;					// intonato o no
 public:
-	Percussione(double, const std::string&, bool = false, bool = false);
+	Percussione(bool = false);
 };
