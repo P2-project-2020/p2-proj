@@ -1,7 +1,8 @@
 #include "chitarra.h"
+const unsigned int Chitarra::defaultStrings = 6;
 
-Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, bool _used, unsigned int _stringsNumber):
-	Strumento(_price,_brand,_used), Corda(_stringsNumber), type(_type), model(_model){}
+Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringsNumber):
+	Strumento(_price,_brand,_used,_desc), Corda(_stringsNumber), type(_type), model(_model){}
 
 Strumento::Tune Chitarra::tune() const { return undefined; }
 

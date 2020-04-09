@@ -6,7 +6,7 @@ public:
 	enum Tune {undefined = 0x0, soprano = 0x1, contralto = 0x2, tenor = 0x3, baritone = 0x4, bass = 0x5};
 
 	Strumento(double, const std::string&, bool = false, const std::string& = std::string(""));
-	virtual ~Strumento();
+	virtual ~Strumento() = default;
 	
 	bool isUsed() const { return used; }
 	std::string getBrand() const { return brand; }
