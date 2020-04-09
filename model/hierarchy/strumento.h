@@ -3,7 +3,7 @@
 
 class Strumento{
 public:
-	enum Tune {undefined = 0x0, sporano = 0x1, contralto = 0x2, tenor = 0x3, baritone = 0x4, bass = 0x5};
+	enum Tune {undefined = 0x0, soprano = 0x1, contralto = 0x2, tenor = 0x3, baritone = 0x4, bass = 0x5};
 
 	Strumento(double, const std::string&, bool = false, const std::string& = std::string(""));
 	virtual ~Strumento();
@@ -15,10 +15,10 @@ public:
 	virtual Strumento::Tune tune() const = 0;
 
 	double getPrice() const;
-	void setPrice();
+	void setPrice(double);
 
 	std::string getDescription() const;
-	void setDescription();
+	void setDescription(const std::string&);
 
 private:
 	double price;

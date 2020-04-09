@@ -3,5 +3,7 @@
 
 class Sax: public Fiato {
 public:
-	Sax(Fiato::Material, Strumento::Tune, double, const std::string&, bool = false);
+	Sax(Strumento::Tune, double, const std::string&, Fiato::Material = brass, bool = false);
+
+	std::string className() const;
 };

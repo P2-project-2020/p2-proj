@@ -2,16 +2,17 @@
 #include "strumento.h"
 
 class Fiato: virtual public Strumento{
-protected:
+public:
 	enum Material {silver, brass, plastic};
+	
+protected:
 	enum Mouthpiece {woodwind_mouthpiece, brass_mouthpiece};
 	Material material;
 	Tune instrumentTune;
 
 public:
-	Fiato(Material, Strumento::Tune, Mouthpiece,  double, const std::string&, bool = false);
+	Fiato(Material, Strumento::Tune, Mouthpiece);
 	Strumento::Tune tune() const;
-	std::string className() const;
 
 private:
 	Mouthpiece mouthpiece;
