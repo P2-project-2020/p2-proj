@@ -13,7 +13,7 @@ protected:
 public:
 	Fiato(Material, Strumento::Tune, Mouthpiece);
 	Strumento::Tune tune() const;
-
+	std::string getMaterial() const;
 private:
 	Mouthpiece mouthpiece;
 };

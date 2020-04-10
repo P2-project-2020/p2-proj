@@ -3,8 +3,8 @@
 
 class Strumento{
 public:
-	enum Tune {undefined = 0x0, soprano = 0x1, contralto = 0x2, tenor = 0x3, baritone = 0x4, bass = 0x5};
-
+	enum Tune {undefined, soprano, contralto, tenor, baritone, bass};
+	
 	Strumento(double, const std::string&, bool = false, const std::string& = std::string(""));
 	virtual ~Strumento() = default;
 	
@@ -13,6 +13,7 @@ public:
 	
 	virtual std::string className() const = 0;
 	virtual Strumento::Tune tune() const = 0;
+	virtual std::string getMaterial() const;
 
 	double getPrice() const;
 	void setPrice(double);
