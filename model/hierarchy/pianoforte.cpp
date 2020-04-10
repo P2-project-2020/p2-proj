@@ -18,6 +18,15 @@ std::string Pianoforte::className() const {
 	return "Pianoforte " + specifier;
 }
 
-std::string Pianoforte::getMateriale() const {
-	return (pianoKeys == ivory)
+std::string Pianoforte::getMaterial() const {
+	std::string to_return;
+	switch (pianoKeys) {
+		case wood:
+			to_return = "Legno"; break; 
+		case plastic:
+			to_return = "Plasitca"; break; 
+		case ivory:	
+			to_return = "Avorio"; break; 
+	}
+	return to_return;
 }

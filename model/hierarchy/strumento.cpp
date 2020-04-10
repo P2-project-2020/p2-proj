@@ -3,6 +3,8 @@
 Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc):
 	price(_price),description(_desc),used(_used),brand(_brand){}
 
+Strumento::~Strumento() = default;
+
 double Strumento::getPrice() const {
 	return price;
 }

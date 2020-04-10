@@ -7,6 +7,6 @@ std::string KitBatteria::className() const {
 	return std::string("Batteria ") + (metalSnare ? " con rullante in metallo" : "");
 }
 
-Strumento::Material KitBatteria::getMaterial() const {
-	return (material == woodKit ? wood : plexiglas);
+std::string KitBatteria::getMaterial() const {
+	return (material == woodKit ? "Legno" : "Plexiglas");
 }

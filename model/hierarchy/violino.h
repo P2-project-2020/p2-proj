@@ -10,4 +10,3 @@ public:
 	Strumento::Tune tune() const;
 	std::string getMaterial() const { return "Legno"; }
 };
-const std::string Violino::lutherie_string = "Liuteria";

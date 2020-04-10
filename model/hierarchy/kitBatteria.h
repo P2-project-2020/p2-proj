@@ -8,7 +8,7 @@ public:
 
 	std::string className() const;
 	Strumento::Tune tune() const { return undefined; }
-	Strumento::Material getMaterial() const;
+	std::string getMaterial() const;
 private:
 	Material material;
 	bool metalSnare;
