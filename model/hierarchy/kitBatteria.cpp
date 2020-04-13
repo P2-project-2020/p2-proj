@@ -4,7 +4,7 @@ KitBatteria::KitBatteria(double _price, const std::string& _brand, KitBatteria::
 	Strumento(_price, _brand, _used, _desc), Percussione(false), material(_material), metalSnare(_metalSnare){}
 
 std::string KitBatteria::className() const {
-	return std::string("Batteria ") + (metalSnare ? " con rullante in metallo" : "");
+	return std::string("Batteria ") + (metalSnare ? "con rullante in metallo" : "");
 }
 
 std::string KitBatteria::getMaterial() const {
