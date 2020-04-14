@@ -2,10 +2,8 @@
 
 #include <QMessageBox>
 
-#include <Model/Hierarchy/fiore.h>
-#include <Model/Hierarchy/commestibile.h>
-#include <Model/Hierarchy/estratto.h>
-#include <View/inputexception.h>
+
+// #include <View/inputexception.h>
 #include <QDebug>
 
 Model::Model():
@@ -40,6 +38,7 @@ void Model::serializeData(QJsonObject& json)
     json["Strumenti"] = jsonArray;
 }
 
+/*
 bool Model::unserializeData(const QJsonObject& jsonObj)
 {
     try{
@@ -77,6 +76,7 @@ bool Model::unserializeData(const QJsonObject& jsonObj)
     return true;
 }//loadData
 
+*/
 bool Model::isDataSaved() const{
     return saved;
 }
