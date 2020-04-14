@@ -35,7 +35,8 @@ HEADERS += controller.h \
            model/hierarchy/strumento.h \
            model/hierarchy/tromba.h \
            model/hierarchy/viola.h \
-           model/hierarchy/violino.h
+           model/hierarchy/violino.h \
+    model/container.h
 FORMS += mainwindow.ui
 SOURCES += controller.cpp \
            main.cpp \
