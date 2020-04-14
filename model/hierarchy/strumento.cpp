@@ -5,6 +5,12 @@ Strumento::Strumento(double _price, const std::string& _brand, bool _used, const
 
 Strumento::~Strumento() = default;
 
+bool Strumento::isUsed() const { return used; }
+void Strumento::setUsed(bool _used) { used = _used; }
+
+std::string Strumento::getBrand() const { return brand; }
+void Strumento::setBrand(const std::string& _brand){ brand = _brand; }
+
 double Strumento::getPrice() const {
 	return price;
 }
