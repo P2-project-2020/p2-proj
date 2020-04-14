@@ -19,10 +19,12 @@ public:
     ~Model();
 
 // Pusha su list e sulla rispettiva lista in base al tipo
-    void push_end(Strumento*);
+    void magazzino_push_end(Strumento*);
+    void carrello_push_end(Strumento*);
 
 //Ritorna elemento in un Container sulla base di un indice
-    Strumento* prodottoAt(unsigned int =0);
+    Strumento* magazzinoAt(unsigned int =0);
+    Strumento* carrelloAt(unsigned int =0);
 //Ritorna elemento in un Container sulla base di un indice
 
     /*Iteratori sui contenitori del model */

@@ -99,7 +99,7 @@ Container<Strumento*>::iterator Model::carrello_end(){
     return carrello->end();
 }
 
-Container<Strumento*>::const_iterator Model::magazzinoi_cbegin() const
+Container<Strumento*>::const_iterator Model::magazzino_cbegin() const
 {
     return magazzino->cbegin();
 }
@@ -134,7 +134,7 @@ Strumento *Model::magazzinoAt(unsigned int ind){
     return magazzino->at(ind);
 }
 
-Pianta *Model::carrelloAt(unsigned int ind){
+Strumento *Model::carrelloAt(unsigned int ind){
     return carrello->at(ind);
 }
 
