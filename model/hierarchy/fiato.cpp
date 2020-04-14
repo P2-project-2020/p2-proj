@@ -4,7 +4,7 @@ Fiato::Fiato(Material _material, Strumento::Tune _tune, Mouthpiece _mouthpiece):
 	material(_material), instrumentTune(_tune), mouthpiece(_mouthpiece){}
 
 void Fiato::setMaterial(Fiato::Material _material){	material = _material; }
-void Fiato::setTune(Strumento::Tune _tune){	tune = _tune; }
+void Fiato::setTune(Strumento::Tune _tune){	instrumentTune = _tune; }
 
 Strumento::Tune Fiato::tune() const { return instrumentTune; }
 
