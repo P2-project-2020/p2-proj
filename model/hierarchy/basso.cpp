@@ -23,12 +23,10 @@ void Basso::loadData(const QJsonObject& obj) {
 	if(nCorde > 0) setStringsNumber(nCorde);
 	
 	//Basso
-	switch(obj["tipo"].toString().toStdString()){
-	case "elettrico":
-		type = electric; break;
-	case "acustico"
+	if(obj["tipo"].toString().toStdString() == "elettrico")
+		type = electric;
+	else
 		type = acoustic; break;
-	}
 	fretLess = obj["fretless"].toBool();
 }
 void Basso::saveData(QJsonObject&) const {
