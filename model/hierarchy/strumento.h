@@ -32,8 +32,9 @@ public:
 	virtual std::string className() const = 0;
 	virtual Strumento::Tune tune() const = 0;
 	virtual std::string getMaterial() const = 0;
-	
 
+protected:
+	static Strumento::Tune findTune(const std::string&);
 private:
 	double price;
 	std::string description;
