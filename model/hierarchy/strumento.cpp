@@ -52,7 +52,7 @@ void Strumento::loadData(const QJsonObject& obj){
 		brad = valBrand.toString().toStdString();
 }
 
-void Strumento:saveData(QJsonObject& obj) const {
+void Strumento::saveData(QJsonObject& obj) const {
 	obj[json_price] = price;
 	obj[josn_desc] = description;
 	obj[josn_used] = used;

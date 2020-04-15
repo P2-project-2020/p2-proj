@@ -41,8 +41,8 @@ public:
     Container<Strumento*>::const_iterator magazzino_cend() const;
     Container<Strumento*>::const_iterator carrello_cbegin() const;
     Container<Strumento*>::const_iterator carrello_cend() const;
-    Container<Strumento*>::iterator ordini_cbegin() const;
-    Container<Strumento*>::iterator ordini_cend() const;
+    Container<Strumento*>::const_iterator ordini_cbegin() const;
+    Container<Strumento*>::const_iterator ordini_cend() const;
     /*Iteratori sui contenitori del model */
 
 //Cancellazione singola o multipla
@@ -51,7 +51,7 @@ public:
     void eraseOrdini(unsigned int);
     void eraseMagazzino(unsigned int, unsigned int);
     void eraseCarrello(unsigned int, unsigned int);
-    void eraseOrdini(unsigned int);
+    void eraseOrdini(unsigned int, unsigned int);
 //Cancellazione singola o multipla
 
     //Svuotano completamente i Container
