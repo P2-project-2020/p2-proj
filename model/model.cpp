@@ -85,6 +85,8 @@ void Model::setDataSaved(bool b){
     saved=b;
 }
 
+/* ITERATORI COSTANTI E NON */
+
 Container<Strumento*>::iterator Model::magazzino_begin(){
     return  magazzino->begin();
 }
@@ -95,9 +97,19 @@ Container<Strumento*>::iterator Model::magazzino_end(){
 Container<Strumento*>::iterator Model::carrello_begin(){
     return carrello->begin();
 }
+
 Container<Strumento*>::iterator Model::carrello_end(){
     return carrello->end();
 }
+
+Container<Strumento*>::iterator Model::ordini_begin(){
+    return ordini->begin();
+}
+
+Container<Strumento*>::iterator Model::ordini_end(){
+    return ordini->end();
+}
+
 
 Container<Strumento*>::const_iterator Model::magazzino_cbegin() const
 {
@@ -119,6 +131,18 @@ Container<Strumento*>::const_iterator Model::carrello_cend() const
     return carrello->cend();
 }
 
+Container<Strumento*>::const_iterator Model::ordini_cbegin() const
+{
+    return ordini->cbegin();
+}
+
+Container<Strumento*>::const_iterator Model::ordini_cend() const
+{
+    return ordini->cend();
+}
+
+/* ITERATORI COSTANTI E NON */
+
 void Model::magazzino_push_end(Strumento *instrument)
 {
     magazzino->push_back(instrument);
@@ -129,6 +153,12 @@ void Model::carrello_push_end(Strumento *instrument)
     carrello->push_back(instrument);
 }
 
+void Model::ordini_push_end(Strumento *instrument)
+{
+    ordini->push_back(instrument);
+}
+
+
 
 Strumento *Model::magazzinoAt(unsigned int ind){
     return magazzino->at(ind);
@@ -136,6 +166,10 @@ Strumento *Model::magazzinoAt(unsigned int ind){
 
 Strumento *Model::carrelloAt(unsigned int ind){
     return carrello->at(ind);
+}
+
+Strumento *Model::ordiniAt(unsigned int ind){
+    return ordini->at(ind);
 }
 
 unsigned int Model::getMagazzinoSize() const
@@ -148,6 +182,11 @@ unsigned int Model::getCarrelloSize() const
     return carrello->getSize();
 }
 
+unsigned int Model::getOrdiniSize() const
+{
+    return ordini->getSize();
+}
+
 void Model::eraseMagazzino(unsigned int index ){
     saved=false;
     magazzino->erase(index);
@@ -156,6 +195,10 @@ void Model::eraseMagazzino(unsigned int index ){
 void Model::eraseCarrello(unsigned int index ){
     saved=false;
     carrello->erase(index);
+}
+void Model::eraseOrdini(unsigned int index ){
+    saved=false;
+    ordini->erase(index);
 }
 
 void Model::eraseMagazzino(unsigned int start, unsigned int end){
@@ -168,6 +211,12 @@ void Model::eraseCarrello(unsigned int start, unsigned int end){
     carrello->erase(start,end);
 }
 
+void Model::eraseOrdini(unsigned int start, unsigned int end){
+    saved=false;
+    ordini->erase(start,end);
+}
+
+
 void Model::resetMagazzino(){
     saved = false;
     eraseMagazzino(0,magazzino->getSize());
@@ -177,5 +226,11 @@ void Model::resetCarrello(){
     saved = false;
     eraseCarrello(0,carrello->getSize());
     delete carrello;
+}
+
+void Model::resetOrdini(){
+    saved = false;
+    eraseOrdini(0,carrello->getSize());
+    delete ordini;
 }
 
