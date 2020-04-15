@@ -12,8 +12,22 @@ public:
 	Strumento::Tune tune() const { return undefined; }
 	std::string getMaterial() const;
 
+	void loadData(const QJsonObject& obj);
+	void saveData(QJsonObject& obj) const;
+
 private:
 	Shape pianoShape;
 	Keys pianoKeys;
+	
 	static const unsigned int numberOfKeys;
+	static const std::vector<std::string> shapes;
+	static const std::vector<std::string> keys;
+	static const QString json_shape;
+	static const QString json_keys;
+
+	std::string shapeToString(const Pianoforte::Shape&);
+	Pianoforte::Shape findShape(const std::string&);
+	
+	std::string keysToString(const Pianoforte::Shape&);
+	Pianoforte::Keys findKeys(const std::string&)
 };

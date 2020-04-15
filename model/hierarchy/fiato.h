@@ -17,6 +17,7 @@ public:
 
 	void loadData(const QJsonObject&);
 	void saveData(QJosnObject&) const;
+
 private:
 	Mouthpiece mouthpiece;
 	Material material;

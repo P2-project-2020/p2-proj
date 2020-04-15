@@ -6,3 +6,11 @@ Tromba::Tromba(Strumento::Tune _tune, double _price, const std::string& _brand,F
 std::string Tromba::className() const {
 	return "Tromba";
 }
+
+void Tromba::loadData(const QJsonObject& obj){
+	Fiato::loadData(obj);
+}
+
+void Tromba::saveData(QJsonObject& obj) const {
+	Fiato::saveData(obj);
+}
