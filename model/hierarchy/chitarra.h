@@ -24,7 +24,7 @@ private:
 	std::string model;
 	
 	static const unsigned int defaultStrings;
-	static const std::vector<std::string> guitarTypes;
+	static const std::vector<std::pair<Chitarra::guitarType, std::string>> guitarTypes;
 
 	static const QString json_type;
 	static const QString json_model;

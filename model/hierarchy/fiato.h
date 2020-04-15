@@ -16,7 +16,7 @@ public:
 	std::string getMaterial() const;
 
 	void loadData(const QJsonObject&);
-	void saveData(QJosnObject&) const;
+	void saveData(QJsonObject&) const;
 
 private:
 	Mouthpiece mouthpiece;
@@ -26,7 +26,8 @@ private:
 	static const QString json_material;
 	static const QString json_tune;
 
-	static const std::string silver_material;
-	static const std::string brass_material;
-	static const std::string plastic_material;
+	static const std::vector<std::pair<Fiato::Material,std::string>> materials;
+
+	static std::string materialToString(const Fiato::Material&);
+	static Fiato::Material findMaterial(const std::string&);
 };

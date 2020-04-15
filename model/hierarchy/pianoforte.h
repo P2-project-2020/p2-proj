@@ -20,14 +20,14 @@ private:
 	Keys pianoKeys;
 	
 	static const unsigned int numberOfKeys;
-	static const std::vector<std::string> shapes;
-	static const std::vector<std::string> keys;
+	static const std::vector<std::pair<Pianoforte::Shape, std::string>> shapes;
+	static const std::vector<std::pair<Pianoforte::Keys, std::string>> keys;
 	static const QString json_shape;
 	static const QString json_keys;
 
-	std::string shapeToString(const Pianoforte::Shape&);
-	Pianoforte::Shape findShape(const std::string&);
+	static std::string shapeToString(const Pianoforte::Shape&);
+	static Pianoforte::Shape findShape(const std::string&);
 	
-	std::string keysToString(const Pianoforte::Shape&);
-	Pianoforte::Keys findKeys(const std::string&)
+	static std::string keysToString(const Pianoforte::Keys&);
+	static Pianoforte::Keys findKeys(const std::string&);
 };

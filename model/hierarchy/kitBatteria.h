@@ -3,7 +3,7 @@
 
 class KitBatteria: public Percussione{
 public:
-	enum Material {woodKit, plexiglasKit};
+	enum Material {woodKit, plexiglassKit};
 	KitBatteria(double, const std::string&, KitBatteria::Material = woodKit, bool = false, bool = false, const std::string& = "");
 
 	std::string className() const;
@@ -16,9 +16,10 @@ private:
 	Material material;
 	bool metalSnare;
 
-	std::vector<std::string> materials;
-	KitBatteria::Material findMaterial(const std::string&);
-	std::string materialToString(const KitBatteria::Material&);
+	static const std::vector<std::pair<KitBatteria::Material,std::string>> materials;
+
+	static KitBatteria::Material findMaterial(const std::string&);
+	static std::string materialToString(const KitBatteria::Material&);
 	
 	static const QString json_material;
 	static const QString json_snare;

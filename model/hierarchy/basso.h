@@ -24,7 +24,7 @@ private:
 	bassType type;
 	bool fretLess;
 
-	static const std::vector<std::string> bassTypes;
+	static const std::vector<std::pair<Basso::bassType,std::string>> bassTypes;
 
 	static const QString json_type;
 	static const QString json_fretless;

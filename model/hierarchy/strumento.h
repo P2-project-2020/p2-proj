@@ -5,6 +5,7 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QJsonDocument>
+#include <vector>
 
 class Strumento{
 public:
@@ -35,6 +36,7 @@ public:
 
 protected:
 	static Strumento::Tune findTune(const std::string&);
+	static const std::string lutherie; // serve come stringa reference in più punti del codice, ma non so se sia buona pratica
 	
 private:
 	double price;
@@ -47,6 +49,5 @@ private:
 	static const QString json_used;
 	static const QString json_brand;
 
-	static const std::string lutherie; // serve come stringa reference in più punti del codice, ma non so se sia buona pratica
-	static const std::vector<std::string> Tunes;
+	static const std::vector<std::pair<Strumento::Tune, std::string>> Tunes;
 };

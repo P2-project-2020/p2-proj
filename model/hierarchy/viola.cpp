@@ -13,16 +13,16 @@ Strumento::Tune Viola::tune() const {
 	return key;
 }
 
-void Viola::loadData(const OJsonObject& obj){
+void Viola::loadData(const QJsonObject& obj){
 	Arco::loadData(obj);
 
-	const QJsonValueRef valTune = obj[json_tune];
+	const QJsonValue& valTune = obj[json_tune];
 	if(!valTune.isUndefined() && valTune.isString())
-		key = Strumento::findTune(valTune.toString.toStdString());
+		key = Strumento::findTune(valTune.toString().toStdString());
 }
 
 void Viola::saveData(QJsonObject& obj) const {
 	Arco::saveData(obj);
 
-	obj[json_tune] = Strumento::tuneToString(key);
+	obj[json_tune] = QString::fromStdString(Strumento::tuneToString(key));
 }

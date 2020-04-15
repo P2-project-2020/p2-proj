@@ -6,7 +6,7 @@ Percussione::Percussione(bool _tuned):
 void Percussione::loadData(const QJsonObject& obj){
 	Strumento::loadData(obj);
 
-	const QJsonValueRef valTuned = obj[json_tuned];
+	const QJsonValue& valTuned = obj[json_tuned];
 	if(!valTuned.isUndefined() && valTuned.isBool())
 		tuned = valTuned.toBool();
 }

@@ -10,7 +10,7 @@ void Corda::setStringsNumber(unsigned int n){ strings = n; }
 void Corda::loadData(const QJsonObject& obj){
 	Strumento::loadData(obj);
 	
-	QJsonValue val = obj["corde"];
+	QJsonValue val = obj[json_strings];
 	if(!val.isUndefined() && val.isDouble() && val.toDouble() > 0)
 		strings = val.toInt();
 }
@@ -19,5 +19,5 @@ void Corda::loadData(const QJsonObject& obj){
 void Corda::saveData(QJsonObject& obj) const {
 	Strumento::saveData(obj);
 
-	obj[json_strings] = strings;
+	obj[json_strings] = int(strings);
 }
