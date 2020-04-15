@@ -9,7 +9,7 @@
 class Strumento{
 public:
 	enum Tune {undefined, soprano, contralto, tenor, baritone, bass};
-	static const std::string Tunes[];
+	static std::string tuneToString(const Strumento::Tune&);
 	
 	Strumento(double, const std::string&, bool = false, const std::string& = std::string(""));
 	virtual ~Strumento();
@@ -35,6 +35,7 @@ public:
 
 protected:
 	static Strumento::Tune findTune(const std::string&);
+	
 private:
 	double price;
 	std::string description;
@@ -47,4 +48,5 @@ private:
 	static const QString json_brand;
 
 	static const std::string lutherie; // serve come stringa reference in più punti del codice, ma non so se sia buona pratica
+	static const std::vector<std::string> Tunes;
 };

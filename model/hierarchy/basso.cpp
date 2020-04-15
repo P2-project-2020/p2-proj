@@ -1,37 +1,40 @@
 #include "basso.h"
+
 const unsigned int Basso::defaultStrings = 4;
+const std::vector<std::string> Basso::bassTypes = {"elettrico", "acustico"};
+const QString Basso::json_type = "tipo";
+const QString Basso::json_model = "modello";
 
 Basso::Basso(bassType _type, double _price, const std::string& _brand, const std::string& _desc, bool _used, unsigned int _stringNumber, bool _fretLess):
 	Strumento(_price, _brand, _used, _desc), Corda(_stringNumber), type(_type), fretLess(_fretLess){}
 
 std::string Basso::className() const {
-	std::string specifier;
-	if(type == electric) specifier = "elettrico";
-	else specifier = "acustico";
-	if(fretLess) specifier += " fretless";
-	return "basso " + specifier;
+	return "basso " + typeToString(type) + (fretless ? " fretless" : "");
 }
 
 void Basso::loadData(const QJsonObject& obj) {
-	// strumento
-	setPrice(obj["prezzo"].toDouble());
-	setBrand(obj["brand"].toString().toStdString());
-	setUsed(obj["usato"].toBool());
-	setDescription(obj["descrizione"].toString().toStdString());
-	// corda
-	int nCorde = obj["corde"].toInt();
-	if(nCorde > 0) setStringsNumber(nCorde);
+	Corda::loadData(obj);
 	
-	//Basso
-	if(obj["tipo"].toString().toStdString() == "elettrico")
-		type = electric;
-	else
-		type = acoustic; break;
-	fretLess = obj["fretless"].toBool();
+	const QJsonValueRef valType = obj[json_type];
+	const QJsonValueRef valModel = obj[json_model];
+
+	if(!valType.isUndefined() && valType.isString())
+		type = findType(valType.toString().toStdString());
+	if(!valModel.isUndefined() && valModel.isString())
+		model = valModel.toString().toStdString();
 }
+
 void Basso::saveData(QJsonObject&) const {
-	// strumento
-	// dovrei dare una interfaccia consistente ai nomi nel json, partendo da strumento
-	// corda
-	// basso
+	Corda::saveData(obj);
+}
+
+bassType Basso::findType(const std::string& str){ // le stringhe dovrebbero forse essere preprocessate in modo da fare tutto lowercase se non vogliamo che sia case-sensitive
+	bassType to_return = electric;
+	for(unsigned int i = 0; i < bassTypes.size(); ++i)
+		if(bassTypes[i] == str) to_return = i;
+	return to_return;
+}
+
+std::string Basso::typeToString(const bassType& _type){
+	return bassTypes[_type];
 }

@@ -9,4 +9,7 @@ public:
 	std::string className() const;
 	Strumento::Tune tune() const;
 	std::string getMaterial() const { return "Legno"; }
+
+	void loadData(const QJsonObject&);
+	void saveData(QJsonObject&) const;
 };

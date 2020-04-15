@@ -42,7 +42,8 @@ void Fiato::loadData(const QJsonObject& obj){
 
 	if(!valTune.isUndefined() && valTune.isString()){
 		std::string tmp = valTune.toString().toStdString();
-		int found = Strumento::findTune(tmp); // TODO: Strumento::findTune(const std::string&)
-		if(found >= 0) setTune(found);
+		// Pre = tmp è std::string
+		setTune(Strumento::findTune(tmp));
+		// Post found contiene Strumento::Tune corrispondete alla stringa se questa era valida, undefined altrimenti && setTune fa il resto
 	}
 }

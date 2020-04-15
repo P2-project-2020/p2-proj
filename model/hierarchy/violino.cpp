@@ -11,3 +11,11 @@ std::string Violino::className() const {
 Strumento::Tune Violino::tune() const {
 	return undefined;
 }
+
+void Violino::loadData(const QJsonObject& obj){
+	Arco::loadData(obj);
+}
+
+void Violino::saveData(QJsonObject& obj) const {
+	Arco::saveData(obj);
+}

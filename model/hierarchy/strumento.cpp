@@ -7,7 +7,7 @@ const QString Strumento::json_desc = "descrizione";
 const QString Strumento::json_used = "usato";
 const QString Strumento::json_brand = "marca";
 
-const std::string Tunes[] = {"", "soprano", "contralto", "tenore", "baritono", "basso"}; // ho letto che dovrebbe funzionare con c++11, ma mi semba anche di ricordare sia una cosa di c++14 quindi devo testare
+const std::vector<std::string> Tunes = {"", "soprano", "contralto", "tenore", "baritono", "basso"}; // ho letto che dovrebbe funzionare con c++11, ma mi semba anche di ricordare sia una cosa di c++14 quindi devo testare
 
 Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc):
 	price(_price),description(_desc),used(_used),brand(_brand){}
@@ -60,5 +60,13 @@ void Strumento:saveData(QJsonObject& obj) const {
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){
-	
+	Strumento::Tune to_return = undefined;
+	for(unsigned int i = 0; i<Tunes.size(); ++i){
+		if(Tunes[i] == to_find) to_return = i;
+	}
+	return to_return;
+}
+
+std::string Strumento::tuneToString(const Strumento::Tune& _tune){
+	return Tunes[_tune];
 }

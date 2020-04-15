@@ -14,9 +14,18 @@ public:
 
 	void loadData(const QJsonObject&) override;
 	void saveData(QJsonObject&) const override;
+
+protected:
+	static bassType findType(const std::string&);
+	static std::string typeToString(const bassType&);
 	
 private:
 	static const unsigned int defaultStrings;
 	bassType type;
 	bool fretLess;
+
+	static const std::vector<std::string> bassTypes;
+
+	static const QString json_type;
+	static const QString json_fretless;
 };
