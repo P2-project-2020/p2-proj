@@ -19,7 +19,6 @@ INCLUDEPATH += .
 HEADERS += controller.h \
            mainwindow.h \
            model/model.h \
-           view/adapterExample.h \
            view/filterExample.h \
            view/insertExample.h \
            view/menu.h \
@@ -36,14 +35,25 @@ HEADERS += controller.h \
            model/hierarchy/tromba.h \
            model/hierarchy/viola.h \
            model/hierarchy/violino.h \
-    model/container.h
+    model/container.h \
+    view/carrelloAdapter.h \
+    view/carrelloFilter.h \
+    view/carrelloView.h \
+    view/ordiniAdapter.h \
+    view/ordiniFilter.h \
+    view/ordiniView.h \
+    view/mgazzinoAdapter.h \
+    view/magazzinoFilter.h \
+    view/magazzinoView.h
+
+
+
+
 FORMS += mainwindow.ui
 SOURCES += controller.cpp \
            main.cpp \
            mainwindow.cpp \
            model/model.cpp \
-           view/adapterExample.cpp \
-           view/filterExample.cpp \
            view/insertExample.cpp \
            view/menu.cpp \
            model/hierarchy/arco.cpp \
@@ -58,4 +68,15 @@ SOURCES += controller.cpp \
            model/hierarchy/strumento.cpp \
            model/hierarchy/tromba.cpp \
            model/hierarchy/viola.cpp \
-           model/hierarchy/violino.cpp
+           model/hierarchy/violino.cpp \
+    view/magazzinoAdapter.cpp \
+    view/magazzinoFilter.cpp \
+    view/magazzinoView.cpp \
+    view/ordiniAdapter.cpp \
+    view/ordiniFilter.cpp \
+    view/ordiniView.cpp \
+    view/carrelloAdapter.cpp \
+    view/carrelloFilter.cpp \
+    view/carrelloView.cpp
+
+
