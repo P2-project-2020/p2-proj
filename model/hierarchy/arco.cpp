@@ -15,6 +15,6 @@ void Arco::loadData(const QJsonObject& obj){
     const QJsonValue val = obj[json_lutherie];
 	if(!val.isUndefined() && val.isBool()){
 		lutherie = obj[json_lutherie].toBool();
-		setBrand(Strumento::lutherie);
+//		setBrand(Strumento::lutherie); ERRORE
 	}
 }
