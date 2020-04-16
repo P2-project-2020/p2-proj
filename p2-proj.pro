@@ -52,7 +52,6 @@ HEADERS += controller.h \
 SOURCES += controller.cpp \
            main.cpp \
            model/model.cpp \
-           view/insertExample.cpp \
            view/menu.cpp \
            model/hierarchy/arco.cpp \
            model/hierarchy/basso.cpp \
@@ -75,6 +74,7 @@ SOURCES += controller.cpp \
     view/ordiniView.cpp \
     view/carrelloAdapter.cpp \
     view/carrelloFilter.cpp \
-    view/carrelloView.cpp
+    view/carrelloView.cpp \
+    view/addView.cpp
 
 

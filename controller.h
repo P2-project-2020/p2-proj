@@ -3,9 +3,7 @@
 
 //#include "View/inputexception.h"
 #include "View/menu.h"
-//#include "View/viewpiante.h"
-//#include "View/viewshop.h"
-//#include "View/viewinserisci.h"
+#include "View/magazzinoView.h"
 #include "Model/model.h"
 #include <QVBoxLayout>
 #include <QStatusBar>
@@ -21,7 +19,7 @@ private:
     Menu *menuBar;
     Model *core;//Il modello contenente i dati
     QTabWidget *pagine;
-    // magazzinoView *Vmagazzino;//Vista gestione magazzino
+    magazzinoView *Vmagazzino;//Vista gestione magazzino
     // ordiniView *Vordini;//Vista gestione ordini
     // carrelloView *Vcarrello;//Vista gestione carrello
     QBoxLayout *mainLayout;

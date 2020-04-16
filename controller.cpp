@@ -19,7 +19,7 @@ Controller::Controller(Model* m,QWidget *parent) :
     menuBar(new Menu(this)),
     core(m),
     pagine(new QTabWidget),
-   // Vmagazzino(new magazzinoView(this,core)),
+    Vmagazzino(new magazzinoView(this,core)),
    // Vordini(new ordiniView(this,core)),
    // Vcarrello(new carrelloView(this,core)),
     mainLayout(new QBoxLayout(QBoxLayout::TopToBottom,this)),
@@ -37,7 +37,7 @@ Controller::Controller(Model* m,QWidget *parent) :
     logoBox->setLayout(headerLayout);
 
 
-    //pagine->insertTab(0,Vmagazzino,"Magazzino");
+    pagine->insertTab(0,Vmagazzino,"Magazzino");
     //pagine->insertTab(1,Vordini,"Ordini");
     //pagine->insertTab(1,Vcarrello,"Carrello");
     mainLayout->addWidget(pagine);

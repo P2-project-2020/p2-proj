@@ -1,5 +1,5 @@
-#ifndef ADDITEM_H
-#define ADDITEM_H
+#ifndef ADDVIEW_H
+#define ADDVIEW_H
 
 #include <QComboBox>
 #include <QCheckBox>
@@ -72,12 +72,12 @@ private:
 
    private slots:
 
-    void slotReset();
-    void slotRestart();
+  //  void slotReset();
+   // void slotRestart();
 
 public:
 
-    addView(QWidget * =nullptr);
+   // addView(QWidget * =nullptr);
 
     //Strumento
     QComboBox *getInstrumentType() const;
@@ -128,7 +128,7 @@ public:
     void showWarningDialog(QWidget* = nullptr, QString ="") const;
 
 public slots:
-    void slotDisableElements(int)const;
+    //void slotDisableElements(int)const;
 signals:
     void signalDisableElements(int);
 };
