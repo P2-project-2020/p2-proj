@@ -5,7 +5,8 @@ class Arco: virtual public Strumento{ // dato che ereditarietà virtuale e class
 	static const QString json_lutherie;
 	bool lutherie;
 public:
-	Arco(bool = false);
+    //Arco(double, const std::string&, const std::string&, bool, bool);
+    Arco(bool = false);
 
 	void saveData(QJsonObject&) const;
 	void loadData(const QJsonObject&);

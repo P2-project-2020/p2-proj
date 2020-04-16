@@ -23,6 +23,10 @@ Chitarra::guitarType Chitarra::findType(const std::string& str){
 	return electric;
 }
 
+Chitarra::guitarType Chitarra::getType() const {
+    return type;
+}
+
 Strumento::Tune Chitarra::tune() const { return undefined; }
 
 std::string Chitarra::className() const {

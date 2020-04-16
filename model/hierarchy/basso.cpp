@@ -12,6 +12,10 @@ std::string Basso::className() const {
 	return "basso " + typeToString(type) + (fretLess ? " fretless" : "");
 }
 
+Basso::bassType Basso::getType() const {
+    return type;
+}
+
 void Basso::loadData(const QJsonObject& obj) {
 	Corda::loadData(obj);
 	

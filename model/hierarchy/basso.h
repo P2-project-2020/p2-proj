@@ -11,6 +11,7 @@ public:
 	std::string className() const override;
 	Strumento::Tune tune() const override { return undefined; }
 	std::string getMaterial() const override { return "Legno"; }
+    bassType getType() const;
 
 	void loadData(const QJsonObject&) override;
 	void saveData(QJsonObject&) const override;

@@ -5,7 +5,8 @@ class Corda: virtual public Strumento { // derivazione virtuale && calsse astrat
 	static const QString json_strings;
 	unsigned int strings;		// Numero di corde dello strumento
 public:
-	Corda(unsigned int);
+    Corda(unsigned int);
+    //Corda(double, const std::string&, const std::string&, bool, unsigned int);
 	unsigned int getStringsNumber() const;
 	void setStringsNumber(unsigned int);
 

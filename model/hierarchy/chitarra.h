@@ -11,11 +11,14 @@ public:
 	std::string className() const;
 	Strumento::Tune tune() const;
 	std::string getMaterial() const { return "Legno"; }
+    guitarType getType() const;
+
 
 	void loadData(const QJsonObject&);
 	void saveData(QJsonObject&) const;
+
 	
-protected:
+//protected:
 	static std::string typeToString(const guitarType&);
 	static guitarType findType(const std::string&);
 	
