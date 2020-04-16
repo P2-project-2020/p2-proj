@@ -12,7 +12,7 @@
 #include <string>
 
 
-class addItem : public QDialog
+class addView : public QDialog
 {
   Q_OBJECT
 private:
@@ -77,7 +77,7 @@ private:
 
 public:
 
-    addItem(QWidget * =nullptr);
+    addView(QWidget * =nullptr);
 
     //Strumento
     QComboBox *getInstrumentType() const;

@@ -10,7 +10,7 @@
 #include <QComboBox>
 
 #include "Model/model.h"
-#include "addItem.h"
+#include "addView.h"
 #include "magazzinoFilter.h"
 #include "magazzinoAdapter.h"
 
@@ -27,7 +27,7 @@ class magazzinoView : public QWidget
         QPushButton *getDeleteSelected() const;
         QPushButton *getDeleteAll() const;
 
-        addItem* getAddNew() const;
+        addView* getAddNew() const;
         QLabel *getResultsNumber() const;
         QLabel *getEditEnabled() const;
 
@@ -45,7 +45,7 @@ class magazzinoView : public QWidget
         QLineEdit *searchLine;
         QComboBox *instrumentType;
 
-        addItem *addView;
+        addView *addView;
 
         QLabel *resultsNumber; //risultati della ricerca
         QLabel *editEnabled; //QPushButton *editEnable;

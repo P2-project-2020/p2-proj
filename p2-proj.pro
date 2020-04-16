@@ -18,7 +18,6 @@ INCLUDEPATH += .
 # Input
 HEADERS += controller.h \
            model/model.h \
-    view/addItem.h \
            view/filterExample.h \
            view/insertExample.h \
     view/magazzinoAdapter.h \
@@ -44,7 +43,8 @@ HEADERS += controller.h \
     view/ordiniFilter.h \
     view/ordiniView.h \
     view/magazzinoFilter.h \
-    view/magazzinoView.h
+    view/magazzinoView.h \
+    view/addView.h
 
 
 

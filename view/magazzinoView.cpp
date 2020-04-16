@@ -18,7 +18,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     deleteSelected(new QPushButton),
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
-    addView(new addItem),
+    addView(new class addView),
     resultsNumber(new QLabel),
     editEnabled(new QLabel),
     adapter(new magazzinoAdapter(this, core))
@@ -112,7 +112,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     QPushButton *magazzinoView::getDeleteSelected() const{ return deleteSelected;}
     QPushButton *magazzinoView::getDeleteAll() const{ return deleteAll;}
 
-    addItem *magazzinoView::getAddNew() const {  return addView; }
+    addView *magazzinoView::getAddNew() const {  return addView; }
 
     QLabel *magazzinoView::getResultsNumber() const{ return resultsNumber;}
 
