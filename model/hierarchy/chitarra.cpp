@@ -30,7 +30,7 @@ Chitarra::guitarType Chitarra::getType() const {
 Strumento::Tune Chitarra::tune() const { return undefined; }
 
 std::string Chitarra::className() const {
-	return std::string("chitarra ") + typeToString(type) + " " + model;
+	return std::string("Chitarra ") + typeToString(type) + " " + model;
 }
 
 void Chitarra::loadData(const QJsonObject& obj){

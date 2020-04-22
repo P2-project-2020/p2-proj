@@ -5,14 +5,17 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QJsonDocument>
+#include <QStringList>
 #include <vector>
 
 class Strumento{
 public:
 	enum Tune {undefined, soprano, contralto, tenor, baritone, bass};
 	static std::string tuneToString(const Strumento::Tune&);
+	static const std::string lutherie; // serve come stringa reference in più punti del codice, ma non so se sia buona pratica
+	static const QString json_type; // QString sulla quale fare switch nella gestione del documento
 	
-	Strumento(double, const std::string&, bool = false, const std::string& = std::string(""));
+	Strumento(double, const std::string&, bool = false, const std::string& = "");
 	virtual ~Strumento();
 	
 	bool isUsed() const;
@@ -36,14 +39,14 @@ public:
 
 protected:
 	static Strumento::Tune findTune(const std::string&);
-	static const std::string lutherie; // serve come stringa reference in più punti del codice, ma non so se sia buona pratica
+	static const QString json_tune;	   // non tutti la usano ma ha senso fare una cosa consistente nel json
 	
 private:
 	double price;
 	std::string description;
 	bool used;
 	std::string brand;
-
+	
 	static const QString json_price;
 	static const QString json_desc;
 	static const QString json_used;

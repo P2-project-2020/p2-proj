@@ -1,7 +1,8 @@
 #include "strumento.h"
 
 const std::string Strumento::lutherie = "liuteria";
-
+const QString Strumento::json_type = "strumento";
+const QString Strumento::json_tune = "intonazione"; // Questa non viene gestita direttamente da Strumento dato che molti figli non la usano
 const QString Strumento::json_price = "prezzo";
 const QString Strumento::json_desc = "descrizione";
 const QString Strumento::json_used = "usato";
@@ -60,6 +61,7 @@ void Strumento::loadData(const QJsonObject& obj){
 }
 
 void Strumento::saveData(QJsonObject& obj) const {
+	obj[json_type] = QString::fromStdString(className()).split(" ").at(0); // ogni classe come prima cosa ritorna il nome specifico dello strumento, poi dettagli
 	obj[json_price] = price;
 	obj[json_desc] = QString::fromStdString(description);
 	obj[json_used] = used;

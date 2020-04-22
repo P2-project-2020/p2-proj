@@ -3,8 +3,7 @@
 
 class Violino: public Arco{
 public:
-	static const std::string lutherie_string;
-	Violino(double, const std::string& = lutherie_string, const std::string& = "", bool = false);
+	Violino(double, const std::string& = Strumento::lutherie, const std::string& = "", bool = false);
 
 	std::string className() const;
 	Strumento::Tune tune() const;
