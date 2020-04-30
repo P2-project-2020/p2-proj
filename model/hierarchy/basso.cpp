@@ -1,7 +1,8 @@
 #include "basso.h"
 
 const unsigned int Basso::defaultStrings = 4;
-const std::vector<std::pair<Basso::bassType,std::string>> Basso::bassTypes = {{electric,"elettrico"}, {acoustic,"acustico"}};
+const std::map<Basso::bassType,std::string> Basso::bassTypes = {{electric,"elettrico"},
+																{acoustic,"acustico"}};
 const QString Basso::json_type = "tipo";
 const QString Basso::json_fretless = "fretless";
 
@@ -32,12 +33,14 @@ void Basso::saveData(QJsonObject& obj) const {
 	Corda::saveData(obj);
 }
 
-Basso::bassType Basso::findType(const std::string& str){ // le stringhe dovrebbero forse essere preprocessate in modo da fare tutto lowercase se non vogliamo che sia case-sensitive
+Basso::bassType Basso::findType(const std::string& str){
 	for(const auto& coppia : bassTypes)
 		if(str == coppia.second) return coppia.first;
 	return electric;
 }
 
 std::string Basso::typeToString(const bassType& _type){
-	return bassTypes[_type].second;
+	const auto it = bassTypes.find(_type);
+	if(it != bassTypes.end()) return it->second;
+	return "";
 }

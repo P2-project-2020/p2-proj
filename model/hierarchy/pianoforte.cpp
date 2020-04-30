@@ -1,11 +1,11 @@
 #include "pianoforte.h"
 
 const unsigned int Pianoforte::numberOfKeys = 48;
-const std::vector<std::pair<Pianoforte::Shape, std::string>> Pianoforte::shapes = {{grand, "coda"},
-																				   {upright, "muro"}};
-const std::vector<std::pair<Pianoforte::Keys, std::string>> Pianoforte::keys = {{wood, "legno"},
-																				{plastic, "plastica"},
-																				{ivory, "avorio"}};
+const std::map<Pianoforte::Shape, std::string> Pianoforte::shapes = {{grand, "coda"},
+																	 {upright, "muro"}};
+const std::map<Pianoforte::Keys, std::string> Pianoforte::keys = {{wood, "legno"},
+																  {plastic, "plastica"},
+																  {ivory, "avorio"}};
 const QString Pianoforte::json_shape = "forma";
 const QString Pianoforte::json_keys = "tasti";
 
@@ -36,17 +36,15 @@ Pianoforte::Shape Pianoforte::findShape(const std::string& _shape){
 }
 
 std::string Pianoforte::keysToString(const Pianoforte::Keys& _keys){
-	for(const auto& key : keys){
-		if(key.first == _keys) return key.second;
-	}
-	return "";
+	const auto it = keys.find(_keys);
+	if(it != keys.end()) return it->second;
+	return keys.begin()->second;
 }
 
 Pianoforte::Keys Pianoforte::findKeys(const std::string& _keys){
-	for(const auto& key : keys){
+	for(const auto& key : keys)
 		if(key.second == _keys) return key.first;
-	}
-	return keys[0].first;
+	return keys.begin()->first;
 }
 
 

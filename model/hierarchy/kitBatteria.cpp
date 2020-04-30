@@ -1,6 +1,6 @@
 #include "kitBatteria.h"
-const std::vector<std::pair<KitBatteria::Material,std::string>> KitBatteria::materials = {{KitBatteria::woodKit, "legno"},
-																			 {KitBatteria::plexiglassKit, "plexiglas"}};
+const std::map<KitBatteria::Material,std::string> KitBatteria::materials = {{KitBatteria::woodKit, "legno"},
+																			{KitBatteria::plexiglassKit, "plexiglas"}};
 const QString KitBatteria::json_material = "materiale";
 const QString KitBatteria::json_snare = "rullante in metallo";
 
@@ -16,17 +16,15 @@ std::string KitBatteria::getMaterial() const {
 }
 
 KitBatteria::Material KitBatteria::findMaterial(const std::string& str){
-	for(const auto& mat : materials){
-		if(mat.second == str)
-			return mat.first;
-	}
-	return woodKit;
+	for(const auto& it : materials)
+		if(it.second == str) return it.first;
+	return materials.begin()->first;
 }
 
 std::string KitBatteria::materialToString(const KitBatteria::Material& _material){
-	for(const auto& mat : materials)
-		if(mat.first == _material) return mat.second;
-	return "";
+	const auto it = materials.find(_material);
+	if(it != materials.end()) return it->second;
+	return materials.begin()->second;
 }
 
 void KitBatteria::loadData(const QJsonObject& obj){

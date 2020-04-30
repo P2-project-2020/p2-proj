@@ -2,9 +2,9 @@
 const QString Fiato::json_material = "materiale";
 const QString Fiato::json_tune = "intonazione";
 
-const std::vector<std::pair<Fiato::Material, std::string>> Fiato::materials = {{Fiato::brass, "bronzo"},
-																		{Fiato::silver,"argento"},
-																		{Fiato::plastic, "plastica"}};
+const std::map<Fiato::Material, std::string> Fiato::materials = {{Fiato::brass, "bronzo"},
+																 {Fiato::silver,"argento"},
+																 {Fiato::plastic, "plastica"}};
 
 Fiato::Fiato(Material _material, Strumento::Tune _tune, Mouthpiece _mouthpiece):
 	mouthpiece(_mouthpiece), material(_material), instrumentTune(_tune) {}
@@ -40,9 +40,8 @@ void Fiato::saveData(QJsonObject& obj) const {
 }
 
 std::string Fiato::materialToString(const Fiato::Material& _material){
-	for(const auto& mat : materials){
-		if(mat.first == _material) return mat.second;
-	}
+	const auto it = Fiato::materials.find(_material);
+	if(it != Fiato::materials.end()) return it->second;
 	return "";
 }
 
@@ -50,5 +49,5 @@ Fiato::Material Fiato::findMaterial(const std::string& str){
 	for(const auto& mat : materials){
 		if(mat.second == str) return mat.first;
 	}
-	return materials[0].first;
+	return materials.begin()->first;
 }

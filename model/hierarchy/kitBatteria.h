@@ -16,7 +16,7 @@ private:
 	Material material;
 	bool metalSnare;
 
-	static const std::vector<std::pair<KitBatteria::Material,std::string>> materials;
+	static const std::map<KitBatteria::Material,std::string> materials;
 
 	static KitBatteria::Material findMaterial(const std::string&);
 	static std::string materialToString(const KitBatteria::Material&);

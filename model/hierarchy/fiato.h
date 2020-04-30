@@ -26,7 +26,7 @@ private:
 	static const QString json_material;
 	static const QString json_tune;
 
-	static const std::vector<std::pair<Fiato::Material,std::string>> materials;
+	static const std::map<Fiato::Material,std::string> materials;
 
 	static std::string materialToString(const Fiato::Material&);
 	static Fiato::Material findMaterial(const std::string&);

@@ -20,8 +20,8 @@ private:
 	Keys pianoKeys;
 	
 	static const unsigned int numberOfKeys;
-	static const std::vector<std::pair<Pianoforte::Shape, std::string>> shapes;
-	static const std::vector<std::pair<Pianoforte::Keys, std::string>> keys;
+	static const std::map<Pianoforte::Shape, std::string> shapes;
+	static const std::map<Pianoforte::Keys, std::string> keys;
 	static const QString json_shape;
 	static const QString json_keys;
 
