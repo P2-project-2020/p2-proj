@@ -24,7 +24,7 @@ KitBatteria::Material KitBatteria::findMaterial(const std::string& str){
 }
 
 std::string KitBatteria::materialToString(const KitBatteria::Material& _material){
-	for(const auto mat : materials)
+	for(const auto& mat : materials)
 		if(mat.first == _material) return mat.second;
 	return "";
 }

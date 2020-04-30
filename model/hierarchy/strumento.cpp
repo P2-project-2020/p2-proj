@@ -8,12 +8,12 @@ const QString Strumento::json_desc = "descrizione";
 const QString Strumento::json_used = "usato";
 const QString Strumento::json_brand = "marca";
 
-const std::vector<std::pair<Strumento::Tune, std::string>> Strumento::Tunes = {{Strumento::undefined, ""},
-																			   {Strumento::soprano, "soprano"},
-																			   {Strumento::contralto, "contralto"},
-																			   {Strumento::tenor, "tenore"},
-																			   {Strumento::baritone, "baritono"},
-																			   {Strumento::bass, "basso"}};
+const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::undefined, ""},
+																 {Strumento::soprano, "soprano"},
+																 {Strumento::contralto, "contralto"},
+																 {Strumento::tenor, "tenore"},
+																 {Strumento::baritone, "baritono"},
+																 {Strumento::bass, "basso"}};
 
 Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc):
 	price(_price),description(_desc),used(_used),brand(_brand){}
@@ -69,15 +69,14 @@ void Strumento::saveData(QJsonObject& obj) const {
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){
-	for(const auto& _tune : Tunes){
-		if(_tune.second == to_find) return _tune.first;
-	}
+	for(const auto& it : Tunes)
+		if(it.second == to_find) return it.first;
 	return undefined;
 }
 
 std::string Strumento::tuneToString(const Strumento::Tune& to_find){
-	for(const auto& _tune : Tunes){
-		if(_tune.first == to_find) return _tune.second;
-	}
+	const auto it = Tunes.find(to_find);
+	if(it != Tunes.end())
+		return it->second;
 	return "";
 }
