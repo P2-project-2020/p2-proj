@@ -22,7 +22,7 @@ KitBatteria::Material KitBatteria::findMaterial(const std::string& str){
 }
 
 std::string KitBatteria::materialToString(const KitBatteria::Material& _material){
-	return materials[_material];
+	return materials.at(_material);
 }
 
 void KitBatteria::loadData(const QJsonObject& obj){

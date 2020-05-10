@@ -24,7 +24,7 @@ std::string Pianoforte::getMaterial() const {
 }
 
 std::string Pianoforte::shapeToString(const Pianoforte::Shape& _shape){
-	return shapes[_shape];
+	return shapes.at(_shape);
 }
 
 Pianoforte::Shape Pianoforte::findShape(const std::string& _shape){
@@ -34,7 +34,7 @@ Pianoforte::Shape Pianoforte::findShape(const std::string& _shape){
 }
 
 std::string Pianoforte::keysToString(const Pianoforte::Keys& _key){
-	return keys[_key];
+	return keys.at(_key);
 }
 
 Pianoforte::Keys Pianoforte::findKeys(const std::string& _keys){

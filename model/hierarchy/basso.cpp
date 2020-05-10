@@ -40,5 +40,5 @@ Basso::bassType Basso::findType(const std::string& str){
 }
 
 std::string Basso::typeToString(const bassType& _type){
-	return bassTypes[_type];
+	return bassTypes.at(_type);
 }

@@ -11,7 +11,7 @@ Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string&
 	Strumento(_price,_brand,_used,_desc), Corda(_stringsNumber), type(_type), model(_model){}
 
 std::string Chitarra::typeToString(const Chitarra::guitarType& _type){
-	return guitarTypes[_type];
+	return guitarTypes.at(_type);
 }
 
 Chitarra::guitarType Chitarra::findType(const std::string& str){
