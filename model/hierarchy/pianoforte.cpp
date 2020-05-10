@@ -24,9 +24,7 @@ std::string Pianoforte::getMaterial() const {
 }
 
 std::string Pianoforte::shapeToString(const Pianoforte::Shape& _shape){
-	for(const auto& s : shapes)
-		if(s.first == _shape) return s.second;
-	return "";
+	return shapes[_shape];
 }
 
 Pianoforte::Shape Pianoforte::findShape(const std::string& _shape){
@@ -35,10 +33,8 @@ Pianoforte::Shape Pianoforte::findShape(const std::string& _shape){
 	return upright;							// solo perchè è più probabile dato che sono i più economici in media
 }
 
-std::string Pianoforte::keysToString(const Pianoforte::Keys& _keys){
-	const auto it = keys.find(_keys);
-	if(it != keys.end()) return it->second;
-	return keys.begin()->second;
+std::string Pianoforte::keysToString(const Pianoforte::Keys& _key){
+	return keys[_key];
 }
 
 Pianoforte::Keys Pianoforte::findKeys(const std::string& _keys){

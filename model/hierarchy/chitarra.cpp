@@ -10,10 +10,8 @@ const QString Chitarra::json_model = "modello";
 Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringsNumber):
 	Strumento(_price,_brand,_used,_desc), Corda(_stringsNumber), type(_type), model(_model){}
 
-std::string Chitarra::typeToString(const guitarType& _type){
-	const auto it = guitarTypes.find(_type);
-	if(it != guitarTypes.end()) return it->second;
-	return "";
+std::string Chitarra::typeToString(const Chitarra::guitarType& _type){
+	return guitarTypes[_type];
 }
 
 Chitarra::guitarType Chitarra::findType(const std::string& str){

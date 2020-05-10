@@ -40,9 +40,7 @@ void Fiato::saveData(QJsonObject& obj) const {
 }
 
 std::string Fiato::materialToString(const Fiato::Material& _material){
-	const auto it = Fiato::materials.find(_material);
-	if(it != Fiato::materials.end()) return it->second;
-	return "";
+	return materials[_material];
 }
 
 Fiato::Material Fiato::findMaterial(const std::string& str){
