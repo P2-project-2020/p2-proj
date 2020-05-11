@@ -1,10 +1,10 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-//#include "View/inputexception.h"
-#include "View/menu.h"
-#include "View/magazzinoView.h"
-#include "Model/model.h"
+//#include "view/inputexception.h"
+#include "view/menu.h"
+#include "view/magazzinoView.h"
+#include "model/model.h"
 #include <QVBoxLayout>
 #include <QStatusBar>
 #include <QLabel>

@@ -1,7 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "Hierarchy/strumento.h"
+#include "hierarchy/strumento.h"
 #include "container.h"
 
 /* Model rappresenta la classe che gestisce l'interazione tra la gerarchia ( o modello di dati )

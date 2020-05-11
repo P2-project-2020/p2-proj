@@ -7,7 +7,7 @@ in order to make possible to use it with Qt MVC widgets*/
 #define MAGAZZINOADAPTER_H
 
 #include <QAbstractTableModel>
-#include<Model/model.h>
+#include<model/model.h>
 
 class magazzinoAdapter : public QAbstractTableModel
 {

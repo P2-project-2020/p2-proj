@@ -9,7 +9,7 @@
 #include <QTableView>
 #include <QComboBox>
 
-#include "Model/model.h"
+#include "model/model.h"
 #include "addView.h"
 #include "magazzinoFilter.h"
 #include "magazzinoAdapter.h"
@@ -45,7 +45,7 @@ class magazzinoView : public QWidget
         QLineEdit *searchLine;
         QComboBox *instrumentType;
 
-        addView *addView;
+        addView *_addView;
 
         QLabel *resultsNumber; //risultati della ricerca
         QLabel *editEnabled; //QPushButton *editEnable;

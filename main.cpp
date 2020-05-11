@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "Model/model.h"
+#include "model/model.h"
 #include "controller.h"
 
 
