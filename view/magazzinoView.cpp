@@ -18,7 +18,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     deleteSelected(new QPushButton),
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
-    _addView(new addView),
+    addView(new insertView),
     resultsNumber(new QLabel),
     editEnabled(new QLabel),
     adapter(new magazzinoAdapter(this, core))
@@ -90,7 +90,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
             setLayout(search);
 
 
-        connect(addNew,SIGNAL(clicked()), this, SLOT(slotOpenInserisci()));
+        connect(addNew,SIGNAL(clicked()), this, SLOT(slotOpenInsertView()));
         connect(instrumentType, SIGNAL(currentIndexChanged(int)), this, SLOT(slotStartFiltering()));
         connect(searchLine, SIGNAL(textChanged(QString)), this, SLOT(slotStartFiltering()));
 
@@ -98,9 +98,10 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
 
     magazzinoAdapter* magazzinoView::getAdapter() const{ return adapter;}
 
-    void magazzinoView::slotOpenAddView() const{
-        _addView->setModal(true);
-        _addView->exec();//show
+    void magazzinoView::slotOpenInsertView() const{
+        addView->setModal(true);
+        addView->exec();//show
+
     }
 
     magazzinoFilter *magazzinoView::getFilter() const{ return filter;}
@@ -112,7 +113,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     QPushButton *magazzinoView::getDeleteSelected() const{ return deleteSelected;}
     QPushButton *magazzinoView::getDeleteAll() const{ return deleteAll;}
 
-    addView *magazzinoView::getAddNew() const {  return _addView; }
+    insertView *magazzinoView::getAddView() const {  return addView; }
 
     QLabel *magazzinoView::getResultsNumber() const{ return resultsNumber;}
 
