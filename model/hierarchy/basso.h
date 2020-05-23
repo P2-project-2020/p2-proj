@@ -5,7 +5,8 @@
 class Basso: virtual public Corda{
 public:
 	enum bassType {electric, acoustic};
-
+	static const std::map<Basso::bassType,std::string> bassTypes;
+	
 	Basso(bassType = electric, double = 0, const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, bool = false);
 	
 	std::string className() const override;
@@ -21,12 +22,10 @@ protected:
 	static std::string typeToString(const bassType&);
 	
 private:
-	static const unsigned int defaultStrings;
 	bassType type;
 	bool fretLess;
-
-	static const std::map<Basso::bassType,std::string> bassTypes;
-
+	
+	static const unsigned int defaultStrings;
 	static const QString json_type;
 	static const QString json_fretless;
 };

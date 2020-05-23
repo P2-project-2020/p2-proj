@@ -4,6 +4,8 @@
 class KitBatteria: public Percussione{
 public:
 	enum Material {woodKit, plexiglassKit};
+	static const std::map<KitBatteria::Material,std::string> materials;
+	
 	KitBatteria(double = 0, const std::string& = "", KitBatteria::Material = woodKit, bool = false, bool = false, const std::string& = "");
 
 	std::string className() const;
@@ -15,8 +17,6 @@ public:
 private:
 	Material material;
 	bool metalSnare;
-
-	static const std::map<KitBatteria::Material,std::string> materials;
 
 	static KitBatteria::Material findMaterial(const std::string&);
 	static std::string materialToString(const KitBatteria::Material&);

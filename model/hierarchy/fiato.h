@@ -4,10 +4,11 @@
 class Fiato: virtual public Strumento{
 protected:
 	enum Mouthpiece {woodwind_mouthpiece, brass_mouthpiece};
-	
+	// Vedere se serve davvero, non si usa da nessuna parte
 public:
 	enum Material {silver, brass, plastic};
-
+	static const std::map<Fiato::Material,std::string> materials;
+	
 	void setMaterial(Fiato::Material);
 	void setTune(Strumento::Tune);
 	
@@ -25,8 +26,6 @@ private:
 
 	static const QString json_material;
 	static const QString json_tune;
-
-	static const std::map<Fiato::Material,std::string> materials;
 
 	static std::string materialToString(const Fiato::Material&);
 	static Fiato::Material findMaterial(const std::string&);
