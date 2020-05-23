@@ -6,7 +6,7 @@ class Pianoforte: public Corda, public Percussione{
 public:
 	enum Shape {grand, upright};
 	enum Keys {wood, plastic, ivory};
-	Pianoforte(Pianoforte::Shape, Pianoforte::Keys, double, const std::string&, bool = false, const std::string& = "");
+	Pianoforte(Pianoforte::Shape = grand, Pianoforte::Keys = ivory, double = 0, const std::string& = "", bool = false, const std::string& = "");
 
 	std::string className() const;
 	Strumento::Tune tune() const { return undefined; }

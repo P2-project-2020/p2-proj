@@ -11,7 +11,7 @@ public:
 	void setMaterial(Fiato::Material);
 	void setTune(Strumento::Tune);
 	
-	Fiato(Material, Strumento::Tune, Mouthpiece);
+	Fiato(Material = brass, Strumento::Tune = soprano, Mouthpiece = brass_mouthpiece);
 	Strumento::Tune tune() const;
 	std::string getMaterial() const;
 

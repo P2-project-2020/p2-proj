@@ -6,7 +6,7 @@ class Basso: virtual public Corda{
 public:
 	enum bassType {electric, acoustic};
 
-	Basso(bassType, double, const std::string&, const std::string& = "", bool = false, unsigned int = defaultStrings, bool = false);
+	Basso(bassType = electric, double = 0, const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, bool = false);
 	
 	std::string className() const override;
 	Strumento::Tune tune() const override { return undefined; }

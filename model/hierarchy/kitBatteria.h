@@ -4,7 +4,7 @@
 class KitBatteria: public Percussione{
 public:
 	enum Material {woodKit, plexiglassKit};
-	KitBatteria(double, const std::string&, KitBatteria::Material = woodKit, bool = false, bool = false, const std::string& = "");
+	KitBatteria(double = 0, const std::string& = "", KitBatteria::Material = woodKit, bool = false, bool = false, const std::string& = "");
 
 	std::string className() const;
 	Strumento::Tune tune() const { return undefined; }

@@ -16,7 +16,7 @@ public:
 	static const std::string lutherie; // serve come stringa reference in più punti del codice, ma non so se sia buona pratica
 	static const QString json_type; // QString sulla quale fare switch nella gestione del documento
 
-	Strumento(double, const std::string&, bool = false, const std::string& = "");
+	Strumento(double = 0, const std::string& = "", bool = false, const std::string& = "");
 	virtual ~Strumento();
 
 	bool isUsed() const;
