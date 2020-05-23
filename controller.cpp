@@ -51,6 +51,7 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     this->layout()->setMenuBar(menuBar);
 
+    core->magazzino_push_random();
     slotUpdatePage();
 
 
@@ -79,7 +80,6 @@ void Controller::slotSave(){
         QMessageBox::information(this,"Informazione","No Worries! I dati correnti sono gia' salvati");
         return;
     } */
-    core->magazzino_push_random();
  QString json_filter = "JSON (*.json)";
     bool overr = false;
     QString filename;
@@ -107,6 +107,8 @@ void Controller::slotSave(){
         output.write(doc.toJson());
         core->setDataSaved(true);
         currentFile = filename;
+        slotUpdatePage();
+
         if(overr)//Salvataggio sullo stesso file
             QMessageBox::information(this,"Successo!","File JSON sovrascritto correttamente");
         else
@@ -390,6 +392,7 @@ void Controller::slotDataChanged(){
 void Controller::slotUpdatePage(){
 
     /* AGGIORNAMENTO TABELLE */
+    Vmagazzino->getAdapter()->dataRefresh();
 
 
 

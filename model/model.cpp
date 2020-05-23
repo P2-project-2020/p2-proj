@@ -164,7 +164,7 @@ void Model::magazzino_push_random()
 {
     int num;
 
-    for(int i=0;i<100000; ++i){
+    for(int i=0;i<100; ++i){
         num = rand() % 8;
         switch(num){
             case(0):
