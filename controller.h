@@ -41,7 +41,7 @@ public slots:
     //void slotLoad();
    // void slotInserisci();
     void slotUpdatePage();//Aggiorna statusBar e tabelle
-   // void slotDeleteMagazzinoItem();
+    void slotDeleteMagazzinoItem();
    // void slotDeleteCarrelloItem();
    // void slotDeleteOrdiniItem();
     void slotResetMagazzino();

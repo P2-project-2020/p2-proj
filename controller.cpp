@@ -56,12 +56,14 @@ Controller::Controller(Model* m,QWidget *parent) :
 
 
     connect(Vmagazzino->getAddView()->getAddItemButton(),SIGNAL(clicked()), this, SLOT(slotInserisci()));
+    connect(Vmagazzino->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteMagazzinoItem()));
+    connect(Vmagazzino->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetMagazzino()));
    /*
     connect(Vpiante->getViewIns()->insertButton(),SIGNAL(clicked()),this, SLOT(slotInserisciPianta()));
     connect(pagine, SIGNAL(currentChanged(int)), this, SLOT(slotUpdatePage()));
-    connect(Vshop->getEliminaSel(),SIGNAL(clicked()),this,SLOT(slotDeleteProdotto()));
+
     connect(Vpiante->getEliminaSel(),SIGNAL(clicked()),this,SLOT(slotDeletePianta()));
-    connect(Vshop->getEliminaT(),SIGNAL(clicked()),this,SLOT(slotResetProdotti()));
+
     connect(Vpiante->getEliminaT(),SIGNAL(clicked()),this,SLOT(slotResetPiante()));
     connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
     //Per sapere che i dati sono stati modificati in real time
@@ -231,15 +233,15 @@ void Controller::slotInserisci(){
 
 
 
-/*
 
-void Controller::slotDeleteProdotto()
+
+void Controller::slotDeleteMagazzinoItem()
 {
 
-    if(!Vshop->getTable()->selectionModel()->hasSelection())
+    if(!Vmagazzino->getTable()->selectionModel()->hasSelection())
         QMessageBox::warning(this,"Attenzione!","Devi selezionare almeno un elemento!");
     else{
-    QModelIndexList selectedIndexes = Vshop->getTable()->selectionModel()->selectedRows();
+    QModelIndexList selectedIndexes = Vmagazzino->getTable()->selectionModel()->selectedRows();
     QMessageBox::StandardButton confirm
             = QMessageBox::question
             (this, "Conferma rimozione",
@@ -247,7 +249,7 @@ void Controller::slotDeleteProdotto()
 
 if(confirm == QMessageBox::Yes)
     for(auto i = 0; i< selectedIndexes.size();++i)
-            Vshop->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+            Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
 else
     return;
 
@@ -257,7 +259,7 @@ core->setDataSaved(false);
 slotUpdatePage();
 }
 
-*/
+
 
 
 void Controller::slotResetOrdini()
@@ -331,15 +333,15 @@ void Controller::resetOrdini(){
 }//resetOrdini
 
 void Controller::resetMagazzino(){
-/*
-    while(core->getProdottiSize())
-    Vshop->getFilter()->removeRows(0,1);
+
+    while(core->getMagazzinoSize())
+    Vmagazzino->getFilter()->removeRows(0,1);
 
     core->setDataSaved(false);
 
     slotUpdatePage();
 
-    */
+
 
 }//resetMagazzino
 
@@ -400,6 +402,17 @@ void Controller::slotUpdatePage(){
 
 
     /* AGGIORNAMENTO LABEL CONTA RISULTATI */
+
+    int magazzinoSize = core->getMagazzinoSize();
+
+    if(pagine->currentIndex() == 0)
+            if(!magazzinoSize){
+                itemCounter->setText("<b>Nessun prodotto presente!</b>");
+                Vmagazzino->getEditEnabled()->setText("");
+            }else{
+                itemCounter->setText("<u>" + QString::number(magazzinoSize) + " prodotti presenti </u>");
+                Vmagazzino->getEditEnabled()->setText("<u> Modifica abilitata! </u>");
+            }
 
     /* AGGIORNAMENTO STATUS BAR */
 

@@ -39,7 +39,7 @@ int magazzinoAdapter::rowCount(const QModelIndex &) const {
 }
 
 int magazzinoAdapter::columnCount(const QModelIndex &) const {
-    return 12;
+    return 7;
 }
 
 QVariant magazzinoAdapter::headerData(int section, Qt::Orientation orientation, int role) const
