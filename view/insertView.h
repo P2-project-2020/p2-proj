@@ -19,13 +19,10 @@ class insertView : public QDialog
 private:
 
     QComboBox *instrumentType; //Arco | Corda | Percussione | Fiato
-
-    QLineEdit *name;
+    QLineEdit *price;
     QLineEdit *description;
-    QLineEdit *material;
     QLineEdit *brand;
-    QLineEdit *productionYear;
-    QLineEdit *basePrice;
+    QComboBox *instrumentTune;
     QCheckBox *isSecondHand;
 
 //*******************************************
@@ -53,8 +50,9 @@ private:
 //*******************************************
 //Percussione
     QComboBox *percussioneType; //Pianoforte | kit Batteria
-    QCheckBox *hasSticks;
+    QComboBox *percussioneMaterial; //Legno | Plexiglass
     QCheckBox *isTuned;
+
 //Pianoforte
 //Vedi Corda<-Pianoforte
 //Kit Batteria
@@ -62,8 +60,9 @@ private:
 
 //*******************************************
 //Fiato
-    QComboBox *fiatoType; //Sax | Tromba |
+    QComboBox *fiatoType; //Sax | Tromba
     QComboBox *mouthPieceType; //Woodwind | Brass
+    QComboBox *fiatoMaterial; //Argento | Ottone | Plastica
 //Sax
 //Tromba
 
@@ -82,13 +81,10 @@ public:
 
     //Strumento
     QComboBox *getInstrumentType() const;
-
-    QLineEdit *getName() const;
+    QLineEdit *getPrice() const;
     QLineEdit *getDescription() const;
-    QLineEdit *getMaterial() const;
     QLineEdit *getBrand() const;
-    QLineEdit *getProductionYear() const;
-    QLineEdit *getBasePrice() const;
+    QComboBox *getInstrumentTune() const;
     QCheckBox *getIsSecondHand() const;
 
     //Arco
@@ -113,7 +109,7 @@ public:
 
     //Percussione
     QComboBox *getPercussioneType() const;
-    QCheckBox *getHasSticks() const;
+    QComboBox *getPercussioneMaterial() const;
     QCheckBox *getIsTuned() const;
 
     //Kit Batteria
@@ -122,6 +118,7 @@ public:
     //Fiato
     QComboBox *getFiatoType() const;
     QComboBox *getMouthPieceType() const;
+    QComboBox *getFiatoMaterial() const;
 
 
     QPushButton *getAddItemButton() const;
@@ -130,13 +127,13 @@ public:
 
 public slots:
     void slotDisableElements(int) const;
-    //void slotDisableString(int) const;
+    void slotDisableCorda(int) const;
     //void slotDisablePercussionInstrument(int) const;
 
 
 signals:
     void signalDisableElements(int);
-    //void slotDisableString(int);
+    void slotDisableCorda(int);
     //void slotDisablePercussionInstrument(int);
 
 };
