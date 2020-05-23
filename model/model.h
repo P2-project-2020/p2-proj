@@ -23,6 +23,7 @@ public:
     void magazzino_push_end(Strumento*);
     void carrello_push_end(Strumento*);
     void ordini_push_end(Strumento*);
+    void magazzino_push_random();
 
 //Ritorna elemento in un Container sulla base di un indice
     Strumento* magazzinoAt(unsigned int =0);

@@ -37,7 +37,7 @@ public:
     void resetCarrello();
     void resetOrdini();
 public slots:
-    //void slotSave();
+    void slotSave();
     //void slotLoad();
    // void slotInserisci();
     void slotUpdatePage();//Aggiorna statusBar e tabelle

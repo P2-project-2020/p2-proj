@@ -11,6 +11,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QAction>
+
+
 /*
 #include "GERARCHIA IN BASE ALLE NECESSITÀ
 */
@@ -51,8 +53,9 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     slotUpdatePage();
 
-/*
-    connect(Vshop->getViewIns()->insertButton(),SIGNAL(clicked()), this, SLOT(slotInserisci()));
+
+    connect(Vmagazzino->getAddView()->getAddItemButton(),SIGNAL(clicked()), this, SLOT(slotInserisci()));
+   /*
     connect(Vpiante->getViewIns()->insertButton(),SIGNAL(clicked()),this, SLOT(slotInserisciPianta()));
     connect(pagine, SIGNAL(currentChanged(int)), this, SLOT(slotUpdatePage()));
     connect(Vshop->getEliminaSel(),SIGNAL(clicked()),this,SLOT(slotDeleteProdotto()));
@@ -69,12 +72,14 @@ Controller::Controller(Model* m,QWidget *parent) :
 
 QString Controller::getCurrentFile() const{ return currentFile;}
 
-/*
+
 void Controller::slotSave(){
+    /*
    if(core->isDataSaved()){
         QMessageBox::information(this,"Informazione","No Worries! I dati correnti sono gia' salvati");
         return;
-    }
+    } */
+    core->magazzino_push_random();
  QString json_filter = "JSON (*.json)";
     bool overr = false;
     QString filename;
@@ -112,7 +117,7 @@ void Controller::slotSave(){
 }
 
 }//slotSave
-*/
+
 
 /*
 void Controller::slotLoad(){
