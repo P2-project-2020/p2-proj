@@ -16,7 +16,7 @@ void Fiato::setTune(Strumento::Tune _tune){	instrumentTune = _tune; }
 Strumento::Tune Fiato::tune() const { return instrumentTune; }
 
 std::string Fiato::getMaterial() const {
-	return Fiato::materialToString(material);
+	return Fiato::materials.at(material);
 }
 
 void Fiato::loadData(const QJsonObject& obj){
@@ -35,13 +35,13 @@ void Fiato::loadData(const QJsonObject& obj){
 void Fiato::saveData(QJsonObject& obj) const {
 	Strumento::saveData(obj);
 
-	obj[json_material] = QString::fromStdString(Fiato::materialToString(material));
-	obj[json_tune] = QString::fromStdString(Strumento::tuneToString(instrumentTune));
+	obj[json_material] = QString::fromStdString(Fiato::materials.at(material));
+	obj[json_tune] = QString::fromStdString(Strumento::Tunes.at(instrumentTune));
 }
 
-std::string Fiato::materialToString(const Fiato::Material& _material){
-	return materials.at(_material);
-}
+// std::string Fiato::materialToString(const Fiato::Material& _material){
+// 	return materials.at(_material);
+// }
 
 Fiato::Material Fiato::findMaterial(const std::string& str){
 	for(const auto& mat : materials){

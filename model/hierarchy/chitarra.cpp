@@ -10,9 +10,9 @@ const QString Chitarra::json_model = "modello";
 Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringsNumber):
 	Strumento(_price,_brand,_used,_desc), Corda(_stringsNumber), type(_type), model(_model){}
 
-std::string Chitarra::typeToString(const Chitarra::guitarType& _type){
-	return guitarTypes.at(_type);
-}
+// std::string Chitarra::typeToString(const Chitarra::guitarType& _type){
+// 	return guitarTypes.at(_type);
+// }
 
 Chitarra::guitarType Chitarra::findType(const std::string& str){
 	for(const auto& gType : guitarTypes){
@@ -28,7 +28,7 @@ Chitarra::guitarType Chitarra::getType() const {
 Strumento::Tune Chitarra::tune() const { return undefined; }
 
 std::string Chitarra::className() const {
-	return std::string("Chitarra ") + typeToString(type) + " " + model;
+	return std::string("Chitarra ") + guitarTypes.at(type) + " " + model;
 }
 
 void Chitarra::loadData(const QJsonObject& obj){
@@ -47,6 +47,6 @@ void Chitarra::loadData(const QJsonObject& obj){
 void Chitarra::saveData(QJsonObject& obj) const {
 	Corda::saveData(obj);
 
-	obj[json_type] = QString::fromStdString(typeToString(type));
+	obj[json_type] = QString::fromStdString(guitarTypes.at(type));
 	obj[json_model] = QString::fromStdString(model);
 }

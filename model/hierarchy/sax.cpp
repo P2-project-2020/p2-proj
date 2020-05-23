@@ -4,7 +4,7 @@ Sax::Sax(Strumento::Tune _tune, double _price, const std::string& _brand, Fiato:
 	Strumento(_price, _brand, _used), Fiato(_material, _tune, Fiato::woodwind_mouthpiece){}
 
 std::string Sax::className() const{
-	return "Sax " + Strumento::tuneToString(tune());
+	return "Sax " + Strumento::Tunes.at(tune());
 }
 
 void Sax::loadData(const QJsonObject& obj){

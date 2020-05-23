@@ -16,16 +16,16 @@ Pianoforte::Pianoforte(Pianoforte::Shape _shape, Pianoforte::Keys _keys, double 
 	pianoShape(_shape), pianoKeys(_keys){}
 
 std::string Pianoforte::className() const {
-	return "Pianoforte " + shapeToString(pianoShape);
+	return "Pianoforte " + shapes.at(pianoShape);
 }
 
 std::string Pianoforte::getMaterial() const {
-	return keysToString(pianoKeys);
+	return keys.at(pianoKeys);
 }
 
-std::string Pianoforte::shapeToString(const Pianoforte::Shape& _shape){
-	return shapes.at(_shape);
-}
+// std::string Pianoforte::shapeToString(const Pianoforte::Shape& _shape){
+// 	return shapes.at(_shape);
+// }
 
 Pianoforte::Shape Pianoforte::findShape(const std::string& _shape){
 	for(const auto& s : shapes)
@@ -33,9 +33,9 @@ Pianoforte::Shape Pianoforte::findShape(const std::string& _shape){
 	return upright;							// solo perchè è più probabile dato che sono i più economici in media
 }
 
-std::string Pianoforte::keysToString(const Pianoforte::Keys& _key){
-	return keys.at(_key);
-}
+// std::string Pianoforte::keysToString(const Pianoforte::Keys& _key){
+// 	return keys.at(_key);
+// }
 
 Pianoforte::Keys Pianoforte::findKeys(const std::string& _keys){
 	for(const auto& key : keys)
@@ -61,6 +61,6 @@ void Pianoforte::saveData(QJsonObject& obj) const {
 	Corda::saveData(obj);
 	Percussione::saveData(obj);
 
-	obj[json_shape] = QString::fromStdString(shapeToString(pianoShape));
-	obj[json_keys] = QString::fromStdString(keysToString(pianoKeys));
+	obj[json_shape] = QString::fromStdString(shapes.at(pianoShape));
+	obj[json_keys] = QString::fromStdString(keys.at(pianoKeys));
 }

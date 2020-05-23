@@ -74,7 +74,6 @@ Strumento::Tune Strumento::findTune(const std::string& to_find){
 	return undefined;
 }
 
-// dato che richiede uno Strumrnto::Tune non serve fare find() sulla mappa, cose diverse da un Tune non dovrebbero funzionare
-std::string Strumento::tuneToString(const Strumento::Tune& to_find){
-	return Tunes.at(to_find);
-}
+// std::string Strumento::tuneToString(const Strumento::Tune& to_find){
+// 	return Tunes.at(to_find);
+// }

@@ -7,7 +7,7 @@ public:
 	enum guitarType {electric, acoustic, classic};
 	static const std::map<Chitarra::guitarType, std::string> guitarTypes;
 	
-	Chitarra(Chitarra::guitarType = electric, double = 0, const std::string& = "", const std::string& = ""x, const std::string& = "", bool = false, unsigned int = defaultStrings);
+	Chitarra(Chitarra::guitarType = electric, double = 0, const std::string& = "", const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings);
 
 	std::string className() const;
 	Strumento::Tune tune() const;

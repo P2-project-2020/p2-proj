@@ -10,7 +10,7 @@ Basso::Basso(bassType _type, double _price, const std::string& _brand, const std
 	Strumento(_price, _brand, _used, _desc), Corda(_stringNumber), type(_type), fretLess(_fretLess){}
 
 std::string Basso::className() const {
-	return "Basso " + typeToString(type) + (fretLess ? " fretless" : "");
+	return "Basso " + bassTypes.at(type) + (fretLess ? " fretless" : "");
 }
 
 Basso::bassType Basso::getType() const {
@@ -39,6 +39,6 @@ Basso::bassType Basso::findType(const std::string& str){
 	return electric;
 }
 
-std::string Basso::typeToString(const bassType& _type){
-	return bassTypes.at(_type);
-}
+// std::string Basso::typeToString(const bassType& _type){
+// 	return bassTypes.at(_type);
+// }

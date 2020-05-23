@@ -21,9 +21,9 @@ KitBatteria::Material KitBatteria::findMaterial(const std::string& str){
 	return materials.begin()->first;
 }
 
-std::string KitBatteria::materialToString(const KitBatteria::Material& _material){
-	return materials.at(_material);
-}
+// std::string KitBatteria::materialToString(const KitBatteria::Material& _material){
+// 	return materials.at(_material);
+// }
 
 void KitBatteria::loadData(const QJsonObject& obj){
 	Percussione::loadData(obj);
@@ -40,6 +40,6 @@ void KitBatteria::loadData(const QJsonObject& obj){
 void KitBatteria::saveData(QJsonObject& obj) const {
 	Percussione::saveData(obj);
 
-	obj[json_material] = QString::fromStdString(materialToString(material));
+	obj[json_material] = QString::fromStdString(KitBatteria::materials.at(material));
 	obj[json_snare] = metalSnare;
 }

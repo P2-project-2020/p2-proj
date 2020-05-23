@@ -22,5 +22,5 @@ void Viola::loadData(const QJsonObject& obj){
 void Viola::saveData(QJsonObject& obj) const {
 	Arco::saveData(obj);
 	
-	obj[Strumento::json_tune] = QString::fromStdString(Strumento::tuneToString(key));
+	obj[Strumento::json_tune] = QString::fromStdString(Strumento::Tunes.at(key));
 }
