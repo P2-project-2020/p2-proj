@@ -31,64 +31,156 @@ Model::~Model(){
         delete carrello->at(i);//Distruzione profonda
     delete carrello;
 }
+
 void Model::serializeData(QJsonObject& json)
 {
     QJsonArray jsonArray;
-    QJsonObject jsonInstrument;
+
+	// salva magazzino
     for(auto it = magazzino_cbegin();it!=magazzino_cend(); ++it){
-
+		QJsonObject jsonInstrument;
         Strumento *instrumentObject = *it;
         instrumentObject->saveData(jsonInstrument);
         jsonArray.append(jsonInstrument);
     }
+	json["Magazzino"] = jsonArray;
+	
+	while(jsonArray.count())
+		jsonArray.pop_back();
+
+	//salva carrello
     for(auto it = carrello_cbegin();it!=carrello_cend(); ++it){
-
+		QJsonObject jsonInstrument;
         Strumento *instrumentObject = *it;
         instrumentObject->saveData(jsonInstrument);
         jsonArray.append(jsonInstrument);
     }
-    json["Strumenti"] = jsonArray;
+    json["Carrello"] = jsonArray;
+
+	while(jsonArray.count())
+		jsonArray.pop_back();
+
+	//salva ordini
+    for(auto it = ordini_cbegin();it!=ordini_cend(); ++it){
+		QJsonObject jsonInstrument;
+        Strumento *instrumentObject = *it;
+        instrumentObject->saveData(jsonInstrument);
+        jsonArray.append(jsonInstrument);
+    }
+    json["Ordini"] = jsonArray;
 }
 
-/*
+
 bool Model::unserializeData(const QJsonObject& jsonObj)
 {
-    try{
+	QJsonArray jsonMagazzino = jsonObj["Magazzino"].toArray();
+	QJsonArray jsonCarrello = jsonObj["Carrello"].toArray();
+	QJsonArray jsonOrdini = jsonObj["Ordini"].toArray();
 
-    QJsonArray jsonArray;
-    if(jsonObj.contains("Cannabis"))
-        jsonArray = jsonObj["Cannabis"].toArray();
-    else
-       throw  inputException("Wrong header");
+	//Carica magazzino
+	for(auto it = jsonMagazzino.begin(); it != jsonMagazzino.end(); ++it){
+		QJsonObject obj = it->toObject();
+		std::string type;
 
-    for(int ind = 0; ind<jsonArray.size();++ind)
-    {
-        QJsonObject jsonCannabis = jsonArray[ind].toObject();
-        string cat ="";
-        if(jsonCannabis.contains("categoria"))
-            cat = jsonCannabis["categoria"].toString().toStdString();
-        else
-            throw inputException("Il File JSON e' corrotto: Chiave categoria mancante");
-        Cannabis* retrieve = nullptr;
-        if(cat == "Fiore")
-            retrieve = new Fiore;
-        else if(cat == "Estratto")
-                retrieve = new Estratto;
-              else if(cat == "Commestibile")
-                      retrieve = new Commestibile;
-                    else if(cat == "Pianta")
-                            retrieve = new Pianta;
-                    else throw inputException("File JSON corrotto: Categoria non trovata");
+		if(obj.contains(Strumento::json_type))
+			type = obj[Strumento::json_type].toString().toStdString();
+		else type = "";
 
-        retrieve->loadData(jsonCannabis);
-        push_end(retrieve);
-    } //scorro gli elementi del Container
-    }catch(inputException exc){qDebug()<<exc.getErrore();}
+		Strumento* retrive = nullptr;
 
+		if(type == "Viola")
+			retrive  = new Viola();
+		else if(type == "Violino")
+			retrive  = new Violino();
+		else if(type == "Chitarra")
+			retrive  = new Chitarra();
+		else if(type == "Basso")
+			retrive  = new Basso();
+		else if(type == "Pianoforte")
+			retrive  = new Pianoforte();
+		else if(type == "KitBatteria")
+			retrive  = new KitBatteria();
+		else if(type == "Sax")
+			retrive  = new Sax();
+		else if(type == "Tromba")
+			retrive  = new Tromba();
+
+		if(retrive){
+			retrive->loadData(obj);
+			magazzino->push_back(retrive);
+		}
+	}
+
+//Carica carrello
+	for(auto it = jsonCarrello.begin(); it != jsonCarrello.end(); ++it){
+		QJsonObject obj = it->toObject();
+		std::string type;
+		
+		if(obj.contains(Strumento::json_type))
+			type = obj[Strumento::json_type].toString().toStdString();
+		else type = "";
+		
+		Strumento* retrive = nullptr;
+
+		if(type == "Viola")
+			retrive  = new Viola();
+		else if(type == "Violino")
+			retrive  = new Violino();
+		else if(type == "Chitarra")
+			retrive  = new Chitarra();
+		else if(type == "Basso")
+			retrive  = new Basso();
+		else if(type == "Pianoforte")
+			retrive  = new Pianoforte();
+		else if(type == "KitBatteria")
+			retrive  = new KitBatteria();
+		else if(type == "Sax")
+			retrive  = new Sax();
+		else if(type == "Tromba")
+			retrive  = new Tromba();
+
+		if(retrive){
+			retrive->loadData(obj);
+			carrello->push_back(retrive);
+		}
+	}
+	
+	//Carica Ordini 
+	for(auto it = jsonOrdini.begin(); it != jsonOrdini.end(); ++it){
+		QJsonObject obj = it->toObject();
+		std::string type;
+
+		if(obj.contains(Strumento::json_type))
+			type = obj[Strumento::json_type].toString().toStdString();
+		else type = "";
+
+		Strumento* retrive = nullptr;
+
+		if(type == "Viola")
+			retrive  = new Viola();
+		else if(type == "Violino")
+			retrive  = new Violino();
+		else if(type == "Chitarra")
+			retrive  = new Chitarra();
+		else if(type == "Basso")
+			retrive  = new Basso();
+		else if(type == "Pianoforte")
+			retrive  = new Pianoforte();
+		else if(type == "KitBatteria")
+			retrive  = new KitBatteria();
+		else if(type == "Sax")
+			retrive  = new Sax();
+		else if(type == "Tromba")
+			retrive  = new Tromba();
+
+		if(retrive){
+			retrive->loadData(obj);
+			ordini->push_back(retrive);
+		}
+	}
     return true;
-}//loadData
+}
 
-*/
 bool Model::isDataSaved() const{
     return saved;
 }
