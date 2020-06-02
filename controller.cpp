@@ -12,6 +12,16 @@
 #include <QJsonObject>
 #include <QAction>
 
+#include "model/hierarchy/strumento.h"
+#include "model/hierarchy/violino.h"
+#include "model/hierarchy/viola.h"
+#include "model/hierarchy/chitarra.h"
+#include "model/hierarchy/basso.h"
+#include "model/hierarchy/kitBatteria.h"
+#include "model/hierarchy/pianoforte.h"
+#include "model/hierarchy/tromba.h"
+#include "model/hierarchy/sax.h"
+
 
 /*
 #include "GERARCHIA IN BASE ALLE NECESSITÀ
@@ -58,8 +68,10 @@ Controller::Controller(Model* m,QWidget *parent) :
     connect(Vmagazzino->getAddView()->getAddItemButton(),SIGNAL(clicked()), this, SLOT(slotInserisci()));
     connect(Vmagazzino->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteMagazzinoItem()));
     connect(Vmagazzino->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetMagazzino()));
-   /*
-    connect(Vpiante->getViewIns()->insertButton(),SIGNAL(clicked()),this, SLOT(slotInserisciPianta()));
+
+    /*
+    connect(Vmagazzino->getViewIns()->insertButton(),SIGNAL(clicked()),this, SLOT(slotInserisciPianta()));
+
     connect(pagine, SIGNAL(currentChanged(int)), this, SLOT(slotUpdatePage()));
 
     connect(Vpiante->getEliminaSel(),SIGNAL(clicked()),this,SLOT(slotDeletePianta()));
@@ -169,16 +181,65 @@ void Controller::slotLoad(){
 }//slotLoadData
 */
 
-/*
+
+/* TO DO!
 void Controller::slotInserisci(){
 
-    viewInserisci *Inserisci = Vshop->getViewIns();
+    insertView *insert = Vmagazzino->getAddView();
     try {
 
-        int type= Inserisci->baseFieldTipo()->currentIndex();
+        int type= insert->getInstrumentType()->currentIndex();
+        int arcType = insert->getArcoType()->currentIndex();
+        int stringType = insert->getCordaType()->currentIndex();
+        int percussionType = insert->getPercussioneType()->currentIndex();
+        int fiatoType = insert->getFiatoType()->currentIndex();
 
-        if(type == 0) throw inputException("Devi prima scegliere il tipo di prodotto che vuoi inserire!");
+        if(type == 0) throw inputException("Devi prima scegliere il tipo di strumento che vuoi inserire!");
+        if(arcType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad arco che vuoi inserire!");
+        if(stringType == 0) throw inputException("Devi prima scegliere il tipo di strumento a corda che vuoi inserire!");
+        if(percussionType == 0) throw inputException("Devi prima scegliere il tipo di strumento a percussione che vuoi inserire!");
+        if(fiatoType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad fiato che vuoi inserire!");
 
+        double price = insert->getPrice()->text().toDouble();
+        string description = insert->getDescription()->text().toStdString();
+        string brand = insert->getBrand()->text().toStdString();
+        string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
+        bool isSecondHand = insert->getIsSecondHand()->isChecked();
+
+        Strumento* toPush = nullptr;
+
+        switch (type) {
+        //Arco
+        case 1:
+            switch(arcType)
+            case 1: //Violino
+                toPush = new Violino();
+            case 2: //Viola
+                toPush = new Viola();
+            default:
+                  throw inputException("Strumento non valido!");
+            break;
+
+        case 2: //Corda
+            toPush = new Arco();
+            break;
+        case 3: //Percussione
+            break;
+        case 4: //Fiato
+            switch(fiatoType)
+            case 1: //Violino
+                toPush = new Tromba();
+            case 2: //Viola
+                toPush = new Sax();
+            default:
+                  throw inputException("Strumento non valido!");
+
+        }
+
+
+
+
+        QCheckBox *isSecondHand;
         double thc = Inserisci->fieldTHC()->text().toDouble();
         double cbd = Inserisci->fieldCBD()->text().toDouble();
         int indica = Inserisci->fieldIndica()->text().toInt();
@@ -229,10 +290,6 @@ void Controller::slotInserisci(){
 }
 
 */
-
-
-
-
 
 
 void Controller::slotDeleteMagazzinoItem()

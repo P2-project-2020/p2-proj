@@ -39,7 +39,7 @@ public:
 public slots:
     void slotSave();
     //void slotLoad();
-   // void slotInserisci();
+    //void slotInserisci();
     void slotUpdatePage();//Aggiorna statusBar e tabelle
     void slotDeleteMagazzinoItem();
    // void slotDeleteCarrelloItem();

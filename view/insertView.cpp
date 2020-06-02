@@ -14,12 +14,14 @@
 insertView::insertView(QWidget* p):
     QDialog (p),
     instrumentType(new QComboBox(this)),
+    generalInfo(new QGroupBox(this)),
     price(new QLineEdit(this)),
     description(new QLineEdit(this)),
     brand(new QLineEdit(this)),
     instrumentTune(new QComboBox(this)),
     isSecondHand(new QCheckBox(this)),
 
+    specificInfo(new QGroupBox(this)),
     arcoType(new QComboBox(this)),
     isLutherie(new QCheckBox(this)),
     cordaType(new QComboBox(this)),
@@ -46,20 +48,21 @@ insertView::insertView(QWidget* p):
 {
     QVBoxLayout *form = new QVBoxLayout(this);
 
-    QVBoxLayout *generalForm= new QVBoxLayout;
-    generalForm->setSpacing(5);
-
     instrumentType->addItem("Scegli il tipo di strumento");
     instrumentType->addItem("Arco");
     instrumentType->addItem("Corda");
     instrumentType->addItem("Percussione");
     instrumentType->addItem("Fiato");
+    form->addWidget(instrumentType);
 
+    QVBoxLayout *generalForm= new QVBoxLayout;
+    generalForm->setSpacing(5);
+
+    generalInfo->setTitle("Informazioni generali");
     price->setPlaceholderText("Prezzo strumento");
     price->setValidator( new QDoubleValidator(0.01,100000,2,this));
     description->setPlaceholderText("Descrizione strumento");
     brand->setPlaceholderText("Marca strumento");
-
     instrumentTune->addItem("Scegli il tipo di tonalità");
     instrumentTune->addItem("Indefinita");
     instrumentTune->addItem("Soprano");
@@ -67,20 +70,22 @@ insertView::insertView(QWidget* p):
     instrumentTune->addItem("Tenore");
     instrumentTune->addItem("Baritono");
     instrumentTune->addItem("Basso");
-
     isSecondHand->setText("Strumento di seconda mano");
 
-
-
-    generalForm->addWidget(instrumentType);
     generalForm->addWidget(price);
     generalForm->addWidget(description);
     generalForm->addWidget(brand);
     generalForm->addWidget(instrumentTune);
     generalForm->addWidget(isSecondHand);
+    generalInfo->setLayout(generalForm);
+
+
+
 
     QVBoxLayout* specificForm = new QVBoxLayout;
     specificForm->setSpacing(5);
+
+    specificInfo->setTitle("Dettagli strumento");
 
     QHBoxLayout *arcForm = new QHBoxLayout;
     arcForm->setSpacing(12);
@@ -110,6 +115,7 @@ insertView::insertView(QWidget* p):
 
     specificForm->addItem(stringForm);
 
+
     QHBoxLayout *guitarForm = new QHBoxLayout;
     guitarForm->setSpacing(12);
 
@@ -137,22 +143,6 @@ insertView::insertView(QWidget* p):
 
     specificForm->addItem(bassForm);
 
-    QHBoxLayout *pianoForm = new QHBoxLayout;
-    pianoForm->setSpacing(12);
-
-    pianoShape->addItem("Scegli il tipo di pianoforte");
-    pianoShape->addItem("Coda");
-    pianoShape->addItem("Muro");
-    keysMaterial->addItem("Scegli il materiale dei tasti");
-    keysMaterial->addItem("Legno");
-    keysMaterial->addItem("Plastica");
-    keysMaterial->addItem("Avorio");
-
-    pianoForm->addWidget(pianoShape);
-    pianoForm->addWidget(keysMaterial);
-
-    specificForm->addItem(pianoForm);
-
     QHBoxLayout *percussioneForm = new QHBoxLayout;
     percussioneForm->setSpacing(12);
 
@@ -170,6 +160,22 @@ insertView::insertView(QWidget* p):
     percussioneForm->addWidget(isTuned);
 
     specificForm->addItem(percussioneForm);
+
+    QHBoxLayout *pianoForm = new QHBoxLayout;
+    pianoForm->setSpacing(12);
+
+    pianoShape->addItem("Scegli il tipo di pianoforte");
+    pianoShape->addItem("Coda");
+    pianoShape->addItem("Muro");
+    keysMaterial->addItem("Scegli il materiale dei tasti");
+    keysMaterial->addItem("Legno");
+    keysMaterial->addItem("Plastica");
+    keysMaterial->addItem("Avorio");
+
+    pianoForm->addWidget(pianoShape);
+    pianoForm->addWidget(keysMaterial);
+
+    specificForm->addItem(pianoForm);
 
 
     isMetalSnare->setText("Rullante");
@@ -196,18 +202,10 @@ insertView::insertView(QWidget* p):
 
     specificForm->addItem(fiatoForm);
 
+    specificInfo->setLayout(specificForm);
 
-    /*
-    QGroupBox* general = new QGroupBox("Informazioni generali");
-    general->setLayout(generalForm);
-
-    QGroupBox* specific = new QGroupBox("Dettaglio strumento");
-    specific->setLayout(specificForm);
-
-    */
-
-    form->addItem(generalForm);
-    form->addItem(specificForm);
+    form->addWidget(generalInfo);
+    form->addWidget(specificInfo);
 
 
       
@@ -219,13 +217,13 @@ insertView::insertView(QWidget* p):
     form->addItem(buttonsLayout);
 
     slotDisableElements(0);
-    //slotDisableCorda(0);
 
     //this->setFixedSize(600,600);
     //window->viewIns->setSizeConstraint( QLayout::SetFixedSize );
 
     connect(instrumentType,SIGNAL(activated(int)),this,SLOT(slotDisableElements(int)));
-    //connect(cordaType,SIGNAL(activated(int)),this,SLOT(slotDisableCorda(int)));
+    connect(cordaType, SIGNAL(activated(int)), this, SLOT(slotDisableCorda(int)));
+    connect(percussioneType, SIGNAL(activated(int)), this, SLOT(slotDisablePercussione(int)));
     connect(resetFields,SIGNAL(clicked()),this,SLOT(slotReset()));
     connect(this,SIGNAL(rejected()),this,SLOT(slotRestart()));
 
@@ -237,29 +235,13 @@ insertView::insertView(QWidget* p):
 
 void insertView::slotRestart(){
 
+    instrumentType->setCurrentIndex(0);
     instrumentType->show();
-    price->hide();
-    description->hide();
-    brand->hide();
-    instrumentTune->hide();
-    isSecondHand->hide();
-    arcoType->hide();
-    isLutherie->hide();
-    cordaType->hide();
-    stringsNumber->hide();
-    guitarType->hide();
-    model->hide();
-    bassType->hide();
-    isFretless->hide();
-    pianoShape->hide();
-    keysMaterial->hide();
-    percussioneType->hide();
-    percussioneMaterial->hide();
-    isTuned->hide();
-    isMetalSnare->hide();
-    fiatoType->hide();
-    mouthPieceType->hide();
-    fiatoMaterial->hide();
+
+    generalInfo->hide();
+    specificInfo->hide();
+
+
 
     slotReset();
 
@@ -292,7 +274,7 @@ void insertView::slotRestart(){
 
     void insertView::slotReset(){
 
-    instrumentType->setCurrentIndex(0);
+    //instrumentType->setCurrentIndex(0); //basta resettare i campi relativi allo strumento
     price->setText("");
     description->setText("");
     brand->setText("");
@@ -306,7 +288,7 @@ void insertView::slotRestart(){
 
 //*******************************************
 //Corda
-    cordaType->setCurrentIndex(0);
+    //cordaType->setCurrentIndex(0);
     stringsNumber->setText("");
 //Chitarra
     guitarType->setCurrentIndex(0);
@@ -321,7 +303,7 @@ void insertView::slotRestart(){
 
 //*******************************************
 //Percussione
-    percussioneType->setCurrentIndex(0);
+    //percussioneType->setCurrentIndex(0);
     percussioneMaterial->setCurrentIndex(0);
     isTuned->setChecked(false);
 //Pianoforte
@@ -331,7 +313,7 @@ void insertView::slotRestart(){
 
 //*******************************************
 //Fiato
-    fiatoType->setCurrentIndex(0);
+    //fiatoType->setCurrentIndex(0);
     mouthPieceType->setCurrentIndex(0);
     fiatoMaterial->setCurrentIndex(0);
 
@@ -344,6 +326,10 @@ void insertView::slotDisableElements(int index) const
     case 1://Arco
 
         instrumentType->show();
+
+        generalInfo->show();
+        specificInfo->show();
+
         price->show();
         description->show();
         brand->show();
@@ -353,19 +339,24 @@ void insertView::slotDisableElements(int index) const
         isLutherie->show();
         cordaType->hide();
         stringsNumber->hide();
+
         guitarType->hide();
         model->hide();
         bassType->hide();
         isFretless->hide();
         pianoShape->hide();
         keysMaterial->hide();
+
         percussioneType->hide();
         percussioneMaterial->hide();
         isTuned->hide();
+
         isMetalSnare->hide();
+
         fiatoType->hide();
         mouthPieceType->hide();
         fiatoMaterial->hide();
+
 
         instrumentType->setEnabled(true);
         price->setEnabled(true);
@@ -394,9 +385,13 @@ void insertView::slotDisableElements(int index) const
         break;
     case 2://Corda
 
-
+        slotDisableCorda(0);
 
         instrumentType->show();
+
+        generalInfo->show();
+        specificInfo->show();
+
         price->show();
         description->show();
         brand->show();
@@ -407,14 +402,8 @@ void insertView::slotDisableElements(int index) const
         cordaType->show();
         stringsNumber->show();
 
-        //-----------------------------
-        guitarType->hide();
-        model->hide();
-        bassType->hide();
-        isFretless->hide();
-        pianoShape->hide();
-        keysMaterial->hide();
-        //----------------------------
+        //gestione di cordaType affidata a slotDisableCorda(int)
+
 
         percussioneType->hide();
         percussioneMaterial->hide();
@@ -434,14 +423,6 @@ void insertView::slotDisableElements(int index) const
         isLutherie->setEnabled(false);
         cordaType->setEnabled(true);
         stringsNumber->setEnabled(true);
-
-        guitarType->setEnabled(false);
-        model->setEnabled(false);
-        bassType->setEnabled(false);
-        isFretless->setEnabled(false);
-        pianoShape->setEnabled(false);
-        keysMaterial->setEnabled(false);
-
         percussioneType->setEnabled(false);
         percussioneMaterial->setEnabled(false);
         isTuned->setEnabled(false);
@@ -454,7 +435,13 @@ void insertView::slotDisableElements(int index) const
         break;
 
     case 3://Percussione
+
+        slotDisablePercussione(0);
+
         instrumentType->show();
+        generalInfo->show();
+        specificInfo->show();
+
         price->show();
         description->show();
         brand->show();
@@ -469,15 +456,13 @@ void insertView::slotDisableElements(int index) const
         model->hide();
         bassType->hide();
         isFretless->hide();
-        pianoShape->hide();
-        keysMaterial->hide();
 
         percussioneType->show();
         percussioneMaterial->show();
         isTuned->show();
-        /*-----------------------------------*/
-        isMetalSnare->hide();
-        /*-----------------------------------*/
+
+        //gestione percussioneType affidata a slotDisablePercussione
+
         fiatoType->hide();
         mouthPieceType->hide();
         fiatoMaterial->hide();
@@ -497,15 +482,11 @@ void insertView::slotDisableElements(int index) const
         model->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
-        pianoShape->setEnabled(false);
-        keysMaterial->setEnabled(false);
 
         percussioneType->setEnabled(true);
         percussioneMaterial->setEnabled(true);
         isTuned->setEnabled(true);
-        /*----------------------------------------*/
-        isMetalSnare->setEnabled(false);
-        /*----------------------------------------*/
+
         fiatoType->setEnabled(false);
         mouthPieceType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
@@ -515,6 +496,9 @@ void insertView::slotDisableElements(int index) const
     case 4://Fiato
 
         instrumentType->show();
+        generalInfo->show();
+        specificInfo->show();
+
         price->show();
         description->show();
         brand->show();
@@ -535,7 +519,9 @@ void insertView::slotDisableElements(int index) const
         percussioneType->hide();
         percussioneMaterial->hide();
         isTuned->hide();
+
         isMetalSnare->hide();
+
         fiatoType->show();
         mouthPieceType->show();
         fiatoMaterial->show();
@@ -550,16 +536,21 @@ void insertView::slotDisableElements(int index) const
         isLutherie->setEnabled(false);
         cordaType->setEnabled(false);
         stringsNumber->setEnabled(false);
+
+
         guitarType->setEnabled(false);
         model->setEnabled(false);
         bassType->setEnabled(false);
-        isFretless->setEnabled(false);
+        isFretless->setEnabled(false);  
         pianoShape->setEnabled(false);
         keysMaterial->setEnabled(false);
+
         percussioneType->setEnabled(false);
         percussioneMaterial->setEnabled(false);
         isTuned->setEnabled(false);
+
         isMetalSnare->setEnabled(false);
+
         fiatoType->setEnabled(true);
         mouthPieceType->setEnabled(true);
         fiatoMaterial->setEnabled(true);
@@ -568,32 +559,10 @@ void insertView::slotDisableElements(int index) const
         break;
 
     default:
-
+        instrumentType->setCurrentIndex(0);
         instrumentType->show();
-        price->hide();
-        description->hide();
-        brand->hide();
-        instrumentTune->hide();
-        isSecondHand->hide();
-        arcoType->hide();
-        isLutherie->hide();
-        cordaType->hide();
-        stringsNumber->hide();
-
-        guitarType->hide();
-        model->hide();
-        bassType->hide();
-        isFretless->hide();
-        pianoShape->hide();
-        keysMaterial->hide();
-
-        percussioneType->hide();
-        percussioneMaterial->hide();
-        isTuned->hide();
-        isMetalSnare->hide();
-        fiatoType->hide();
-        mouthPieceType->hide();
-        fiatoMaterial->hide();
+        generalInfo->hide();
+        specificInfo->hide();
 
         instrumentType->setEnabled(true);
         price->setEnabled(false);
@@ -622,148 +591,7 @@ void insertView::slotDisableElements(int index) const
 }
 
 
-/*
-void insertView::slotDisableCorda(int index) const {
 
-    switch (index) {
-    case 1://Guitar
-
-        instrumentType->show();
-        price->show();
-        description->show();
-        brand->show();
-        instrumentTune->show();
-        isSecondHand->show();
-        arcoType->hide();
-        isLutherie->hide();
-        cordaType->show();
-        stringsNumber->show();
-
-        guitarType->show();
-        model->show();
-
-        bassType->hide();
-        isFretless->hide();
-
-        pianoShape->hide();
-        keysMaterial->hide();
-
-
-        percussioneType->hide();
-        percussioneMaterial->hide();
-        isTuned->hide();
-        isMetalSnare->hide();
-        fiatoType->hide();
-        mouthPieceType->hide();
-        fiatoMaterial->hide();
-
-        break;
-
-    case 2://Bass
-
-        instrumentType->show();
-        price->show();
-        description->show();
-        brand->show();
-        instrumentTune->show();
-        isSecondHand->show();
-        arcoType->hide();
-        isLutherie->hide();
-        cordaType->show();
-        stringsNumber->show();
-
-        guitarType->hide();
-        model->hide();
-
-        bassType->show();
-        isFretless->show();
-
-        pianoShape->hide();
-        keysMaterial->hide();
-
-
-        percussioneType->hide();
-        percussioneMaterial->hide();
-        isTuned->hide();
-        isMetalSnare->hide();
-        fiatoType->hide();
-        mouthPieceType->hide();
-        fiatoMaterial->hide();
-
-        break;
-
-    case 3://Piano
-
-        instrumentType->show();
-        price->show();
-        description->show();
-        brand->show();
-        instrumentTune->show();
-        isSecondHand->show();
-        arcoType->hide();
-        isLutherie->hide();
-        cordaType->show();
-        stringsNumber->show();
-
-        guitarType->hide();
-        model->hide();
-
-        bassType->hide();
-        isFretless->hide();
-
-        pianoShape->show();
-        keysMaterial->show();
-
-        percussioneType->hide();
-        percussioneMaterial->hide();
-        isTuned->hide();
-        isMetalSnare->hide();
-        fiatoType->hide();
-        mouthPieceType->hide();
-        fiatoMaterial->hide();
-
-        break;
-
-
-    default:
-
-        instrumentType->show();
-        price->show();
-        description->show();
-        brand->show();
-        instrumentTune->show();
-        isSecondHand->show();
-        arcoType->hide();
-        isLutherie->hide();
-        cordaType->show();
-        stringsNumber->show();
-
-        guitarType->hide();
-        model->hide();
-
-        bassType->hide();
-        isFretless->hide();
-
-        pianoShape->hide();
-        keysMaterial->hide();
-
-
-        percussioneType->hide();
-        percussioneMaterial->hide();
-        isTuned->hide();
-        isMetalSnare->hide();
-        fiatoType->hide();
-        mouthPieceType->hide();
-        fiatoMaterial->hide();
-
-        break;
-    }
-
-
-}
-*/
-
-/*
 void insertView::slotDisableCorda(int index) const
 {
 
@@ -779,6 +607,14 @@ void insertView::slotDisableCorda(int index) const
         pianoShape->hide();
         keysMaterial->hide();
 
+        guitarType->setEnabled(true);
+        model->setEnabled(true);
+
+        bassType->setEnabled(false);
+        isFretless->setEnabled(false);
+        pianoShape->setEnabled(false);
+        keysMaterial->setEnabled(false);
+
         break;
 
     case 2://Bass
@@ -792,6 +628,14 @@ void insertView::slotDisableCorda(int index) const
         pianoShape->hide();
         keysMaterial->hide();
 
+        guitarType->setEnabled(false);
+        model->setEnabled(false);
+
+        bassType->setEnabled(true);
+        isFretless->setEnabled(true);
+
+        pianoShape->setEnabled(false);
+        keysMaterial->setEnabled(false);
 
         break;
 
@@ -806,11 +650,20 @@ void insertView::slotDisableCorda(int index) const
         pianoShape->show();
         keysMaterial->show();
 
+        guitarType->setEnabled(false);
+        model->setEnabled(false);
+        bassType->setEnabled(false);
+        isFretless->setEnabled(false);
+
+        pianoShape->setEnabled(true);
+        keysMaterial->setEnabled(true);
+
         break;
 
 
     default:
 
+        cordaType->setCurrentIndex(0);
         guitarType->hide();
         model->hide();
 
@@ -820,13 +673,62 @@ void insertView::slotDisableCorda(int index) const
         pianoShape->hide();
         keysMaterial->hide();
 
+        guitarType->setEnabled(false);
+        model->setEnabled(false);
+        bassType->setEnabled(false);
+        isFretless->setEnabled(false);
+        pianoShape->setEnabled(false);
+        keysMaterial->setEnabled(false);
+
 
         break;
     }
 }
 
-*/
 
+void insertView::slotDisablePercussione(int index) const
+{
+
+    switch (index) {
+    case 1://Piano
+
+        pianoShape->show();
+        keysMaterial->show();
+        isMetalSnare->hide();
+
+        pianoShape->setEnabled(true);
+        keysMaterial->setEnabled(true);
+        isMetalSnare->setEnabled(false);
+
+        break;
+
+    case 2://Kit Batteria
+
+        pianoShape->hide();
+        keysMaterial->hide();
+        isMetalSnare->show();
+
+        pianoShape->setEnabled(false);
+        keysMaterial->setEnabled(false);
+        isMetalSnare->setEnabled(true);
+
+
+        break;
+
+
+    default:
+        percussioneType->setCurrentIndex(0);
+        pianoShape->hide();
+        keysMaterial->hide();
+        isMetalSnare->hide();
+
+        pianoShape->setEnabled(false);
+        keysMaterial->setEnabled(false);
+        isMetalSnare->setEnabled(false);
+
+        break;
+    }
+}
 
     QComboBox* insertView::getInstrumentType() const {
         return instrumentType;

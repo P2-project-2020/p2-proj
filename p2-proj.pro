@@ -44,7 +44,6 @@ HEADERS += controller.h \
     view/ordiniView.h \
     view/magazzinoFilter.h \
     view/magazzinoView.h \
-    view/addView.h \
     view/insertView.h
 
 

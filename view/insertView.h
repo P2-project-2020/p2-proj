@@ -7,6 +7,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QGroupBox>
 #include <QLabel>
 #include <QDialog>
 #include <QWidget>
@@ -19,12 +20,15 @@ class insertView : public QDialog
 private:
 
     QComboBox *instrumentType; //Arco | Corda | Percussione | Fiato
+
+    QGroupBox* generalInfo;
     QLineEdit *price;
     QLineEdit *description;
     QLineEdit *brand;
     QComboBox *instrumentTune;
     QCheckBox *isSecondHand;
 
+    QGroupBox* specificInfo;
 //*******************************************
 //Arco
     QComboBox *arcoType; //Violino | Viola
@@ -128,13 +132,13 @@ public:
 public slots:
     void slotDisableElements(int) const;
     void slotDisableCorda(int) const;
-    //void slotDisablePercussionInstrument(int) const;
+    void slotDisablePercussione(int) const;
 
 
 signals:
     void signalDisableElements(int);
-    void slotDisableCorda(int);
-    //void slotDisablePercussionInstrument(int);
+    void signalDisableCorda(int);
+    void signalDisablePercussione(int);
 
 };
 
