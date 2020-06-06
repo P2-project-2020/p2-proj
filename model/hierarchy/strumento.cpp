@@ -9,14 +9,14 @@ const QString Strumento::json_used = "usato";
 const QString Strumento::json_brand = "marca";
 
 const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::undefined, ""},
-																 {Strumento::soprano, "soprano"},
-																 {Strumento::contralto, "contralto"},
-																 {Strumento::tenor, "tenore"},
-																 {Strumento::baritone, "baritono"},
-																 {Strumento::bass, "basso"}};
+								 {Strumento::soprano, "soprano"},
+								 {Strumento::contralto, "contralto"},
+								 {Strumento::tenor, "tenore"},
+								 {Strumento::baritone, "baritono"},
+								 {Strumento::bass, "basso"}};
 
 Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc):
-	price(_price),description(_desc),used(_used),brand(_brand){}
+     price(_price),description(_desc),used(_used),brand(_brand){}
 
 Strumento::~Strumento() = default;
 
@@ -29,51 +29,53 @@ std::string Strumento::getBrand() const { return brand; }
 void Strumento::setBrand(const std::string& _brand){ brand = _brand; }
 
 double Strumento::getPrice() const {
-	return price;
+     return price;
 }
 
 void Strumento::setPrice(double _price) {
-	price = _price;
+     price = _price;
 }
 
 std::string Strumento::getDescription() const {
-	return description;
+     return description;
 }
 
 void Strumento::setDescription(const std::string& _desc) {
-	description = _desc;
+     description = _desc;
 }
 
 void Strumento::loadData(const QJsonObject& obj){
-	const QJsonValue& valPrice = obj[json_price];
-	const QJsonValue& valDesc = obj[json_desc];
-	const QJsonValue& valUsed = obj[json_used];
-	const QJsonValue& valBrand = obj[json_brand];
+     const QJsonValue& valPrice = obj[json_price];
+     const QJsonValue& valDesc = obj[json_desc];
+     const QJsonValue& valUsed = obj[json_used];
+     const QJsonValue& valBrand = obj[json_brand];
 
-	if(!valPrice.isUndefined() && valPrice.isDouble())
-		price = valPrice.toDouble();
-	if(!valDesc.isUndefined() && valDesc.isString())
-		description = valDesc.toString().toStdString();
-	if(!valUsed.isUndefined() && valPrice.isBool())
-		used = valUsed.toBool();
-	if(!valBrand.isUndefined() && valPrice.isString())
-		brand = valBrand.toString().toStdString();
+     if(!valPrice.isUndefined() && valPrice.isDouble())
+	  price = valPrice.toDouble();
+     if(!valDesc.isUndefined() && valDesc.isString())
+	  description = valDesc.toString().toStdString();
+     if(!valUsed.isUndefined() && valPrice.isBool())
+	  used = valUsed.toBool();
+     if(!valBrand.isUndefined() && valPrice.isString())
+	  brand = valBrand.toString().toStdString();
 }
 
 void Strumento::saveData(QJsonObject& obj) const {
-	obj[json_type] = QString::fromStdString(className()).split(" ").at(0); // ogni classe come prima cosa ritorna il nome specifico dello strumento, poi dettagli
-	obj[json_price] = price;
-	obj[json_desc] = QString::fromStdString(description);
-	obj[json_used] = used;
-	obj[json_used] = QString::fromStdString(brand);
+     obj[json_type] = QString::fromStdString(className()).split(" ").at(0); // ogni classe come prima cosa ritorna il nome specifico dello strumento, poi dettagli
+     obj[json_price] = price;
+     obj[json_desc] = QString::fromStdString(description);
+     obj[json_used] = used;
+     obj[json_used] = QString::fromStdString(brand);
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){
-	for(const auto& it : Tunes)
-		if(it.second == to_find) return it.first;
-	return undefined;
+     for(const auto& it : Tunes)
+	  if(it.second == to_find) return it.first;
+     return undefined;
 }
 
-// std::string Strumento::tuneToString(const Strumento::Tune& to_find){
-// 	return Tunes.at(to_find);
-// }
+void Strumento::setTune(const Strumento::Tune& new_tune){
+     return;
+     /* La maggior parte delle volte gli strumenti non hanno intonazione, e comunque
+	lascio decidere alla classe finale cosa fare */
+}

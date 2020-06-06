@@ -11,6 +11,11 @@ Strumento::Tune Viola::tune() const {
 	return key;
 }
 
+void Viola::setTune(const Strumento::Tune& new_tune){
+     // if(new_tune)
+     key = new_tune;
+}
+
 void Viola::loadData(const QJsonObject& obj){
 	Arco::loadData(obj);
 

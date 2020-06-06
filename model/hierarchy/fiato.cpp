@@ -11,9 +11,13 @@ Fiato::Fiato(Material _material, Strumento::Tune _tune, Mouthpiece _mouthpiece):
 
 void Fiato::setMaterial(Fiato::Material _material){	material = _material; }
 
-void Fiato::setTune(Strumento::Tune _tune){	instrumentTune = _tune; }
-
 Strumento::Tune Fiato::tune() const { return instrumentTune; }
+
+void Fiato::setTune(const Strumento::Tune& new_tune){
+     // if(new_tune) { // Se vogliamo che non si possa settare undefined però idk
+     instrumentTune = new_tune;
+     // }
+}
 
 std::string Fiato::getMaterial() const {
 	return Fiato::materials.at(material);
@@ -38,10 +42,6 @@ void Fiato::saveData(QJsonObject& obj) const {
 	obj[json_material] = QString::fromStdString(Fiato::materials.at(material));
 	obj[json_tune] = QString::fromStdString(Strumento::Tunes.at(instrumentTune));
 }
-
-// std::string Fiato::materialToString(const Fiato::Material& _material){
-// 	return materials.at(_material);
-// }
 
 Fiato::Material Fiato::findMaterial(const std::string& str){
 	for(const auto& mat : materials){
