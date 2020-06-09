@@ -19,6 +19,8 @@ public:
      void loadData(const QJsonObject&);
      void saveData(QJsonObject&) const;
 
+     static int findMaterial(const std::string&);
+
 private:
      Mouthpiece mouthpiece;
      int material;
@@ -26,6 +28,4 @@ private:
 
      static const QString json_material;
      static const QString json_tune;
-
-     static int findMaterial(const std::string&);
 };

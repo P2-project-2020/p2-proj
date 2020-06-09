@@ -17,7 +17,6 @@ public:
      void loadData(const QJsonObject&) override;
      void saveData(QJsonObject&) const override;
      
-protected:
      static bassType findType(const std::string&);
      
 private:
