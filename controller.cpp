@@ -211,13 +211,25 @@ void Controller::slotInserisci(){
     try {
 
         int type= insert->getInstrumentType()->currentIndex();
-        int arcType = insert->getArcoType()->currentIndex();
-        int stringType = insert->getCordaType()->currentIndex();
-        int percussionType = insert->getPercussioneType()->currentIndex();
-        int fiatoType = insert->getFiatoType()->currentIndex();
 
         if(type == 0) throw inputException("Devi prima scegliere il tipo di strumento che vuoi inserire!");
-        if(arcType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad arco che vuoi inserire!");
+
+        double price = insert->getPrice()->text().toDouble();
+        std::string description = insert->getDescription()->text().toStdString();
+        std::string brand = insert->getBrand()->text().toStdString();
+
+
+        if(type == 1) // Arco
+            if(arcType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad arco che vuoi inserire!");
+            if(type ==2) // Corda
+                if(type ==3) // Percussione
+                    if(type ==4) // Fiato
+
+
+
+        //CONTROLLARE IL TIPO
+
+
         if(stringType == 0) throw inputException("Devi prima scegliere il tipo di strumento a corda che vuoi inserire!");
         if(percussionType == 0) throw inputException("Devi prima scegliere il tipo di strumento a percussione che vuoi inserire!");
         if(fiatoType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad fiato che vuoi inserire!");
