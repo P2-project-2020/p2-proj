@@ -44,7 +44,8 @@ HEADERS += controller.h \
     view/ordiniView.h \
     view/magazzinoFilter.h \
     view/magazzinoView.h \
-    view/insertView.h
+    view/insertView.h \
+    view/inputexception.h
 
 
 
@@ -75,6 +76,7 @@ SOURCES += controller.cpp \
     view/carrelloAdapter.cpp \
     view/carrelloFilter.cpp \
     view/carrelloView.cpp \
-    view/insertView.cpp
+    view/insertView.cpp \
+    view/inputexception.cpp
 
 

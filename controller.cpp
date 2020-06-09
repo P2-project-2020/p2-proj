@@ -135,10 +135,10 @@ void Controller::slotSave(){
 }//slotSave
 
 
-/*
+
 void Controller::slotLoad(){
 
-    if(core->getPianteSize() || core->getProdottiSize()){
+    if(core->getMagazzinoSize() || core->getCarrelloSize() || core->getOrdiniSize()){
         QMessageBox::StandardButton reply= QMessageBox::question(this,"Attenzione!","Cosi' facendo sovrascriverai i dati presenti, vuoi continuare?",QMessageBox::Yes|QMessageBox::No);
         if(reply==QMessageBox::No)
             return;
@@ -179,7 +179,6 @@ void Controller::slotLoad(){
     }catch(inputException exc){QMessageBox::warning(this, "Error",exc.getErrore());}
 
 }//slotLoadData
-*/
 
 
 /* TO DO!
@@ -416,29 +415,29 @@ void Controller::resetCarrello(){
 }//resetCarrello
 
 
-/*
+
 void Controller::slotResetTables(){
 
     QAction* send = qobject_cast<QAction*>(sender());
     if(send->text() == "Nuovo"){
- if(core->getPianteSize() || core->getProdottiSize()){
+ if(core->getCarrelloSize() || core->getMagazzinoSize() || core->getOrdiniSize()){
     QMessageBox::StandardButton reply= QMessageBox::question
 (this,"Attenzione!","Cosi' facendo sovrascriverai i dati presenti, vuoi continuare?",
 QMessageBox::Yes|QMessageBox::No);
 if(reply==QMessageBox::No)
       return;
-resetProdotti();
-resetPiante();
+resetMagazzino();
+resetCarrello();
+resetOrdini();
         }
- resetProdotti();
- resetPiante();
 
 
     }//Se la chiamata arriva da File > Nuovo
-    resetProdotti();
-    resetPiante();
+    resetMagazzino();
+    resetCarrello();
+    resetOrdini();
 }//resetTables
-*/
+
 
 void Controller::slotDataChanged(){
     //Viene chiamato solo in seguito al segnale dataChanged emesso da adapter, che indica che i dati sono stai modificati

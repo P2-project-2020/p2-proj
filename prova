@@ -1,0 +1,904 @@
+{
+    "Carrello": [
+    ],
+    "Magazzino": [
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 144,
+            "descrizione": "",
+            "forma": "coda",
+            "intonato": true,
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Pianoforte",
+            "tasti": "avorio",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonato": false,
+            "marca": "",
+            "materiale": "legno",
+            "prezzo": 0,
+            "rullante in metallo": false,
+            "strumento": "Batteria",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonato": false,
+            "marca": "",
+            "materiale": "legno",
+            "prezzo": 0,
+            "rullante in metallo": false,
+            "strumento": "Batteria",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonato": false,
+            "marca": "",
+            "materiale": "legno",
+            "prezzo": 0,
+            "rullante in metallo": false,
+            "strumento": "Batteria",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "corde": 144,
+            "descrizione": "",
+            "forma": "coda",
+            "intonato": true,
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Pianoforte",
+            "tasti": "avorio",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonato": false,
+            "marca": "",
+            "materiale": "legno",
+            "prezzo": 0,
+            "rullante in metallo": false,
+            "strumento": "Batteria",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonato": false,
+            "marca": "",
+            "materiale": "legno",
+            "prezzo": 0,
+            "rullante in metallo": false,
+            "strumento": "Batteria",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonato": false,
+            "marca": "",
+            "materiale": "legno",
+            "prezzo": 0,
+            "rullante in metallo": false,
+            "strumento": "Batteria",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 144,
+            "descrizione": "",
+            "forma": "coda",
+            "intonato": true,
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Pianoforte",
+            "tasti": "avorio",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonato": false,
+            "marca": "",
+            "materiale": "legno",
+            "prezzo": 0,
+            "rullante in metallo": false,
+            "strumento": "Batteria",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "corde": 144,
+            "descrizione": "",
+            "forma": "coda",
+            "intonato": true,
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Pianoforte",
+            "tasti": "avorio",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Tromba",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "soprano",
+            "marca": "",
+            "materiale": "bronzo",
+            "prezzo": 0,
+            "strumento": "Sax",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 144,
+            "descrizione": "",
+            "forma": "coda",
+            "intonato": true,
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Pianoforte",
+            "tasti": "avorio",
+            "usato": false
+        },
+        {
+            "corde": 6,
+            "descrizione": "",
+            "marca": "",
+            "modello": "",
+            "prezzo": 0,
+            "strumento": "Chitarra",
+            "tipo": "elettrica",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "intonazione": "contralto",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Viola",
+            "usato": false
+        },
+        {
+            "corde": 144,
+            "descrizione": "",
+            "forma": "coda",
+            "intonato": true,
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Pianoforte",
+            "tasti": "avorio",
+            "usato": false
+        },
+        {
+            "descrizione": "",
+            "liuteria": true,
+            "marca": "liuteria",
+            "prezzo": 0,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "",
+            "marca": "",
+            "prezzo": 0,
+            "strumento": "Basso",
+            "usato": false
+        }
+    ],
+    "Ordini": [
+    ]
+}

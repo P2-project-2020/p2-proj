@@ -1,7 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-//#include "view/inputexception.h"
+#include "view/inputexception.h"
 #include "view/menu.h"
 #include "view/magazzinoView.h"
 #include "model/model.h"
@@ -38,8 +38,8 @@ public:
     void resetOrdini();
 public slots:
     void slotSave();
-    //void slotLoad();
-    //void slotInserisci();
+    void slotLoad();
+   // void slotInserisci();
     void slotUpdatePage();//Aggiorna statusBar e tabelle
     void slotDeleteMagazzinoItem();
    // void slotDeleteCarrelloItem();
@@ -47,7 +47,7 @@ public slots:
     void slotResetMagazzino();
     void slotResetCarrello();
     void slotResetOrdini();
-    //void slotResetTables();
+    void slotResetTables();
     void slotDataChanged();
 };
 #endif // CONTROLLER_H
