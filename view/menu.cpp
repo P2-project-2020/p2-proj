@@ -14,16 +14,19 @@ Menu::Menu(QWidget* p):
         saveAs->setShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_S);
     exit = new QAction("Esci", menu);
          exit->setShortcut(Qt::CTRL | Qt::Key_W);
+    print = new QAction("Stampa", menu);
 
     // Setup
     addMenu(menu);
         menu->addAction(nuovo);
-        menu->addAction(load);
+        menu->addAction(nuovo);
+        menu->addAction(print);
         menu->addAction(save);
         menu->addAction(saveAs);
         menu->addAction(exit);
 
     connect(nuovo,SIGNAL(triggered()),parent, SLOT(slotResetTables()));
+    connect(print,SIGNAL(triggered()),parent, SLOT(slotPrint()));
     connect(load,SIGNAL(triggered()),parent, SLOT(slotLoad()));
     connect(saveAs,SIGNAL(triggered()),parent,SLOT(slotSave()));
     connect(exit,SIGNAL(triggered()),parent,SLOT(close()));
@@ -40,6 +43,10 @@ QAction *Menu::getSave() const{
 
 QAction *Menu::getSaveAs() const{
     return saveAs;
+}
+
+QAction *Menu::getPrint() const{
+    return print;
 }
 
 

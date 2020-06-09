@@ -11,6 +11,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QAction>
+#include <QPrinter>
+#include <QPainter>
 
 #include "model/hierarchy/strumento.h"
 #include "model/hierarchy/violino.h"
@@ -88,6 +90,28 @@ Controller::Controller(Model* m,QWidget *parent) :
 QString Controller::getCurrentFile() const{ return currentFile;}
 
 
+/*PDF Print for receipt */
+void Controller::slotPrint() {
+
+    QPrinter printer;
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName("/Users/erik/Documents/p2-2020/p2-proj/nonwritable.pdf");
+        QPainter painter;
+        if (! painter.begin(&printer)) { // failed to open file
+            qWarning("failed to open file, is it writable?");
+            //return 1;
+        }
+        painter.drawText(10, 10, "Test");
+        if (! printer.newPage()) {
+            qWarning("failed in flushing page to disk, disk full?");
+            //return 1;
+        }
+        painter.drawText(10, 10, "Test 2");
+        painter.end();
+
+}
+
+/*PDF Print for receipt */
 void Controller::slotSave(){
     /*
    if(core->isDataSaved()){
@@ -181,7 +205,6 @@ void Controller::slotLoad(){
 }//slotLoadData
 
 
-/* TO DO!
 void Controller::slotInserisci(){
 
     insertView *insert = Vmagazzino->getAddView();
@@ -200,85 +223,97 @@ void Controller::slotInserisci(){
         if(fiatoType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad fiato che vuoi inserire!");
 
         double price = insert->getPrice()->text().toDouble();
-        string description = insert->getDescription()->text().toStdString();
-        string brand = insert->getBrand()->text().toStdString();
-        string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
+        std::string description = insert->getDescription()->text().toStdString();
+        std::string brand = insert->getBrand()->text().toStdString();
+        std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
         bool isSecondHand = insert->getIsSecondHand()->isChecked();
 
-        Strumento* toPush = nullptr;
+        int stringsNumber = insert->getStringsNumber()->text().toInt();
+        std::string guitarType = insert->getGuitarType()->currentText().toStdString();
+        std::string guitarModel = insert->getModel()->text().toStdString();
+        std::string bassType = insert->getBassType()->currentText().toStdString();
+        bool isFretless = insert->getIsFretless()->isChecked();
+        std::string pianoShape = insert->getPianoShape()->currentText().toStdString();
+        std::string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
+        std::string percussionMaterial = insert->getPercussioneMaterial()->currentText().toStdString();
+        bool isMetalSnare = insert->getIsMetalSnare()->isChecked();
+        std::string windMaterial = insert->getFiatoMaterial()->currentText().toStdString();
+
+      Strumento* toPush = nullptr;
 
         switch (type) {
         //Arco
         case 1:
-            switch(arcType)
+
+            switch(arcType) {
             case 1: //Violino
-                toPush = new Violino();
+                toPush = new Violino(price, brand, description, isSecondHand);
             case 2: //Viola
-                toPush = new Viola();
+                toPush = new Viola(price, brand, description,Strumento::findTune(instrumentTune), isSecondHand);
             default:
                   throw inputException("Strumento non valido!");
+
+                break;
+
+            }
+
             break;
 
-        case 2: //Corda
-            toPush = new Arco();
+        case 2:
+        //Corda
+            switch(stringType) {
+            case 1: //Chitarra
+                toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, guitarModel, description, isSecondHand, stringsNumber);
+            case 2: //Basso
+                toPush = new Basso(Basso::findType(bassType), price, brand, description, isSecondHand, stringsNumber, isFretless);
+            case 3: //Pianoforte
+                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
+            default:
+                throw inputException("Strumento non valido!");
+
+                break;
+            }
+
+
             break;
-        case 3: //Percussione
+        case 3:
+        //Percussione
+            switch(percussionType) {
+            case 1: // Kit batteria
+                toPush = new KitBatteria(price, brand, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description);
+            case 2: //Pianoforte
+                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
+            default:
+                throw inputException("Strumento non valido!");
+
+                break;
+            }
+
+
             break;
+
         case 4: //Fiato
-            switch(fiatoType)
-            case 1: //Violino
-                toPush = new Tromba();
-            case 2: //Viola
-                toPush = new Sax();
+            switch(fiatoType) {
+            case 1: //Tromba
+                toPush = new Tromba(Strumento::findTune(instrumentTune), price, brand, Fiato::findMaterial(windMaterial), isSecondHand, description );
+            case 2: //Sax
+                toPush = new Sax(Strumento::findTune(instrumentTune), price, brand, Fiato::findMaterial(windMaterial), isSecondHand);
             default:
                   throw inputException("Strumento non valido!");
-
-        }
-
-
+                break;
+            }
 
 
-        QCheckBox *isSecondHand;
-        double thc = Inserisci->fieldTHC()->text().toDouble();
-        double cbd = Inserisci->fieldCBD()->text().toDouble();
-        int indica = Inserisci->fieldIndica()->text().toInt();
-        int sativa = Inserisci->fieldSativa()->text().toInt();
-        string strain = Inserisci->fieldStrain()->text().toStdString();
-
-        double prezzo = Inserisci->fieldPrezzoBase()->text().toDouble();
-        bool hq = Inserisci->fieldHQ()->isChecked();
-        double peso = Inserisci->fieldPeso()->text().toDouble();
-
-        string estratto = Inserisci->fieldTipoEstratto()->currentText().toStdString();
-        string commestibile = Inserisci->fieldTipoCommestibile()->currentText().toStdString();
-        bool indoor = Inserisci->fieldIndoor()->isChecked();
-
-        Cannabis* toPush=nullptr;
-
-
-
-
-        switch (type) {
-        case 1://Fiore
-               toPush = new Fiore(thc,cbd,indica,sativa,strain,peso,prezzo,hq,indoor);
             break;
-        case 2://Estratto
-                toPush = new Estratto(thc,cbd,indica,sativa,strain,peso,prezzo,hq,
-                                       Estratto::toEnum(estratto));
-            break;
-        case 3://Commestibile
-                toPush = new Commestibile(thc,cbd,indica,sativa,strain,peso,prezzo,hq,
-                                          Commestibile::toEnum(commestibile));
-            break;
-      default:
-            throw inputException("Prodotto non valido!");
+        default:
+               throw inputException("Strumento non valido!");
 
         }
 
 
         if(toPush!= nullptr){
-            core->push_end(toPush);
-            QMessageBox::information(this,"Successo", "Prodotto inserito correttamente");
+            core->magazzino_push_end(toPush);
+            QMessageBox::information(this,"Successo", "Strumento inserito correttamente");
             core->setDataSaved(false);
             slotUpdatePage();
         }
@@ -287,9 +322,6 @@ void Controller::slotInserisci(){
         QMessageBox::warning(this,"Spono",exc.getErrore());
     }
 }
-
-*/
-
 
 void Controller::slotDeleteMagazzinoItem()
 {
