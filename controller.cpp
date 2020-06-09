@@ -107,7 +107,7 @@ void Controller::slotSave(){
                 QFileDialog::getSaveFileName(
                     this,
                     tr("Scegli dove salvare il file"),
-                    QDir::homePath(),
+                    QDir::currentPath(),
                     json_filter,&json_filter,QFileDialog::DontUseNativeDialog);
 
  if(filename.isEmpty())
@@ -152,7 +152,7 @@ void Controller::slotLoad(){
                 QFileDialog::getOpenFileName(
                     this,
                     tr("Scegli il file da aprire"),
-                    QDir::homePath(),
+                    QDir::currentPath(),
                     json_filter,&json_filter,QFileDialog::DontUseNativeDialog);
 
     if(filename.isEmpty())
