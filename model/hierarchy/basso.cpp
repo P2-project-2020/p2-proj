@@ -2,7 +2,7 @@
 
 const unsigned int Basso::defaultStrings = 4;
 const std::map<Basso::bassType,std::string> Basso::bassTypes = {{electric,"elettrico"},
-																{acoustic,"acustico"}};
+								{acoustic,"acustico"}};
 const QString Basso::json_type = "tipo";
 const QString Basso::json_fretless = "fretless";
 
@@ -39,6 +39,3 @@ Basso::bassType Basso::findType(const std::string& str){
 	return electric;
 }
 
-// std::string Basso::typeToString(const bassType& _type){
-// 	return bassTypes.at(_type);
-// }

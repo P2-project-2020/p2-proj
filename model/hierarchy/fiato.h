@@ -6,29 +6,26 @@ protected:
      enum Mouthpiece {woodwind_mouthpiece, brass_mouthpiece};
      // Vedere se serve davvero, non si usa da nessuna parte
 public:
-     enum Material {silver, brass, plastic};
-     static const std::map<Fiato::Material,std::string> materials;
+     static const std::vector<std::string> materials;
 	
-     void setMaterial(Fiato::Material);
-	
-     Fiato(Material = brass, Strumento::Tune = soprano, Mouthpiece = brass_mouthpiece);
+     Fiato(int = 0, Strumento::Tune = soprano, Mouthpiece = brass_mouthpiece);
 
      Strumento::Tune tune() const;
      void setTune(const Strumento::Tune&);
      
      std::string getMaterial() const;
+     void setMaterial(int);
 
      void loadData(const QJsonObject&);
      void saveData(QJsonObject&) const;
 
 private:
      Mouthpiece mouthpiece;
-     Material material;
+     int material;
      Tune instrumentTune;
 
      static const QString json_material;
      static const QString json_tune;
 
-     static std::string materialToString(const Fiato::Material&);
-     static Fiato::Material findMaterial(const std::string&);
+     static int findMaterial(const std::string&);
 };

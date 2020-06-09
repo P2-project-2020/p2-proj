@@ -1,6 +1,6 @@
 #include "sax.h"
 
-Sax::Sax(Strumento::Tune _tune, double _price, const std::string& _brand, Fiato::Material _material, bool _used):
+Sax::Sax(Strumento::Tune _tune, double _price, const std::string& _brand, int _material, bool _used):
 	Strumento(_price, _brand, _used), Fiato(_material, _tune, Fiato::woodwind_mouthpiece){}
 
 std::string Sax::className() const{

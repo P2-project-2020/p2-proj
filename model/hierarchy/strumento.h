@@ -43,6 +43,7 @@ public:
      virtual void setTune(const Strumento::Tune&);
      
      virtual std::string getMaterial() const = 0;
+     virtual void setMaterial(int);
 
 protected:
      static Strumento::Tune findTune(const std::string&);

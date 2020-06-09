@@ -2,14 +2,11 @@
 const QString Fiato::json_material = "materiale";
 const QString Fiato::json_tune = "intonazione";
 
-const std::map<Fiato::Material, std::string> Fiato::materials = {{Fiato::brass, "bronzo"},
-																 {Fiato::silver,"argento"},
-																 {Fiato::plastic, "plastica"}};
+const std::vector<std::string> Fiato::materials = { "bronzo", "argento", "plastica" };
 
-Fiato::Fiato(Material _material, Strumento::Tune _tune, Mouthpiece _mouthpiece):
-	mouthpiece(_mouthpiece), material(_material), instrumentTune(_tune) {}
-
-void Fiato::setMaterial(Fiato::Material _material){	material = _material; }
+Fiato::Fiato(int _material, Strumento::Tune _tune, Mouthpiece _mouthpiece):
+	mouthpiece(_mouthpiece),
+	material(_material >= 0 && _material < materials.size() ? _material : 0), instrumentTune(_tune) {}
 
 Strumento::Tune Fiato::tune() const { return instrumentTune; }
 
@@ -21,6 +18,12 @@ void Fiato::setTune(const Strumento::Tune& new_tune){
 
 std::string Fiato::getMaterial() const {
 	return Fiato::materials.at(material);
+}
+
+void Fiato::setMaterial(int new_material) {
+     if(new_material >=0 && new_material < materials.size()){
+	  material = new_material;
+     }
 }
 
 void Fiato::loadData(const QJsonObject& obj){
@@ -43,9 +46,10 @@ void Fiato::saveData(QJsonObject& obj) const {
 	obj[json_tune] = QString::fromStdString(Strumento::Tunes.at(instrumentTune));
 }
 
-Fiato::Material Fiato::findMaterial(const std::string& str){
-	for(const auto& mat : materials){
-		if(mat.second == str) return mat.first;
-	}
-	return materials.begin()->first;
+int Fiato::findMaterial(const std::string& str){
+     for(int i = 0; i < materials.size(); ++i){
+	  if(str == materials.at(i))
+	       return i;
+     }
+     return -1;
 }

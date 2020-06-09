@@ -79,3 +79,7 @@ void Strumento::setTune(const Strumento::Tune& new_tune){
      /* La maggior parte delle volte gli strumenti non hanno intonazione, e comunque
 	lascio decidere alla classe finale cosa fare */
 }
+
+void Strumento::setMaterial(int){
+     return; // stesso discorso per i materiali
+}
