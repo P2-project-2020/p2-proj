@@ -208,31 +208,11 @@ void Controller::slotLoad(){
 void Controller::slotInserisci(){
 
     insertView *insert = Vmagazzino->getAddView();
+    Strumento* toPush = nullptr;
+
     try {
 
         int type= insert->getInstrumentType()->currentIndex();
-
-        if(type == 0) throw inputException("Devi prima scegliere il tipo di strumento che vuoi inserire!");
-
-        double price = insert->getPrice()->text().toDouble();
-        std::string description = insert->getDescription()->text().toStdString();
-        std::string brand = insert->getBrand()->text().toStdString();
-
-
-        if(type == 1) // Arco
-            if(arcType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad arco che vuoi inserire!");
-            if(type ==2) // Corda
-                if(type ==3) // Percussione
-                    if(type ==4) // Fiato
-
-
-
-        //CONTROLLARE IL TIPO
-
-
-        if(stringType == 0) throw inputException("Devi prima scegliere il tipo di strumento a corda che vuoi inserire!");
-        if(percussionType == 0) throw inputException("Devi prima scegliere il tipo di strumento a percussione che vuoi inserire!");
-        if(fiatoType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad fiato che vuoi inserire!");
 
         double price = insert->getPrice()->text().toDouble();
         std::string description = insert->getDescription()->text().toStdString();
@@ -240,87 +220,114 @@ void Controller::slotInserisci(){
         std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
         bool isSecondHand = insert->getIsSecondHand()->isChecked();
 
-        int stringsNumber = insert->getStringsNumber()->text().toInt();
-        std::string guitarType = insert->getGuitarType()->currentText().toStdString();
-        std::string guitarModel = insert->getModel()->text().toStdString();
-        std::string bassType = insert->getBassType()->currentText().toStdString();
-        bool isFretless = insert->getIsFretless()->isChecked();
-        std::string pianoShape = insert->getPianoShape()->currentText().toStdString();
-        std::string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
-        std::string percussionMaterial = insert->getPercussioneMaterial()->currentText().toStdString();
-        bool isMetalSnare = insert->getIsMetalSnare()->isChecked();
-        std::string windMaterial = insert->getFiatoMaterial()->currentText().toStdString();
-
-      Strumento* toPush = nullptr;
-
         switch (type) {
-        //Arco
-        case 1:
 
+
+        //Arco
+        case 1: {
+            int arcType = insert->getArcoType()->currentIndex();
             switch(arcType) {
             case 1: //Violino
                 toPush = new Violino(price, brand, description, isSecondHand);
+                break;
             case 2: //Viola
                 toPush = new Viola(price, brand, description,Strumento::findTune(instrumentTune), isSecondHand);
+                break;
             default:
-                  throw inputException("Strumento non valido!");
+                  throw inputException("Devi prima scegliere il tipo di strumento ad arco che vuoi inserire!");
 
                 break;
-
             }
+        }
 
             break;
+        case 2: { //Corda
+            int stringType = insert->getCordaType()->currentIndex();
+            int stringsNumber = insert->getStringsNumber()->text().toInt();
 
-        case 2:
-        //Corda
             switch(stringType) {
-            case 1: //Chitarra
+
+
+            case 1: { //Chitarra
+
+                std::string guitarType = insert->getGuitarType()->currentText().toStdString();
+                std::string guitarModel = insert->getModel()->text().toStdString();
                 toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, guitarModel, description, isSecondHand, stringsNumber);
-            case 2: //Basso
+            }
+                break;
+            case 2: { //Basso
+                std::string bassType = insert->getBassType()->currentText().toStdString();
+                bool isFretless = insert->getIsFretless()->isChecked();
                 toPush = new Basso(Basso::findType(bassType), price, brand, description, isSecondHand, stringsNumber, isFretless);
-            case 3: //Pianoforte
+            }
+                break;
+            case 3: { //Pianoforte
+                std::string pianoShape = insert->getPianoShape()->currentText().toStdString();
+                std::string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
                 toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
+            }
+                break;
             default:
-                throw inputException("Strumento non valido!");
+                throw inputException("Devi prima scegliere il tipo di strumento ad corda che vuoi inserire!");
 
                 break;
             }
-
-
+        }
             break;
-        case 3:
+
+        case 3: {
         //Percussione
+            int percussionType = insert->getPercussioneType()->currentIndex();
             switch(percussionType) {
-            case 1: // Kit batteria
-                toPush = new KitBatteria(price, brand, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description);
-            case 2: //Pianoforte
+
+            case 1: { //Pianoforte
+                std::string pianoShape = insert->getPianoShape()->currentText().toStdString();
+                std::string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
                 toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
+            }
+                break;
+            case 2: { // Kit batteria
+                std::string percussionMaterial = insert->getPercussioneMaterial()->currentText().toStdString();
+                bool isMetalSnare = insert->getIsMetalSnare()->isChecked();
+                toPush = new KitBatteria(price, brand, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description);
+
+            }
+                break;
+
             default:
-                throw inputException("Strumento non valido!");
+                 throw inputException("Devi prima scegliere il tipo di strumento a percussione che vuoi inserire!");
 
                 break;
             }
-
+        }
 
             break;
 
-        case 4: //Fiato
+        case 4: { //Fiato
+        int fiatoType = insert->getFiatoType()->currentIndex();
+        std::string windMaterial = insert->getFiatoMaterial()->currentText().toStdString();
             switch(fiatoType) {
-            case 1: //Tromba
+
+            case 1:  //Tromba
                 toPush = new Tromba(Strumento::findTune(instrumentTune), price, brand, Fiato::findMaterial(windMaterial), isSecondHand, description );
+
+                break;
             case 2: //Sax
                 toPush = new Sax(Strumento::findTune(instrumentTune), price, brand, Fiato::findMaterial(windMaterial), isSecondHand);
+
+                break;
             default:
-                  throw inputException("Strumento non valido!");
+                throw inputException("Devi prima scegliere il tipo di strumento ad fiato che vuoi inserire!");
                 break;
             }
 
-
-            break;
-        default:
-               throw inputException("Strumento non valido!");
-
         }
+            break;
+
+        default:
+              throw inputException("Devi prima scegliere il tipo di strumento che vuoi inserire!");
+        }
+
 
 
         if(toPush!= nullptr){
