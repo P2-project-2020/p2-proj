@@ -223,21 +223,21 @@ void Controller::slotInserisci(){
         if(fiatoType == 0) throw inputException("Devi prima scegliere il tipo di strumento ad fiato che vuoi inserire!");
 
         double price = insert->getPrice()->text().toDouble();
-        string description = insert->getDescription()->text().toStdString();
-        string brand = insert->getBrand()->text().toStdString();
-        string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
+        std::string description = insert->getDescription()->text().toStdString();
+        std::string brand = insert->getBrand()->text().toStdString();
+        std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
         bool isSecondHand = insert->getIsSecondHand()->isChecked();
 
         int stringsNumber = insert->getStringsNumber()->text().toInt();
-        string guitarType = insert->getGuitarType()->currentText().toStdString();
-        string guitarModel = insert->getModel()->text().toStdString();
-        string bassType = insert->getBassType()->currentText().toStdString();
+        std::string guitarType = insert->getGuitarType()->currentText().toStdString();
+        std::string guitarModel = insert->getModel()->text().toStdString();
+        std::string bassType = insert->getBassType()->currentText().toStdString();
         bool isFretless = insert->getIsFretless()->isChecked();
-        string pianoShape = insert->getPianoShape()->currentText().toStdString();
-        string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
-        string percussionMaterial = insert->getPercussioneMaterial()->currentText().toStdString();
+        std::string pianoShape = insert->getPianoShape()->currentText().toStdString();
+        std::string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
+        std::string percussionMaterial = insert->getPercussioneMaterial()->currentText().toStdString();
         bool isMetalSnare = insert->getIsMetalSnare()->isChecked();
-        string windMaterial = insert->getFiatoMaterial()->currentText().toStdString();
+        std::string windMaterial = insert->getFiatoMaterial()->currentText().toStdString();
 
       Strumento* toPush = nullptr;
 
@@ -249,7 +249,7 @@ void Controller::slotInserisci(){
             case 1: //Violino
                 toPush = new Violino(price, brand, description, isSecondHand);
             case 2: //Viola
-                toPush = new Viola(price, brand, description, instrumentTune, isSecondHand);
+                toPush = new Viola(price, brand, description,Strumento::findTune(instrumentTune), isSecondHand);
             default:
                   throw inputException("Strumento non valido!");
 
@@ -312,7 +312,7 @@ void Controller::slotInserisci(){
 
 
         if(toPush!= nullptr){
-            core->push_end(toPush);
+            core->magazzino_push_end(toPush);
             QMessageBox::information(this,"Successo", "Strumento inserito correttamente");
             core->setDataSaved(false);
             slotUpdatePage();
