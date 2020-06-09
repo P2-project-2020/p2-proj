@@ -65,7 +65,7 @@ void Strumento::saveData(QJsonObject& obj) const {
      obj[json_price] = price;
      obj[json_desc] = QString::fromStdString(description);
      obj[json_used] = used;
-     obj[json_used] = QString::fromStdString(brand);
+     obj[json_brand] = QString::fromStdString(brand);
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){
