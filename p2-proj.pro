@@ -70,9 +70,6 @@ SOURCES += controller.cpp \
     view/magazzinoAdapter.cpp \
     view/magazzinoFilter.cpp \
     view/magazzinoView.cpp \
-    view/ordiniAdapter.cpp \
-    view/ordiniFilter.cpp \
-    view/ordiniView.cpp \
     view/carrelloAdapter.cpp \
     view/carrelloFilter.cpp \
     view/carrelloView.cpp \
