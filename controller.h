@@ -4,6 +4,7 @@
 #include "view/inputexception.h"
 #include "view/menu.h"
 #include "view/magazzinoView.h"
+#include "view/carrelloView.h"
 #include "model/model.h"
 #include <QVBoxLayout>
 #include <QStatusBar>
@@ -20,8 +21,7 @@ private:
     Model *core;//Il modello contenente i dati
     QTabWidget *pagine;
     magazzinoView *Vmagazzino;//Vista gestione magazzino
-    // ordiniView *Vordini;//Vista gestione ordini
-    // carrelloView *Vcarrello;//Vista gestione carrello
+    carrelloView *Vcarrello;//Vista gestione carrello
     QBoxLayout *mainLayout;
     QHBoxLayout *headerLayout;
     QHBoxLayout *statusBar;//La statusBar inferiore che emula il comportamente della QStatusBar
@@ -35,18 +35,15 @@ public:
     QString getCurrentFile() const;
     void resetMagazzino();
     void resetCarrello();
-    void resetOrdini();
 public slots:
     void slotSave();
     void slotLoad();
     void slotInserisci();
     void slotUpdatePage();//Aggiorna statusBar e tabelle
     void slotDeleteMagazzinoItem();
-   // void slotDeleteCarrelloItem();
-   // void slotDeleteOrdiniItem();
+    //void slotDeleteCarrelloItem();
     void slotResetMagazzino();
     void slotResetCarrello();
-    void slotResetOrdini();
     void slotResetTables();
     void slotDataChanged();
     void slotPrint();

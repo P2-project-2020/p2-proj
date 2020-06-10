@@ -34,8 +34,7 @@ Controller::Controller(Model* m,QWidget *parent) :
     core(m),
     pagine(new QTabWidget),
     Vmagazzino(new magazzinoView(this,core)),
-   // Vordini(new ordiniView(this,core)),
-   // Vcarrello(new carrelloView(this,core)),
+    Vcarrello(new carrelloView(this,core)),
     mainLayout(new QBoxLayout(QBoxLayout::TopToBottom,this)),
     headerLayout(new QHBoxLayout),
     statusBar(new QHBoxLayout),
@@ -52,8 +51,7 @@ Controller::Controller(Model* m,QWidget *parent) :
 
 
     pagine->insertTab(0,Vmagazzino,"Magazzino");
-    //pagine->insertTab(1,Vordini,"Ordini");
-    //pagine->insertTab(1,Vcarrello,"Carrello");
+    pagine->insertTab(1,Vcarrello,"Carrello");
     mainLayout->addWidget(pagine);
 
     statusBar->addWidget(itemCounter,Qt::AlignRight);
@@ -70,6 +68,9 @@ Controller::Controller(Model* m,QWidget *parent) :
     connect(Vmagazzino->getAddView()->getAddItemButton(),SIGNAL(clicked()), this, SLOT(slotInserisci()));
     connect(Vmagazzino->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteMagazzinoItem()));
     connect(Vmagazzino->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetMagazzino()));
+
+    connect(Vcarrello->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteCarrelloItem()));
+    connect(Vcarrello->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetCarrello()));
 
     /*
     connect(Vmagazzino->getViewIns()->insertButton(),SIGNAL(clicked()),this, SLOT(slotInserisciPianta()));
@@ -162,7 +163,7 @@ void Controller::slotSave(){
 
 void Controller::slotLoad(){
 
-    if(core->getMagazzinoSize() || core->getCarrelloSize() || core->getOrdiniSize()){
+    if(core->getMagazzinoSize() || core->getCarrelloSize()){
         QMessageBox::StandardButton reply= QMessageBox::question(this,"Attenzione!","Cosi' facendo sovrascriverai i dati presenti, vuoi continuare?",QMessageBox::Yes|QMessageBox::No);
         if(reply==QMessageBox::No)
             return;
@@ -367,27 +368,6 @@ slotUpdatePage();
 }
 
 
-
-
-void Controller::slotResetOrdini()
-{
- if(core->getOrdiniSize() == 0){
-      QMessageBox::warning(this,"Errore","Nessun ordine presente!");
-      return;
- }
-QMessageBox::StandardButton confirm  =QMessageBox::question
-(this, "Conferma rimozione",
-"Sei sicuro di volere cancellare tutti gli ordini presenti?", QMessageBox::Yes|QMessageBox::No);
-
-if(confirm == QMessageBox::Yes){
-    resetOrdini();
-    //Update pagina delegato a deleteTables
-}
-else
-    return;
-
-}//slotResetOrdini
-
 void Controller::slotResetMagazzino()
 {
  if(core->getMagazzinoSize() == 0){
@@ -426,18 +406,6 @@ else
 
 }//slotResetOrdini
 
-void Controller::resetOrdini(){
-/*
-    while(core->getProdottiSize())
-    Vshop->getFilter()->removeRows(0,1);
-
-    core->setDataSaved(false);
-
-    slotUpdatePage();
-
-    */
-
-}//resetOrdini
 
 void Controller::resetMagazzino(){
 
@@ -453,15 +421,14 @@ void Controller::resetMagazzino(){
 }//resetMagazzino
 
 void Controller::resetCarrello(){
-/*
-    while(core->getProdottiSize())
-    Vshop->getFilter()->removeRows(0,1);
+
+    while(core->getCarrelloSize())
+    Vcarrello->getFilter()->removeRows(0,1);
 
     core->setDataSaved(false);
 
     slotUpdatePage();
 
-    */
 
 }//resetCarrello
 
@@ -471,7 +438,7 @@ void Controller::slotResetTables(){
 
     QAction* send = qobject_cast<QAction*>(sender());
     if(send->text() == "Nuovo"){
- if(core->getCarrelloSize() || core->getMagazzinoSize() || core->getOrdiniSize()){
+ if(core->getCarrelloSize() || core->getMagazzinoSize()){
     QMessageBox::StandardButton reply= QMessageBox::question
 (this,"Attenzione!","Cosi' facendo sovrascriverai i dati presenti, vuoi continuare?",
 QMessageBox::Yes|QMessageBox::No);
@@ -479,14 +446,12 @@ if(reply==QMessageBox::No)
       return;
 resetMagazzino();
 resetCarrello();
-resetOrdini();
         }
 
 
     }//Se la chiamata arriva da File > Nuovo
     resetMagazzino();
     resetCarrello();
-    resetOrdini();
 }//resetTables
 
 
