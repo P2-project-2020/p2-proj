@@ -221,12 +221,25 @@ void Controller::slotInserisci(){
         std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
         bool isSecondHand = insert->getIsSecondHand()->isChecked();
 
-        switch (type) {
+        if(type) {
 
+            if(!price)
+                throw inputException("Devi prima inserire il prezzo!");
+            if(description == "")
+                throw inputException("Devi prima inserire la descrizione!");
+            if(brand == "")
+                throw inputException("Devi prima inserire la marca!");
+        }
+
+
+        switch (type) {
 
         //Arco
         case 1: {
+
             int arcType = insert->getArcoType()->currentIndex();
+            if(instrumentTune == "Scegli il tipo di tonalità")
+                   throw inputException("Devi prima inserire la tonalità!");
             switch(arcType) {
             case 1: //Violino
                 toPush = new Violino(price, brand, description, isSecondHand);
@@ -245,6 +258,8 @@ void Controller::slotInserisci(){
         case 2: { //Corda
             int stringType = insert->getCordaType()->currentIndex();
             int stringsNumber = insert->getStringsNumber()->text().toInt();
+            if(!stringsNumber)
+                   throw inputException("Devi prima inserire il numero di corde!");
 
             switch(stringType) {
 
@@ -253,18 +268,34 @@ void Controller::slotInserisci(){
 
                 std::string guitarType = insert->getGuitarType()->currentText().toStdString();
                 std::string guitarModel = insert->getModel()->text().toStdString();
+
+                if(guitarType == "Scegli il tipo di chitarra")
+                       throw inputException("Devi prima inserire il tipo di chitarra!");
+                if(guitarModel == "")
+                       throw inputException("Devi prima inserire il modello di chitarra!");
+
                 toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, guitarModel, description, isSecondHand, stringsNumber);
             }
                 break;
             case 2: { //Basso
                 std::string bassType = insert->getBassType()->currentText().toStdString();
                 bool isFretless = insert->getIsFretless()->isChecked();
+
+                if(bassType == "Scegli il tipo di basso")
+                       throw inputException("Devi prima inserire il tipo di basso!");
+
                 toPush = new Basso(Basso::findType(bassType), price, brand, description, isSecondHand, stringsNumber, isFretless);
             }
                 break;
             case 3: { //Pianoforte
                 std::string pianoShape = insert->getPianoShape()->currentText().toStdString();
                 std::string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
+
+                if(pianoShape == "Scegli il tipo di pianoforte")
+                       throw inputException("Devi prima inserire il tipo di pianoforte!");
+                if(keysMaterial == "Scegli il materiale dei tasti")
+                       throw inputException("Devi prima inserire il materiale dei tasti!");
+
                 toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
             }
                 break;
@@ -284,12 +315,22 @@ void Controller::slotInserisci(){
             case 1: { //Pianoforte
                 std::string pianoShape = insert->getPianoShape()->currentText().toStdString();
                 std::string keysMaterial = insert->getKeysMaterial()->currentText().toStdString();
+
+                if(pianoShape == "Scegli il tipo di pianoforte")
+                       throw inputException("Devi prima inserire il tipo di pianoforte!");
+                if(keysMaterial == "Scegli il materiale dei tasti")
+                       throw inputException("Devi prima inserire il materiale dei tasti!");
+
                 toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
             }
                 break;
             case 2: { // Kit batteria
                 std::string percussionMaterial = insert->getPercussioneMaterial()->currentText().toStdString();
                 bool isMetalSnare = insert->getIsMetalSnare()->isChecked();
+
+                if(percussionMaterial == "Scegli il tipo di materiale")
+                       throw inputException("Devi prima inserire il tipo di materiale!");
+
                 toPush = new KitBatteria(price, brand, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description);
 
             }
@@ -307,7 +348,13 @@ void Controller::slotInserisci(){
         case 4: { //Fiato
         int fiatoType = insert->getFiatoType()->currentIndex();
         std::string windMaterial = insert->getFiatoMaterial()->currentText().toStdString();
-            switch(fiatoType) {
+
+        if(instrumentTune == "Scegli il tipo di tonalità")
+               throw inputException("Devi prima inserire la tonalità!");
+        if(windMaterial == "Scegli il tipo di materiale")
+               throw inputException("Devi prima inserire il tipo di materiale!");
+
+        switch(fiatoType) {
 
             case 1:  //Tromba
                 toPush = new Tromba(Strumento::findTune(instrumentTune), price, brand, Fiato::findMaterial(windMaterial), isSecondHand, description );

@@ -40,7 +40,6 @@ insertView::insertView(QWidget* p):
     isMetalSnare(new QCheckBox(this)),
 
     fiatoType(new QComboBox(this)),
-    mouthPieceType(new QComboBox(this)),
     fiatoMaterial(new QComboBox(this)),
 
     addItem(new QPushButton("Inserisci",this)),
@@ -188,16 +187,12 @@ insertView::insertView(QWidget* p):
     fiatoType->addItem("Scegli il tipo di strumento a fiato");
     fiatoType->addItem("Sassofono");
     fiatoType->addItem("Tromba");
-    mouthPieceType->addItem("Scegli il tipo di bocchino");
-    mouthPieceType->addItem("Legno");
-    mouthPieceType->addItem("Ottone");
     fiatoMaterial->addItem("Scegli il tipo di materiale");
     fiatoMaterial->addItem("Argento");
     fiatoMaterial->addItem("Ottone");
     fiatoMaterial->addItem("Plastica");
 
     fiatoForm->addWidget(fiatoType);
-    fiatoForm->addWidget(mouthPieceType);
     fiatoForm->addWidget(fiatoMaterial);
 
     specificForm->addItem(fiatoForm);
@@ -266,7 +261,6 @@ void insertView::slotRestart(){
     isTuned->setEnabled(false);
     isMetalSnare->setEnabled(false);
     fiatoType->setEnabled(false);
-    mouthPieceType->setEnabled(false);
     fiatoMaterial->setEnabled(false);
 
 
@@ -313,8 +307,6 @@ void insertView::slotRestart(){
 
 //*******************************************
 //Fiato
-    //fiatoType->setCurrentIndex(0);
-    mouthPieceType->setCurrentIndex(0);
     fiatoMaterial->setCurrentIndex(0);
 
 }
@@ -354,7 +346,6 @@ void insertView::slotDisableElements(int index) const
         isMetalSnare->hide();
 
         fiatoType->hide();
-        mouthPieceType->hide();
         fiatoMaterial->hide();
 
 
@@ -379,7 +370,6 @@ void insertView::slotDisableElements(int index) const
         isTuned->setEnabled(false);
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
-        mouthPieceType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
 
         break;
@@ -395,7 +385,7 @@ void insertView::slotDisableElements(int index) const
         price->show();
         description->show();
         brand->show();
-        instrumentTune->show();
+        instrumentTune->hide();
         isSecondHand->show();
         arcoType->hide();
         isLutherie->hide();
@@ -410,14 +400,13 @@ void insertView::slotDisableElements(int index) const
         isTuned->hide();
         isMetalSnare->hide();
         fiatoType->hide();
-        mouthPieceType->hide();
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
-        instrumentTune->setEnabled(true);
+        instrumentTune->setEnabled(false);
         isSecondHand->setEnabled(true);
         arcoType->setEnabled(false);
         isLutherie->setEnabled(false);
@@ -428,7 +417,6 @@ void insertView::slotDisableElements(int index) const
         isTuned->setEnabled(false);
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
-        mouthPieceType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
 
 
@@ -445,7 +433,7 @@ void insertView::slotDisableElements(int index) const
         price->show();
         description->show();
         brand->show();
-        instrumentTune->show();
+        instrumentTune->hide();
         isSecondHand->show();
         arcoType->hide();
         isLutherie->hide();
@@ -464,14 +452,13 @@ void insertView::slotDisableElements(int index) const
         //gestione percussioneType affidata a slotDisablePercussione
 
         fiatoType->hide();
-        mouthPieceType->hide();
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
-        instrumentTune->setEnabled(true);
+        instrumentTune->setEnabled(false);
         isSecondHand->setEnabled(true);
         arcoType->setEnabled(false);
         isLutherie->setEnabled(false);
@@ -488,7 +475,6 @@ void insertView::slotDisableElements(int index) const
         isTuned->setEnabled(true);
 
         fiatoType->setEnabled(false);
-        mouthPieceType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
 
         break;
@@ -523,7 +509,6 @@ void insertView::slotDisableElements(int index) const
         isMetalSnare->hide();
 
         fiatoType->show();
-        mouthPieceType->show();
         fiatoMaterial->show();
 
         instrumentType->setEnabled(true);
@@ -552,7 +537,6 @@ void insertView::slotDisableElements(int index) const
         isMetalSnare->setEnabled(false);
 
         fiatoType->setEnabled(true);
-        mouthPieceType->setEnabled(true);
         fiatoMaterial->setEnabled(true);
 
 
@@ -585,7 +569,6 @@ void insertView::slotDisableElements(int index) const
         isTuned->setEnabled(false);
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
-        mouthPieceType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
     }
 }
@@ -821,9 +804,6 @@ void insertView::slotDisablePercussione(int index) const
         return fiatoType;
     }
 
-    QComboBox* insertView::getMouthPieceType() const {
-        return mouthPieceType;
-    }
 
     QComboBox* insertView::getFiatoMaterial() const {
         return fiatoMaterial;

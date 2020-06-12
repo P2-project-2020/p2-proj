@@ -65,7 +65,6 @@ private:
 //*******************************************
 //Fiato
     QComboBox *fiatoType; //Sax | Tromba
-    QComboBox *mouthPieceType; //Woodwind | Brass
     QComboBox *fiatoMaterial; //Argento | Ottone | Plastica
 //Sax
 //Tromba
@@ -121,7 +120,6 @@ public:
 
     //Fiato
     QComboBox *getFiatoType() const;
-    QComboBox *getMouthPieceType() const;
     QComboBox *getFiatoMaterial() const;
 
 
