@@ -7,7 +7,7 @@ public:
      enum bassType {electric, acoustic};
      static const std::map<Basso::bassType,std::string> bassTypes;
      
-     Basso(bassType = electric, double = 0, const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, bool = false);
+     Basso(bassType = electric, double = 0, const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, bool = false, unsigned int = 1);
 	
      std::string className() const override;
      Strumento::Tune tune() const override { return undefined; }

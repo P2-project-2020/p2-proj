@@ -3,11 +3,14 @@ const std::vector<std::string> KitBatteria::materials = {"legno", "plexiglas"};
 const QString KitBatteria::json_material = "materiale";
 const QString KitBatteria::json_snare = "rullante in metallo";
 
-KitBatteria::KitBatteria(double _price, const std::string& _brand, int _material, bool _metalSnare, bool _used, const std::string& _desc):
-     Strumento(_price, _brand, _used, _desc), Percussione(false), material(_material), metalSnare(_metalSnare){}
+KitBatteria::KitBatteria(double _price, const std::string& _brand, int _material, bool _metalSnare, bool _used, const std::string& _desc, unsigned int _quantity):
+     Strumento(_price, _brand, _used, _desc, _quantity),
+     Percussione(false),
+     material(_material),
+     metalSnare(_metalSnare){}
 
 std::string KitBatteria::className() const {
-     return std::string("Batteria ") + (metalSnare ? "con rullante in metallo" : "");
+     return std::string("Batteria");
 }
 
 std::string KitBatteria::getMaterial() const {
@@ -25,10 +28,6 @@ int KitBatteria::findMaterial(const std::string& str){
      }
      return -1;
 }
-
-// std::string KitBatteria::materialToString(const KitBatteria::Material& _material){
-// 	return materials.at(_material);
-// }
 
 void KitBatteria::loadData(const QJsonObject& obj){
      Percussione::loadData(obj);

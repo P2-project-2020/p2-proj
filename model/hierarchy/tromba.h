@@ -3,7 +3,7 @@
 
 class Tromba: public Fiato{
 public:
-	Tromba(Strumento::Tune = contralto, double = 0, const std::string& = "", int = 0, bool = false, const std::string& = "");
+     Tromba(Strumento::Tune = contralto, double = 0, const std::string& = "", int = 0, bool = false, const std::string& = "", unsigned int = 1);
 	std::string className() const;
 
 	void loadData(const QJsonObject&);

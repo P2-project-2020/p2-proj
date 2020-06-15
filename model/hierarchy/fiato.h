@@ -2,9 +2,10 @@
 #include "strumento.h"
 
 class Fiato: virtual public Strumento{
+
 protected:
      enum Mouthpiece {woodwind_mouthpiece, brass_mouthpiece};
-     // Vedere se serve davvero, non si usa da nessuna parte
+
 public:
      static const std::vector<std::string> materials;
 	

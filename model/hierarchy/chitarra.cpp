@@ -7,12 +7,11 @@ const std::map<Chitarra::guitarType, std::string> Chitarra::guitarTypes = {{Chit
 const QString Chitarra::json_type = "tipo";
 const QString Chitarra::json_model = "modello";
 
-Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringsNumber):
-	Strumento(_price,_brand,_used,_desc), Corda(_stringsNumber), type(_type), model(_model){}
-
-// std::string Chitarra::typeToString(const Chitarra::guitarType& _type){
-// 	return guitarTypes.at(_type);
-// }
+Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringsNumber, unsigned int _quantity):
+     Strumento(_price,_brand,_used,_desc,_quantity),
+     Corda(_stringsNumber),
+     type(_type),
+     model(_model){}
 
 Chitarra::guitarType Chitarra::findType(const std::string& str){
 	for(const auto& gType : guitarTypes){

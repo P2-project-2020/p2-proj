@@ -15,8 +15,12 @@ const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::und
 								 {Strumento::baritone, "baritono"},
 								 {Strumento::bass, "basso"}};
 
-Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc):
-     price(_price),description(_desc),used(_used),brand(_brand){}
+Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc, unsigned int _quantity):
+     price(_price),
+     description(_desc),
+     used(_used),
+     brand(_brand),
+     quantity(_quantity){}
 
 Strumento::~Strumento() = default;
 
@@ -42,6 +46,12 @@ std::string Strumento::getDescription() const {
 
 void Strumento::setDescription(const std::string& _desc) {
      description = _desc;
+}
+
+unsigned int Strumento::getQuantity() const { return quantity; }
+
+void Strumento::setQuantity(unsigned int newQty){
+     quantity = newQty;
 }
 
 void Strumento::loadData(const QJsonObject& obj){

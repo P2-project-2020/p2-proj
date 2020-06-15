@@ -6,7 +6,8 @@ const std::vector<std::string> Fiato::materials = { "bronzo", "argento", "plasti
 
 Fiato::Fiato(int _material, Strumento::Tune _tune, Mouthpiece _mouthpiece):
 	mouthpiece(_mouthpiece),
-	material(_material >= 0 && _material < materials.size() ? _material : 0), instrumentTune(_tune) {}
+	material(_material >= 0 && _material < materials.size() ? _material : 0),
+	instrumentTune(_tune) {}
 
 Strumento::Tune Fiato::tune() const { return instrumentTune; }
 
