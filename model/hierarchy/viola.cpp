@@ -3,6 +3,10 @@
 Viola::Viola(double _price, const std::string& _brand, const std::string& _desc, Strumento::Tune _key, bool _used):
 	Strumento(_price ,_brand, _used, _desc), Arco(_brand == Strumento::lutherie), key(_key){}
 
+Strumento* Viola::clone() const {
+     return new Viola(*this);
+}
+
 std::string Viola::className() const {
 	return "Viola";
 }

@@ -13,6 +13,10 @@ Pianoforte::Pianoforte(int _shape, int _keys, double _price, const std::string& 
      pianoShape(_shape >= 0 && _shape < shapes.size() ? _shape : 0),
      pianoKeys(_keys >= 0 && _keys < keys.size() ? _keys : 0){}
 
+Strumento* Pianoforte::clone() const {
+     return new Pianoforte(*this);
+}
+
 std::string Pianoforte::className() const {
      return "Pianoforte " + shapes.at(pianoShape);
 }

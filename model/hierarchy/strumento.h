@@ -21,6 +21,7 @@ public:
 
      Strumento(double = 0, const std::string& = "", bool = false, const std::string& = "", unsigned int = 1);
      virtual ~Strumento();
+     virtual Strumento* clone() const = 0;
 
      bool isUsed() const;
      void setUsed(bool = true);

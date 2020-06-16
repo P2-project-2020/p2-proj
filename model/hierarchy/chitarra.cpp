@@ -13,6 +13,10 @@ Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string&
      type(_type),
      model(_model){}
 
+Strumento* Chitarra::clone() const {
+     return new Chitarra(*this);
+}
+
 Chitarra::guitarType Chitarra::findType(const std::string& str){
 	for(const auto& gType : guitarTypes){
 		if(str == gType.second) return gType.first;

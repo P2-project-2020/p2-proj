@@ -4,6 +4,10 @@ Sax::Sax(Strumento::Tune _tune, double _price, const std::string& _brand, int _m
      Strumento(_price, _brand, _used, _desc, _quantity),
      Fiato(_material, _tune, Fiato::woodwind_mouthpiece){}
 
+Strumento* Sax::clone() const {
+     return new Sax(*this);
+}
+
 std::string Sax::className() const{
      return "Sax";
 }

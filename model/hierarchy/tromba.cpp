@@ -4,6 +4,10 @@ Tromba::Tromba(Strumento::Tune _tune, double _price, const std::string& _brand, 
      Strumento(_price,_brand,_used,_desc,_qunatity),
      Fiato(_material,_tune,brass_mouthpiece){}
 
+Strumento* Tromba::clone() const {
+     return new Tromba(*this);
+}
+
 std::string Tromba::className() const {
 	return "Tromba";
 }

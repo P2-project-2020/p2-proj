@@ -12,6 +12,10 @@ Basso::Basso(bassType _type, double _price, const std::string& _brand, const std
      type(_type),
      fretLess(_fretLess){}
 
+Strumento* Basso::clone() const{
+     return new Basso(*this);
+}
+
 std::string Basso::className() const {
      return "Basso " + bassTypes.at(type) + (fretLess ? " fretless" : "");
 }

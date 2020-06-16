@@ -9,6 +9,9 @@ KitBatteria::KitBatteria(double _price, const std::string& _brand, int _material
      material(_material),
      metalSnare(_metalSnare){}
 
+Strumento* KitBatteria::clone() const {
+     return new KitBatteria(*this);
+}
 std::string KitBatteria::className() const {
      return std::string("Batteria");
 }

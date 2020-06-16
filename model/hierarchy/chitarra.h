@@ -8,7 +8,8 @@ public:
      static const std::map<Chitarra::guitarType, std::string> guitarTypes;
 	
      Chitarra(Chitarra::guitarType = electric, double = 0, const std::string& = "", const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, unsigned int = 1);
-
+     Strumento* clone() const;
+     
      std::string className() const;
      Strumento::Tune tune() const;
      std::string getMaterial() const { return "Legno"; }

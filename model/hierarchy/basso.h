@@ -8,7 +8,8 @@ public:
      static const std::map<Basso::bassType,std::string> bassTypes;
      
      Basso(bassType = electric, double = 0, const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, bool = false, unsigned int = 1);
-	
+     Strumento* clone() const;
+     
      std::string className() const override;
      Strumento::Tune tune() const override { return undefined; }
      std::string getMaterial() const override { return "Legno"; }
