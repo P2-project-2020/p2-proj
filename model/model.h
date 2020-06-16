@@ -46,6 +46,8 @@ public:
     Container<Strumento*>::const_iterator ordini_cend() const;
     /*Iteratori sui contenitori del model */
 
+
+
 //Cancellazione singola o multipla
     void eraseMagazzino(unsigned int);
     void eraseCarrello(unsigned int);

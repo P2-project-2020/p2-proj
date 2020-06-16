@@ -6,7 +6,9 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QInputDialog>
 #include <QGroupBox>
+#include <QSpinBox>
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -68,7 +70,7 @@ Controller::Controller(Model* m,QWidget *parent) :
     connect(Vmagazzino->getAddView()->getAddItemButton(),SIGNAL(clicked()), this, SLOT(slotInserisci()));
     connect(Vmagazzino->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteMagazzinoItem()));
     connect(Vmagazzino->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetMagazzino()));
-
+    connect(Vmagazzino->getAddToCart(),SIGNAL(clicked()),this,SLOT(slotAddToCart())); //NEW
     connect(Vcarrello->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteCarrelloItem()));
     connect(Vcarrello->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetCarrello()));
 
@@ -390,6 +392,47 @@ void Controller::slotInserisci(){
     }
 }
 
+void Controller::slotAddToCart() {
+    if(!Vmagazzino->getTable()->selectionModel()->hasSelection())
+        QMessageBox::warning(this,"Attenzione!","Devi selezionare almeno un elemento!");
+    else{
+    QModelIndexList selectedIndexes = Vmagazzino->getTable()->selectionModel()->selectedRows();
+
+    QMessageBox::StandardButton confirm
+            = QMessageBox::question
+            (this, "Conferma aggiunta",
+            "Confermi di volere aggiungere al carrello il prodotto selezionato?", QMessageBox::Yes|QMessageBox::No);
+
+
+if(confirm == QMessageBox::Yes)
+
+    for(auto i = 0; i< selectedIndexes.size();++i) {
+
+        bool ok;
+        unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(i)->getQuantity(), 1, &ok);
+                if(ok) {
+
+                    core->carrello_push_end(core->magazzinoAt(i)->clone());
+                    core->carrelloAt(i)->setQuantity(quantity);
+                    if(quantity == core->magazzinoAt(i)->getQuantity())
+                        Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+                    else
+                        core->magazzinoAt(i)->setQuantity(core->magazzinoAt(i)->getQuantity() - quantity);
+                }
+    }
+
+
+            else
+    return;
+
+core->setDataSaved(false);
+
+    }
+
+slotUpdatePage();
+
+}
+
 void Controller::slotDeleteMagazzinoItem()
 {
 
@@ -400,11 +443,35 @@ void Controller::slotDeleteMagazzinoItem()
     QMessageBox::StandardButton confirm
             = QMessageBox::question
             (this, "Conferma rimozione",
-            "Confermi di volere rimuovere il prodotto selezionato?", QMessageBox::Yes|QMessageBox::No);
+            "Confermi di voler rimuovere lo strumento selezionato?", QMessageBox::Yes|QMessageBox::No);
 
 if(confirm == QMessageBox::Yes)
     for(auto i = 0; i< selectedIndexes.size();++i)
             Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+else
+    return;
+
+core->setDataSaved(false);
+
+    }
+slotUpdatePage();
+}
+
+void Controller::slotDeleteCarrelloItem()
+{
+
+    if(!Vcarrello->getTable()->selectionModel()->hasSelection())
+        QMessageBox::warning(this,"Attenzione!","Devi selezionare almeno un elemento!");
+    else{
+    QModelIndexList selectedIndexes = Vcarrello->getTable()->selectionModel()->selectedRows();
+    QMessageBox::StandardButton confirm
+            = QMessageBox::question
+            (this, "Conferma rimozione",
+            "Confermi di voler rimuovere lo strumento selezionato?", QMessageBox::Yes|QMessageBox::No);
+
+if(confirm == QMessageBox::Yes)
+    for(auto i = 0; i< selectedIndexes.size();++i)
+            Vcarrello->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
 else
     return;
 
@@ -421,7 +488,7 @@ void Controller::slotResetMagazzino()
       QMessageBox::warning(this,"Errore","Nessun elemento presente nel magazzino!");
       return;
  }
-QMessageBox::StandardButton confirm  =QMessageBox::question
+QMessageBox::StandardButton confirm  = QMessageBox::question
 (this, "Conferma rimozione",
 "Sei sicuro di volere cancellare tutti gli articoli presenti in magazzino?", QMessageBox::Yes|QMessageBox::No);
 
@@ -440,7 +507,7 @@ void Controller::slotResetCarrello()
       QMessageBox::warning(this,"Errore","Nessun elemento presente nel carrello!");
       return;
  }
-QMessageBox::StandardButton confirm  =QMessageBox::question
+QMessageBox::StandardButton confirm  = QMessageBox::question
 (this, "Conferma rimozione",
 "Sei sicuro di volere cancellare tutti gli articoli presenti nel carrello?", QMessageBox::Yes|QMessageBox::No);
 
@@ -514,15 +581,12 @@ void Controller::slotUpdatePage(){
 
     /* AGGIORNAMENTO TABELLE */
     Vmagazzino->getAdapter()->dataRefresh();
-
-
-
-    /* AGGIORNAMENTO LABEL CONTA RISULTATI */
-
+    Vcarrello->getAdapter()->dataRefresh();
 
     /* AGGIORNAMENTO LABEL CONTA RISULTATI */
 
     int magazzinoSize = core->getMagazzinoSize();
+    int carrelloSize = core->getCarrelloSize();
 
     if(pagine->currentIndex() == 0)
             if(!magazzinoSize){
@@ -531,6 +595,15 @@ void Controller::slotUpdatePage(){
             }else{
                 itemCounter->setText("<u>" + QString::number(magazzinoSize) + " prodotti presenti </u>");
                 Vmagazzino->getEditEnabled()->setText("<u> Modifica abilitata! </u>");
+            }
+
+    else if(pagine->currentIndex() == 1) {
+            if(!carrelloSize)
+                itemCounter->setText("<b>Nessun prodotto presente!</b>");
+
+             else
+                itemCounter->setText("<u>" + QString::number(carrelloSize) + " prodotti presenti </u>");
+
             }
 
     /* AGGIORNAMENTO STATUS BAR */

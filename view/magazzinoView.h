@@ -26,6 +26,7 @@ class magazzinoView : public QWidget
 
         QPushButton *getDeleteSelected() const;
         QPushButton *getDeleteAll() const;
+        QPushButton *getAddToCart() const;
 
         insertView* getAddView() const;
         QLabel *getResultsNumber() const;
@@ -41,6 +42,7 @@ class magazzinoView : public QWidget
         QPushButton *addNew;
         QPushButton *deleteAll;
         QPushButton *deleteSelected;
+        QPushButton *addToCart;
 
         QLineEdit *searchLine;
         QComboBox *instrumentType;

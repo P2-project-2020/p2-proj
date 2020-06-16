@@ -16,6 +16,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     addNew(new QPushButton),
     deleteAll(new QPushButton),
     deleteSelected(new QPushButton),
+    addToCart(new QPushButton),
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
     addView(new insertView),
@@ -37,6 +38,12 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         instrumentType->addItem("Tutto");
         instrumentType->addItem("Opzione_1");
         instrumentType->addItem("Opzione_2");
+        /*instrumentType->addItem("Filtra per famiglia");
+        instrumentType->addItem("Archi");
+        instrumentType->addItem("Corde");
+        instrumentType->addItem("Percussioni");
+        instrumentType->addItem("Fiati");*/
+
         instrumentType->setToolTip("Filtra per:");
         form->addWidget(instrumentType);
 
@@ -65,6 +72,10 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         //deleteAll->setIcon(QIcon(":/res/img/delete.svg"));
         //deleteAll->setIconSize(QSize(16,16));
         resultBar->addWidget(deleteAll);
+        addToCart->setText("Aggiungi al carrello");
+        //addNew->setIcon(QIcon(":/res/img/plus.svg"));
+        //addNew->setIconSize(QSize(16,16));
+        resultBar->addWidget(addToCart);
         addNew->setText("Nuovo prodotto");
         //addNew->setIcon(QIcon(":/res/img/plus.svg"));
         //addNew->setIconSize(QSize(16,16));
@@ -110,12 +121,12 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
 
     QTableView *magazzinoView::getTable() const{ return table;}
 
-    QPushButton *magazzinoView::getDeleteSelected() const{ return deleteSelected;}
-    QPushButton *magazzinoView::getDeleteAll() const{ return deleteAll;}
+    QPushButton *magazzinoView::getDeleteSelected() const{ return deleteSelected; }
+    QPushButton *magazzinoView::getDeleteAll() const{ return deleteAll; }
+    QPushButton *magazzinoView::getAddToCart() const { return addToCart; }
+    insertView *magazzinoView::getAddView() const { return addView; }
 
-    insertView *magazzinoView::getAddView() const {  return addView; }
-
-    QLabel *magazzinoView::getResultsNumber() const{ return resultsNumber;}
+    QLabel *magazzinoView::getResultsNumber() const{ return resultsNumber; }
 
 
     void magazzinoView::slotStartFiltering() const

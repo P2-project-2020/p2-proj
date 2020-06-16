@@ -27,11 +27,10 @@ public:
         bool insertRows(int, int = 1, const QModelIndex& = QModelIndex()) override;
         bool removeRows(int, int = 1, const QModelIndex& = QModelIndex()) override;
         void dataRefresh();
-        bool setData(const QModelIndex&, const QVariant&, int) override;
         Qt::ItemFlags flags(const QModelIndex&) const override;
         bool searchMatchRegex(unsigned int, const QRegExp&, const QString&) const;
     signals:
-        void editCompleted(const Strumento*);
+
 private:
         Model* core;
 };

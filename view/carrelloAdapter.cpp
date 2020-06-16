@@ -39,7 +39,7 @@ int carrelloAdapter::rowCount(const QModelIndex &) const {
 }
 
 int carrelloAdapter::columnCount(const QModelIndex &) const {
-    return 7;
+    return 9;
 }
 
 QVariant carrelloAdapter::headerData(int section, Qt::Orientation orientation, int role) const
@@ -53,12 +53,9 @@ QVariant carrelloAdapter::headerData(int section, Qt::Orientation orientation, i
         switch (section)
         {
             case 0:
-                return QString("Strumento"); //Chitarra | Basso | Violino | ... -> NON MODIFICABILI
-
+                return QString("Strumento");
             case 1:
-                return QString("Tipo"); //Se c'è Elettrica | Acustica | Classica, cambia in base a Strumento -> alcuni non lo hanno
-
-
+                return QString("Tipo");
             case 2:
                 return QString("Brand");
             case 3:
@@ -69,23 +66,11 @@ QVariant carrelloAdapter::headerData(int section, Qt::Orientation orientation, i
                 return QString("Descrizione");
             case 6:
                 return QString("Condizione"); //Nuovo | Usato
-            /*
-            case 6:
-                return QString("Luteria"); //Solo Arco
-            case 7:
-                return QString("Numero corde"); //Solo Chitarra?
-            case 8:
-                return QString("Modello"); //Solo Chitarra?
-            case 9:
-                return QString("Senza tasti"); //Solo Basso?
-            case 10:
-                return QString("Materiale tasti"); //Solo Pianoforte?
-            case 11:
-                return QString("Tipo bocchino"); //Solo Fiato
-            */
-
             case 7:
                 return QString("Prezzo");
+            case 8:
+             return QString("Quantità");
+
             default:
                 return QVariant();
         }
@@ -111,6 +96,7 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
         case Qt::SizeHintRole:
             return QSize(500, 0 );
 
+    /*
     case Qt::EditRole:{// Per fare in modo di non cancellare il contenuto della cella durante l'editing
 
         switch(index.column())
@@ -130,8 +116,11 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
             return strumento->isUsed();
         case 7:
             return strumento->getPrice();
+        case 8:
+            return strumento->getQuantity();
         }
     }
+    */
         case Qt::DisplayRole:
         {
             switch(index.column())
@@ -212,6 +201,9 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
             case 7:
                 return QString::number(strumento->getPrice()) + " €";
                 break;
+            case 8:
+                return QString::number(strumento->getQuantity());
+                break;
 
             default:
                 return QVariant();
@@ -246,6 +238,8 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
                 break;
             case 7:
                 return strumento->getPrice();
+            case 8:
+                return strumento->getQuantity();
                 break;
 
 
@@ -278,53 +272,7 @@ void carrelloAdapter::dataRefresh()
     endResetModel();
 }
 
-//REVISE
-bool carrelloAdapter::setData(const QModelIndex& index, const QVariant& value, int role)
-{
-    Strumento *strumento = core->carrelloAt(index.row());//Il prodotto da modificare
 
-    if (role == Qt::EditRole) {
-
-        switch(index.column()){
-
-        case 2: //brand
-            strumento->setBrand(value.toString().toStdString());
-            break;
-
-        //E' opportuno inserire setMaterial() e setTune() nei sottooggetti che lo necessitano
-        /*case 3: //material
-            strumento->setMaterial(value.toString().toStdString());
-            break;
-
-        case 4: //tune
-            strumento->tune(value.toDouble());
-            break;
-*/
-        case 5: //description
-            strumento->setDescription(value.toString().toStdString());
-            break;
-
-        case 6: //
-            strumento->setUsed(value.toBool());
-            break;
-
-        case 7: //price
-            strumento->setPrice(value.toDouble());
-            break;
-
-
-        default: //Strumento(0) non può essere mdoificato
-            return false;
-            break;
-
-        }
-        emit editCompleted(strumento);
-        QModelIndex editIndex = createIndex(index.row(),index.column());
-        emit dataChanged(editIndex,editIndex,{Qt::DisplayRole});
-        return true;
-    }
-    return false;
-}//setData
 
 Qt::ItemFlags carrelloAdapter::flags(const QModelIndex& index) const
 {
@@ -337,13 +285,45 @@ Qt::ItemFlags carrelloAdapter::flags(const QModelIndex& index) const
 }
 
 
+
+//REVISE
+bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
+{
+     Strumento* strumento = core->carrelloAt(ind);
+     if(instrumentType == "Tutto")
+      return (QString::fromStdString(strumento->className())).contains(exp) ||
+               (QString::fromStdString(strumento->getBrand())).contains(exp);
+     /*
+       else if(thc == "Psicoattivo")
+       return ((prod->getThc() > 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||
+       ((prod->getThc() > 0.5) && QString::fromStdString(prod->getCategory()).contains(exp));
+       else if(thc == "Non psicoattivo")
+       return ((prod->getThc() <= 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||
+       ((prod->getThc() <= 0.5) && QString::fromStdString(prod->getCategory()).contains(exp));
+     */
+     else
+      return false;
+}
+
+
+
+/*
 //REVISE
 bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
 {
     Strumento* strumento = core->carrelloAt(ind);
-    if(instrumentType == "Tutto")
+    if(instrumentType == "Filtra per famiglia strumento")
         return (QString::fromStdString(strumento->className())).contains(exp) ||
                (QString::fromStdString(strumento->getBrand())).contains(exp);
+    else if(instrumentType == "Archi")
+        return true;
+    else if(instrumentType == "Corde")
+        return true;
+    else if(instrumentType == "Percussioni")
+        return true;
+    else if(instrumentType == "Fiati")
+        return true;
+
     /*
     else if(thc == "Psicoattivo")
         return ((prod->getThc() > 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||
@@ -351,9 +331,9 @@ bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, con
     else if(thc == "Non psicoattivo")
         return ((prod->getThc() <= 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||
                ((prod->getThc() <= 0.5) && QString::fromStdString(prod->getCategory()).contains(exp));
-*/
+
 else
         return false;
 }
-
+*/
 

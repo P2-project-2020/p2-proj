@@ -13,17 +13,16 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
 
     QWidget(parent),
     core(model),
-    addNew(new QPushButton),
     deleteAll(new QPushButton),
     deleteSelected(new QPushButton),
+    proceedAndBuy(new QPushButton),
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
-    addView(new insertView),
     resultsNumber(new QLabel),
     editEnabled(new QLabel),
     adapter(new carrelloAdapter(this, core))
 {
-    addNew->setText("Nuovo strumento");
+
 
         QVBoxLayout *search = new QVBoxLayout();
         //search->setSpacing(10);
@@ -57,18 +56,18 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
         resultBar->addWidget(resultsNumber);
         editEnabled->setText("");
         resultBar->addWidget(editEnabled);
-        deleteSelected->setText("Elimina Selezionato");
+        deleteSelected->setText("Rimuovi Selezionato");
         resultBar->addWidget(deleteSelected);
         //deleteSelected->setIcon(QIcon(":/res/img/negative.svg"));
         //deleteSelected->setIconSize(QSize(16,16));
-        deleteAll->setText("Elimina Tutti");
+        deleteAll->setText("Svuota Carrello");
         //deleteAll->setIcon(QIcon(":/res/img/delete.svg"));
         //deleteAll->setIconSize(QSize(16,16));
         resultBar->addWidget(deleteAll);
-        addNew->setText("Nuovo prodotto");
-        //addNew->setIcon(QIcon(":/res/img/plus.svg"));
-        //addNew->setIconSize(QSize(16,16));
-        resultBar->addWidget(addNew);
+        proceedAndBuy->setText("Procedi e Acquista");
+        //deleteAll->setIcon(QIcon(":/res/img/buy.svg"));
+        //deleteAll->setIconSize(QSize(16,16));
+        resultBar->addWidget(proceedAndBuy);
         search->addItem(resultBar);
 
 
@@ -90,19 +89,12 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
             setLayout(search);
 
 
-        connect(addNew,SIGNAL(clicked()), this, SLOT(slotOpenInsertView()));
         connect(instrumentType, SIGNAL(currentIndexChanged(int)), this, SLOT(slotStartFiltering()));
         connect(searchLine, SIGNAL(textChanged(QString)), this, SLOT(slotStartFiltering()));
 
     }
 
     carrelloAdapter* carrelloView::getAdapter() const{ return adapter;}
-
-    void carrelloView::slotOpenInsertView() const{
-        addView->setModal(true);
-        addView->exec();//show
-
-    }
 
     carrelloFilter *carrelloView::getFilter() const{ return filter;}
 
@@ -113,7 +105,7 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
     QPushButton *carrelloView::getDeleteSelected() const{ return deleteSelected;}
     QPushButton *carrelloView::getDeleteAll() const{ return deleteAll;}
 
-    insertView *carrelloView::getAddView() const {  return addView; }
+    QPushButton *carrelloView::getProceedAndBuy() const {  return proceedAndBuy; }
 
     QLabel *carrelloView::getResultsNumber() const{ return resultsNumber;}
 

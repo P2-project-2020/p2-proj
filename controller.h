@@ -25,7 +25,7 @@ private:
     QBoxLayout *mainLayout;
     QHBoxLayout *headerLayout;
     QHBoxLayout *statusBar;//La statusBar inferiore che emula il comportamente della QStatusBar
-    QLabel *itemCounter;//TMostra in tempo reale il numero di piante/prodotti presenti
+    QLabel *itemCounter;//TMostra in tempo reale il numero di strumenti presenti
     QLabel *saveStatus;//Mostra in tempo reale lo stato dei dati ( salvati o meno)
     QString currentFile;//Il file di lavoro corrente
 public:
@@ -39,9 +39,10 @@ public slots:
     void slotSave();
     void slotLoad();
     void slotInserisci();
+    void slotAddToCart();
     void slotUpdatePage();//Aggiorna statusBar e tabelle
     void slotDeleteMagazzinoItem();
-    //void slotDeleteCarrelloItem();
+    void slotDeleteCarrelloItem();
     void slotResetMagazzino();
     void slotResetCarrello();
     void slotResetTables();

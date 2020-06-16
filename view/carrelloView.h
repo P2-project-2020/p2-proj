@@ -10,7 +10,6 @@
 #include <QComboBox>
 
 #include "model/model.h"
-#include "insertView.h"
 #include "carrelloFilter.h"
 #include "carrelloAdapter.h"
 
@@ -26,10 +25,11 @@ class carrelloView : public QWidget
 
         QPushButton *getDeleteSelected() const;
         QPushButton *getDeleteAll() const;
+        QPushButton *getProceedAndBuy() const;
 
-        insertView* getAddView() const;
+
         QLabel *getResultsNumber() const;
-        QLabel *getEditEnabled() const;
+        QLabel *getEditEnabled() const; //USELESS
 
     private:
         Model *core;
@@ -38,17 +38,15 @@ class carrelloView : public QWidget
         carrelloFilter *filter;
         QTableView *table;
 
-        QPushButton *addNew;
-        QPushButton *deleteAll;
-        QPushButton *deleteSelected;
+        QPushButton *deleteAll; //svuota carrello
+        QPushButton *deleteSelected; //rimuovi dal carrello
+        QPushButton *proceedAndBuy; //procedi con l'acquisto
 
         QLineEdit *searchLine;
         QComboBox *instrumentType;
 
-        insertView *addView;
-
         QLabel *resultsNumber; //risultati della ricerca
-        QLabel *editEnabled; //QPushButton *editEnable;
+        QLabel *editEnabled; //QPushButton *editEnable; USELESS
 
 
 
@@ -56,7 +54,7 @@ class carrelloView : public QWidget
     signals:
 
     public slots:
-        void slotOpenInsertView() const;
+
         void slotStartFiltering() const;
 };
 
