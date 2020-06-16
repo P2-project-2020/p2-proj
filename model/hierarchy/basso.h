@@ -8,7 +8,7 @@ public:
      static const std::map<Basso::bassType,std::string> bassTypes;
      
      Basso(bassType = electric, double = 0, const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, bool = false, unsigned int = 1);
-     Strumento* clone() const;
+     Strumento* clone() const override;
      
      std::string className() const override;
      Strumento::Tune tune() const override { return undefined; }
@@ -17,6 +17,8 @@ public:
 
      void loadData(const QJsonObject&) override;
      void saveData(QJsonObject&) const override;
+
+     bool operator==(const Basso&) const;
      
      static bassType findType(const std::string&);
      

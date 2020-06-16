@@ -33,3 +33,9 @@ void Viola::saveData(QJsonObject& obj) const {
 	
 	obj[Strumento::json_tune] = QString::fromStdString(Strumento::Tunes.at(key));
 }
+
+bool Viola::operator==(const Viola& other) const {
+     return
+	  Arco::operator==(other) &&
+	  key == other.key;
+}

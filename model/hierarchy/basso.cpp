@@ -12,7 +12,7 @@ Basso::Basso(bassType _type, double _price, const std::string& _brand, const std
      type(_type),
      fretLess(_fretLess){}
 
-Strumento* Basso::clone() const{
+Strumento* Basso::clone() const {
      return new Basso(*this);
 }
 
@@ -38,6 +38,16 @@ void Basso::loadData(const QJsonObject& obj) {
 
 void Basso::saveData(QJsonObject& obj) const {
      Corda::saveData(obj);
+
+     obj[json_type] = QString::fromStdString(bassTypes.at(type));
+     obj[json_fretless] = fretLess ? "true" : "false";
+}
+
+bool Basso::operator==(const Basso& other) const {
+     return
+	  Corda::operator==(other) &&
+	  type == other.type &&
+	  fretLess == other.fretLess;
 }
 
 Basso::bassType Basso::findType(const std::string& str){
@@ -45,4 +55,3 @@ Basso::bassType Basso::findType(const std::string& str){
 	  if(str == coppia.second) return coppia.first;
      return electric;
 }
-

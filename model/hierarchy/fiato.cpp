@@ -54,3 +54,11 @@ int Fiato::findMaterial(const std::string& str){
      }
      return -1;
 }
+
+bool Fiato::operator==(const Fiato& other) const {
+     return
+	  Strumento::operator==(other) &&
+	  mouthpiece == other.mouthpiece &&
+	  material == other.material &&
+	  instrumentTune == other.instrumentTune;
+}

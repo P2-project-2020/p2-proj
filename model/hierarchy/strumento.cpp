@@ -93,3 +93,15 @@ void Strumento::setTune(const Strumento::Tune& new_tune){
 void Strumento::setMaterial(int){
      return; // stesso discorso per i materiali
 }
+
+bool Strumento::operator==(const Strumento& other) const {
+     return
+	  price == other.price &&
+	  used == other.used &&
+	  brand == other.brand;
+     /* Credo non abbia senso mettere l'uguaglianza anche sulla
+      * quantità e la descrizione, visto che sono estremamente
+      * variabili (tra l'altro se facciamo un oggetto unico che deve
+      * essere aggiunto a una collezione non è molto funzionale)
+      */
+}

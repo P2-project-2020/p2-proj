@@ -9,4 +9,6 @@ public:
      std::string className() const;
      void loadData(const QJsonObject&);
      void saveData(QJsonObject&) const;
+
+     bool operator==(const Sax&) const;
 };

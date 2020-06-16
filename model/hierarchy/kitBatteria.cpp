@@ -50,3 +50,10 @@ void KitBatteria::saveData(QJsonObject& obj) const {
      obj[json_material] = QString::fromStdString(KitBatteria::materials.at(material));
      obj[json_snare] = metalSnare;
 }
+
+bool KitBatteria::operator==(const KitBatteria& other) const {
+     return
+	  Percussione::operator==(other) &&
+	  material == other.material &&
+	  metalSnare == other.metalSnare;
+}

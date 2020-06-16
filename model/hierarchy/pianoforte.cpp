@@ -64,3 +64,11 @@ void Pianoforte::saveData(QJsonObject& obj) const {
      obj[json_shape] = QString::fromStdString(shapes.at(pianoShape));
      obj[json_keys] = QString::fromStdString(keys.at(pianoKeys));
 }
+
+bool Pianoforte::operator==(const Pianoforte& other) const {
+     return
+	  Corda::operator==(other) &&
+	  Percussione::operator==(other) &&
+	  pianoShape == other.pianoShape &&
+	  pianoKeys == other.pianoKeys;
+}

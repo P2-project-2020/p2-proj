@@ -20,6 +20,8 @@ public:
      void loadData(const QJsonObject& obj);
      void saveData(QJsonObject& obj) const;
 
+     bool operator==(const Pianoforte&) const;
+
 private:
      int pianoShape;
      int pianoKeys;

@@ -21,3 +21,9 @@ void Corda::saveData(QJsonObject& obj) const {
 
 	obj[json_strings] = int(strings);
 }
+
+bool Corda::operator==(const Corda& other) const {
+     return
+	  Strumento::operator==(other) &&
+	  strings == other.strings;
+}

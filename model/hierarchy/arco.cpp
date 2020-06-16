@@ -18,3 +18,9 @@ void Arco::loadData(const QJsonObject& obj){
 		setBrand(Strumento::lutherie);
 	}
 }
+
+bool Arco::operator==(const Arco& other) const {
+     return
+	  Strumento::operator==(other) &&
+	  lutherie == other.lutherie;
+}

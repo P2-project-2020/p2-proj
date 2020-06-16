@@ -13,9 +13,14 @@ std::string Sax::className() const{
 }
 
 void Sax::loadData(const QJsonObject& obj){
-	Fiato::loadData(obj);
+     Fiato::loadData(obj);
 }
 
 void Sax::saveData(QJsonObject& obj) const {
-	Fiato::saveData(obj);
+     Fiato::saveData(obj);
+}
+
+bool Sax::operator==(const Sax& other) const {
+     return
+	  Fiato::operator==(other);
 }

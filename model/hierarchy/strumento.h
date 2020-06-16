@@ -50,8 +50,11 @@ public:
      virtual void setMaterial(int);
 
      static Strumento::Tune findTune(const std::string&);
-     static const QString json_tune;	   // non tutti la usano ma ha senso fare una cosa consistente nel json
 
+     bool operator==(const Strumento&) const;
+
+protected:
+     static const QString json_tune;	   // non tutti la usano ma ha senso per fare una cosa consistente nel json
 private:
      double price;
      std::string description;

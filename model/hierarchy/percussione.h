@@ -2,11 +2,13 @@
 #include "strumento.h"
 
 class Percussione: virtual public Strumento{
-	static const QString json_tuned;
-	bool tuned;					// intonato o no
+     static const QString json_tuned;
+     bool tuned;					// intonato o no
 public:
-	Percussione(bool = false);
+     Percussione(bool = false);
 
-	void loadData(const QJsonObject&);
-	void saveData(QJsonObject&) const;
+     void loadData(const QJsonObject&);
+     void saveData(QJsonObject&) const;
+     
+     bool operator==(const Percussione&) const;
 };

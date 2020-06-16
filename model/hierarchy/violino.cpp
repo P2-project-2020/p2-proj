@@ -27,3 +27,9 @@ void Violino::loadData(const QJsonObject& obj){
 void Violino::saveData(QJsonObject& obj) const {
      Arco::saveData(obj);
 }
+
+bool Violino::operator==(const Violino& other) const {
+     return
+	  Arco::operator==(other) &&
+	  key == other.key;
+}

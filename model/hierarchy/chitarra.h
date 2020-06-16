@@ -16,7 +16,9 @@ public:
      guitarType getType() const;
      
      void loadData(const QJsonObject&);
-     void saveData(QJsonObject&) const;	
+     void saveData(QJsonObject&) const;
+
+     bool operator==(const Chitarra&) const;
 
      static std::string typeToString(const guitarType&);
      static guitarType findType(const std::string&);
@@ -24,7 +26,7 @@ public:
 private:
      guitarType type;
      std::string model;
-	
+     
      static const unsigned int defaultStrings;
      static const QString json_type;
      static const QString json_model;

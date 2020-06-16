@@ -10,4 +10,6 @@ public:
      
      void loadData(const QJsonObject&);
      void saveData(QJsonObject&) const;
+
+     bool operator==(const Tromba&) const;
 };

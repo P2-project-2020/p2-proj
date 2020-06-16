@@ -16,6 +16,8 @@ public:
      void loadData(const QJsonObject&);
      void saveData(QJsonObject&) const;
 
+     bool operator==(const KitBatteria&) const;
+
      static int findMaterial(const std::string&);
      
 private:
