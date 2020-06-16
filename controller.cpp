@@ -276,7 +276,7 @@ void Controller::slotInserisci(){
                 if(guitarModel == "")
                        throw inputException("Devi prima inserire il modello di chitarra!");
 
-                toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, guitarModel, description, isSecondHand, stringsNumber);
+                toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, description, isSecondHand, stringsNumber);
             }
                 break;
             case 2: { //Basso

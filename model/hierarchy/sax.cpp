@@ -1,7 +1,7 @@
 #include "sax.h"
 
-Sax::Sax(Strumento::Tune _tune, double _price, const std::string& _brand, int _material, bool _used, unsigned int _quantity, const std::string& _desc):
-     Strumento(_price, _brand, _used, _desc, _quantity),
+Sax::Sax(Strumento::Tune _tune, double _price, const std::string& _brand, const std::string& _model, int _material, bool _used, unsigned int _quantity, const std::string& _desc):
+     Strumento(_price, _brand, _used, _desc, _quantity, _model),
      Fiato(_material, _tune, Fiato::woodwind_mouthpiece){}
 
 Strumento* Sax::clone() const {

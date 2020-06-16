@@ -6,8 +6,8 @@ const std::map<Basso::bassType,std::string> Basso::bassTypes = {{electric,"elett
 const QString Basso::json_type = "tipo";
 const QString Basso::json_fretless = "fretless";
 
-Basso::Basso(bassType _type, double _price, const std::string& _brand, const std::string& _desc, bool _used, unsigned int _stringNumber, bool _fretLess, unsigned int _quantity):
-     Strumento(_price, _brand, _used, _desc, _quantity),
+Basso::Basso(bassType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringNumber, bool _fretLess, unsigned int _quantity):
+     Strumento(_price, _brand, _used, _desc, _quantity, _model),
      Corda(_stringNumber),
      type(_type),
      fretLess(_fretLess){}

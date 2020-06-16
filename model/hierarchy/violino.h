@@ -4,7 +4,7 @@
 class Violino: public Arco{
      Strumento::Tune key;
 public:
-     Violino(double = 0, const std::string& = Strumento::lutherie, const std::string& = "", bool = false);
+     Violino(double = 0, const std::string& = Strumento::lutherie, const std::string& = "",  const std::string& = "", bool = false, unsigned int = 1);
      Strumento* clone() const;
      std::string className() const;
      

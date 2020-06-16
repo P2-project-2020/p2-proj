@@ -1,7 +1,7 @@
 #include "viola.h"
 
-Viola::Viola(double _price, const std::string& _brand, const std::string& _desc, Strumento::Tune _key, bool _used):
-	Strumento(_price ,_brand, _used, _desc), Arco(_brand == Strumento::lutherie), key(_key){}
+Viola::Viola(double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, Strumento::Tune _key, bool _used, unsigned int _quantity):
+     Strumento(_price ,_brand, _used, _desc, _quantity, _model), Arco(_brand == Strumento::lutherie), key(_key){}
 
 Strumento* Viola::clone() const {
      return new Viola(*this);

@@ -1,7 +1,8 @@
 #include "violino.h"
 
-Violino::Violino(double _price, const std::string& _brand, const std::string& _desc, bool _used):
-     Strumento(_price ,_brand, _used, _desc), Arco(_brand == Strumento::lutherie){}
+Violino::Violino(double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _quantity):
+     Strumento(_price ,_brand, _used, _desc, _quantity, _model),
+     Arco(_brand == Strumento::lutherie){}
 
 Strumento* Violino::clone() const {
      return new Violino(*this);

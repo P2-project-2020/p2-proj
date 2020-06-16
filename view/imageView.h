@@ -5,7 +5,6 @@
 #include <QUrl>
 #include <QMessageBox>
 #include <iostream>
-#include "imageWindow.h"
 
 /* Non definisco neanche il distruttore perchè quello standard va mene, è solo un wrapper attorno a QLabel
    per avere il segnale di clicked su un'immagine*/

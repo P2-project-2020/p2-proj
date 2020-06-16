@@ -7,7 +7,7 @@ class Viola: public Arco{
 	
 public:
 	
-     Viola(double = 0, const std::string& = Strumento::lutherie, const std::string& = "", Strumento::Tune = contralto ,bool = false);
+     Viola(double = 0, const std::string& = Strumento::lutherie, const std::string& = "", const std::string& = "", Strumento::Tune = contralto ,bool = false, unsigned int = 1);
      Strumento* clone() const;
      std::string className() const;
 

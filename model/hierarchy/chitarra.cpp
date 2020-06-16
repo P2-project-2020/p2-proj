@@ -6,8 +6,8 @@ const std::map<Chitarra::guitarType, std::string> Chitarra::guitarTypes = {{Chit
 									   {Chitarra::classic, "classica"}};
 const QString Chitarra::json_type = "tipo";
 
-Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _desc, bool _used, unsigned int _stringsNumber, unsigned int _quantity):
-     Strumento(_price,_brand,_used,_desc,_quantity),
+Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringsNumber, unsigned int _quantity):
+     Strumento(_price,_brand,_used,_desc,_quantity,_model),
      Corda(_stringsNumber),
      type(_type){}
 

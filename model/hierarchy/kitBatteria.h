@@ -5,7 +5,7 @@ class KitBatteria: public Percussione{
 public:
      static const std::vector<std::string> materials;
 	
-     KitBatteria(double = 0, const std::string& = "", int = 0, bool = false, bool = false, const std::string& = "", unsigned int = 1);
+     KitBatteria(double = 0, const std::string& = "", const std::string& = "", int = 0, bool = false, bool = false, const std::string& = "", unsigned int = 1);
      Strumento* clone() const;
      
      std::string className() const;
