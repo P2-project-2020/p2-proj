@@ -33,3 +33,7 @@ bool Violino::operator==(const Violino& other) const {
 	  Arco::operator==(other) &&
 	  key == other.key;
 }
+
+bool Violino::operator!=(const Violino& other) const {
+     return !(*this == other);
+}

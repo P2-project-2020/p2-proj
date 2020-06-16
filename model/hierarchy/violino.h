@@ -17,4 +17,5 @@ public:
      void saveData(QJsonObject&) const;
 
      bool operator==(const Violino&) const;
+     bool operator!=(const Violino&) const;
 };

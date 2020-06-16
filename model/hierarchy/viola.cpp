@@ -39,3 +39,7 @@ bool Viola::operator==(const Viola& other) const {
 	  Arco::operator==(other) &&
 	  key == other.key;
 }
+
+bool Viola::operator!=(const Viola& other) const {
+     return !(*this == other);
+}

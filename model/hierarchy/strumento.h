@@ -52,6 +52,7 @@ public:
      static Strumento::Tune findTune(const std::string&);
 
      bool operator==(const Strumento&) const;
+     bool operator!=(const Strumento&) const;
 
 protected:
      static const QString json_tune;	   // non tutti la usano ma ha senso per fare una cosa consistente nel json

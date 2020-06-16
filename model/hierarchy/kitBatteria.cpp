@@ -57,3 +57,7 @@ bool KitBatteria::operator==(const KitBatteria& other) const {
 	  material == other.material &&
 	  metalSnare == other.metalSnare;
 }
+
+bool KitBatteria::operator!=(const KitBatteria& other) const {
+     return !(*this == other);
+}

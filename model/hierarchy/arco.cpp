@@ -24,3 +24,7 @@ bool Arco::operator==(const Arco& other) const {
 	  Strumento::operator==(other) &&
 	  lutherie == other.lutherie;
 }
+
+bool Arco::operator!=(const Arco& other) const {
+     return !(*this == other);
+}

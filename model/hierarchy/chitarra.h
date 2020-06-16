@@ -19,6 +19,7 @@ public:
      void saveData(QJsonObject&) const;
 
      bool operator==(const Chitarra&) const;
+     bool operator!=(const Chitarra&) const;
 
      static std::string typeToString(const guitarType&);
      static guitarType findType(const std::string&);

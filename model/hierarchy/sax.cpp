@@ -24,3 +24,7 @@ bool Sax::operator==(const Sax& other) const {
      return
 	  Fiato::operator==(other);
 }
+
+bool Sax::operator!=(const Sax& other) const {
+     return !(*this == other);
+}

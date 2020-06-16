@@ -19,6 +19,7 @@ public:
      void saveData(QJsonObject&) const override;
 
      bool operator==(const Basso&) const;
+     bool operator!=(const Basso&) const;
      
      static bassType findType(const std::string&);
      

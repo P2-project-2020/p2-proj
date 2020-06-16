@@ -60,3 +60,7 @@ bool Chitarra::operator==(const Chitarra& other) const {
 	  type == other.type &&
 	  model == other.model;
 }
+
+bool Chitarra::operator!=(const Chitarra& other) const {
+     return !(*this == other);
+}

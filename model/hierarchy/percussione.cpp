@@ -22,3 +22,7 @@ bool Percussione::operator==(const Percussione& other) const {
 	  Strumento::operator==(other) &&
 	  tuned == other.tuned;
 }
+
+bool Percussione::operator!=(const Percussione& other) const {
+     return !(*this == other);
+}

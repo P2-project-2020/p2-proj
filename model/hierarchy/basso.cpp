@@ -50,6 +50,10 @@ bool Basso::operator==(const Basso& other) const {
 	  fretLess == other.fretLess;
 }
 
+bool Basso::operator!=(const Basso& other) const {
+     return !(*this == other);
+}
+
 Basso::bassType Basso::findType(const std::string& str){
      for(const auto& coppia : bassTypes)
 	  if(str == coppia.second) return coppia.first;

@@ -17,4 +17,5 @@ public:
      void saveData(QJsonObject& obj) const;
 
      bool operator==(const Corda&) const;
+     bool operator!=(const Corda&) const;
 };

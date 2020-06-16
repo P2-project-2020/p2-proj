@@ -23,6 +23,7 @@ public:
      static int findMaterial(const std::string&);
 
      bool operator==(const Fiato&) const;
+     bool operator!=(const Fiato&) const;
 
 private:
      Mouthpiece mouthpiece;

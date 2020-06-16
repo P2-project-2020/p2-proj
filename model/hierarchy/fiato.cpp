@@ -62,3 +62,7 @@ bool Fiato::operator==(const Fiato& other) const {
 	  material == other.material &&
 	  instrumentTune == other.instrumentTune;
 }
+
+bool Fiato::operator!=(const Fiato& other) const {
+     return !(*this == other);
+}

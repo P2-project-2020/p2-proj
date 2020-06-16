@@ -12,4 +12,6 @@ public:
      void saveData(QJsonObject&) const;
 
      bool operator==(const Tromba&) const;
+     bool operator!=(const Tromba&) const;
+     
 };

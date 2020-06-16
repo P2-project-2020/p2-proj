@@ -105,3 +105,7 @@ bool Strumento::operator==(const Strumento& other) const {
       * essere aggiunto a una collezione non è molto funzionale)
       */
 }
+
+bool Strumento::operator!=(const Strumento& other) const {
+     return !(*this == other);
+}

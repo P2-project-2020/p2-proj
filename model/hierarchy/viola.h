@@ -20,4 +20,6 @@ public:
      void saveData(QJsonObject&) const;
 
      bool operator==(const Viola&) const;
+     bool operator!=(const Viola&) const;
+     
 };

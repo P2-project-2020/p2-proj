@@ -14,4 +14,5 @@ public:
      void loadData(const QJsonObject&);
 
      bool operator==(const Arco&) const;
+     bool operator!=(const Arco&) const;
 };

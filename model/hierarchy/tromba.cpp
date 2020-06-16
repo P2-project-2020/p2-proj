@@ -23,3 +23,7 @@ void Tromba::saveData(QJsonObject& obj) const {
 bool Tromba::operator==(const Tromba& other) const {
      return Fiato::operator==(other);
 }
+
+bool Tromba::operator!=(const Tromba& other) const {
+     return !(*this == other);
+}

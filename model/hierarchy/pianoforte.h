@@ -21,6 +21,7 @@ public:
      void saveData(QJsonObject& obj) const;
 
      bool operator==(const Pianoforte&) const;
+     bool operator!=(const Pianoforte&) const;
 
 private:
      int pianoShape;

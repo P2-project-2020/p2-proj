@@ -72,3 +72,7 @@ bool Pianoforte::operator==(const Pianoforte& other) const {
 	  pianoShape == other.pianoShape &&
 	  pianoKeys == other.pianoKeys;
 }
+
+bool Pianoforte::operator!=(const Pianoforte& other) const {
+     return !(*this == other);
+}

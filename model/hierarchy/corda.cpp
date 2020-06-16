@@ -27,3 +27,7 @@ bool Corda::operator==(const Corda& other) const {
 	  Strumento::operator==(other) &&
 	  strings == other.strings;
 }
+
+bool Corda::operator!=(const Corda& other) const {
+     return !(*this == other);
+}
