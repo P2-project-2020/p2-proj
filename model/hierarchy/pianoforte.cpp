@@ -32,13 +32,13 @@ void Pianoforte::setMaterial(int new_material){
 }
 
 int Pianoforte::findShape(const std::string& _shape){
-     for(int i=0; i < shapes.size(); ++i)
+     for(unsigned int i=0; i < shapes.size(); ++i)
 	  if(_shape == shapes.at(i)) return i;
      return 0;
 }
 
 int Pianoforte::findKeys(const std::string& _key){
-     for(int i=0; i < keys.size(); ++i)
+     for(unsigned int i=0; i < keys.size(); ++i)
 	  if(_key == keys.at(i)) return i;
      return 0;
 }

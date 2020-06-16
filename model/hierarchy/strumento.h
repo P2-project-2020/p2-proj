@@ -19,7 +19,7 @@ public:
      static const std::string lutherie; // serve come stringa reference in più punti del codice
      static const QString json_type; // QString sulla quale fare switch nella gestione del documento
 
-     Strumento(double = 0, const std::string& = "", bool = false, const std::string& = "", unsigned int = 1);
+     Strumento(double = 0, const std::string& = "", bool = false, const std::string& = "", unsigned int = 1, const std::string& = "");
      virtual ~Strumento();
      virtual Strumento* clone() const = 0;
 
@@ -29,6 +29,9 @@ public:
      std::string getBrand() const;
      void setBrand(const std::string&);
 
+     std::string getModel() const;
+     void setModel(const std::string&);
+     
      double getPrice() const;
      void setPrice(double);
 
@@ -61,10 +64,12 @@ private:
      std::string description;
      bool used;
      std::string brand;
+     std::string model;
      unsigned int quantity;
      
      static const QString json_price;
      static const QString json_desc;
      static const QString json_used;
      static const QString json_brand;
+     static const QString json_model;
 };

@@ -7,7 +7,7 @@ public:
      enum guitarType {electric, acoustic, classic};
      static const std::map<Chitarra::guitarType, std::string> guitarTypes;
 	
-     Chitarra(Chitarra::guitarType = electric, double = 0, const std::string& = "", const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, unsigned int = 1);
+     Chitarra(Chitarra::guitarType = electric, double = 0, const std::string& = "", const std::string& = "", bool = false, unsigned int = defaultStrings, unsigned int = 1);
      Strumento* clone() const;
      
      std::string className() const;
@@ -26,7 +26,6 @@ public:
 	
 private:
      guitarType type;
-     std::string model;
      
      static const unsigned int defaultStrings;
      static const QString json_type;

@@ -7,6 +7,7 @@ const QString Strumento::json_price = "prezzo";
 const QString Strumento::json_desc = "descrizione";
 const QString Strumento::json_used = "usato";
 const QString Strumento::json_brand = "marca";
+const QString Strumento::json_model = "modello";
 
 const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::undefined, ""},
 								 {Strumento::soprano, "soprano"},
@@ -15,11 +16,12 @@ const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::und
 								 {Strumento::baritone, "baritono"},
 								 {Strumento::bass, "basso"}};
 
-Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc, unsigned int _quantity):
+Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc, unsigned int _quantity, const std::string& _model):
      price(_price),
      description(_desc),
      used(_used),
      brand(_brand),
+     model(_model),
      quantity(_quantity){}
 
 Strumento::~Strumento() = default;
@@ -31,6 +33,11 @@ void Strumento::setUsed(bool _used) { used = _used; }
 std::string Strumento::getBrand() const { return brand; }
 
 void Strumento::setBrand(const std::string& _brand){ brand = _brand; }
+
+std::string Strumento::getModel() const { return model; }
+
+void Strumento::setModel(const std::string& _model){ model = _model; }
+
 
 double Strumento::getPrice() const {
      return price;
@@ -59,6 +66,7 @@ void Strumento::loadData(const QJsonObject& obj){
      const QJsonValue& valDesc = obj[json_desc];
      const QJsonValue& valUsed = obj[json_used];
      const QJsonValue& valBrand = obj[json_brand];
+     const QJsonValue& valModel = obj[json_model];
 
      if(!valPrice.isUndefined() && valPrice.isDouble())
 	  price = valPrice.toDouble();
@@ -68,14 +76,18 @@ void Strumento::loadData(const QJsonObject& obj){
 	  used = valUsed.toBool();
      if(!valBrand.isUndefined() && valPrice.isString())
 	  brand = valBrand.toString().toStdString();
+     if(!valModel.isUndefined() && valModel.isString())
+	  model = valModel.toString().toStdString();
+
 }
 
 void Strumento::saveData(QJsonObject& obj) const {
-     obj[json_type] = QString::fromStdString(className()).split(" ").at(0); // ogni classe come prima cosa ritorna il nome specifico dello strumento, poi dettagli
+     obj[json_type] = QString::fromStdString(className()).split(" ").at(0);
      obj[json_price] = price;
      obj[json_desc] = QString::fromStdString(description);
      obj[json_used] = used;
      obj[json_brand] = QString::fromStdString(brand);
+     obj[json_model] = QString::fromStdString(model);
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){
@@ -98,7 +110,8 @@ bool Strumento::operator==(const Strumento& other) const {
      return
 	  price == other.price &&
 	  used == other.used &&
-	  brand == other.brand;
+	  brand == other.brand &&
+	  model == other.model;
      /* Credo non abbia senso mettere l'uguaglianza anche sulla
       * quantità e la descrizione, visto che sono estremamente
       * variabili (tra l'altro se facciamo un oggetto unico che deve
