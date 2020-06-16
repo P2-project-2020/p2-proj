@@ -53,12 +53,10 @@ QVariant magazzinoAdapter::headerData(int section, Qt::Orientation orientation, 
 	  switch (section)
 	  {
 	  case 0:
-	       return QString("Strumento"); //Chitarra | Basso | Violino | ... -> NON MODIFICABILI
+	       return QString("Strumento"); // è la prima parola nel metodo className()
 
 	  case 1:
-	       return QString("Tipo"); //Se c'è Elettrica | Acustica | Classica, cambia in base a Strumento -> alcuni non lo hanno
-
-
+	       return QString("Tipo"); // è la seconda parola nel ritorno del metodo className()
 	  case 2:
 	       return QString("Brand");
 	  case 3:
@@ -69,21 +67,6 @@ QVariant magazzinoAdapter::headerData(int section, Qt::Orientation orientation, 
 	       return QString("Descrizione");
 	  case 6:
 	       return QString("Condizione"); //Nuovo | Usato
-	       /*
-		 case 6:
-		 return QString("Luteria"); //Solo Arco
-		 case 7:
-		 return QString("Numero corde"); //Solo Chitarra?
-		 case 8:
-		 return QString("Modello"); //Solo Chitarra?
-		 case 9:
-		 return QString("Senza tasti"); //Solo Basso?
-		 case 10:
-		 return QString("Materiale tasti"); //Solo Pianoforte?
-		 case 11:
-		 return QString("Tipo bocchino"); //Solo Fiato
-	       */
-
 	  case 7:
 	       return QString("Prezzo");
 	  case 8:
@@ -249,14 +232,16 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 	       break;
 
 	       //E' opportuno inserire setMaterial() e setTune() nei sottooggetti che lo necessitano
-	       /*case 3: //material
-		 strumento->setMaterial(value.toString().toStdString());
-		 break;
-
-		 case 4: //tune
-		 strumento->tune(value.toDouble());
-		 break;
-	       */
+	  case 3: //material
+	       strumento->setMaterial((int)value.toDouble());
+	       break;
+	       
+	  case 4: //tune
+	       // bisognerebbe impostare la comboBox per selezionare non interi qualsiasi ma
+	       // una tra le stringhe presenti in Strumento::Tunes
+	       strumento->setTune(Strumento::findTune(value.toString().toStdString()));
+	       break;
+	       
 	  case 5: //description
 	       strumento->setDescription(value.toString().toStdString());
 	       break;
