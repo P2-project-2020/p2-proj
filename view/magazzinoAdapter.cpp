@@ -175,10 +175,10 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	       return this->index(row,index.column()).data();
 	       break;
 	  case 4:
-	       return this->index(row,index.column()).data();
+           return this->index(row,index.column()).data();
 	       break;
 	  case 5:
-           return strumento->tune();
+           return this->index(row,index.column()).data();
 	       break;
       case 6:
 	       return strumento->isUsed();

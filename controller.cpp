@@ -63,31 +63,23 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     this->layout()->setMenuBar(menuBar);
 
-    core->magazzino_push_random();
+    //core->magazzino_push_random();
     slotUpdatePage();
 
-
+    connect(pagine, SIGNAL(currentChanged(int)), this, SLOT(slotUpdatePage()));
     connect(Vmagazzino->getAddView()->getAddItemButton(),SIGNAL(clicked()), this, SLOT(slotInserisci()));
     connect(Vmagazzino->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteMagazzinoItem()));
     connect(Vmagazzino->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetMagazzino()));
     connect(Vmagazzino->getAddToCart(),SIGNAL(clicked()),this,SLOT(slotAddToCart())); //NEW
     connect(Vcarrello->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteCarrelloItem()));
     connect(Vcarrello->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetCarrello()));
-
-    /*
-    connect(Vmagazzino->getViewIns()->insertButton(),SIGNAL(clicked()),this, SLOT(slotInserisciPianta()));
-
-    connect(pagine, SIGNAL(currentChanged(int)), this, SLOT(slotUpdatePage()));
-
-    connect(Vpiante->getEliminaSel(),SIGNAL(clicked()),this,SLOT(slotDeletePianta()));
-
-    connect(Vpiante->getEliminaT(),SIGNAL(clicked()),this,SLOT(slotResetPiante()));
+    //salvataggio
     connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
     //Per sapere che i dati sono stati modificati in real time
-    connect(Vshop->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
-    connect(Vpiante->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
+    connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
+    connect(Vcarrello->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
 
-    */
+
 }
 
 QString Controller::getCurrentFile() const{ return currentFile;}
@@ -248,14 +240,16 @@ void Controller::slotInserisci(){
         case 1: {
 
             int arcType = insert->getArcoType()->currentIndex();
-            if(instrumentTune == "Scegli il tipo di tonalità")
-                   throw inputException("Devi prima inserire la tonalità!");
+
             switch(arcType) {
             case 1: //Violino
                 toPush = new Violino(price, brand, model, description, isSecondHand, quantity);
                 break;
-            case 2: //Viola
+            case 2: { //Viola
+                if(instrumentTune == "Scegli il tipo di tonalità")
+                       throw inputException("Devi prima inserire la tonalità!");
                 toPush = new Viola(price, brand, model, description,Strumento::findTune(instrumentTune), isSecondHand, quantity);
+            }
                 break;
             default:
                   throw inputException("Devi prima scegliere il tipo di strumento ad arco che vuoi inserire!");
@@ -485,9 +479,14 @@ void Controller::slotDeleteCarrelloItem()
             "Confermi di voler rimuovere lo strumento selezionato?", QMessageBox::Yes|QMessageBox::No);
 
 if(confirm == QMessageBox::Yes)
-    for(auto i = 0; i< selectedIndexes.size();++i)
-            Vcarrello->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+    for(auto i = 0; i< selectedIndexes.size();++i) {
+
+        Vcarrello->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+
+    }
 else
+
+
     return;
 
 core->setDataSaved(false);
@@ -603,14 +602,18 @@ void Controller::slotUpdatePage(){
     int magazzinoSize = core->getMagazzinoSize();
     int carrelloSize = core->getCarrelloSize();
 
-    if(pagine->currentIndex() == 0)
+    if(pagine->currentIndex() == 0) {
+
             if(!magazzinoSize){
                 itemCounter->setText("<b>Nessun prodotto presente!</b>");
                 Vmagazzino->getEditEnabled()->setText("");
-            }else{
+            }
+
+            else {
                 itemCounter->setText("<u>" + QString::number(magazzinoSize) + " prodotti presenti </u>");
                 Vmagazzino->getEditEnabled()->setText("<u> Modifica abilitata! </u>");
             }
+    }
 
     else if(pagine->currentIndex() == 1) {
             if(!carrelloSize)

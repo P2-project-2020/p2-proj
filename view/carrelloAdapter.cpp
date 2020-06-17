@@ -96,37 +96,12 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
         case Qt::SizeHintRole:
             return QSize(500, 0 );
 
-    /*
-    case Qt::EditRole:{// Per fare in modo di non cancellare il contenuto della cella durante l'editing
-
-        switch(index.column())
-        {
-
-        case 1:
-            return this->index(row,index.column()).data();
-        case 2:
-            return this->index(row,index.column()).data();
-        case 3:
-            return this->index(row,index.column()).data();
-        case 4:
-            return strumento->tune();
-        case 5:
-            return this->index(row,index.column()).data();
-        case 6:
-            return strumento->isUsed();
-        case 7:
-            return strumento->getPrice();
-        case 8:
-            return strumento->getQuantity();
-        }
-    }
-    */
         case Qt::DisplayRole:
         {
             switch(index.column())
             {
 
-            case 0:
+            case 0: {
                  if(dynamic_cast<Violino*>(strumento))
                        return QString("Violino");
                  else if(dynamic_cast<Viola*>(strumento))
@@ -143,12 +118,13 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
                             return QString("Tromba");
                  else if(dynamic_cast<Sax*>(strumento))
                             return QString("Sax");
+            }
 
                  break;
 
             case 1:
 
-
+            {
                 if(dynamic_cast<Chitarra*>(strumento)){
                     Chitarra *chitarra = dynamic_cast<Chitarra*>(strumento);
 
@@ -180,7 +156,7 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
 
                 else
                     return QString("Standard");
-
+                }
                 break;
 
             case 2:
@@ -211,7 +187,7 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
             }
         }
 
-        case SortRole:{
+        case SortRole: {
 
             switch (index.column()){
 
@@ -251,6 +227,7 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
+
 bool carrelloAdapter::insertRows(int begin, int count, const QModelIndex& parent) {
     beginInsertRows(parent, begin, begin + count - 1);
     // Aggiunta di nuove righe
@@ -277,7 +254,7 @@ void carrelloAdapter::dataRefresh()
 Qt::ItemFlags carrelloAdapter::flags(const QModelIndex& index) const
 {
     int col = index.column();
-    if( col == 0 || col==1 || col ==8 || col == 10)
+    if( col == 0 || col==1 || col==2 | col == 3 | col == 4 | col == 5 | col == 6 |col == 7 | col == 8 | col == 9 )
         return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     else
         return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
@@ -293,6 +270,7 @@ bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, con
      if(instrumentType == "Tutto")
       return (QString::fromStdString(strumento->className())).contains(exp) ||
                (QString::fromStdString(strumento->getBrand())).contains(exp);
+
      /*
        else if(thc == "Psicoattivo")
        return ((prod->getThc() > 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||

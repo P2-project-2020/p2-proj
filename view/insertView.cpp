@@ -115,7 +115,7 @@ insertView::insertView(QWidget* p):
     cordaType->addItem("Pianoforte");
 
     stringsNumber->setPlaceholderText("Numero di corde");
-
+    stringsNumber->setValidator( new QIntValidator(1,100000,this));
     stringForm->addWidget(cordaType);
     stringForm->addWidget(stringsNumber);
 
@@ -217,6 +217,7 @@ insertView::insertView(QWidget* p):
     slotDisableElements(0);
 
     connect(instrumentType,SIGNAL(activated(int)),this,SLOT(slotDisableElements(int)));
+    connect(arcoType, SIGNAL(activated(int)), this, SLOT(slotDisableArco(int)));
     connect(cordaType, SIGNAL(activated(int)), this, SLOT(slotDisableCorda(int)));
     connect(percussioneType, SIGNAL(activated(int)), this, SLOT(slotDisablePercussione(int)));
     connect(resetFields,SIGNAL(clicked()),this,SLOT(slotReset()));
@@ -325,9 +326,10 @@ void insertView::slotDisableElements(int index) const
 
         price->show();
         description->show();
+        instrumentTune->hide();
         brand->show();
         model->show();
-        instrumentTune->show();
+
         isSecondHand->show();
         quantity->show();
         arcoType->show();
@@ -356,7 +358,6 @@ void insertView::slotDisableElements(int index) const
         description->setEnabled(true);
         brand->setEnabled(true);
         model->setEnabled(true);
-        instrumentTune->setEnabled(true);
         isSecondHand->setEnabled(true);
         quantity->setEnabled(true);
         arcoType->setEnabled(true);
@@ -585,7 +586,24 @@ void insertView::slotDisableElements(int index) const
     }
 }
 
+void insertView::slotDisableArco(int index) const {
+    switch (index) {
+    case 1://Violino
+        instrumentTune->hide();
+        instrumentTune->setEnabled(false);
+         break;
+    case 2://Viola
+        instrumentTune->show();
+        instrumentTune->setEnabled(true);
+         break;
+    default:
+         cordaType->setCurrentIndex(0);
+         instrumentTune->hide();
+         instrumentTune->setEnabled(false);
+          break;
+    }
 
+}
 
 void insertView::slotDisableCorda(int index) const
 {

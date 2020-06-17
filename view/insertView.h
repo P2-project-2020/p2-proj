@@ -134,12 +134,14 @@ public slots:
     void slotDisableElements(int) const;
     void slotDisableCorda(int) const;
     void slotDisablePercussione(int) const;
+    void slotDisableArco(int) const;
 
 
 signals:
     void signalDisableElements(int);
     void signalDisableCorda(int);
     void signalDisablePercussione(int);
+    void signalDisableArcoe(int);
 
 };
 
