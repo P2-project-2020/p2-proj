@@ -21,12 +21,12 @@ std::string KitBatteria::getMaterial() const {
 }
 
 void KitBatteria::setMaterial(int new_material){
-     if(new_material >= 0 && new_material < materials.size())
+     if(new_material >= 0 && new_material < (int)materials.size())
 	  material = new_material;
 }
 
 int KitBatteria::findMaterial(const std::string& str){
-     for(int i=0; i < materials.size(); ++i){
+     for(int i=0; i < (int)materials.size(); ++i){
 	  if(str == materials.at(i)) return i;
      }
      return -1;

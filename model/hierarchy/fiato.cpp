@@ -6,7 +6,7 @@ const std::vector<std::string> Fiato::materials = { "bronzo", "argento", "plasti
 
 Fiato::Fiato(int _material, Strumento::Tune _tune, Mouthpiece _mouthpiece):
 	mouthpiece(_mouthpiece),
-	material(_material >= 0 && _material < materials.size() ? _material : 0),
+	material(_material >= 0 && _material < (int)materials.size() ? _material : 0),
 	instrumentTune(_tune) {}
 
 Strumento::Tune Fiato::tune() const { return instrumentTune; }
@@ -22,7 +22,7 @@ std::string Fiato::getMaterial() const {
 }
 
 void Fiato::setMaterial(int new_material) {
-     if(new_material >=0 && new_material < materials.size()){
+     if(new_material >=0 && new_material < (int)materials.size()){
 	  material = new_material;
      }
 }
@@ -48,7 +48,7 @@ void Fiato::saveData(QJsonObject& obj) const {
 }
 
 int Fiato::findMaterial(const std::string& str){
-     for(int i = 0; i < materials.size(); ++i){
+     for(int i = 0; i < (int)materials.size(); ++i){
 	  if(str == materials.at(i))
 	       return i;
      }

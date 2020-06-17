@@ -7,11 +7,11 @@ const QString Pianoforte::json_shape = "forma";
 const QString Pianoforte::json_keys = "tasti";
 
 Pianoforte::Pianoforte(int _shape, int _keys, double _price, const std::string& _brand, const std::string& _model, bool _used, const std::string& _desc, unsigned int _quantity):
-     Strumento(_price, _brand, _used, _desc, _quantity),
+     Strumento(_price, _brand, _used, _desc, _quantity, _model),
      Corda(numberOfKeys*3),
      Percussione(true),
-     pianoShape(_shape >= 0 && _shape < shapes.size() ? _shape : 0),
-     pianoKeys(_keys >= 0 && _keys < keys.size() ? _keys : 0){}
+     pianoShape(_shape >= 0 && _shape < (int)shapes.size() ? _shape : 0),
+     pianoKeys(_keys >= 0 && _keys < (int)keys.size() ? _keys : 0){}
 
 Strumento* Pianoforte::clone() const {
      return new Pianoforte(*this);
@@ -26,7 +26,7 @@ std::string Pianoforte::getMaterial() const {
 }
 
 void Pianoforte::setMaterial(int new_material){
-     if(new_material >= 0 && new_material < keys.size()){
+     if(new_material >= 0 && new_material < (int)keys.size()){
 	  pianoKeys = new_material;
      }
 }
