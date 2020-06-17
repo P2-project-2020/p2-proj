@@ -13,8 +13,6 @@ class Strumento{
 public:
      enum Tune {undefined, soprano, contralto, tenor, baritone, bass};
      static const std::map<Strumento::Tune, std::string> Tunes;
-	
-     static std::string tuneToString(const Strumento::Tune&); //USELESS
 
      static const std::string lutherie; // serve come stringa reference in più punti del codice
      static const QString json_type; // QString sulla quale fare switch nella gestione del documento
