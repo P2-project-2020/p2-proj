@@ -18,8 +18,10 @@ insertView::insertView(QWidget* p):
     price(new QLineEdit(this)),
     description(new QLineEdit(this)),
     brand(new QLineEdit(this)),
+    model(new QLineEdit(this)),
     instrumentTune(new QComboBox(this)),
     isSecondHand(new QCheckBox(this)),
+    quantity(new QSpinBox(this)),
 
     specificInfo(new QGroupBox(this)),
     arcoType(new QComboBox(this)),
@@ -27,7 +29,6 @@ insertView::insertView(QWidget* p):
     cordaType(new QComboBox(this)),
     stringsNumber(new QLineEdit(this)),
     guitarType(new QComboBox(this)),
-    model(new QLineEdit(this)),
     bassType(new QComboBox(this)),
     isFretless(new QCheckBox(this)),
 
@@ -62,6 +63,7 @@ insertView::insertView(QWidget* p):
     price->setValidator( new QDoubleValidator(0.01,100000,2,this));
     description->setPlaceholderText("Descrizione strumento");
     brand->setPlaceholderText("Marca strumento");
+    model->setPlaceholderText("Modello strumento");
     instrumentTune->addItem("Scegli il tipo di tonalità");
     instrumentTune->addItem("Indefinita");
     instrumentTune->addItem("Soprano");
@@ -70,15 +72,20 @@ insertView::insertView(QWidget* p):
     instrumentTune->addItem("Baritono");
     instrumentTune->addItem("Basso");
     isSecondHand->setText("Strumento di seconda mano");
+    QFormLayout * quantityForm = new QFormLayout;
+    quantityForm->setSpacing(5);
+    quantity->setRange(1,100000);
+    quantity->setValue(1);
+    quantityForm->addRow(tr("Quantità"), quantity);
 
     generalForm->addWidget(price);
     generalForm->addWidget(description);
     generalForm->addWidget(brand);
+    generalForm->addWidget(model);
     generalForm->addWidget(instrumentTune);
     generalForm->addWidget(isSecondHand);
+    generalForm->addItem(quantityForm);
     generalInfo->setLayout(generalForm);
-
-
 
 
     QVBoxLayout* specificForm = new QVBoxLayout;
@@ -115,19 +122,13 @@ insertView::insertView(QWidget* p):
     specificForm->addItem(stringForm);
 
 
-    QHBoxLayout *guitarForm = new QHBoxLayout;
-    guitarForm->setSpacing(12);
 
     guitarType->addItem("Scegli il tipo di chitarra");
     guitarType->addItem("Elettrica");
     guitarType->addItem("Acustica");
     guitarType->addItem("Classica");
-    model->setPlaceholderText("Modello di chitarra");
 
-    guitarForm->addWidget(guitarType);
-    guitarForm->addWidget(model);
-
-    specificForm->addItem(guitarForm);
+    specificForm->addWidget(guitarType);
 
     QHBoxLayout *bassForm = new QHBoxLayout;
     bassForm->setSpacing(12);
@@ -185,8 +186,8 @@ insertView::insertView(QWidget* p):
     fiatoForm->setSpacing(12);
 
     fiatoType->addItem("Scegli il tipo di strumento a fiato");
-    fiatoType->addItem("Sassofono");
     fiatoType->addItem("Tromba");
+    fiatoType->addItem("Sassofono");
     fiatoMaterial->addItem("Scegli il tipo di materiale");
     fiatoMaterial->addItem("Argento");
     fiatoMaterial->addItem("Ottone");
@@ -211,10 +212,9 @@ insertView::insertView(QWidget* p):
     buttonsLayout->setSpacing(5);
     form->addItem(buttonsLayout);
 
-    slotDisableElements(0);
+    form->setSizeConstraint(QLayout::SetFixedSize);
 
-    //this->setFixedSize(600,600);
-    //window->viewIns->setSizeConstraint( QLayout::SetFixedSize );
+    slotDisableElements(0);
 
     connect(instrumentType,SIGNAL(activated(int)),this,SLOT(slotDisableElements(int)));
     connect(cordaType, SIGNAL(activated(int)), this, SLOT(slotDisableCorda(int)));
@@ -244,14 +244,15 @@ void insertView::slotRestart(){
     price->setEnabled(false);
     description->setEnabled(false);
     brand->setEnabled(false);
+    model->setEnabled(false);
     instrumentTune->setEnabled(false);
     isSecondHand->setEnabled(false);
+    quantity->setEnabled(false);
     arcoType->setEnabled(false);
     isLutherie->setEnabled(false);
     cordaType->setEnabled(false);
     stringsNumber->setEnabled(false);
     guitarType->setEnabled(false);
-    model->setEnabled(false);
     bassType->setEnabled(false);
     isFretless->setEnabled(false);
     pianoShape->setEnabled(false);
@@ -268,12 +269,14 @@ void insertView::slotRestart(){
 
     void insertView::slotReset(){
 
-    //instrumentType->setCurrentIndex(0); //basta resettare i campi relativi allo strumento
+
     price->setText("");
     description->setText("");
     brand->setText("");
+    model->setText("");
     instrumentTune->setCurrentIndex(0);
     isSecondHand->setChecked(false);
+    quantity->setValue(1);
 
     arcoType->setCurrentIndex(0);
     isLutherie->setChecked(false);
@@ -286,7 +289,6 @@ void insertView::slotRestart(){
     stringsNumber->setText("");
 //Chitarra
     guitarType->setCurrentIndex(0);
-    model->setText("");
 //Basso
     bassType->setCurrentIndex(0);
     isFretless->setChecked(false);
@@ -297,7 +299,6 @@ void insertView::slotRestart(){
 
 //*******************************************
 //Percussione
-    //percussioneType->setCurrentIndex(0);
     percussioneMaterial->setCurrentIndex(0);
     isTuned->setChecked(false);
 //Pianoforte
@@ -325,15 +326,16 @@ void insertView::slotDisableElements(int index) const
         price->show();
         description->show();
         brand->show();
+        model->show();
         instrumentTune->show();
         isSecondHand->show();
+        quantity->show();
         arcoType->show();
         isLutherie->show();
         cordaType->hide();
         stringsNumber->hide();
 
         guitarType->hide();
-        model->hide();
         bassType->hide();
         isFretless->hide();
         pianoShape->hide();
@@ -353,14 +355,15 @@ void insertView::slotDisableElements(int index) const
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
+        model->setEnabled(true);
         instrumentTune->setEnabled(true);
         isSecondHand->setEnabled(true);
+        quantity->setEnabled(true);
         arcoType->setEnabled(true);
         isLutherie->setEnabled(true);
         cordaType->setEnabled(false);
         stringsNumber->setEnabled(false);
         guitarType->setEnabled(false);
-        model->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
         pianoShape->setEnabled(false);
@@ -385,8 +388,10 @@ void insertView::slotDisableElements(int index) const
         price->show();
         description->show();
         brand->show();
+        model->show();
         instrumentTune->hide();
         isSecondHand->show();
+        quantity->show();
         arcoType->hide();
         isLutherie->hide();
         cordaType->show();
@@ -406,8 +411,10 @@ void insertView::slotDisableElements(int index) const
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
+        model->setEnabled(true);
         instrumentTune->setEnabled(false);
         isSecondHand->setEnabled(true);
+        quantity->setEnabled(true);
         arcoType->setEnabled(false);
         isLutherie->setEnabled(false);
         cordaType->setEnabled(true);
@@ -433,15 +440,16 @@ void insertView::slotDisableElements(int index) const
         price->show();
         description->show();
         brand->show();
+        model->show();
         instrumentTune->hide();
         isSecondHand->show();
+        quantity->show();
         arcoType->hide();
         isLutherie->hide();
         cordaType->hide();
         stringsNumber->hide();
 
         guitarType->hide();
-        model->hide();
         bassType->hide();
         isFretless->hide();
 
@@ -458,15 +466,16 @@ void insertView::slotDisableElements(int index) const
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
+        model->setEnabled(true);
         instrumentTune->setEnabled(false);
         isSecondHand->setEnabled(true);
+        quantity->setEnabled(true);
         arcoType->setEnabled(false);
         isLutherie->setEnabled(false);
         cordaType->setEnabled(false);
         stringsNumber->setEnabled(false);
 
         guitarType->setEnabled(false);
-        model->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
 
@@ -488,15 +497,16 @@ void insertView::slotDisableElements(int index) const
         price->show();
         description->show();
         brand->show();
+        model->show();
         instrumentTune->show();
         isSecondHand->show();
+        quantity->show();
         arcoType->hide();
         isLutherie->hide();
         cordaType->hide();
         stringsNumber->hide();
 
         guitarType->hide();
-        model->hide();
         bassType->hide();
         isFretless->hide();
         pianoShape->hide();
@@ -515,8 +525,10 @@ void insertView::slotDisableElements(int index) const
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
+        model->setEnabled(true);
         instrumentTune->setEnabled(true);
         isSecondHand->setEnabled(true);
+        quantity->setEnabled(true);
         arcoType->setEnabled(false);
         isLutherie->setEnabled(false);
         cordaType->setEnabled(false);
@@ -524,7 +536,6 @@ void insertView::slotDisableElements(int index) const
 
 
         guitarType->setEnabled(false);
-        model->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);  
         pianoShape->setEnabled(false);
@@ -552,14 +563,15 @@ void insertView::slotDisableElements(int index) const
         price->setEnabled(false);
         description->setEnabled(false);
         brand->setEnabled(false);
+        model->setEnabled(false);
         instrumentTune->setEnabled(false);
         isSecondHand->setEnabled(false);
+        quantity->setEnabled(false);
         arcoType->setEnabled(false);
         isLutherie->setEnabled(false);
         cordaType->setEnabled(false);
         stringsNumber->setEnabled(false);
         guitarType->setEnabled(false);
-        model->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
         pianoShape->setEnabled(false);
@@ -582,7 +594,6 @@ void insertView::slotDisableCorda(int index) const
     case 1://Guitar
 
         guitarType->show();
-        model->show();
 
         bassType->hide();
         isFretless->hide();
@@ -591,7 +602,6 @@ void insertView::slotDisableCorda(int index) const
         keysMaterial->hide();
 
         guitarType->setEnabled(true);
-        model->setEnabled(true);
 
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
@@ -603,7 +613,6 @@ void insertView::slotDisableCorda(int index) const
     case 2://Bass
 
         guitarType->hide();
-        model->hide();
 
         bassType->show();
         isFretless->show();
@@ -612,7 +621,6 @@ void insertView::slotDisableCorda(int index) const
         keysMaterial->hide();
 
         guitarType->setEnabled(false);
-        model->setEnabled(false);
 
         bassType->setEnabled(true);
         isFretless->setEnabled(true);
@@ -625,7 +633,6 @@ void insertView::slotDisableCorda(int index) const
     case 3://Piano
 
         guitarType->hide();
-        model->hide();
 
         bassType->hide();
         isFretless->hide();
@@ -634,7 +641,6 @@ void insertView::slotDisableCorda(int index) const
         keysMaterial->show();
 
         guitarType->setEnabled(false);
-        model->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
 
@@ -648,7 +654,6 @@ void insertView::slotDisableCorda(int index) const
 
         cordaType->setCurrentIndex(0);
         guitarType->hide();
-        model->hide();
 
         bassType->hide();
         isFretless->hide();
@@ -657,7 +662,6 @@ void insertView::slotDisableCorda(int index) const
         keysMaterial->hide();
 
         guitarType->setEnabled(false);
-        model->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
         pianoShape->setEnabled(false);
@@ -729,12 +733,21 @@ void insertView::slotDisablePercussione(int index) const
         return brand;
     }
 
+    QLineEdit* insertView::getModel() const {
+        return model;
+    }
+
+
     QComboBox* insertView::getInstrumentTune() const {
         return instrumentTune;
     }
 
     QCheckBox* insertView::getIsSecondHand() const {
         return isSecondHand;
+    }
+
+    QSpinBox* insertView::getQuantity() const {
+        return quantity;
     }
 
     //Arco
@@ -757,10 +770,6 @@ void insertView::slotDisablePercussione(int index) const
     //Chitarra
     QComboBox* insertView::getGuitarType() const {
         return guitarType;
-    }
-
-    QLineEdit* insertView::getModel() const {
-        return model;
     }
 
     //Basso

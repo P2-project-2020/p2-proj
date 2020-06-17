@@ -178,9 +178,9 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	       return this->index(row,index.column()).data();
 	       break;
 	  case 5:
-	       return strumento->tune();
+           return strumento->tune();
 	       break;
-	  case 6:
+      case 6:
 	       return strumento->isUsed();
 	       break;
 	  case 7:
@@ -274,7 +274,7 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
 {
      int col = index.column();
-     if( col == 0 || col==1 || col ==8 || col == 10)
+     if( col == 0 || col==1 )
 	  return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
      else
 	  return Qt::ItemIsEditable | QAbstractTableModel::flags(index);

@@ -29,7 +29,7 @@ class carrelloView : public QWidget
 
 
         QLabel *getResultsNumber() const;
-        QLabel *getEditEnabled() const; //USELESS
+        //QLabel *getEditEnabled() const; //USELESS
 
     private:
         Model *core;
@@ -46,7 +46,7 @@ class carrelloView : public QWidget
         QComboBox *instrumentType;
 
         QLabel *resultsNumber; //risultati della ricerca
-        QLabel *editEnabled; //QPushButton *editEnable; USELESS
+        //QLabel *editEnabled; //QPushButton *editEnable; USELESS
 
 
 

@@ -190,7 +190,7 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
                 return QString::fromStdString(strumento->getMaterial());
                 break;
             case 4:
-                return QString(strumento->tune());
+                return QString::fromStdString(Strumento::Tunes.at(strumento->tune()));
                 break;
             case 5:
                 return QString::fromStdString(strumento->getDescription());

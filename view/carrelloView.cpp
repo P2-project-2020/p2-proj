@@ -19,7 +19,6 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
     resultsNumber(new QLabel),
-    editEnabled(new QLabel),
     adapter(new carrelloAdapter(this, core))
 {
 
@@ -54,8 +53,8 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
         }
 
         resultBar->addWidget(resultsNumber);
-        editEnabled->setText("");
-        resultBar->addWidget(editEnabled);
+        //editEnabled->setText("");
+        //resultBar->addWidget(editEnabled);
         deleteSelected->setText("Rimuovi Selezionato");
         resultBar->addWidget(deleteSelected);
         //deleteSelected->setIcon(QIcon(":/res/img/negative.svg"));
@@ -98,7 +97,7 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
 
     carrelloFilter *carrelloView::getFilter() const{ return filter;}
 
-    QLabel *carrelloView::getEditEnabled() const{ return editEnabled;}
+    //QLabel *carrelloView::getEditEnabled() const{ return editEnabled;}
 
     QTableView *carrelloView::getTable() const{ return table;}
 

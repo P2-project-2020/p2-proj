@@ -12,6 +12,7 @@
 #include <QDialog>
 #include <QWidget>
 #include <string>
+#include <QSpinBox>
 
 
 class insertView : public QDialog
@@ -25,8 +26,10 @@ private:
     QLineEdit *price;
     QLineEdit *description;
     QLineEdit *brand;
+    QLineEdit *model;
     QComboBox *instrumentTune;
     QCheckBox *isSecondHand;
+    QSpinBox *quantity;
 
     QGroupBox* specificInfo;
 //*******************************************
@@ -42,8 +45,7 @@ private:
     QLineEdit *stringsNumber;
 //Chitarra
     QComboBox *guitarType; //Eletric | Acoustic | Classic
-    QLineEdit *model;
-//Basso
+    //Basso
     QComboBox *bassType; //Eletric | Acoustic
     QCheckBox *isFretless;
 //Pianoforte
@@ -87,8 +89,10 @@ public:
     QLineEdit *getPrice() const;
     QLineEdit *getDescription() const;
     QLineEdit *getBrand() const;
+    QLineEdit *getModel() const;
     QComboBox *getInstrumentTune() const;
     QCheckBox *getIsSecondHand() const;
+    QSpinBox *getQuantity() const;
 
     //Arco
     QComboBox *getArcoType() const;
@@ -100,7 +104,6 @@ public:
 
     //Chitarra
     QComboBox *getGuitarType() const;
-    QLineEdit *getModel() const;
 
     //Basso
     QComboBox *getBassType() const;

@@ -220,8 +220,10 @@ void Controller::slotInserisci(){
         double price = insert->getPrice()->text().toDouble();
         std::string description = insert->getDescription()->text().toStdString();
         std::string brand = insert->getBrand()->text().toStdString();
+        std::string model = insert->getModel()->text().toStdString();
         std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
         bool isSecondHand = insert->getIsSecondHand()->isChecked();
+        unsigned int quantity = insert->getQuantity()->text().toUInt();
 
         if(type) {
 
@@ -231,6 +233,12 @@ void Controller::slotInserisci(){
                 throw inputException("Devi prima inserire la descrizione!");
             if(brand == "")
                 throw inputException("Devi prima inserire la marca!");
+            if(model == "")
+                throw inputException("Devi prima inserire il modello!");
+
+            //isSecondHand false di default
+            //quantity uguale a 1 di default
+
         }
 
 
@@ -244,10 +252,10 @@ void Controller::slotInserisci(){
                    throw inputException("Devi prima inserire la tonalità!");
             switch(arcType) {
             case 1: //Violino
-                toPush = new Violino(price, brand, description, isSecondHand);
+                toPush = new Violino(price, brand, model, description, isSecondHand, quantity);
                 break;
             case 2: //Viola
-                toPush = new Viola(price, brand, description,Strumento::findTune(instrumentTune), isSecondHand);
+                toPush = new Viola(price, brand, model, description,Strumento::findTune(instrumentTune), isSecondHand, quantity);
                 break;
             default:
                   throw inputException("Devi prima scegliere il tipo di strumento ad arco che vuoi inserire!");
@@ -276,7 +284,7 @@ void Controller::slotInserisci(){
                 if(guitarModel == "")
                        throw inputException("Devi prima inserire il modello di chitarra!");
 
-                toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, description, isSecondHand, stringsNumber);
+                toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, model, description, isSecondHand, stringsNumber, quantity);
             }
                 break;
             case 2: { //Basso
@@ -286,7 +294,7 @@ void Controller::slotInserisci(){
                 if(bassType == "Scegli il tipo di basso")
                        throw inputException("Devi prima inserire il tipo di basso!");
 
-                toPush = new Basso(Basso::findType(bassType), price, brand, description, isSecondHand, stringsNumber, isFretless);
+                toPush = new Basso(Basso::findType(bassType), price, brand, model, description, isSecondHand, stringsNumber, isFretless, quantity);
             }
                 break;
             case 3: { //Pianoforte
@@ -298,7 +306,7 @@ void Controller::slotInserisci(){
                 if(keysMaterial == "Scegli il materiale dei tasti")
                        throw inputException("Devi prima inserire il materiale dei tasti!");
 
-                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
+                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, model, isSecondHand, description, quantity);
             }
                 break;
             default:
@@ -323,7 +331,7 @@ void Controller::slotInserisci(){
                 if(keysMaterial == "Scegli il materiale dei tasti")
                        throw inputException("Devi prima inserire il materiale dei tasti!");
 
-                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, isSecondHand, description);
+                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, model, isSecondHand, description, quantity);
             }
                 break;
             case 2: { // Kit batteria
@@ -333,7 +341,7 @@ void Controller::slotInserisci(){
                 if(percussionMaterial == "Scegli il tipo di materiale")
                        throw inputException("Devi prima inserire il tipo di materiale!");
 
-                toPush = new KitBatteria(price, brand, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description);
+                toPush = new KitBatteria(price, brand, model, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description, quantity);
 
             }
                 break;
@@ -359,11 +367,11 @@ void Controller::slotInserisci(){
         switch(fiatoType) {
 
             case 1:  //Tromba
-                toPush = new Tromba(Strumento::findTune(instrumentTune), price, brand, Fiato::findMaterial(windMaterial), isSecondHand, description );
+                toPush = new Tromba(Strumento::findTune(instrumentTune), price, brand, model, Fiato::findMaterial(windMaterial), isSecondHand, description, quantity);
 
                 break;
             case 2: //Sax
-                toPush = new Sax(Strumento::findTune(instrumentTune), price, brand, Fiato::findMaterial(windMaterial), isSecondHand);
+                toPush = new Sax(Strumento::findTune(instrumentTune), price, brand, model, Fiato::findMaterial(windMaterial), isSecondHand, quantity);
 
                 break;
             default:
@@ -408,18 +416,25 @@ if(confirm == QMessageBox::Yes)
 
     for(auto i = 0; i< selectedIndexes.size();++i) {
 
+
         bool ok;
         unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(i)->getQuantity(), 1, &ok);
                 if(ok) {
 
-                    core->carrello_push_end(core->magazzinoAt(i)->clone());
-                    core->carrelloAt(i)->setQuantity(quantity);
-                    if(quantity == core->magazzinoAt(i)->getQuantity())
-                        Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
-                    else
-                        core->magazzinoAt(i)->setQuantity(core->magazzinoAt(i)->getQuantity() - quantity);
+                        //fixare: inserisce sempre il primo e non quello che si seleziona
+
+                        core->carrello_push_end(core->magazzinoAt(i)->clone());
+
+                        //this works
+                        core->carrelloAt(core->getCarrelloSize()-1)->setQuantity(quantity);
+                        if(quantity == core->magazzinoAt(i)->getQuantity())
+                            Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+                        else
+                            core->magazzinoAt(i)->setQuantity(core->magazzinoAt(i)->getQuantity() - quantity);
+                    }
+
                 }
-    }
+
 
 
             else
