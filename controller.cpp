@@ -63,7 +63,7 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     this->layout()->setMenuBar(menuBar);
 
-    //core->magazzino_push_random();
+    core->magazzino_push_random();
     slotUpdatePage();
 
     connect(pagine, SIGNAL(currentChanged(int)), this, SLOT(slotUpdatePage()));

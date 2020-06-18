@@ -94,7 +94,7 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
      case Qt::TextAlignmentRole:
 	  return QVariant ( Qt::AlignVCenter | Qt::AlignHCenter );
      case Qt::SizeHintRole:
-	  return QSize(500, 0 );
+      return QSize(500, 0 );
 
      case Qt::EditRole:{// Per fare in modo di non cancellare il contenuto della cella durante l'editing
 
@@ -108,17 +108,18 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	  case 3:
 	       return this->index(row,index.column()).data();
 	  case 4:
-	       return strumento->tune();
+           return strumento->tune();
 	  case 5:
-	       return this->index(row,index.column()).data();
+           return strumento->getMaterialVector();
 	  case 6:
-	       return strumento->isUsed();
+           return strumento->isUsed();
 	  case 7:
 	       return strumento->getPrice();
 	  case 8:
 	       return strumento->getQuantity();
 	  }
      }
+
      case Qt::DisplayRole:
      {
 	  switch(index.column())
