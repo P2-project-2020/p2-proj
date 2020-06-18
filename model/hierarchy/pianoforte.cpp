@@ -2,7 +2,7 @@
 
 const unsigned int Pianoforte::numberOfKeys = 48;
 const std::vector<std::string> Pianoforte::shapes = {"coda", "muro"};
-const std::vector<std::string> Pianoforte::keys = {"legno", "plastica", "avorio"};
+ const std::vector<std::string> Pianoforte::keys = {"legno", "plastica", "avorio"};
 const QString Pianoforte::json_shape = "forma";
 const QString Pianoforte::json_keys = "tasti";
 

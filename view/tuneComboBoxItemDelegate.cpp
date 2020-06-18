@@ -1,4 +1,4 @@
-#include "tunecomboboxitemdelegate.h"
+#include "tuneComboBoxItemDelegate.h"
 #include <QComboBox>
 #include "model/hierarchy/strumento.h"
 

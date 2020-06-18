@@ -1,6 +1,11 @@
-#include "materialcomboboxitemdelegate.h"
+#include "materialComboBoxItemDelegate.h"
 #include <QComboBox>
 #include "model/hierarchy/strumento.h"
+#include "model/hierarchy/pianoforte.h"
+#include "model/hierarchy/tromba.h"
+#include "model/hierarchy/fiato.h"
+
+#include <QDebug>
 
 MaterialComboBoxItemDelegate::MaterialComboBoxItemDelegate(QObject *parent) :  QStyledItemDelegate(parent)
 {
@@ -16,13 +21,17 @@ MaterialComboBoxItemDelegate::~MaterialComboBoxItemDelegate()
 QWidget *MaterialComboBoxItemDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     // Create the combobox and populate it
-    QComboBox *cb = new QComboBox(parent);
-    const int row = index.row();
-    QString rowType = this->index(index.row(),0).data().toString();
-    if(rowType == "Pianoforte" )
-    for(auto& it: Strumento::getMaterialVector() )
-    cb->addItem(QString::fromStdString(it));
-    return cb;
+     QComboBox *cb = new QComboBox(parent);
+     const int row = index.row();
+
+     QString rowType = index.data().toString();
+     qDebug()<<rowType;
+
+     if(rowType == "Pianoforte" )
+     for(auto& it: Pianoforte::keys )
+     cb->addItem(QString::fromStdString(it));
+     return cb;
+
 }
 
 void MaterialComboBoxItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
