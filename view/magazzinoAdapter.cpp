@@ -289,7 +289,7 @@ Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
             return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 
         if(rowType == "Chitarra")
-            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+            return  Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 
         if(rowType == "Basso")
             return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;

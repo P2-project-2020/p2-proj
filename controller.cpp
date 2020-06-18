@@ -412,19 +412,19 @@ if(confirm == QMessageBox::Yes)
 
 
         bool ok;
-        unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(i)->getQuantity(), 1, &ok);
+        unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(selectedIndexes[i].row())->getQuantity(), 1, &ok);
                 if(ok) {
 
                         //fixare: inserisce sempre il primo e non quello che si seleziona
 
-                        core->carrello_push_end(core->magazzinoAt(i)->clone());
+                        core->carrello_push_end(core->magazzinoAt(selectedIndexes[i].row())->clone());
 
                         //this works
                         core->carrelloAt(core->getCarrelloSize()-1)->setQuantity(quantity);
-                        if(quantity == core->magazzinoAt(i)->getQuantity())
+                        if(quantity == core->magazzinoAt(selectedIndexes[i].row())->getQuantity())
                             Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
                         else
-                            core->magazzinoAt(i)->setQuantity(core->magazzinoAt(i)->getQuantity() - quantity);
+                            core->magazzinoAt(selectedIndexes[i].row())->setQuantity(core->magazzinoAt(selectedIndexes[i].row())->getQuantity() - quantity);
                     }
 
                 }
