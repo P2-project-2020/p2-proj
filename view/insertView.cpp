@@ -37,7 +37,6 @@ insertView::insertView(QWidget* p):
 
     percussioneType(new QComboBox(this)),
     percussioneMaterial(new QComboBox(this)),
-    isTuned(new QCheckBox(this)),
     isMetalSnare(new QCheckBox(this)),
 
     fiatoType(new QComboBox(this)),
@@ -143,23 +142,11 @@ insertView::insertView(QWidget* p):
 
     specificForm->addItem(bassForm);
 
-    QHBoxLayout *percussioneForm = new QHBoxLayout;
-    percussioneForm->setSpacing(12);
-
     percussioneType->addItem("Scegli il tipo di strumento a percussione");
     percussioneType->addItem("Pianoforte");
-    percussioneType->addItem("Kit Batteria");
-    percussioneMaterial->addItem("Scegli il tipo di materiale");
-    percussioneMaterial->addItem("Woodkit");
-    percussioneMaterial->addItem("Plexiglass");
-    isTuned->setText("Strumento con tonalità");
+    percussioneType->addItem("Kit Batteria"); 
 
-
-    percussioneForm->addWidget(percussioneType);
-    percussioneForm->addWidget(percussioneMaterial);
-    percussioneForm->addWidget(isTuned);
-
-    specificForm->addItem(percussioneForm);
+    specificForm->addWidget(percussioneType);
 
     QHBoxLayout *pianoForm = new QHBoxLayout;
     pianoForm->setSpacing(12);
@@ -177,10 +164,19 @@ insertView::insertView(QWidget* p):
 
     specificForm->addItem(pianoForm);
 
+    QHBoxLayout *percussioneForm = new QHBoxLayout;
+    percussioneForm->setSpacing(12);
 
+    percussioneMaterial->addItem("Scegli il tipo di materiale");
+    percussioneMaterial->addItem("Woodkit");
+    percussioneMaterial->addItem("Plexiglass");
     isMetalSnare->setText("Rullante");
 
-    specificForm->addWidget(isMetalSnare);
+    percussioneForm->addWidget(percussioneMaterial);
+    percussioneForm->addWidget(isMetalSnare);
+
+    specificForm->addItem(percussioneForm);
+
 
     QHBoxLayout *fiatoForm = new QHBoxLayout;
     fiatoForm->setSpacing(12);
@@ -260,7 +256,6 @@ void insertView::slotRestart(){
     keysMaterial->setEnabled(false);
     percussioneType->setEnabled(false);
     percussioneMaterial->setEnabled(false);
-    isTuned->setEnabled(false);
     isMetalSnare->setEnabled(false);
     fiatoType->setEnabled(false);
     fiatoMaterial->setEnabled(false);
@@ -301,7 +296,6 @@ void insertView::slotRestart(){
 //*******************************************
 //Percussione
     percussioneMaterial->setCurrentIndex(0);
-    isTuned->setChecked(false);
 //Pianoforte
 //Vedi Corda<-Pianoforte!
 //Kit Batteria
@@ -345,7 +339,6 @@ void insertView::slotDisableElements(int index) const
 
         percussioneType->hide();
         percussioneMaterial->hide();
-        isTuned->hide();
 
         isMetalSnare->hide();
 
@@ -371,7 +364,6 @@ void insertView::slotDisableElements(int index) const
         keysMaterial->setEnabled(false);
         percussioneType->setEnabled(false);
         percussioneMaterial->setEnabled(false);
-        isTuned->setEnabled(false);
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
@@ -403,7 +395,6 @@ void insertView::slotDisableElements(int index) const
 
         percussioneType->hide();
         percussioneMaterial->hide();
-        isTuned->hide();
         isMetalSnare->hide();
         fiatoType->hide();
         fiatoMaterial->hide();
@@ -422,7 +413,6 @@ void insertView::slotDisableElements(int index) const
         stringsNumber->setEnabled(true);
         percussioneType->setEnabled(false);
         percussioneMaterial->setEnabled(false);
-        isTuned->setEnabled(false);
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
@@ -455,8 +445,6 @@ void insertView::slotDisableElements(int index) const
         isFretless->hide();
 
         percussioneType->show();
-        percussioneMaterial->show();
-        isTuned->show();
 
         //gestione percussioneType affidata a slotDisablePercussione
 
@@ -481,8 +469,6 @@ void insertView::slotDisableElements(int index) const
         isFretless->setEnabled(false);
 
         percussioneType->setEnabled(true);
-        percussioneMaterial->setEnabled(true);
-        isTuned->setEnabled(true);
 
         fiatoType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
@@ -515,7 +501,6 @@ void insertView::slotDisableElements(int index) const
 
         percussioneType->hide();
         percussioneMaterial->hide();
-        isTuned->hide();
 
         isMetalSnare->hide();
 
@@ -544,7 +529,6 @@ void insertView::slotDisableElements(int index) const
 
         percussioneType->setEnabled(false);
         percussioneMaterial->setEnabled(false);
-        isTuned->setEnabled(false);
 
         isMetalSnare->setEnabled(false);
 
@@ -579,7 +563,6 @@ void insertView::slotDisableElements(int index) const
         keysMaterial->setEnabled(false);
         percussioneType->setEnabled(false);
         percussioneMaterial->setEnabled(false);
-        isTuned->setEnabled(false);
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
@@ -699,10 +682,12 @@ void insertView::slotDisablePercussione(int index) const
 
         pianoShape->show();
         keysMaterial->show();
+        percussioneMaterial->hide();
         isMetalSnare->hide();
 
         pianoShape->setEnabled(true);
         keysMaterial->setEnabled(true);
+        percussioneMaterial->setEnabled(false);
         isMetalSnare->setEnabled(false);
 
         break;
@@ -711,10 +696,12 @@ void insertView::slotDisablePercussione(int index) const
 
         pianoShape->hide();
         keysMaterial->hide();
+        percussioneMaterial->show();
         isMetalSnare->show();
 
         pianoShape->setEnabled(false);
         keysMaterial->setEnabled(false);
+        percussioneMaterial->setEnabled(true);
         isMetalSnare->setEnabled(true);
 
 
@@ -725,10 +712,12 @@ void insertView::slotDisablePercussione(int index) const
         percussioneType->setCurrentIndex(0);
         pianoShape->hide();
         keysMaterial->hide();
+        percussioneMaterial->hide();
         isMetalSnare->hide();
 
         pianoShape->setEnabled(false);
         keysMaterial->setEnabled(false);
+        percussioneMaterial->setEnabled(false);
         isMetalSnare->setEnabled(false);
 
         break;
@@ -815,10 +804,6 @@ void insertView::slotDisablePercussione(int index) const
 
     QComboBox* insertView::getPercussioneMaterial() const {
         return percussioneMaterial;
-    }
-
-    QCheckBox* insertView::getIsTuned() const {
-        return isTuned;
     }
 
     //Kit Batteria

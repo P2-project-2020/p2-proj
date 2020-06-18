@@ -56,12 +56,11 @@ private:
 //*******************************************
 //Percussione
     QComboBox *percussioneType; //Pianoforte | kit Batteria
-    QComboBox *percussioneMaterial; //Legno | Plexiglass
-    QCheckBox *isTuned;
 
 //Pianoforte
 //Vedi Corda<-Pianoforte
 //Kit Batteria
+    QComboBox *percussioneMaterial; //Legno | Plexiglass
     QCheckBox *isMetalSnare;
 
 //*******************************************
@@ -115,10 +114,9 @@ public:
 
     //Percussione
     QComboBox *getPercussioneType() const;
-    QComboBox *getPercussioneMaterial() const;
-    QCheckBox *getIsTuned() const;
 
     //Kit Batteria
+    QComboBox *getPercussioneMaterial() const;
     QCheckBox *getIsMetalSnare() const;
 
     //Fiato
