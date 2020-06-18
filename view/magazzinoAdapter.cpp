@@ -234,7 +234,7 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 
 	       //E' opportuno inserire setMaterial() e setTune() nei sottooggetti che lo necessitano
 	  case 3: //material
-	       strumento->setMaterial((int)value.toDouble());
+           strumento->setMaterial(value.toString().toStdString());
 	       break;
 	       
 	  case 4: //tune
