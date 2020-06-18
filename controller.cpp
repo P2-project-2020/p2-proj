@@ -16,6 +16,8 @@
 #include <QPrinter>
 #include <QPainter>
 
+#include <QDebug>
+
 #include "model/hierarchy/strumento.h"
 #include "model/hierarchy/violino.h"
 #include "model/hierarchy/viola.h"
@@ -417,14 +419,31 @@ if(confirm == QMessageBox::Yes)
 
                         //fixare: inserisce sempre il primo e non quello che si seleziona
 
-                        core->carrello_push_end(core->magazzinoAt(selectedIndexes[i].row())->clone());
+                    bool aggiornato = false;
+                    for(auto it = core->carrello_begin();it!=core->carrello_end(); ++it){
+                        Strumento *instrument = *it;
+                        int oldQuantity = instrument->getQuantity();
+                        int newQuantity = oldQuantity + quantity;
+                        if(*(*it) == *(core->magazzinoAt(selectedIndexes[i].row()))){ //Sto inserendo in carrello un oggetto che c'è gia -> incremento quantita
+                            instrument->setQuantity(newQuantity);
+                            aggiornato = true;
+                        }
+                    }
+                    if(!aggiornato){ //Pusho un nuovo obj
+                    core->carrello_push_end(core->magazzinoAt(selectedIndexes[i].row())->clone());
+                    core->carrelloAt(core->getCarrelloSize()-1)->setQuantity(quantity);
+                    }
+
 
                         //this works
-                        core->carrelloAt(core->getCarrelloSize()-1)->setQuantity(quantity);
+
+                    /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
                         if(quantity == core->magazzinoAt(selectedIndexes[i].row())->getQuantity())
                             Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
                         else
                             core->magazzinoAt(selectedIndexes[i].row())->setQuantity(core->magazzinoAt(selectedIndexes[i].row())->getQuantity() - quantity);
+                   /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
+
                     }
 
                 }
