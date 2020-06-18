@@ -498,14 +498,29 @@ void Controller::slotDeleteCarrelloItem()
             "Confermi di voler rimuovere lo strumento selezionato?", QMessageBox::Yes|QMessageBox::No);
 
 if(confirm == QMessageBox::Yes)
+
     for(auto i = 0; i< selectedIndexes.size();++i) {
 
-        Vcarrello->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+        bool found = false;
+        for(auto it = core->magazzino_begin();it!=core->magazzino_end(); ++it){
+            Strumento *instrument = *it;
 
+            if(*(*it) == *(core->carrelloAt(selectedIndexes[i].row()))){ //Nel magazzino sono presenti ancora strumenti uguali a quello che si vuole rimuovere dal carrello -> incremento quantita
+                instrument->setQuantity( core->carrelloAt(selectedIndexes[i].row())->getQuantity() + instrument->getQuantity());
+                found = true;
+            }
+        }
+
+        if(!found)
+            core->carrello_push_end(core->carrelloAt(selectedIndexes[i].row())->clone());
+
+
+            Vcarrello->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
     }
+
+
+
 else
-
-
     return;
 
 core->setDataSaved(false);
