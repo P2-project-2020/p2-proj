@@ -275,10 +275,39 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
 {
      int col = index.column();
-     if( col == 0 || col==1 )
-	  return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-     else
-	  return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+     QString rowType = this->index(index.row(),0).data().toString();
+
+     if( col == 0 || col==1 ) //Prime due colonne solo lettura
+        return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+
+     /*Attivo o disattivo modifica di tune in baso allo strumento */
+     if(col == 4)
+        if(rowType == "Violino")
+            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+
+        if(rowType == "Viola")
+            return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+
+        if(rowType == "Chitarra")
+            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+
+        if(rowType == "Basso")
+            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+
+        if(rowType == "Pianoforte")
+            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+
+        if(rowType == "Batteria")
+            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+
+        if(rowType == "Tromba")
+            return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+
+        if(rowType == "Sax")
+            return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+        /*Attivo o disattivo modifica di tune in baso allo strumento */
+
+     return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 
 }
 

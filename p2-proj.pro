@@ -20,7 +20,6 @@ HEADERS += controller.h \
            model/container.h \
            model/model.h \
            view/carrelloAdapter.h \
-           view/carrelloAdapter_copy1.h \
            view/carrelloFilter.h \
            view/carrelloView.h \
            view/filterExample.h \
@@ -46,7 +45,8 @@ HEADERS += controller.h \
            model/hierarchy/strumento.h \
            model/hierarchy/tromba.h \
            model/hierarchy/viola.h \
-           model/hierarchy/violino.h
+           model/hierarchy/violino.h \
+    view/tunecomboboxitemdelegate.h
 SOURCES += controller.cpp \
            main.cpp \
            model/model.cpp \
@@ -74,4 +74,5 @@ SOURCES += controller.cpp \
            model/hierarchy/strumento.cpp \
            model/hierarchy/tromba.cpp \
            model/hierarchy/viola.cpp \
-           model/hierarchy/violino.cpp
+           model/hierarchy/violino.cpp \
+    view/tunecomboboxitemdelegate.cpp

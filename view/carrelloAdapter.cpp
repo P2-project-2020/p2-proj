@@ -302,7 +302,6 @@ bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, con
     else if(instrumentType == "Fiati")
         return true;
 
-    /*
     else if(thc == "Psicoattivo")
         return ((prod->getThc() > 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||
                ((prod->getThc() > 0.5) && QString::fromStdString(prod->getCategory()).contains(exp));

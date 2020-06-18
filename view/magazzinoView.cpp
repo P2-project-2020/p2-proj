@@ -1,4 +1,5 @@
 #include "magazzinoView.h"
+#include "tunecomboboxitemdelegate.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -95,6 +96,9 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
             //Regola di ordinamento customizzata ( di default ordina prendendo tutto come stringa --> 8 > 70)
             filter->setSortRole(magazzinoAdapter::SortRole);
             table->setModel(filter);
+
+            TuneComboBoxItemDelegate *tuneComboDelegate = new TuneComboBoxItemDelegate(this);
+            table->setItemDelegateForColumn(4,tuneComboDelegate );
 
         /* Creazione Tabella e configurazione filtraggio (ricerca) e sorting per ogni campo di essa */
             search->addWidget(table);
