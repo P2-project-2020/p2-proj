@@ -285,32 +285,4 @@ bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, con
 
 
 
-/*
-//REVISE
-bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
-{
-    Strumento* strumento = core->carrelloAt(ind);
-    if(instrumentType == "Filtra per famiglia strumento")
-        return (QString::fromStdString(strumento->className())).contains(exp) ||
-               (QString::fromStdString(strumento->getBrand())).contains(exp);
-    else if(instrumentType == "Archi")
-        return true;
-    else if(instrumentType == "Corde")
-        return true;
-    else if(instrumentType == "Percussioni")
-        return true;
-    else if(instrumentType == "Fiati")
-        return true;
-
-    else if(thc == "Psicoattivo")
-        return ((prod->getThc() > 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||
-               ((prod->getThc() > 0.5) && QString::fromStdString(prod->getCategory()).contains(exp));
-    else if(thc == "Non psicoattivo")
-        return ((prod->getThc() <= 0.5) && QString::fromStdString(prod->getStrain()).contains(exp)) ||
-               ((prod->getThc() <= 0.5) && QString::fromStdString(prod->getCategory()).contains(exp));
-
-else
-        return false;
-}
-*/
 

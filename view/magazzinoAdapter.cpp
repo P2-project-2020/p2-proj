@@ -108,9 +108,9 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	  case 3:
 	       return this->index(row,index.column()).data();
 	  case 4:
-           return strumento->tune();
+           return  this->index(row,index.column()).data();
 	  case 5:
-           return strumento->getMaterialVector();
+           return this->index(row,index.column()).data();
 	  case 6:
            return strumento->isUsed();
 	  case 7:
@@ -281,7 +281,7 @@ Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
         return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
      /*Attivo o disattivo modifica di tune in baso allo strumento */
-     if(col == 4)
+     if(col == 4){
         if(rowType == "Violino")
             return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
@@ -306,6 +306,8 @@ Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
         if(rowType == "Sax")
             return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
         /*Attivo o disattivo modifica di tune in baso allo strumento */
+}
+
 
      return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 

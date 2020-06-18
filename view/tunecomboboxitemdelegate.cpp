@@ -1,5 +1,6 @@
 #include "TuneComboBoxItemDelegate.h"
 #include <QComboBox>
+#include "model/hierarchy/strumento.h"
 
 TuneComboBoxItemDelegate::TuneComboBoxItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
@@ -17,12 +18,8 @@ QWidget *TuneComboBoxItemDelegate::createEditor(QWidget *parent, const QStyleOpt
     // Create the combobox and populate it
     QComboBox *cb = new QComboBox(parent);
     const int row = index.row();
-    cb->addItem(QString("undefined %1").arg(row));
-    cb->addItem(QString("soprano %1").arg(row));
-    cb->addItem(QString("contralto %1").arg(row));
-    cb->addItem(QString("tenore %1").arg(row));
-    cb->addItem(QString("baritono %1").arg(row));
-    cb->addItem(QString("basso %1").arg(row));
+    for(auto& it: Strumento::Tunes )
+    cb->addItem(QString::fromStdString(it.second));
     return cb;
 }
 
