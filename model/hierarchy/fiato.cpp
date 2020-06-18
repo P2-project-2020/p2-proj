@@ -27,6 +27,13 @@ void Fiato::setMaterial(int new_material) {
      }
 }
 
+void Fiato::setMaterial(const std::string& new_material) {
+     int to_change = findMaterial(new_material);
+     if(to_change != -1)
+	  material = to_change;
+}
+
+
 void Fiato::loadData(const QJsonObject& obj){
 	Strumento::loadData(obj);
 

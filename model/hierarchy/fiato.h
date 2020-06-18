@@ -16,6 +16,7 @@ public:
      
      std::string getMaterial() const;
      void setMaterial(int);
+     void setMaterial(const std::string&);
 
      void loadData(const QJsonObject&);
      void saveData(QJsonObject&) const;
