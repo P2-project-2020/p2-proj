@@ -21,6 +21,7 @@ public:
      void saveData(QJsonObject&) const;
 
      static int findMaterial(const std::string&);
+     const std::vector<std::string>* getMaterialVector() const;
 
      bool operator==(const Fiato&) const;
      bool operator!=(const Fiato&) const;

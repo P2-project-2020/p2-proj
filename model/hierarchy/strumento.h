@@ -49,6 +49,7 @@ public:
      
      virtual std::string getMaterial() const = 0;
      virtual void setMaterial(int);
+     virtual const std::vector<std::string>* getMaterialVector() const;
 
      static Strumento::Tune findTune(const std::string&);
 

@@ -12,10 +12,13 @@ public:
 	
      Pianoforte(int = 0, int = 2, double = 0, const std::string& = "",  const std::string& = "",  bool = false, const std::string& = "", unsigned int = 1);
      Strumento* clone() const;
+
      std::string className() const;
      Strumento::Tune tune() const { return undefined; }
+     
      std::string getMaterial() const;
      void setMaterial(int);
+     const std::vector<std::string>* getMaterialVector() const;
 
      void loadData(const QJsonObject& obj);
      void saveData(QJsonObject& obj) const;

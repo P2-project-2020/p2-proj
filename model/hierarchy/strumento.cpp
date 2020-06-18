@@ -106,6 +106,12 @@ void Strumento::setMaterial(int){
      return; // stesso discorso per i materiali
 }
 
+const std::vector<std::string>* Strumento::getMaterialVector() const {
+     return nullptr;
+     /* Così di default ritorna nullptr, a meno che una sottoclasse
+      * non lo overridi ritornando il proprio vettore di materiali */
+}
+
 bool Strumento::operator==(const Strumento& other) const {
      return
 	  price == other.price &&

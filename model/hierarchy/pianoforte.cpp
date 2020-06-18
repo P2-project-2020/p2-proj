@@ -31,6 +31,10 @@ void Pianoforte::setMaterial(int new_material){
      }
 }
 
+const std::vector<std::string>* Pianoforte::getMaterialVector() const {
+     return &keys;
+}
+
 int Pianoforte::findShape(const std::string& _shape){
      for(unsigned int i=0; i < shapes.size(); ++i)
 	  if(_shape == shapes.at(i)) return i;

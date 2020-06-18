@@ -66,3 +66,7 @@ bool Fiato::operator==(const Fiato& other) const {
 bool Fiato::operator!=(const Fiato& other) const {
      return !(*this == other);
 }
+
+const std::vector<std::string>* Fiato::getMaterialVector() const {
+     return &materials;
+}

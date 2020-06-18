@@ -10,9 +10,11 @@ public:
      
      std::string className() const;
      Strumento::Tune tune() const { return undefined; }
+
      std::string getMaterial() const;
      void setMaterial(int);
-
+     const std::vector<std::string>* getMaterialVector() const;
+     
      void loadData(const QJsonObject&);
      void saveData(QJsonObject&) const;
 
