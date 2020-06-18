@@ -25,6 +25,13 @@ void KitBatteria::setMaterial(int new_material){
 	  material = new_material;
 }
 
+void KitBatteria::setMaterial(const std::string& new_material){
+     int to_change = findMaterial(new_material);
+     if(to_change != -1)
+	  material = to_change;
+}
+
+
 const std::vector<std::string>* KitBatteria::getMaterialVector() const {
      return &materials;
 }

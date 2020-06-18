@@ -106,6 +106,10 @@ void Strumento::setMaterial(int){
      return; // stesso discorso per i materiali
 }
 
+void Strumento::setMaterial(const std::string& new_material){
+     return; // stesso discorso per i materiali
+}
+
 const std::vector<std::string>* Strumento::getMaterialVector() const {
      return nullptr;
      /* Così di default ritorna nullptr, a meno che una sottoclasse

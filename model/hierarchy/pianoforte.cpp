@@ -31,6 +31,13 @@ void Pianoforte::setMaterial(int new_material){
      }
 }
 
+void Pianoforte::setMaterial(const std::string& new_material){
+     int to_change = findKeys(new_material);
+     if(to_change != -1)
+	  pianoKeys = to_change;
+}
+
+
 const std::vector<std::string>* Pianoforte::getMaterialVector() const {
      return &keys;
 }

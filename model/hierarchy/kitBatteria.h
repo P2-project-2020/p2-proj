@@ -13,6 +13,7 @@ public:
 
      std::string getMaterial() const;
      void setMaterial(int);
+     void setMaterial(const std::string&);
      const std::vector<std::string>* getMaterialVector() const;
      
      void loadData(const QJsonObject&);
