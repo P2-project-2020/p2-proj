@@ -46,7 +46,8 @@ HEADERS += controller.h \
            model/hierarchy/tromba.h \
            model/hierarchy/viola.h \
            model/hierarchy/violino.h \
-    view/tunecomboboxitemdelegate.h
+    view/tunecomboboxitemdelegate.h \
+    view/materialcomboboxitemdelegate.h
 SOURCES += controller.cpp \
            main.cpp \
            model/model.cpp \
@@ -75,4 +76,5 @@ SOURCES += controller.cpp \
            model/hierarchy/tromba.cpp \
            model/hierarchy/viola.cpp \
            model/hierarchy/violino.cpp \
-    view/tunecomboboxitemdelegate.cpp
+    view/tunecomboboxitemdelegate.cpp \
+    view/materialcomboboxitemdelegate.cpp
