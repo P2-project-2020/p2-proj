@@ -2,8 +2,8 @@
 #include <QComboBox>
 #include "model/hierarchy/strumento.h"
 #include "model/hierarchy/pianoforte.h"
-#include "model/hierarchy/tromba.h"
 #include "model/hierarchy/fiato.h"
+#include "model/hierarchy/kitBatteria.h"
 
 #include <QDebug>
 
@@ -24,12 +24,22 @@ QWidget *MaterialComboBoxItemDelegate::createEditor(QWidget *parent, const QStyl
      QComboBox *cb = new QComboBox(parent);
      const int row = index.row();
 
-     QString rowType = index.data().toString();
-     qDebug()<<rowType;
+     QString rowType = index.model()->index(row,0).data().toString();
 
      if(rowType == "Pianoforte" )
-     for(auto& it: Pianoforte::keys )
-     cb->addItem(QString::fromStdString(it));
+        for(auto& it: Pianoforte::keys )
+            cb->addItem(QString::fromStdString(it));
+    else
+     if(rowType == "Fiato" )
+        for(auto& it: Fiato::materials )
+            cb->addItem(QString::fromStdString(it));
+
+    else
+     if(rowType == "Batteria" )
+        for(auto& it: KitBatteria::materials )
+            cb->addItem(QString::fromStdString(it));
+    else
+         cb->addItem(QString::fromStdString("Legno"));
      return cb;
 
 }
