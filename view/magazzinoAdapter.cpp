@@ -39,7 +39,7 @@ int magazzinoAdapter::rowCount(const QModelIndex &) const {
 }
 
 int magazzinoAdapter::columnCount(const QModelIndex &) const {
-     return 9;
+     return 10;
 }
 
 QVariant magazzinoAdapter::headerData(int section, Qt::Orientation orientation, int role) const
@@ -60,16 +60,18 @@ QVariant magazzinoAdapter::headerData(int section, Qt::Orientation orientation, 
 	  case 2:
 	       return QString("Brand");
 	  case 3:
-	       return QString("Materiale");
+	       return QString("Modello");
 	  case 4:
-	       return QString("Tonalità");
+	       return QString("Materiale");
 	  case 5:
-	       return QString("Descrizione");
+	       return QString("Tonalità");
 	  case 6:
-	       return QString("Condizione"); //Nuovo | Usato
+	       return QString("Descrizione");
 	  case 7:
-	       return QString("Prezzo");
+	       return QString("Condizione"); //Nuovo | Usato
 	  case 8:
+	       return QString("Prezzo");
+	  case 9:
 	       return QString("Quantità");
 	  default:
 	       return QVariant();
@@ -94,7 +96,7 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
      case Qt::TextAlignmentRole:
 	  return QVariant ( Qt::AlignVCenter | Qt::AlignHCenter );
      case Qt::SizeHintRole:
-      return QSize(500, 0 );
+	  return QSize(500, 0 );
 
      case Qt::EditRole:{// Per fare in modo di non cancellare il contenuto della cella durante l'editing
 
@@ -108,14 +110,16 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	  case 3:
 	       return this->index(row,index.column()).data();
 	  case 4:
-           return  this->index(row,index.column()).data();
+	       return this->index(row,index.column()).data();
 	  case 5:
-           return this->index(row,index.column()).data();
+	       return  this->index(row,index.column()).data();
 	  case 6:
-           return strumento->isUsed();
+	       return this->index(row,index.column()).data();
 	  case 7:
-	       return strumento->getPrice();
+	       return strumento->isUsed();
 	  case 8:
+	       return strumento->getPrice();
+	  case 9:
 	       return strumento->getQuantity();
 	  }
      }
@@ -132,26 +136,28 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	  case 1:
 	       return QString::fromStdString(strumento->className()).split(" ").value(1);
 	       break;
-
 	  case 2:
 	       return QString::fromStdString(strumento->getBrand());
 	       break;
 	  case 3:
-	       return QString::fromStdString(strumento->getMaterial());
+	       return QString::fromStdString(strumento->getModel());
 	       break;
 	  case 4:
-	       return QString::fromStdString(Strumento::Tunes.at(strumento->tune()));
+	       return QString::fromStdString(strumento->getMaterial());
 	       break;
 	  case 5:
-	       return QString::fromStdString(strumento->getDescription());
+	       return QString::fromStdString(Strumento::Tunes.at(strumento->tune()));
 	       break;
 	  case 6:
-	       return QString::fromStdString(strumento->isUsed() ? "Usato" : "Nuovo");
+	       return QString::fromStdString(strumento->getDescription());
 	       break;
 	  case 7:
-	       return QString::number(strumento->getPrice()) + " €";
+	       return QString::fromStdString(strumento->isUsed() ? "Usato" : "Nuovo");
 	       break;
 	  case 8:
+	       return QString::number(strumento->getPrice()) + " €";
+	       break;
+	  case 9:
 	       return QString::number(strumento->getQuantity());
 	  default:
 	       return QVariant();
@@ -176,18 +182,21 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	       return this->index(row,index.column()).data();
 	       break;
 	  case 4:
-           return this->index(row,index.column()).data();
+	       return this->index(row,index.column()).data();
 	       break;
 	  case 5:
-           return this->index(row,index.column()).data();
+	       return this->index(row,index.column()).data();
 	       break;
-      case 6:
-	       return strumento->isUsed();
+	  case 6:
+	       return this->index(row,index.column()).data();
 	       break;
 	  case 7:
-           return strumento->getPrice();
+	       return strumento->isUsed();
 	       break;
 	  case 8:
+	       return strumento->getPrice();
+	       break;
+	  case 9:
 	       return strumento->getQuantity();
 	       break;
 	  }
@@ -231,31 +240,34 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 	  case 2: //brand
 	       strumento->setBrand(value.toString().toStdString());
 	       break;
-
-	       //E' opportuno inserire setMaterial() e setTune() nei sottooggetti che lo necessitano
-	  case 3: //material
-           strumento->setMaterial(value.toString().toStdString());
+	       
+	  case 3: //model
+	       strumento->setModel(value.toString().toStdString());
 	       break;
 	       
-	  case 4: //tune
+	  case 4: //material
+	       strumento->setMaterial(value.toString().toStdString());
+	       break;
+	       
+	  case 5: //tune
 	       // bisognerebbe impostare la comboBox per selezionare non interi qualsiasi ma
 	       // una tra le stringhe presenti in Strumento::Tunes
 	       strumento->setTune(Strumento::findTune(value.toString().toStdString()));
 	       break;
 	       
-	  case 5: //description
+	  case 6: //description
 	       strumento->setDescription(value.toString().toStdString());
 	       break;
 
-	  case 6: //
+	  case 7: //
 	       strumento->setUsed(value.toBool());
 	       break;
 
-	  case 7: //price
-           strumento->setPrice(value.toDouble());
+	  case 8: //price
+	       strumento->setPrice(value.toDouble());
 	       break;
 
-	  case 8:
+	  case 9:
 	       strumento->setQuantity(value.toDouble());
 	       break;
 
@@ -278,35 +290,35 @@ Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
      QString rowType = this->index(index.row(),0).data().toString();
 
      if( col == 0 || col==1 ) //Prime due colonne solo lettura
-        return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+	  return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
      /*Attivo o disattivo modifica di tune in baso allo strumento */
-     if(col == 4){
-        if(rowType == "Violino")
-            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+     if(col == 5){
+	  if(rowType == "Violino")
+	       return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
-        if(rowType == "Viola")
-            return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+	  if(rowType == "Viola")
+	       return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 
-        if(rowType == "Chitarra")
-            return  Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+	  if(rowType == "Chitarra")
+	       return  Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 
-        if(rowType == "Basso")
-            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+	  if(rowType == "Basso")
+	       return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
-        if(rowType == "Pianoforte")
-            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+	  if(rowType == "Pianoforte")
+	       return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
-        if(rowType == "Batteria")
-            return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+	  if(rowType == "Batteria")
+	       return  Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 
-        if(rowType == "Tromba")
-            return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+	  if(rowType == "Tromba")
+	       return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
 
-        if(rowType == "Sax")
-            return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
-        /*Attivo o disattivo modifica di tune in baso allo strumento */
-}
+	  if(rowType == "Sax")
+	       return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+	  /*Attivo o disattivo modifica di tune in baso allo strumento */
+     }
 
 
      return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
@@ -319,38 +331,36 @@ bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, co
 {
      Strumento* strumento = core->magazzinoAt(ind);
      if(instrumentType == "Tutto")
-      return (QString::fromStdString(strumento->className())).contains(exp) ||
-              (QString::fromStdString(strumento->getBrand())).contains(exp);
+	  return (QString::fromStdString(strumento->className())).contains(exp) ||
+	       (QString::fromStdString(strumento->getBrand())).contains(exp);
 
      else if(instrumentType == "Archi") {
-         return  ((QString::fromStdString(strumento->className())).contains(exp) ||
-                 (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
-                 ((QString::fromStdString(strumento->className())).contains("Violino") ||
+	  return  ((QString::fromStdString(strumento->className())).contains(exp) ||
+		   (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
+	       ((QString::fromStdString(strumento->className())).contains("Violino") ||
                 (QString::fromStdString(strumento->className())).contains("Viola"));
      }
      else if(instrumentType == "Corde") {
-         return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
-                ((QString::fromStdString(strumento->className())).contains("Chitarra") ||
+	  return ((QString::fromStdString(strumento->className())).contains(exp) ||
+		  (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
+	       ((QString::fromStdString(strumento->className())).contains("Chitarra") ||
                 (QString::fromStdString(strumento->className())).contains("Basso") ||
                 (QString::fromStdString(strumento->className())).contains("Pianoforte"));
 
      }
      else if(instrumentType == "Percussioni") {
-         return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
-                ((QString::fromStdString(strumento->className())).contains("Batteria") ||
+	  return ((QString::fromStdString(strumento->className())).contains(exp) ||
+		  (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
+	       ((QString::fromStdString(strumento->className())).contains("Batteria") ||
                 (QString::fromStdString(strumento->className())).contains("Pianoforte"));
      }
      else if(instrumentType == "Fiati") {
-         return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
-                ((QString::fromStdString(strumento->className())).contains("Tromba") ||
+	  return ((QString::fromStdString(strumento->className())).contains(exp) ||
+		  (QString::fromStdString(strumento->getBrand())).contains(exp)) &&
+	       ((QString::fromStdString(strumento->className())).contains("Tromba") ||
                 (QString::fromStdString(strumento->className())).contains("Sax"));
      }
 
      else
 	  return false;
 }
-
-

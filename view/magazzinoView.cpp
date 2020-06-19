@@ -97,8 +97,8 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
 
             TuneComboBoxItemDelegate *tuneComboDelegate = new TuneComboBoxItemDelegate(this);
             MaterialComboBoxItemDelegate *materialComboDelegate = new MaterialComboBoxItemDelegate(this);
-            table->setItemDelegateForColumn(4,tuneComboDelegate );// Inserisce QComboBOx su colonna 4
-            table->setItemDelegateForColumn(3,materialComboDelegate );// Inserisce QComboBOx su colonna 4
+            table->setItemDelegateForColumn(5,tuneComboDelegate );// Inserisce QComboBOx su colonna 4
+            table->setItemDelegateForColumn(4,materialComboDelegate );// Inserisce QComboBOx su colonna 4
 
         /* Creazione Tabella e configurazione filtraggio (ricerca) e sorting per ogni campo di essa */
             search->addWidget(table);
