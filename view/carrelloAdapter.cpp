@@ -274,12 +274,63 @@ bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, con
      Strumento* strumento = core->carrelloAt(ind);
 
 
-         return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                (QString::fromStdString(strumento->getBrand())).contains(exp) ||
-                (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
-                (QString::number(strumento->getPrice())).contains(exp) ||
-                (QString::fromStdString(strumento->getDescription())).contains(exp) ||
-                 (QString::fromStdString(strumento->getModel())).contains(exp));
+     bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
+     {
+       Strumento* strumento = core->magazzinoAt(ind);
+          if(instrumentType == "Tutto")
+              return ((QString::fromStdString(strumento->className())).contains(exp) ||
+                      (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+                      (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+                      (QString::number(strumento->getPrice())).contains(exp) ||
+                      (QString::fromStdString(strumento->getDescription())).contains(exp) ||
+                      (QString::fromStdString(strumento->getModel())).contains(exp));
+
+          else
+             if(instrumentType == "Archi") {
+              return ((QString::fromStdString(strumento->className())).contains(exp) ||
+                      (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+                      (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+                      (QString::number(strumento->getPrice())).contains(exp) ||
+                      (QString::fromStdString(strumento->getDescription())).contains(exp) ||
+                      (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+                     ((QString::fromStdString(strumento->className())).contains("Violino") ||
+                      (QString::fromStdString(strumento->className())).contains("Viola"));
+          }
+          else if(instrumentType == "Corde") {
+              return ((QString::fromStdString(strumento->className())).contains(exp) ||
+                      (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+                      (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+                      (QString::number(strumento->getPrice())).contains(exp) ||
+                      (QString::fromStdString(strumento->getDescription())).contains(exp) ||
+                      (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+                     ((QString::fromStdString(strumento->className())).contains("Chitarra") ||
+                      (QString::fromStdString(strumento->className())).contains("Basso") ||
+                      (QString::fromStdString(strumento->className())).contains("Pianoforte"));
+
+          }
+          else if(instrumentType == "Percussioni") {
+              ((QString::fromStdString(strumento->className())).contains(exp) ||
+               (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+               (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+               (QString::number(strumento->getPrice())).contains(exp) ||
+               (QString::fromStdString(strumento->getDescription())).contains(exp) ||
+               (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+              ((QString::fromStdString(strumento->className())).contains("Batteria") ||
+               (QString::fromStdString(strumento->className())).contains("Pianoforte"));
+          }
+          else if(instrumentType == "Fiati") {
+           return ((QString::fromStdString(strumento->className())).contains(exp) ||
+                   (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+                   (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+                   (QString::number(strumento->getPrice())).contains(exp) ||
+                   (QString::fromStdString(strumento->getDescription())).contains(exp) ||
+                   (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+                  ((QString::fromStdString(strumento->className())).contains("Tromba") ||
+                    (QString::fromStdString(strumento->className())).contains("Sax"));
+          }
+
+           return false;
+     }
 
 }
 
