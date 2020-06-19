@@ -8,6 +8,7 @@ const QString Strumento::json_desc = "descrizione";
 const QString Strumento::json_used = "usato";
 const QString Strumento::json_brand = "marca";
 const QString Strumento::json_model = "modello";
+const QString Strumento::json_quantity = "quantita";
 
 const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::undefined, ""},
 								 {Strumento::soprano, "soprano"},
@@ -91,7 +92,7 @@ void Strumento::saveData(QJsonObject& obj) const {
      obj[json_used] = used;
      obj[json_brand] = QString::fromStdString(brand);
      obj[json_model] = QString::fromStdString(model);
-     obj[json_quantity] = quantity;
+     obj[json_quantity] = (int)quantity;
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){

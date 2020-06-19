@@ -72,4 +72,5 @@ private:
      static const QString json_used;
      static const QString json_brand;
      static const QString json_model;
+     static const QString json_quantity;
 };
