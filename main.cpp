@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     Controller* c = new Controller(new Model());
     c->show();
 
-    //a.setWindowIcon(QIcon(":/res/img/logo.ico"));
+    a.setWindowIcon(QIcon(":/images/res/logo.png"));
 
     return a.exec();
 }

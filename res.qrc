@@ -1,6 +1,12 @@
 <RCC>
-    <qresource prefix="/res/images">
+    <qresource prefix="/icons">
+        <file>res/cart.png</file>
+        <file>res/delete.svg</file>
         <file>res/factory.png</file>
-        <file>res/shopping-cart.png</file>
+        <file>res/negative.svg</file>
+        <file>res/plus.svg</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>res/logo.png</file>
     </qresource>
 </RCC>

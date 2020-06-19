@@ -54,8 +54,8 @@ Controller::Controller(Model* m,QWidget *parent) :
     logoBox->setLayout(headerLayout);
 
 
-    pagine->insertTab(0,Vmagazzino,QIcon(":/res/images/res/factory.png"),"Magazzino");
-    pagine->insertTab(1,Vcarrello,QIcon(":/res/images/res/shopping-cart.png"),"Carrello");
+    pagine->insertTab(0,Vmagazzino,QIcon(":/icons/res/factory.png"),"Magazzino");
+    pagine->insertTab(1,Vcarrello,QIcon(":/icons/res/cart.png"),"Carrello");
     mainLayout->addWidget(pagine);
 
     statusBar->addWidget(itemCounter,Qt::AlignRight);

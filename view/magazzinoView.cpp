@@ -65,19 +65,19 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         resultBar->addWidget(editEnabled);
         deleteSelected->setText("Elimina Selezionato");
         resultBar->addWidget(deleteSelected);
-        //deleteSelected->setIcon(QIcon(":/res/img/negative.svg"));
-        //deleteSelected->setIconSize(QSize(16,16));
+        deleteSelected->setIcon(QIcon(":/icons/res/negative.svg"));
+        deleteSelected->setIconSize(QSize(18,18));
         deleteAll->setText("Elimina Tutti");
-        //deleteAll->setIcon(QIcon(":/res/img/delete.svg"));
-        //deleteAll->setIconSize(QSize(16,16));
+        deleteAll->setIcon(QIcon(":/icons/res/delete.svg"));
+        deleteAll->setIconSize(QSize(18,18));
         resultBar->addWidget(deleteAll);
         addToCart->setText("Aggiungi al carrello");
-        addToCart->setIcon(QIcon(":/res/images/res/shopping-cart.png"));
-        addNew->setIconSize(QSize(16,16));
+        addToCart->setIcon(QIcon(":/icons/res/cart.png"));
+        addNew->setIconSize(QSize(18,18));
         resultBar->addWidget(addToCart);
         addNew->setText("Nuovo prodotto");
-        //addNew->setIcon(QIcon(":/res/img/plus.svg"));
-        //addNew->setIconSize(QSize(16,16));
+        addNew->setIcon(QIcon(":/icons/res/plus.svg"));
+        addNew->setIconSize(QSize(18,18));
         resultBar->addWidget(addNew);
         search->addItem(resultBar);
 
