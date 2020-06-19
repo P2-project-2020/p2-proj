@@ -412,43 +412,43 @@ if(confirm == QMessageBox::Yes)
 
     for(auto i = 0; i< selectedIndexes.size();++i) {
 
+        if(!core->magazzinoAt(selectedIndexes[i].row())->getQuantity())
+            QMessageBox::warning(this,"Attenzione!","Quantità esaurita, rifornire il magazzino!");
 
-        bool ok;
-        unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(selectedIndexes[i].row())->getQuantity(), 1, &ok);
-                if(ok) {
+        else {
+            bool ok;
+            unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(selectedIndexes[i].row())->getQuantity(), 1, &ok);
+                    if(ok) {
 
-                        //fixare: inserisce sempre il primo e non quello che si seleziona
-
-                    bool aggiornato = false;
-                    for(auto it = core->carrello_begin();it!=core->carrello_end(); ++it){
-                        Strumento *instrument = *it;
-                        int oldQuantity = instrument->getQuantity();
-                        int newQuantity = oldQuantity + quantity;
-                        if(*(*it) == *(core->magazzinoAt(selectedIndexes[i].row()))){ //Sto inserendo in carrello un oggetto che c'è gia -> incremento quantita
-                            instrument->setQuantity(newQuantity);
-                            aggiornato = true;
+                        bool aggiornato = false;
+                        for(auto it = core->carrello_begin();it!=core->carrello_end(); ++it){
+                            Strumento *instrument = *it;
+                            int oldQuantity = instrument->getQuantity();
+                            int newQuantity = oldQuantity + quantity;
+                            if(*(*it) == *(core->magazzinoAt(selectedIndexes[i].row()))){ //Sto inserendo in carrello un oggetto che c'è gia -> incremento quantita
+                                instrument->setQuantity(newQuantity);
+                                aggiornato = true;
+                            }
                         }
-                    }
-                    if(!aggiornato){ //Pusho un nuovo obj
-                    core->carrello_push_end(core->magazzinoAt(selectedIndexes[i].row())->clone());
-                    core->carrelloAt(core->getCarrelloSize()-1)->setQuantity(quantity);
-                    }
+                        if(!aggiornato){ //Pusho un nuovo obj
+                        core->carrello_push_end(core->magazzinoAt(selectedIndexes[i].row())->clone());
+                        core->carrelloAt(core->getCarrelloSize()-1)->setQuantity(quantity);
+                        }
 
 
-                        //this works
 
-                    /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
-                        if(quantity == core->magazzinoAt(selectedIndexes[i].row())->getQuantity())
-                            Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
-                        else
-                            core->magazzinoAt(selectedIndexes[i].row())->setQuantity(core->magazzinoAt(selectedIndexes[i].row())->getQuantity() - quantity);
-                   /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
 
+                        /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
+                            /*if(quantity == core->magazzinoAt(selectedIndexes[i].row())->getQuantity())
+                                Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+                            else*/
+                                core->magazzinoAt(selectedIndexes[i].row())->setQuantity(core->magazzinoAt(selectedIndexes[i].row())->getQuantity() - quantity);
+
+
+                        }
                     }
 
                 }
-
-
 
             else
     return;
@@ -512,13 +512,12 @@ if(confirm == QMessageBox::Yes)
         }
 
         if(!found)
-            core->carrello_push_end(core->carrelloAt(selectedIndexes[i].row())->clone());
+            core->magazzino_push_end(core->carrelloAt(selectedIndexes[i].row())->clone());
 
 
+        //vengono rimossi gli elementi selezionati dal carrello
             Vcarrello->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
     }
-
-
 
 else
     return;
@@ -584,8 +583,24 @@ void Controller::resetMagazzino(){
 
 void Controller::resetCarrello(){
 
-    while(core->getCarrelloSize())
-    Vcarrello->getFilter()->removeRows(0,1);
+    while(core->getCarrelloSize()) {
+
+        bool found = false;
+        for(auto it = core->magazzino_begin();it!=core->magazzino_end(); ++it){
+            Strumento *instrument = *it;
+
+            if(*(*it) == *(core->carrelloAt(0))){ //Nel magazzino sono presenti ancora strumenti uguali a quello che si vuole rimuovere dal carrello -> incremento quantita
+                instrument->setQuantity( core->carrelloAt(0)->getQuantity() + instrument->getQuantity());
+                found = true;
+            }
+        }
+
+        if(!found)
+            core->magazzino_push_end(core->carrelloAt(0)->clone());
+
+        Vcarrello->getFilter()->removeRows(0,1);
+    }
+
 
     core->setDataSaved(false);
 
