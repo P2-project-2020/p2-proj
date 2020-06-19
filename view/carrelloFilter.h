@@ -17,7 +17,6 @@ protected:
 public:
         carrelloFilter(QObject* = nullptr, const QComboBox* = nullptr);
         bool insertRows(int, int = 1, const QModelIndex& = QModelIndex()) override;
-        void removeServerResults();
 
 };
 

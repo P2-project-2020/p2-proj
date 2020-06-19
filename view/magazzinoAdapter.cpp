@@ -329,7 +329,7 @@ Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
 //REVISE
 bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
 {
-  Strumento* strumento = core->magazzinoAt(ind);
+     Strumento* strumento = core->magazzinoAt(ind);
      if(instrumentType == "Tutto")
          return ((QString::fromStdString(strumento->className())).contains(exp) ||
                  (QString::fromStdString(strumento->getBrand())).contains(exp) ||
@@ -381,6 +381,7 @@ bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, co
              ((QString::fromStdString(strumento->className())).contains("Tromba") ||
                (QString::fromStdString(strumento->className())).contains("Sax"));
      }
+
 
 	  return false;
 }

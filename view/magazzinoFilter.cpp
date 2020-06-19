@@ -18,8 +18,3 @@ bool magazzinoFilter::filterAcceptsRow(int row_source, const QModelIndex&) const
                                                                         instrumentType->currentText());
 }
 
-void magazzinoFilter::removeServerResults()
-{
-    while(rowCount())
-        removeRows(0,1); // Rimuovo ciascun nodo visualizzato
-}

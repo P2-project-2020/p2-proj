@@ -270,12 +270,6 @@ Qt::ItemFlags carrelloAdapter::flags(const QModelIndex& index) const
 bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
 {
 
-
-     Strumento* strumento = core->carrelloAt(ind);
-
-
-     bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
-     {
        Strumento* strumento = core->magazzinoAt(ind);
           if(instrumentType == "Tutto")
               return ((QString::fromStdString(strumento->className())).contains(exp) ||
@@ -332,7 +326,6 @@ bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, con
            return false;
      }
 
-}
 
 
 
