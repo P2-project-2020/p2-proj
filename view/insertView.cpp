@@ -8,7 +8,12 @@
 #include <QHBoxLayout>
 #include <QGroupBox>
 
-
+/*Non so quanto Ranzi veda di buon occhio questa cosa ma mi serve
+ * accedere alle mappe per i materiali*/
+#include "model/hierarchy/fiato.h"
+#include "model/hierarchy/pianoforte.h"
+#include "model/hierarchy/kitBatteria.h"
+#include "model/hierarchy/strumento.h"
 
 
 insertView::insertView(QWidget* p):
@@ -64,12 +69,9 @@ insertView::insertView(QWidget* p):
     brand->setPlaceholderText("Marca strumento");
     model->setPlaceholderText("Modello strumento");
     instrumentTune->addItem("Scegli il tipo di tonalità");
-    instrumentTune->addItem("Indefinita");
-    instrumentTune->addItem("Soprano");
-    instrumentTune->addItem("Contralto");
-    instrumentTune->addItem("Tenore");
-    instrumentTune->addItem("Baritono");
-    instrumentTune->addItem("Basso");
+    for(auto& tune : Strumento::Tunes)
+	 instrumentTune->addItem(QString::fromStdString(tune.second));
+    
     isSecondHand->setText("Strumento di seconda mano");
     QFormLayout * quantityForm = new QFormLayout;
     quantityForm->setSpacing(5);
@@ -155,9 +157,8 @@ insertView::insertView(QWidget* p):
     pianoShape->addItem("Coda");
     pianoShape->addItem("Muro");
     keysMaterial->addItem("Scegli il materiale dei tasti");
-    keysMaterial->addItem("Legno");
-    keysMaterial->addItem("Plastica");
-    keysMaterial->addItem("Avorio");
+    for(auto& material : Pianoforte::keys)
+	 keysMaterial->addItem(QString::fromStdString(material));
 
     pianoForm->addWidget(pianoShape);
     pianoForm->addWidget(keysMaterial);
@@ -168,8 +169,9 @@ insertView::insertView(QWidget* p):
     percussioneForm->setSpacing(12);
 
     percussioneMaterial->addItem("Scegli il tipo di materiale");
-    percussioneMaterial->addItem("Woodkit");
-    percussioneMaterial->addItem("Plexiglass");
+    for(auto& material : KitBatteria::materials)
+	 percussioneMaterial->addItem(QString::fromStdString(material));
+
     isMetalSnare->setText("Rullante");
 
     percussioneForm->addWidget(percussioneMaterial);
@@ -185,9 +187,8 @@ insertView::insertView(QWidget* p):
     fiatoType->addItem("Tromba");
     fiatoType->addItem("Sassofono");
     fiatoMaterial->addItem("Scegli il tipo di materiale");
-    fiatoMaterial->addItem("Argento");
-    fiatoMaterial->addItem("Ottone");
-    fiatoMaterial->addItem("Plastica");
+    for(auto& material : Fiato::materials)
+	 fiatoMaterial->addItem(QString::fromStdString(material));    
 
     fiatoForm->addWidget(fiatoType);
     fiatoForm->addWidget(fiatoMaterial);
