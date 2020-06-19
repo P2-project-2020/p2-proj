@@ -1,5 +1,5 @@
 #include "kitBatteria.h"
-const std::vector<std::string> KitBatteria::materials = {"legno", "plexiglas"};
+const std::vector<std::string> KitBatteria::materials = {"Legno", "Plexiglas"};
 const QString KitBatteria::json_material = "materiale";
 const QString KitBatteria::json_snare = "rullante in metallo";
 

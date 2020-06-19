@@ -1,8 +1,8 @@
 #include "basso.h"
 
 const unsigned int Basso::defaultStrings = 4;
-const std::map<Basso::bassType,std::string> Basso::bassTypes = {{electric,"elettrico"},
-								{acoustic,"acustico"}};
+const std::map<Basso::bassType,std::string> Basso::bassTypes = {{electric,"Elettrico"},
+                                {acoustic,"Acustico"}};
 const QString Basso::json_type = "tipo";
 const QString Basso::json_fretless = "fretless";
 

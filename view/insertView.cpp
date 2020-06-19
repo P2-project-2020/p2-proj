@@ -8,8 +8,6 @@
 #include <QHBoxLayout>
 #include <QGroupBox>
 
-/*Non so quanto Ranzi veda di buon occhio questa cosa ma mi serve
- * accedere alle mappe per i materiali*/
 #include "model/hierarchy/fiato.h"
 #include "model/hierarchy/pianoforte.h"
 #include "model/hierarchy/kitBatteria.h"
