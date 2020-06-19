@@ -39,7 +39,6 @@ std::string Strumento::getModel() const { return model; }
 
 void Strumento::setModel(const std::string& _model){ model = _model; }
 
-
 double Strumento::getPrice() const {
      return price;
 }
@@ -75,9 +74,9 @@ void Strumento::loadData(const QJsonObject& obj){
 	  price = valPrice.toDouble() >= 0 ? valPrice.toDouble() : 0;
      if(!valDesc.isUndefined() && valDesc.isString())
 	  description = valDesc.toString().toStdString();
-     if(!valUsed.isUndefined() && valPrice.isBool())
+     if(!valUsed.isUndefined() && valUsed.isBool())
 	  used = valUsed.toBool();
-     if(!valBrand.isUndefined() && valPrice.isString())
+     if(!valBrand.isUndefined() && valBrand.isString())
 	  brand = valBrand.toString().toStdString();
      if(!valModel.isUndefined() && valModel.isString())
 	  model = valModel.toString().toStdString();
