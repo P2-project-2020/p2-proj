@@ -68,9 +68,10 @@ void Strumento::loadData(const QJsonObject& obj){
      const QJsonValue& valUsed = obj[json_used];
      const QJsonValue& valBrand = obj[json_brand];
      const QJsonValue& valModel = obj[json_model];
+     const QJsonValue& valQuantity = obj[json_quantity];
 
      if(!valPrice.isUndefined() && valPrice.isDouble())
-	  price = valPrice.toDouble();
+	  price = valPrice.toDouble() >= 0 ? valPrice.toDouble() : 0;
      if(!valDesc.isUndefined() && valDesc.isString())
 	  description = valDesc.toString().toStdString();
      if(!valUsed.isUndefined() && valPrice.isBool())
@@ -79,7 +80,8 @@ void Strumento::loadData(const QJsonObject& obj){
 	  brand = valBrand.toString().toStdString();
      if(!valModel.isUndefined() && valModel.isString())
 	  model = valModel.toString().toStdString();
-
+     if(!valQuantity.isUndefined() && valQuantity.isDouble())
+	  quantity = valQuantity.toDouble() >= 0 ? valQuantity.toDouble() : 0;
 }
 
 void Strumento::saveData(QJsonObject& obj) const {
@@ -89,6 +91,7 @@ void Strumento::saveData(QJsonObject& obj) const {
      obj[json_used] = used;
      obj[json_brand] = QString::fromStdString(brand);
      obj[json_model] = QString::fromStdString(model);
+     obj[json_quantity] = quantity;
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){
