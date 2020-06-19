@@ -30,7 +30,7 @@ QWidget *MaterialComboBoxItemDelegate::createEditor(QWidget *parent, const QStyl
         for(auto& it: Pianoforte::keys )
             cb->addItem(QString::fromStdString(it));
     else
-     if(rowType == "Fiato" )
+     if(rowType == "Tromba" || rowType == "Sax" )
         for(auto& it: Fiato::materials )
             cb->addItem(QString::fromStdString(it));
 

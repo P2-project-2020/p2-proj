@@ -75,8 +75,8 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         //deleteAll->setIconSize(QSize(16,16));
         resultBar->addWidget(deleteAll);
         addToCart->setText("Aggiungi al carrello");
-        //addNew->setIcon(QIcon(":/res/img/plus.svg"));
-        //addNew->setIconSize(QSize(16,16));
+        addToCart->setIcon(QIcon(":/res/images/res/shopping-cart.png"));
+        addNew->setIconSize(QSize(16,16));
         resultBar->addWidget(addToCart);
         addNew->setText("Nuovo prodotto");
         //addNew->setIcon(QIcon(":/res/img/plus.svg"));

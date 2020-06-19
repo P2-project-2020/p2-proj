@@ -78,3 +78,6 @@ SOURCES += controller.cpp \
            model/hierarchy/violino.cpp \
     view/materialComboBoxItemDelegate.cpp \
     view/tuneComboBoxItemDelegate.cpp
+
+RESOURCES += \
+    res.qrc
