@@ -44,7 +44,8 @@ double Strumento::getPrice() const {
 }
 
 void Strumento::setPrice(double _price) {
-     price = _price;
+     if(_price >= 0)
+	  price = _price;
 }
 
 std::string Strumento::getDescription() const {
