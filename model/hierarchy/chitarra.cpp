@@ -1,9 +1,9 @@
 #include "chitarra.h"
 
 const unsigned int Chitarra::defaultStrings = 6;
-const std::map<Chitarra::guitarType, std::string> Chitarra::guitarTypes = {{Chitarra::electric, "elettrica"},
-									   {Chitarra::acoustic, "acustica"},
-									   {Chitarra::classic, "classica"}};
+const std::map<Chitarra::guitarType, std::string> Chitarra::guitarTypes = {{Chitarra::electric, "Elettrica"},
+                                       {Chitarra::acoustic, "Acustica"},
+                                       {Chitarra::classic, "Classica"}};
 const QString Chitarra::json_type = "tipo";
 
 Chitarra::Chitarra(Chitarra::guitarType _type, double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _stringsNumber, unsigned int _quantity):
