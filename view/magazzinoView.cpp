@@ -38,15 +38,12 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         searchLine->setPlaceholderText("Ricerca per categoria, tipo o brand");
         form->addWidget(searchLine, Qt::AlignLeft);
         instrumentType->addItem("Tutto");
-        instrumentType->addItem("Opzione_1");
-        instrumentType->addItem("Opzione_2");
-        /*instrumentType->addItem("Filtra per famiglia");
         instrumentType->addItem("Archi");
         instrumentType->addItem("Corde");
         instrumentType->addItem("Percussioni");
-        instrumentType->addItem("Fiati");*/
+        instrumentType->addItem("Fiati");
 
-        instrumentType->setToolTip("Filtra per:");
+        instrumentType->setToolTip("Filtra per famiglia strumento:");
         form->addWidget(instrumentType);
 
         box->setLayout(form);
@@ -142,10 +139,11 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         QRegExp regex(searchLine->text(), Qt::CaseInsensitive, QRegExp::Wildcard);
         filter->setFilterRegExp(regex);
         int numberRes = filter->rowCount();
-        if(numberRes){
+        if(numberRes) {
             resultsNumber->setText("<b>" + QString::number(numberRes) + " risultati trovati </b>");
             resultsNumber->setStyleSheet("color: green;");
-        }else{
+        }
+        else {
             if(core->getMagazzinoSize()){
                 resultsNumber->setText("<b>Nessun risultato trovato </b>");
                 resultsNumber->setStyleSheet("color: red");

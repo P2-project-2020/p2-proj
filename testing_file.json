@@ -1,0 +1,51 @@
+{
+    "Carrello": [
+    ],
+    "Magazzino": [
+        {
+            "descrizione": "violino_description_1",
+            "liuteria": false,
+            "marca": "liuteria",
+            "modello": "modello_1",
+            "prezzo": 21.3,
+            "quantita": 12,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "violino_description_2",
+            "liuteria": false,
+            "marca": "liuteria",
+            "modello": "modello_1",
+            "prezzo": 210.3,
+            "quantita": 4,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "corde": 4,
+            "descrizione": "basso_description",
+            "fretless": "false",
+            "marca": "",
+            "modello": "modello_1",
+            "prezzo": 34,
+            "quantita": 4,
+            "strumento": "Basso",
+            "tipo": "elettrico",
+            "usato": false
+        },
+        {
+            "corde": 144,
+            "descrizione": "pianoforte_description",
+            "forma": "coda",
+            "intonato": true,
+            "marca": "",
+            "modello": "modello_1",
+            "prezzo": 1200.99,
+            "quantita": 1,
+            "strumento": "Pianoforte",
+            "tasti": "legno",
+            "usato": false
+        }
+    ]
+}
