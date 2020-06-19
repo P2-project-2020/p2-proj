@@ -1,0 +1,20 @@
+* HIGH
+** TODO cancellazione su più righe contiene bug sia per magazzino che per carrello-> fixare;
+** DONE aggiungere colonna "Model" in QTableView";
+CLOSED: [2020-06-19 ven 16:48]
+** TODO disabilitare celle che contengono informazione non editabile (quelle bianche);
+** TODO manca la connect per "procedi all'acquisto" e bisogna decidere se scarica il file pdf o un qualcosa che descriva l'acquisto;
+** TODO manca all'uscita un messaggio di warning se lavoro non è stato salvato;
+** DONE dopo aver inserito uno strumento il campo del materiale non viene aggiornato correttamente;
+CLOSED: [2020-06-19 ven 16:48]
+
+* LOW
+** TODO correggere scritta "per iniziare caricare un salvataggio" che non si aggiorna quando è presente un file, ma solo quando viene spostato il filtraggio della famiglia;
+** TODO sistemare edit prezzo che va in negativo [HALF DONE non fa inserire in negativo, ma dà i range negativi];
+** TODO inserire logo;
+** TODO togliere commenti del vecchio progetto da tutti i file;
+
+* OPTIONAL
+** aggiungere tooltip sui campi di inserimento strumento;
+** manca la gestione dell'immagine per lo strumento; 
+** inserire icone nei pulsanti di cancellazione e aggiunta;
