@@ -388,10 +388,8 @@ void insertView::slotDisableElements(int index) const
         arcoType->hide();
         isLutherie->hide();
         cordaType->show();
-        stringsNumber->show();
 
         //gestione di cordaType affidata a slotDisableCorda(int)
-
 
         percussioneType->hide();
         percussioneMaterial->hide();
@@ -410,7 +408,6 @@ void insertView::slotDisableElements(int index) const
         arcoType->setEnabled(false);
         isLutherie->setEnabled(false);
         cordaType->setEnabled(true);
-        stringsNumber->setEnabled(true);
         percussioneType->setEnabled(false);
         percussioneMaterial->setEnabled(false);
         isMetalSnare->setEnabled(false);
@@ -593,7 +590,7 @@ void insertView::slotDisableCorda(int index) const
 
     switch (index) {
     case 1://Guitar
-
+        stringsNumber->show();
         guitarType->show();
 
         bassType->hide();
@@ -602,6 +599,7 @@ void insertView::slotDisableCorda(int index) const
         pianoShape->hide();
         keysMaterial->hide();
 
+        stringsNumber->setEnabled(true);
         guitarType->setEnabled(true);
 
         bassType->setEnabled(false);
@@ -612,7 +610,7 @@ void insertView::slotDisableCorda(int index) const
         break;
 
     case 2://Bass
-
+        stringsNumber->show();
         guitarType->hide();
 
         bassType->show();
@@ -621,6 +619,7 @@ void insertView::slotDisableCorda(int index) const
         pianoShape->hide();
         keysMaterial->hide();
 
+        stringsNumber->setEnabled(true);
         guitarType->setEnabled(false);
 
         bassType->setEnabled(true);
@@ -632,7 +631,7 @@ void insertView::slotDisableCorda(int index) const
         break;
 
     case 3://Piano
-
+        stringsNumber->hide();
         guitarType->hide();
 
         bassType->hide();
@@ -641,6 +640,7 @@ void insertView::slotDisableCorda(int index) const
         pianoShape->show();
         keysMaterial->show();
 
+        stringsNumber->setEnabled(false);
         guitarType->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
