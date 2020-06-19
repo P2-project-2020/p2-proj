@@ -21,7 +21,6 @@
 Model::Model():
 	magazzino(new Container<Strumento*>(2)),
 	carrello(new Container<Strumento*>(2)),
-	ordini(new Container<Strumento*>(2)),
 	saved(true){}
 
 Model::~Model(){
@@ -32,10 +31,6 @@ Model::~Model(){
 	for(unsigned int i=0; i<carrello->getSize(); i++)
 		delete carrello->at(i);//Distruzione profonda
 	delete carrello;
-
-	for(unsigned int i=0; i<ordini->getSize(); i++)
-		delete ordini->at(i);//Distruzione profonda
-	delete ordini;
 }
 
 void Model::serializeData(QJsonObject& json)
@@ -65,16 +60,6 @@ void Model::serializeData(QJsonObject& json)
 	
 	while(jsonArray.count())
 		jsonArray.pop_back();
-	
-	//salva ordini
-	for(auto it = ordini_cbegin(); it != ordini_cend(); ++it){
-		QJsonObject jsonInstrument;
-		Strumento *instrumentObject = *it;
-		instrumentObject->saveData(jsonInstrument);
-		jsonArray.append(jsonInstrument);
-	}
-
-	json["Ordini"] = jsonArray;
 }
 
 
@@ -82,7 +67,6 @@ bool Model::unserializeData(const QJsonObject& jsonObj)
 {
 	QJsonArray jsonMagazzino = jsonObj["Magazzino"].toArray();
 	QJsonArray jsonCarrello = jsonObj["Carrello"].toArray();
-	QJsonArray jsonOrdini = jsonObj["Ordini"].toArray();
 
 	//Carica magazzino
 	for(auto it = jsonMagazzino.begin(); it != jsonMagazzino.end(); ++it){
@@ -151,40 +135,7 @@ bool Model::unserializeData(const QJsonObject& jsonObj)
 			carrello->push_back(retrive);
 		}
 	}
-	
-	//Carica Ordini 
-	for(auto it = jsonOrdini.begin(); it != jsonOrdini.end(); ++it){
-		QJsonObject obj = it->toObject();
-		std::string type;
 
-		if(obj.contains(Strumento::json_type))
-			type = obj[Strumento::json_type].toString().toStdString();
-		else type = "";
-
-		Strumento* retrive = nullptr;
-
-		if(type == "Viola")
-			retrive	 = new Viola();
-		else if(type == "Violino")
-			retrive	 = new Violino();
-		else if(type == "Chitarra")
-			retrive	 = new Chitarra();
-		else if(type == "Basso")
-			retrive	 = new Basso();
-		else if(type == "Pianoforte")
-			retrive	 = new Pianoforte();
-		else if(type == "KitBatteria")
-			retrive	 = new KitBatteria();
-		else if(type == "Sax")
-			retrive	 = new Sax();
-		else if(type == "Tromba")
-			retrive	 = new Tromba();
-
-		if(retrive){
-			retrive->loadData(obj);
-			ordini->push_back(retrive);
-		}
-	}
 	return true;
 }
 
@@ -213,15 +164,6 @@ Container<Strumento*>::iterator Model::carrello_end(){
 	return carrello->end();
 }
 
-Container<Strumento*>::iterator Model::ordini_begin(){
-	return ordini->begin();
-}
-
-Container<Strumento*>::iterator Model::ordini_end(){
-	return ordini->end();
-}
-
-
 Container<Strumento*>::const_iterator Model::magazzino_cbegin() const
 {
 	return magazzino->cbegin();
@@ -240,16 +182,6 @@ Container<Strumento*>::const_iterator Model::carrello_cbegin() const
 Container<Strumento*>::const_iterator Model::carrello_cend() const
 {
 	return carrello->cend();
-}
-
-Container<Strumento*>::const_iterator Model::ordini_cbegin() const
-{
-	return ordini->cbegin();
-}
-
-Container<Strumento*>::const_iterator Model::ordini_cend() const
-{
-	return ordini->cend();
 }
 
 /* ITERATORI COSTANTI E NON */
@@ -302,23 +234,12 @@ void Model::carrello_push_end(Strumento *instrument)
 	carrello->push_back(instrument);
 }
 
-void Model::ordini_push_end(Strumento *instrument)
-{
-	ordini->push_back(instrument);
-}
-
-
-
 Strumento *Model::magazzinoAt(unsigned int ind){
 	return magazzino->at(ind);
 }
 
 Strumento *Model::carrelloAt(unsigned int ind){
 	return carrello->at(ind);
-}
-
-Strumento *Model::ordiniAt(unsigned int ind){
-	return ordini->at(ind);
 }
 
 unsigned int Model::getMagazzinoSize() const
@@ -331,11 +252,6 @@ unsigned int Model::getCarrelloSize() const
 	return carrello->getSize();
 }
 
-unsigned int Model::getOrdiniSize() const
-{
-	return ordini->getSize();
-}
-
 void Model::eraseMagazzino(unsigned int index ){
 	saved=false;
 	magazzino->erase(index);
@@ -344,10 +260,6 @@ void Model::eraseMagazzino(unsigned int index ){
 void Model::eraseCarrello(unsigned int index ){
 	saved=false;
 	carrello->erase(index);
-}
-void Model::eraseOrdini(unsigned int index ){
-	saved=false;
-	ordini->erase(index);
 }
 
 void Model::eraseMagazzino(unsigned int start, unsigned int end){
@@ -360,12 +272,6 @@ void Model::eraseCarrello(unsigned int start, unsigned int end){
 	carrello->erase(start,end);
 }
 
-void Model::eraseOrdini(unsigned int start, unsigned int end){
-	saved=false;
-	ordini->erase(start,end);
-}
-
-
 void Model::resetMagazzino(){
 	saved = false;
 	eraseMagazzino(0,magazzino->getSize());
@@ -376,10 +282,3 @@ void Model::resetCarrello(){
 	eraseCarrello(0,carrello->getSize());
 	delete carrello;
 }
-
-void Model::resetOrdini(){
-	saved = false;
-	eraseOrdini(0,carrello->getSize());
-	delete ordini;
-}
-

@@ -13,7 +13,6 @@ class Model
 private:
     Container<Strumento*>* magazzino;
     Container<Strumento*>* carrello;
-    Container<Strumento*>* ordini;
     bool saved;
 public:
     Model();
@@ -22,13 +21,11 @@ public:
 // Pusha su list e sulla rispettiva lista in base al tipo
     void magazzino_push_end(Strumento*);
     void carrello_push_end(Strumento*);
-    void ordini_push_end(Strumento*);
     void magazzino_push_random();
 
 //Ritorna elemento in un Container sulla base di un indice
     Strumento* magazzinoAt(unsigned int =0);
     Strumento* carrelloAt(unsigned int =0);
-    Strumento* ordiniAt(unsigned int =0);
 //Ritorna elemento in un Container sulla base di un indice
 
     /*Iteratori sui contenitori del model */
@@ -36,14 +33,10 @@ public:
     Container<Strumento*>::iterator magazzino_end();
     Container<Strumento*>::iterator carrello_begin();
     Container<Strumento*>::iterator carrello_end();
-    Container<Strumento*>::iterator ordini_begin();
-    Container<Strumento*>::iterator ordini_end();
     Container<Strumento*>::const_iterator magazzino_cbegin() const;
     Container<Strumento*>::const_iterator magazzino_cend() const;
     Container<Strumento*>::const_iterator carrello_cbegin() const;
     Container<Strumento*>::const_iterator carrello_cend() const;
-    Container<Strumento*>::const_iterator ordini_cbegin() const;
-    Container<Strumento*>::const_iterator ordini_cend() const;
     /*Iteratori sui contenitori del model */
 
 
@@ -51,16 +44,13 @@ public:
 //Cancellazione singola o multipla
     void eraseMagazzino(unsigned int);
     void eraseCarrello(unsigned int);
-    void eraseOrdini(unsigned int);
     void eraseMagazzino(unsigned int, unsigned int);
     void eraseCarrello(unsigned int, unsigned int);
-    void eraseOrdini(unsigned int, unsigned int);
 //Cancellazione singola o multipla
 
     //Svuotano completamente i Container
     void resetMagazzino();
     void resetCarrello();
-    void resetOrdini();
     //Svuotano completamente i Container
 
 /* Salvataggio e caricamento dati dell'applicazione */
@@ -72,7 +62,6 @@ public:
 
     unsigned int getMagazzinoSize() const;
     unsigned int getCarrelloSize() const;
-    unsigned int getOrdiniSize() const;
 
 
 };
