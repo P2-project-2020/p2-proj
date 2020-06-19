@@ -21,6 +21,7 @@ Menu::Menu(QWidget* p):
         menu->addAction(nuovo);
         menu->addAction(nuovo);
         menu->addAction(print);
+        menu->addAction(load);
         menu->addAction(save);
         menu->addAction(saveAs);
         menu->addAction(exit);
