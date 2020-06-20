@@ -153,6 +153,14 @@ void Controller::slotPrint() {
 
 void Controller::slotLoadSample(){
 
+    if(core->getMagazzinoSize() || core->getCarrelloSize()){
+        QMessageBox::StandardButton reply= QMessageBox::question(this,"Attenzione!","Cosi' facendo sovrascriverai i dati presenti, vuoi continuare?",QMessageBox::Yes|QMessageBox::No);
+        if(reply==QMessageBox::No)
+            return;
+//Elimino i dati presenti prima di continuare
+        slotResetTables();
+    }
+
     QJsonDocument doc;
     QByteArray data_json;
     QFile input(":/json/sample.json");
@@ -681,9 +689,9 @@ void Controller::resetCarrello(){
 
 
 void Controller::slotResetTables(){
-
+    //qDebug()<<sender();
     QAction* send = qobject_cast<QAction*>(sender());
-    if(send->text() == "Nuovo"){
+    if(send && send->text() == "Nuovo"){
  if(core->getCarrelloSize() || core->getMagazzinoSize()){
     QMessageBox::StandardButton reply= QMessageBox::question
 (this,"Attenzione!","Cosi' facendo sovrascriverai i dati presenti, vuoi continuare?",
@@ -693,7 +701,6 @@ if(reply==QMessageBox::No)
 resetMagazzino();
 resetCarrello();
         }
-
 
     }//Se la chiamata arriva da File > Nuovo
     resetMagazzino();
