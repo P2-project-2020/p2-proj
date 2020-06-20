@@ -31,7 +31,6 @@ bool ImageControlBox::setImage(const QString& file){
 	// Se l'immagine è null rimuove quella di prima e torna true B)
 	
 	imageIsSet = image->setPixmap(file);
-	qDebug() << imageIsSet;
 	return imageIsSet;
 }
 
@@ -54,4 +53,9 @@ void ImageControlBox::slot_removeImage(){
 			emit signal_removeImage();
 		}
 	}
+}
+
+bool ImageControlBox::setPreviewSize(int width,int height) {
+     image->setSize(width, height);
+     return true;
 }
