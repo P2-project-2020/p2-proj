@@ -480,7 +480,7 @@ if(confirm == QMessageBox::Yes)
         int row = Vmagazzino->getFilter()->mapToSource
          (QPersistentModelIndex(selectedIndexes[i])).row();
 
-        qDebug() <<row;
+        //qDebug() <<row;
 
         if(!core->magazzinoAt(row)->getQuantity())
             QMessageBox::warning(this,"Attenzione!","Quantità esaurita, rifornire il magazzino!");
@@ -542,7 +542,6 @@ void Controller::slotDeleteMagazzinoItem()
 
 if(confirm == QMessageBox::Yes)
     for(auto i = 0; i< selectedIndexes.size();++i){
-            qDebug() << selectedIndexes[i].row() << selectedIndexes[i].model();
             Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
     }
 else
@@ -659,9 +658,8 @@ void Controller::resetCarrello(){
             Strumento *instrument = *it;
 
             if(*(*it) == *(core->carrelloAt(0))){ //Nel magazzino sono presenti ancora strumenti uguali a quello che si vuole rimuovere dal carrello -> incremento quantita
-                //qDebug()<<core->carrelloAt(0)->getQuantity() + instrument->getQuantity();
                 instrument->setQuantity( core->carrelloAt(0)->getQuantity() + instrument->getQuantity());
-                qDebug()<< instrument->getQuantity();
+                //qDebug()<< instrument->getQuantity();
                 found = true;
             }
         }
