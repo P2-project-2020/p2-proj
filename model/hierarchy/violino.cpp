@@ -1,7 +1,7 @@
 #include "violino.h"
 
-Violino::Violino(double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _quantity):
-     Strumento(_price ,_brand, _used, _desc, _quantity, _model),
+Violino::Violino(double _price, const std::string& _brand, const std::string& _model, const std::string& _desc, bool _used, unsigned int _quantity, const std::string& _path):
+     Strumento(_price ,_brand, _used, _desc, _quantity, _model, _path),
      Arco(_brand == Strumento::lutherie),
      key(Strumento::contralto){}
 

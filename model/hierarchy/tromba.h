@@ -3,7 +3,7 @@
 
 class Tromba: public Fiato{
 public:
-     Tromba(Strumento::Tune = contralto, double = 0, const std::string& = "", const std::string& = "", int = 0, bool = false, const std::string& = "", unsigned int = 1);
+     Tromba(Strumento::Tune = contralto, double = 0, const std::string& = "", const std::string& = "", int = 0, bool = false, const std::string& = "", unsigned int = 1, const std::string& = "");
      Strumento* clone() const;
      
      std::string className() const;

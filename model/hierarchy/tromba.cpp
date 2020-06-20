@@ -1,7 +1,7 @@
 #include "tromba.h"
 
-Tromba::Tromba(Strumento::Tune _tune, double _price, const std::string& _brand, const std::string& _model, int _material, bool _used, const std::string& _desc, unsigned int _quantity):
-     Strumento(_price,_brand,_used,_desc,_quantity,_model),
+Tromba::Tromba(Strumento::Tune _tune, double _price, const std::string& _brand, const std::string& _model, int _material, bool _used, const std::string& _desc, unsigned int _quantity, const std::string& _path):
+     Strumento(_price,_brand,_used,_desc,_quantity,_model,_path),
      Fiato(_material,_tune,brass_mouthpiece){}
 
 Strumento* Tromba::clone() const {

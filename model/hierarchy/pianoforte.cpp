@@ -6,8 +6,8 @@ const std::vector<std::string> Pianoforte::shapes = {"Coda", "Muro"};
 const QString Pianoforte::json_shape = "forma";
 const QString Pianoforte::json_keys = "tasti";
 
-Pianoforte::Pianoforte(int _shape, int _keys, double _price, const std::string& _brand, const std::string& _model, bool _used, const std::string& _desc, unsigned int _quantity):
-     Strumento(_price, _brand, _used, _desc, _quantity, _model),
+Pianoforte::Pianoforte(int _shape, int _keys, double _price, const std::string& _brand, const std::string& _model, bool _used, const std::string& _desc, unsigned int _quantity, const std::string& _path):
+     Strumento(_price, _brand, _used, _desc, _quantity, _model, _path),
      Corda(numberOfKeys*3),
      Percussione(true),
      pianoShape(_shape >= 0 && _shape < (int)shapes.size() ? _shape : 0),

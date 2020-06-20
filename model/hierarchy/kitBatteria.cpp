@@ -3,8 +3,8 @@ const std::vector<std::string> KitBatteria::materials = {"Legno", "Plexiglas"};
 const QString KitBatteria::json_material = "materiale";
 const QString KitBatteria::json_snare = "rullante in metallo";
 
-KitBatteria::KitBatteria(double _price, const std::string& _brand, const std::string& _model, int _material, bool _metalSnare, bool _used, const std::string& _desc, unsigned int _quantity):
-     Strumento(_price, _brand, _used, _desc, _quantity, _model),
+KitBatteria::KitBatteria(double _price, const std::string& _brand, const std::string& _model, int _material, bool _metalSnare, bool _used, const std::string& _desc, unsigned int _quantity, const std::string& _path):
+     Strumento(_price, _brand, _used, _desc, _quantity, _model, _path),
      Percussione(false),
      material(_material),
      metalSnare(_metalSnare){}

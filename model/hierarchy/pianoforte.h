@@ -10,7 +10,7 @@ public:
      static int findShape(const std::string&);
      static int findKeys(const std::string&);
 	
-     Pianoforte(int = 0, int = 2, double = 0, const std::string& = "",  const std::string& = "",  bool = false, const std::string& = "", unsigned int = 1);
+     Pianoforte(int = 0, int = 2, double = 0, const std::string& = "",  const std::string& = "",  bool = false, const std::string& = "", unsigned int = 1, const std::string& = "");
      Strumento* clone() const;
 
      std::string className() const;
