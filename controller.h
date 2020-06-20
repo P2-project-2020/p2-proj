@@ -28,6 +28,7 @@ private:
     QLabel *itemCounter;//Mostra in tempo reale il numero di strumenti presenti
     QLabel *saveStatus;//Mostra in tempo reale lo stato dei dati ( salvati o meno)
     QString currentFile;//Il file di lavoro corrente
+    QPushButton* loadSample;
 public:
     Controller(Model*, QWidget * = nullptr);
     // Rileva il tentativo di chiusura della finestra, chiede se salvare i dati in caso essi non lo siano
@@ -38,6 +39,7 @@ public:
 public slots:
     void slotSave();
     void slotLoad();
+    void slotLoadSample();
     void slotInserisci();
     void slotAddToCart();
     void slotUpdatePage();//Aggiorna statusBar e tabelle

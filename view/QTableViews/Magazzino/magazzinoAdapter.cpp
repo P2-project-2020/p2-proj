@@ -1,9 +1,4 @@
-//Qt MVC is based on 2 widgets: QListview & QtableView
-// They both provide real time search, edit, ordering and visualization over da$
-/*Adapter is the class necessary to communicate with our Model and Hierarchy
-  in order to make possible to use it with Qt MVC widgets*/
-
-#include "magazzinoAdapter.h"
+#include "view/QTableViews/Magazzino/magazzinoAdapter.h"
 #include <QFont>
 #include <QColor>
 #include <QBrush>
@@ -84,15 +79,26 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 {
      unsigned int row = abs(index.row());
 
+
      if (!index.isValid() || row >= core->getMagazzinoSize())
 	  return QVariant();
 
      Strumento *strumento = core->magazzinoAt(row);
 
+      int quantity = strumento->getQuantity(); //Instrument quantity
+
      switch(role)
      {
      case Qt::BackgroundRole:
-	  return QVariant(QBrush(QColor( (row % 2 == 0) ? "#EEE" : "#FFF")));
+         if (quantity == 0)
+             return QVariant(QBrush(QColor("#7A0012")));
+         if(quantity<=3)
+            return QVariant(QBrush(QColor("#F18604")));
+         return QVariant(QBrush(QColor( (row % 2 == 0) ? "#EEE" : "#FFF")));
+     case Qt::ForegroundRole:
+         if(quantity<=3)
+            return QVariant(QBrush(QColor("#ffffff")));
+         return QVariant(QBrush(QColor( "#000000")));
      case Qt::TextAlignmentRole:
 	  return QVariant ( Qt::AlignVCenter | Qt::AlignHCenter );
      case Qt::SizeHintRole:
@@ -276,6 +282,7 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 	       break;
 
 	  }
+
 	  emit editCompleted(strumento);
 	  QModelIndex editIndex = createIndex(index.row(),index.column());
 	  emit dataChanged(editIndex,editIndex,{Qt::DisplayRole});
@@ -286,6 +293,8 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 
 Qt::ItemFlags magazzinoAdapter::flags(const QModelIndex& index) const
 {
+
+
      int col = index.column();
      QString rowType = this->index(index.row(),0).data().toString();
 

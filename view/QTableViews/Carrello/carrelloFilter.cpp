@@ -1,4 +1,4 @@
-#include "carrelloFilter.h"
+#include "view/QTableViews/Carrello/carrelloFilter.h"
 
 carrelloFilter::carrelloFilter(QObject* parent, const QComboBox * filterComboBox)
     : QSortFilterProxyModel (parent), instrumentType(filterComboBox)

@@ -4,7 +4,7 @@
 #include <QSortFilterProxyModel>
 #include <QComboBox>
 
-#include "magazzinoAdapter.h"
+#include "view/QTableViews/Magazzino/magazzinoAdapter.h"
 
 // Crea un modello virtuale utilizzato per la ricerca dei dati su QTableView
 

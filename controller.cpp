@@ -29,9 +29,12 @@
 #include "model/hierarchy/sax.h"
 
 
+
 /*
 #include "GERARCHIA IN BASE ALLE NECESSITÀ
 */
+
+
 Controller::Controller(Model* m,QWidget *parent) :
     QWidget (parent),
     menuBar(new Menu(this)),
@@ -43,10 +46,13 @@ Controller::Controller(Model* m,QWidget *parent) :
     headerLayout(new QHBoxLayout),
     statusBar(new QHBoxLayout),
     itemCounter(new QLabel(this)),
+    loadSample(new QPushButton(this)),
     saveStatus(new QLabel(this))
 {
 
     QGroupBox *logoBox = new QGroupBox();
+
+
 
     setStyleSheet("QTabWidget::pane {border: 0px;}");
     headerLayout->setSpacing(10);
@@ -58,8 +64,13 @@ Controller::Controller(Model* m,QWidget *parent) :
     pagine->insertTab(1,Vcarrello,QIcon(":/icons/res/cart.png"),"Carrello");
     mainLayout->addWidget(pagine);
 
+
+
+    loadSample->setText("Importa il file sample");
+
     statusBar->addWidget(itemCounter,Qt::AlignRight);
     statusBar->addWidget(saveStatus,Qt::AlignRight);
+    statusBar->addWidget(loadSample,Qt::AlignLeft);
     mainLayout->addItem(statusBar);
     setLayout(mainLayout);
 
@@ -75,7 +86,9 @@ Controller::Controller(Model* m,QWidget *parent) :
     connect(Vmagazzino->getAddToCart(),SIGNAL(clicked()),this,SLOT(slotAddToCart())); //NEW
     connect(Vcarrello->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteCarrelloItem()));
     connect(Vcarrello->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetCarrello()));
+   // connect(Vcarrello->getLoadSample(),SIGNAL(clicked()),this,SLOT(slotLoadSample()));
     //salvataggio
+    //connect(this->loadSample,SIGNAL(clicked()),this,SLOT(slotLoadSample()));
     connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
     //Per sapere che i dati sono stati modificati in real time
     connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
@@ -109,7 +122,28 @@ void Controller::slotPrint() {
 }
 
 /*PDF Print for receipt */
+
+void Controller::slotLoadSample(){
+
+    QJsonDocument doc;
+    QByteArray data_json;
+    QFile input("sample.json");
+    if(input.open(QIODevice::ReadOnly | QIODevice::Text)){
+        data_json = input.readAll();
+        doc = doc.fromJson(data_json);
+        if(core->unserializeData(doc.object())){
+        QMessageBox::information(this,tr("Messaggio"),tr("Documento JSON letto correttamente"));
+        core->setDataSaved(true);
+        currentFile = "sample_save.json";
+        slotUpdatePage();
+        }else
+            throw inputException("Errore nella lettura del JSON");
+    }else
+        throw inputException("Errore nell' apertura del file");
+}
+
 void Controller::slotSave(){
+
     /*
    if(core->isDataSaved()){
         QMessageBox::information(this,"Informazione","No Worries! I dati correnti sono gia' salvati");
@@ -154,8 +188,6 @@ void Controller::slotSave(){
 }
 
 }//slotSave
-
-
 
 void Controller::slotLoad(){
 

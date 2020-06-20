@@ -51,7 +51,7 @@
             "marca": "Stagg",
             "modello": "BC300FL-BK",
             "prezzo": 238.21,
-            "quantita": 5,
+            "quantita": 0,
             "strumento": "Basso",
             "tipo": "Elettrico",
             "usato": false
@@ -73,7 +73,7 @@
             "marca": "Yamaha",
             "modello": "C40II",
             "prezzo": 53,
-            "quantita": 2,
+            "quantita": 15,
             "strumento": "Chitarra",
             "tipo": "Classica",
             "usato": true
@@ -95,7 +95,7 @@
             "marca": "Gibson",
             "modello": "ES 335",
             "prezzo": 715,
-            "quantita": 2,
+            "quantita": 6,
             "strumento": "Chitarra",
             "tipo": "Elettrica",
             "usato": false
@@ -113,37 +113,13 @@
             "usato": false
         },
         {
-            "descrizione": "Batteria per principianti, include sgabello e bacchette",
-            "intonato": false,
-            "marca": "Gear4Music",
-            "materiale": "Plexiglas",
-            "modello": "BDK-1",
-            "prezzo": 311.5,
-            "quantita": 10,
-            "rullante in metallo": true,
-            "strumento": "Batteria",
-            "usato": false
-        },
-        {
-            "descrizione": "Rhythm Mate batteria",
-            "intonato": false,
-            "marca": "Tama",
-            "materiale": "Plexiglas",
-            "modello": "RM52KH6 ",
-            "prezzo": 616.03,
-            "quantita": 5,
-            "rullante in metallo": true,
-            "strumento": "Batteria",
-            "usato": false
-        },
-        {
             "descrizione": "Valvole M3 Perinet, corpo e campana in ottone",
             "intonazione": "tenore",
             "marca": "Thomann",
             "materiale": "argento",
             "modello": "ETR- 3300S Eb/D",
             "prezzo": 999,
-            "quantita": 1,
+            "quantita": 12,
             "strumento": "Tromba",
             "usato": false
         },
@@ -176,7 +152,7 @@
             "materiale": "bronzo",
             "modello": "Eb",
             "prezzo": 135.98,
-            "quantita": 3,
+            "quantita": 0,
             "strumento": "Sax",
             "usato": true
         }

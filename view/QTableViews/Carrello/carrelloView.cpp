@@ -74,6 +74,8 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
         search->addItem(resultBar);
 
 
+
+
         /* Creazione Tabella e configurazione filtraggio (ricerca) e sorting per ogni campo di essa */
             table = new QTableView;
             table->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -107,7 +109,6 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
 
     QPushButton *carrelloView::getDeleteSelected() const{ return deleteSelected;}
     QPushButton *carrelloView::getDeleteAll() const{ return deleteAll;}
-
     QPushButton *carrelloView::getProceedAndBuy() const {  return proceedAndBuy; }
 
     QLabel *carrelloView::getResultsNumber() const{ return resultsNumber;}
