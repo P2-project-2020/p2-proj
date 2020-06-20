@@ -87,7 +87,7 @@ private:
 
 public:
 
-     insertView(QWidget* = nullptr, Strumento* = nullptr);
+     insertView(QWidget* = nullptr, const Strumento* = nullptr);
 
     //Strumento
      QComboBox *getInstrumentType() const;

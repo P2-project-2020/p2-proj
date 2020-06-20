@@ -14,7 +14,7 @@
 #include "model/hierarchy/strumento.h"
 
 
-insertView::insertView(QWidget* p, Strumento* strumento):
+insertView::insertView(QWidget* p, const Strumento* strumento):
     QDialog (p),
     instrumentType(new QComboBox(this)),
     generalInfo(new QGroupBox(this)),
@@ -247,6 +247,14 @@ insertView::insertView(QWidget* p, Strumento* strumento):
 	 cordaType->setEnabled(false);
 	 guitarType->setEnabled(false);
 	 bassType->setEnabled(false);
+
+	 addItem->hide();
+	 image->show();
+	 image->setEnabled(true);
+	 generalInfo->show();
+	 generalInfo->setEnabled(true);
+	 instrumentTune->show();
+	 instrumentTune->setEnabled(true);
 	 
 	 price->setText(QString::number(strumento->getPrice()));
 	 description->setText(QString::fromStdString(strumento->getDescription()));
