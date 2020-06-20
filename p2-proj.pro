@@ -4,7 +4,7 @@
 
 TEMPLATE = app
 TARGET = p2-proj
-QT += widgets gui printersupport
+QT += widgets gui printsupport
 INCLUDEPATH += .
 
 # You can make your code fail to compile if you use deprecated APIs.
