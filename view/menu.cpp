@@ -15,6 +15,7 @@ Menu::Menu(QWidget* p):
     exit = new QAction("Esci", menu);
          exit->setShortcut(Qt::CTRL | Qt::Key_W);
     print = new QAction("Stampa", menu);
+        print->setShortcut(Qt::CTRL | Qt::Key_P);
 
     // Setup
     addMenu(menu);

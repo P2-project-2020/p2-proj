@@ -104,8 +104,8 @@ void Controller::slotPrint() {
 
         QPrinter printer;
                 printer.setOutputFormat(QPrinter::PdfFormat);
-                printer.setOrientation(QPrinter::Landscape);
-                printer.setOutputFileName("/Users/erik/Documents/p2-2020/p2-proj/nonwritableew.pdf");
+                printer.setPageOrientation(QPageLayout::Landscape);
+                printer.setOutputFileName("/Users/erik/Documents/p2-2020/p2-proj/magazzinoTable.pdf");
         // printer setup
 
         QPainter painter;
