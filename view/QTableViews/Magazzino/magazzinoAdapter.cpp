@@ -34,7 +34,7 @@ int magazzinoAdapter::rowCount(const QModelIndex &) const {
 }
 
 int magazzinoAdapter::columnCount(const QModelIndex &) const {
-     return 10;
+     return 9;
 }
 
 QVariant magazzinoAdapter::headerData(int section, Qt::Orientation orientation, int role) const
@@ -60,13 +60,11 @@ QVariant magazzinoAdapter::headerData(int section, Qt::Orientation orientation, 
 	       return QString("Materiale");
 	  case 5:
 	       return QString("Tonalità");
-	  case 6:
-	       return QString("Descrizione");
-	  case 7:
+      case 6:
 	       return QString("Condizione"); //Nuovo | Usato
-	  case 8:
+      case 7:
 	       return QString("Prezzo");
-	  case 9:
+      case 8:
 	       return QString("Quantità");
 	  default:
 	       return QVariant();
@@ -117,15 +115,13 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	       return this->index(row,index.column()).data();
 	  case 4:
 	       return this->index(row,index.column()).data();
-	  case 5:
-	       return  this->index(row,index.column()).data();
-	  case 6:
+      case 5:
 	       return this->index(row,index.column()).data();
-	  case 7:
+      case 6:
 	       return strumento->isUsed();
-	  case 8:
+      case 7:
 	       return strumento->getPrice();
-	  case 9:
+      case 8:
 	       return strumento->getQuantity();
 	  }
      }
@@ -154,16 +150,13 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	  case 5:
 	       return QString::fromStdString(Strumento::Tunes.at(strumento->tune()));
 	       break;
-	  case 6:
-	       return QString::fromStdString(strumento->getDescription());
-	       break;
-	  case 7:
+      case 6:
 	       return QString::fromStdString(strumento->isUsed() ? "Usato" : "Nuovo");
 	       break;
-	  case 8:
+      case 7:
 	       return QString::number(strumento->getPrice()) + " €";
 	       break;
-	  case 9:
+      case 8:
 	       return QString::number(strumento->getQuantity());
 	  default:
 	       return QVariant();
@@ -193,16 +186,13 @@ QVariant magazzinoAdapter::data(const QModelIndex& index, int role) const
 	  case 5:
 	       return this->index(row,index.column()).data();
 	       break;
-	  case 6:
-	       return this->index(row,index.column()).data();
-	       break;
-	  case 7:
+      case 6:
 	       return strumento->isUsed();
 	       break;
-	  case 8:
+      case 7:
 	       return strumento->getPrice();
 	       break;
-	  case 9:
+      case 8:
 	       return strumento->getQuantity();
 	       break;
 	  }
@@ -259,21 +249,17 @@ bool magazzinoAdapter::setData(const QModelIndex& index, const QVariant& value, 
 	       // bisognerebbe impostare la comboBox per selezionare non interi qualsiasi ma
 	       // una tra le stringhe presenti in Strumento::Tunes
 	       strumento->setTune(Strumento::findTune(value.toString().toStdString()));
-	       break;
-	       
-	  case 6: //description
-	       strumento->setDescription(value.toString().toStdString());
-	       break;
+          break;
 
-	  case 7: //
+      case 6: //
 	       strumento->setUsed(value.toBool());
 	       break;
 
-	  case 8: //price
+      case 7: //price
 	       strumento->setPrice(value.toDouble());
 	       break;
 
-	  case 9:
+      case 8:
 	       strumento->setQuantity(value.toDouble());
 	       break;
 

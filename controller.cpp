@@ -15,6 +15,7 @@
 #include <QAction>
 #include <QPrinter>
 #include <QPainter>
+#include <view/PDF/tablePrinter.h>
 
 #include <QDebug>
 
@@ -101,21 +102,19 @@ QString Controller::getCurrentFile() const{ return currentFile;}
 /*PDF Print for receipt */
 void Controller::slotPrint() {
 
-    QPrinter printer;
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName("/Users/erik/Documents/p2-2020/p2-proj/nonwritable.pdf");
+        QPrinter printer;
+                printer.setOutputFormat(QPrinter::PdfFormat);
+                printer.setOutputFileName("/Users/erik/Documents/p2-2020/p2-proj/nonwritableew.pdf");
+        // printer setup
+
         QPainter painter;
-        if (! painter.begin(&printer)) { // failed to open file
-            qWarning("failed to open file, is it writable?");
-            //return 1;
-        }
-        painter.drawText(10, 10, "Test");
-        if (! printer.newPage()) {
-            qWarning("failed in flushing page to disk, disk full?");
-            //return 1;
-        }
-        painter.drawText(10, 10, "Test 2");
-        painter.end();
+                painter.begin(&printer);
+                TablePrinter tablePrinter(&painter, &printer);
+                QVector<int> columnStretch = QVector<int>() << 10 << 10 << 10 << 10 << 10 << 10 << 10 <<10 << 4;
+                if(!tablePrinter.printTable(Vmagazzino->getAdapter(), columnStretch)) {
+                    qDebug() << tablePrinter.lastError();
+                }
+                painter.end();
 
 }
 

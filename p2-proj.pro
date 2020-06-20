@@ -48,6 +48,7 @@ HEADERS += controller.h \
     view/insertView.h \
     view/menu.h \
     view/toolboxrow.h \
+    view/PDF/tablePrinter.h \
 
 SOURCES += controller.cpp \
            main.cpp \
@@ -79,6 +80,7 @@ SOURCES += controller.cpp \
     view/insertView.cpp \
     view/menu.cpp \
     view/toolboxrow.cpp \
+    view/PDF/tablePrinter.cpp \
 
 RESOURCES += \
     res.qrc

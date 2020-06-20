@@ -36,6 +36,7 @@ public:
     QString getCurrentFile() const;
     void resetMagazzino();
     void resetCarrello();
+    void printTable();
 public slots:
     void slotSave();
     void slotLoad();
