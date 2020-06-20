@@ -139,8 +139,7 @@ void Controller::slotViewDetails(){
 
     }
 
-
-slotUpdatePage();
+//slotUpdatePage();
 
 }//slotViewDetails
 
@@ -181,10 +180,21 @@ void Controller::printPdfTable(const QString filename){
                 //Stampa tabella
                 TablePrinter tablePrinter(&painter, &printer);
                 QVector<int> columnStretch = QVector<int>() << 10 << 10 << 10 << 10 << 10 << 10 << 10 <<10 << 4;
-                if(!tablePrinter.printTable(Vmagazzino->getAdapter(), columnStretch)) {
-                    qDebug() << tablePrinter.lastError();
-                }
-                QMessageBox::information(this,tr("Messaggio"),tr("PDF Magazzino generato correttamente"));
+                 if(pagine->currentIndex() == 0) {
+                     if(!tablePrinter.printTable(Vmagazzino->getAdapter(), columnStretch)) {
+                         qDebug() << tablePrinter.lastError();
+                     }
+                     QMessageBox::information(this,tr("Messaggio"),tr("Magazzino generato ed esportato correttamente"));
+
+                 }
+                 else
+                     if(pagine->currentIndex() == 1){
+                         if(!tablePrinter.printTable(Vcarrello->getAdapter(), columnStretch)) {
+                             qDebug() << tablePrinter.lastError();
+                         }
+                         QMessageBox::information(this,tr("Messaggio"),tr("Carrello generato ed esportato correttamente"));
+                 }
+
                 painter.end();
 
                   //w->render(&painter);
