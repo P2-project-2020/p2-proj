@@ -36,7 +36,7 @@ public:
     QString getCurrentFile() const;
     void resetMagazzino();
     void resetCarrello();
-    void printTable();
+    void printPdfTable(const QString);
 public slots:
     void slotSave();
     void slotLoad();

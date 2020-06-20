@@ -99,13 +99,12 @@ Controller::Controller(Model* m,QWidget *parent) :
 QString Controller::getCurrentFile() const{ return currentFile;}
 
 
-/*PDF Print for receipt */
-void Controller::slotPrint() {
+void Controller::printPdfTable(const QString filename){
 
     QPrinter printer;//(QPrinter::HighResolution);
                 printer.setOutputFormat(QPrinter::PdfFormat);
                 printer.setPageOrientation(QPageLayout::Landscape);
-                printer.setOutputFileName("/Users/erik/Documents/p2-2020/p2-proj/magazzinoTable.pdf");
+                printer.setOutputFileName(filename);
                // printer.setPageMargins(12, 16, 12, 20, QPrinter::Millimeter);
                //printer.setFullPage(false);
 
@@ -145,6 +144,41 @@ void Controller::slotPrint() {
 
                   //w->render(&painter);
 
+
+
+}//printPdfTable
+
+
+/*PDF Print for receipt */
+void Controller::slotPrint() {
+    QString filter = "PDF (*.pdf)";
+       bool overr = false;
+       QString filename;
+      QAction* send = qobject_cast<QAction*>(sender());
+      if(send && send->text() == "Salva"){
+          //Salvataggio sullo stesso file se la funzione e' chiamata da un certo oggetto
+          filename = currentFile;
+          overr = true;
+   }else{
+          QFileDialog *fileDialog = new QFileDialog;
+          fileDialog->setDefaultSuffix("pdf");
+          filename=
+                  fileDialog->getSaveFileName(
+                       this,
+                       tr("Scegli dove salvare il file"),
+                       QDir::currentPath(),
+                       filter,&filter,QFileDialog::DontUseNativeDialog);
+          //Se l'utente non ha inserito l'estensione la aggiungo
+          if (!filename.endsWith(".pdf"))
+              filename += ".pdf";
+
+
+    if(filename.isEmpty())
+        QMessageBox::warning(this,"Attenzione!","File scelto non valido");
+    else
+        printPdfTable(filename);
+
+      }//Chiedo all'utente dove salvare
 
 
 }
@@ -200,6 +234,11 @@ void Controller::slotSave(){
                     tr("Scegli dove salvare il file"),
                     QDir::currentPath(),
                     json_filter,&json_filter,QFileDialog::DontUseNativeDialog);
+
+        if (!filename.endsWith(".json"))
+        filename += ".json";
+
+   //Se l'utente non ha inserito l'estensione la aggiungo
 
  if(filename.isEmpty())
      QMessageBox::warning(this,"Attenzione!","File scelto non valido");
