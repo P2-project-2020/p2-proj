@@ -70,7 +70,7 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     statusBar->addWidget(itemCounter,Qt::AlignRight);
     statusBar->addWidget(saveStatus,Qt::AlignRight);
-    statusBar->addWidget(loadSample,Qt::AlignLeft);
+    statusBar->addWidget(loadSample,Qt::AlignRight);
     mainLayout->addItem(statusBar);
     setLayout(mainLayout);
 
@@ -720,10 +720,22 @@ void Controller::slotUpdatePage(){
 
     /* AGGIORNAMENTO STATUS BAR */
 
+    if(!core->getMagazzinoSize() && !core->getCarrelloSize()){
+        saveStatus->setText("Nessun dato presente");
+        saveStatus->setStyleSheet("color: orange;");
+    }else
+    if(core->isDataSaved()){
+        saveStatus->setText("Dati Salvati");
+        saveStatus->setStyleSheet("color: green;");
+    }else{
+        saveStatus->setText("Attenzione! Dati non salvati");
+        saveStatus->setStyleSheet("color: orange;");
+    }
+
     /* AGGIORNAMENTO STATUS BAR */
 }
 
-/*
+
 void Controller::closeEvent(QCloseEvent *event) {
 
             if(!core->isDataSaved()){
@@ -735,6 +747,3 @@ void Controller::closeEvent(QCloseEvent *event) {
            }else
                this->close();
     }
-
-    */
-
