@@ -4,19 +4,24 @@ const QString Arco::json_lutherie = "liuteria";
 Arco::Arco(bool _lutherie):lutherie(_lutherie){}
 
 void Arco::saveData(QJsonObject& obj) const {
-	Strumento::saveData(obj);
+     Strumento::saveData(obj);
 
-	obj[json_lutherie] = lutherie;
+     obj[json_lutherie] = lutherie;
 }
 
 void Arco::loadData(const QJsonObject& obj){
-	Strumento::loadData(obj);
 
-	const QJsonValue& val = obj[json_lutherie];
-	if(!val.isUndefined() && val.isBool()){
-		lutherie = obj[json_lutherie].toBool();
-		if(lutherie) setBrand(Strumento::lutherie);
-	}
+     Strumento::loadData(obj);
+     
+     const QJsonValue& val = obj[json_lutherie];
+     
+     if(!val.isUndefined() && val.isBool()){
+	  lutherie = obj[json_lutherie].toBool();
+     }
+}
+
+bool Arco::isLutherie() const {
+     return lutherie;
 }
 
 bool Arco::operator==(const Arco& other) const {

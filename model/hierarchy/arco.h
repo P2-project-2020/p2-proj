@@ -13,6 +13,8 @@ public:
      void saveData(QJsonObject&) const;
      void loadData(const QJsonObject&);
 
+     bool isLutherie() const;
+
      bool operator==(const Arco&) const;
      bool operator!=(const Arco&) const;
 };

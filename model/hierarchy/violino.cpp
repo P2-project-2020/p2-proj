@@ -10,7 +10,7 @@ Strumento* Violino::clone() const {
 }
 
 std::string Violino::className() const {
-     return "Violino";
+     return "Violino " + isLutherie() ? Strumento::lutherie : "";
 }
 
 Strumento::Tune Violino::tune() const {
