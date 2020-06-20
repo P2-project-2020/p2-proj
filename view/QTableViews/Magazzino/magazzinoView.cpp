@@ -15,6 +15,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
 
     QWidget(parent),
     core(model),
+    adapter(new magazzinoAdapter(this, core)),
     addNew(new QPushButton),
     deleteAll(new QPushButton),
     deleteSelected(new QPushButton),
@@ -23,8 +24,8 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     instrumentType(new QComboBox),
     addView(new insertView),
     resultsNumber(new QLabel),
-    editEnabled(new QLabel),
-    adapter(new magazzinoAdapter(this, core))
+    editEnabled(new QLabel)
+
 {
     addNew->setText("Nuovo strumento");
 

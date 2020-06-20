@@ -25,8 +25,9 @@ Strumento::Strumento(double _price, const std::string& _brand, bool _used, const
      used(_used),
      brand(_brand),
      model(_model),
-     quantity(_quantity),
-     imgPath(std::ifstream(_img).good() ? _img : "")
+     imgPath(std::ifstream(_img).good() ? _img : ""),
+     quantity(_quantity)
+
 {}
 
 Strumento::~Strumento() = default;

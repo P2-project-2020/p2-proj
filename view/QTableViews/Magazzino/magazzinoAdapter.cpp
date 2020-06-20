@@ -344,7 +344,6 @@ bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, co
                  (QString::fromStdString(strumento->getBrand())).contains(exp) ||
                  (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
                  (QString::number(strumento->getPrice())).contains(exp) ||
-                 (QString::fromStdString(strumento->getDescription())).contains(exp) ||
                  (QString::fromStdString(strumento->getModel())).contains(exp));
 
      else
@@ -353,7 +352,6 @@ bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, co
                  (QString::fromStdString(strumento->getBrand())).contains(exp) ||
                  (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
                  (QString::number(strumento->getPrice())).contains(exp) ||
-                 (QString::fromStdString(strumento->getDescription())).contains(exp) ||
                  (QString::fromStdString(strumento->getModel())).contains(exp)) &&
                 ((QString::fromStdString(strumento->className())).contains("Violino") ||
                  (QString::fromStdString(strumento->className())).contains("Viola"));
@@ -363,7 +361,6 @@ bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, co
                  (QString::fromStdString(strumento->getBrand())).contains(exp) ||
                  (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
                  (QString::number(strumento->getPrice())).contains(exp) ||
-                 (QString::fromStdString(strumento->getDescription())).contains(exp) ||
                  (QString::fromStdString(strumento->getModel())).contains(exp)) &&
                 ((QString::fromStdString(strumento->className())).contains("Chitarra") ||
                  (QString::fromStdString(strumento->className())).contains("Basso") ||
@@ -375,7 +372,6 @@ bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, co
           (QString::fromStdString(strumento->getBrand())).contains(exp) ||
           (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
           (QString::number(strumento->getPrice())).contains(exp) ||
-          (QString::fromStdString(strumento->getDescription())).contains(exp) ||
           (QString::fromStdString(strumento->getModel())).contains(exp)) &&
          ((QString::fromStdString(strumento->className())).contains("Batteria") ||
           (QString::fromStdString(strumento->className())).contains("Pianoforte"));
@@ -385,7 +381,6 @@ bool magazzinoAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, co
               (QString::fromStdString(strumento->getBrand())).contains(exp) ||
               (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
               (QString::number(strumento->getPrice())).contains(exp) ||
-              (QString::fromStdString(strumento->getDescription())).contains(exp) ||
               (QString::fromStdString(strumento->getModel())).contains(exp)) &&
              ((QString::fromStdString(strumento->className())).contains("Tromba") ||
                (QString::fromStdString(strumento->className())).contains("Sax"));

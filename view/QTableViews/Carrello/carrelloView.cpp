@@ -15,13 +15,13 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
 
     QWidget(parent),
     core(model),
+    adapter(new carrelloAdapter(this, core)),
     deleteAll(new QPushButton),
     deleteSelected(new QPushButton),
     proceedAndBuy(new QPushButton),
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
-    resultsNumber(new QLabel),
-    adapter(new carrelloAdapter(this, core))
+    resultsNumber(new QLabel)
 {
 
 

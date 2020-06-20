@@ -46,8 +46,8 @@ Controller::Controller(Model* m,QWidget *parent) :
     headerLayout(new QHBoxLayout),
     statusBar(new QHBoxLayout),
     itemCounter(new QLabel(this)),
-    loadSample(new QPushButton(this)),
-    saveStatus(new QLabel(this))
+    saveStatus(new QLabel(this)),
+    loadSample(new QPushButton(this))
 {
 
     QGroupBox *logoBox = new QGroupBox();
