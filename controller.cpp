@@ -685,20 +685,24 @@ void Controller::slotUpdatePage(){
     int magazzinoSize = core->getMagazzinoSize();
     int carrelloSize = core->getCarrelloSize();
 
-    if(pagine->currentIndex() == 0) {
+    if(pagine->currentIndex() == 0) { //Magazzino
 
             if(!magazzinoSize){
                 itemCounter->setText("<b>Nessun prodotto presente!</b>");
                 Vmagazzino->getEditEnabled()->setText("");
+                Vmagazzino->getResultsNumber()->setText("<b>Per iniziare, carica un salvataggio</b>");
+                Vmagazzino->getResultsNumber()->setStyleSheet("color : orange");
             }
 
             else {
                 itemCounter->setText("<u>" + QString::number(magazzinoSize) + " prodotti presenti </u>");
                 Vmagazzino->getEditEnabled()->setText("<u> Modifica abilitata! </u>");
+                Vmagazzino->getResultsNumber()->setText("<b>" + QString::number(core->getMagazzinoSize()) + " strumenti trovati</b>");
+                Vmagazzino->getResultsNumber()->setStyleSheet("color : green");
             }
     }
 
-    else if(pagine->currentIndex() == 1) {
+    else if(pagine->currentIndex() == 1) {//Carrello
             if(!carrelloSize)
                 itemCounter->setText("<b>Nessun prodotto presente!</b>");
 

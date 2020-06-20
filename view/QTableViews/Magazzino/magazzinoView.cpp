@@ -57,7 +57,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
             resultsNumber->setStyleSheet("color : orange");
         }else
         {
-            resultsNumber->setText("<b>" + QString::number(core->getMagazzinoSize()) + "strumenti trovati</b>");
+            resultsNumber->setText("<b>" + QString::number(core->getMagazzinoSize()) + " strumenti trovati</b>");
             resultsNumber->setStyleSheet("color : green");
         }
 
