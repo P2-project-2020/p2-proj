@@ -1,15 +1,37 @@
 {
     "Carrello": [
+        {
+            "descrizione": "Prodotto in Germania da Siegfried heffler",
+            "immagine": "",
+            "liuteria": false,
+            "marca": "liuteria",
+            "modello": "PSH06/E",
+            "prezzo": 7699,
+            "quantita": 2,
+            "strumento": "Violino",
+            "usato": false
+        }
     ],
     "Magazzino": [
         {
             "descrizione": "Prodotto in Germania da Siegfried heffler",
             "immagine": "",
             "liuteria": false,
-            "marca": "Scala Vilagio",
+            "marca": "ciaoaaa",
             "modello": "PSH06/E",
             "prezzo": 7699,
-            "quantita": 1,
+            "quantita": 2,
+            "strumento": "Violino",
+            "usato": false
+        },
+        {
+            "descrizione": "Prodotto in Germania da Siegfried heffler",
+            "immagine": "",
+            "liuteria": false,
+            "marca": "ciao",
+            "modello": "PSH06/E",
+            "prezzo": 7699,
+            "quantita": 0,
             "strumento": "Violino",
             "usato": false
         },
@@ -17,7 +39,7 @@
             "descrizione": "Violino competo 3/4 ideale per studenti",
             "immagine": "",
             "liuteria": false,
-            "marca": "Forenza",
+            "marca": "liuteria",
             "modello": "F1151CBK",
             "prezzo": 54.83,
             "quantita": 10,
@@ -29,7 +51,7 @@
             "immagine": "",
             "intonazione": "contralto",
             "liuteria": false,
-            "marca": "Forenza",
+            "marca": "liuteria",
             "modello": "F2250Q",
             "prezzo": 160.65,
             "quantita": 10,
@@ -41,7 +63,7 @@
             "immagine": "",
             "intonazione": "soprano",
             "liuteria": false,
-            "marca": "Cremona",
+            "marca": "liuteria",
             "modello": "SVA",
             "prezzo": 208.93,
             "quantita": 5,
@@ -168,48 +190,6 @@
             "prezzo": 135.98,
             "quantita": 0,
             "strumento": "Sax",
-            "usato": true
-        },
-        {
-            "corde": 144,
-            "descrizione": "Pianoforte realizzato nel 1917, soddisfa le massime esigenze e tutti i requisiti tecnici con il massimo dell'ispirazione ",
-            "forma": "Coda",
-            "immagine": "/home/student/Desktop/images/piano.jpeg",
-            "intonato": true,
-            "marca": "Stei­nway & Sons ",
-            "modello": "O-180",
-            "prezzo": 33111,
-            "quantita": 5,
-            "strumento": "Pianoforte",
-            "tasti": "Avorio",
-            "usato": false
-        },
-        {
-            "corde": 144,
-            "descrizione": "Esemplare in pura forma di cultura del suono inerente agli strumenti di Steinway",
-            "forma": "Muro",
-            "immagine": "/home/student/Desktop/images/piano.jpeg",
-            "intonato": true,
-            "marca": "Stei­nway & Sons",
-            "modello": "V-125",
-            "prezzo": 16666,
-            "quantita": 5,
-            "strumento": "Pianoforte",
-            "tasti": "Plastica",
-            "usato": false
-        },
-        {
-            "corde": 144,
-            "descrizione": "Esemplare in pura forma di cultura del suono inerente agli strumenti di Steinway",
-            "forma": "Muro",
-            "immagine": "/home/student/Desktop/images/piano.jpeg",
-            "intonato": true,
-            "marca": "Stei­nway & Sons",
-            "modello": "V-125",
-            "prezzo": 8000.98,
-            "quantita": 1,
-            "strumento": "Pianoforte",
-            "tasti": "Plastica",
             "usato": true
         }
     ]
