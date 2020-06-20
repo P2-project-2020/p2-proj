@@ -1,4 +1,5 @@
 #include "strumento.h"
+#include <fstream>
 
 const std::string Strumento::lutherie = "liuteria";
 const QString Strumento::json_type = "strumento";
@@ -9,6 +10,7 @@ const QString Strumento::json_used = "usato";
 const QString Strumento::json_brand = "marca";
 const QString Strumento::json_model = "modello";
 const QString Strumento::json_quantity = "quantita";
+const QString Strumento::json_img_path = "immagine";
 
 const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::undefined, ""},
 								 {Strumento::soprano, "soprano"},
@@ -17,13 +19,15 @@ const std::map<Strumento::Tune, std::string> Strumento::Tunes = {{Strumento::und
 								 {Strumento::baritone, "baritono"},
 								 {Strumento::bass, "basso"}};
 
-Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc, unsigned int _quantity, const std::string& _model):
+Strumento::Strumento(double _price, const std::string& _brand, bool _used, const std::string& _desc, unsigned int _quantity, const std::string& _model, const std::string& _img):
      price(_price),
      description(_desc),
      used(_used),
      brand(_brand),
      model(_model),
-     quantity(_quantity){}
+     quantity(_quantity),
+     imgPath(std::ifstream(_img).good() ? _img : "")
+{}
 
 Strumento::~Strumento() = default;
 
@@ -62,6 +66,20 @@ void Strumento::setQuantity(unsigned int newQty){
      quantity = newQty;
 }
 
+bool Strumento::setImgPath(const std::string& new_path){
+     if(std::ifstream(new_path).good()){
+	  /* Controlla solo che la path esista, se non è un'immagine
+	   * non dovrebbe comunque venir visualizzata*/
+	  imgPath = new_path;
+	  return true;
+     }
+     return false;
+}
+
+std::string Strumento::getImgPath() const {
+     return imgPath;
+}
+
 void Strumento::loadData(const QJsonObject& obj){
      const QJsonValue& valPrice = obj[json_price];
      const QJsonValue& valDesc = obj[json_desc];
@@ -69,19 +87,34 @@ void Strumento::loadData(const QJsonObject& obj){
      const QJsonValue& valBrand = obj[json_brand];
      const QJsonValue& valModel = obj[json_model];
      const QJsonValue& valQuantity = obj[json_quantity];
+     const QJsonValue& valImg = obj[json_img_path];
 
-     if(!valPrice.isUndefined() && valPrice.isDouble())
-	  price = valPrice.toDouble() >= 0 ? valPrice.toDouble() : 0;
-     if(!valDesc.isUndefined() && valDesc.isString())
-	  description = valDesc.toString().toStdString();
-     if(!valUsed.isUndefined() && valUsed.isBool())
-	  used = valUsed.toBool();
-     if(!valBrand.isUndefined() && valBrand.isString())
-	  brand = valBrand.toString().toStdString();
-     if(!valModel.isUndefined() && valModel.isString())
-	  model = valModel.toString().toStdString();
-     if(!valQuantity.isUndefined() && valQuantity.isDouble())
-	  quantity = valQuantity.toDouble() >= 0 ? valQuantity.toDouble() : 0;
+     if(!valPrice.isUndefined() && valPrice.isDouble()){
+	  setPrice(valPrice.toDouble());
+     }
+     if(!valDesc.isUndefined() && valDesc.isString()){
+	  setDescription(valDesc.toString().toStdString());
+     }
+     if(!valUsed.isUndefined() && valUsed.isBool()){
+	  setUsed(valUsed.toBool());
+     }
+     if(!valBrand.isUndefined() && valBrand.isString()){
+	  setBrand(valBrand.toString().toStdString());
+     }
+     if(!valModel.isUndefined() && valModel.isString()){
+	  setModel(valModel.toString().toStdString());
+     }
+     if(!valQuantity.isUndefined() && valQuantity.isDouble()){
+	  // Il controllo va fatto qui perchè altrimenti dovrei fare 3
+	  // cast consecutivi
+	  quantity =
+	       valQuantity.toDouble() >= 0 ?
+	       valQuantity.toDouble() :
+	       0;
+     }
+     if(!valImg.isUndefined() && valImg.isString()){
+	  setImgPath(valImg.toString().toStdString());
+     }
 }
 
 void Strumento::saveData(QJsonObject& obj) const {
@@ -92,6 +125,7 @@ void Strumento::saveData(QJsonObject& obj) const {
      obj[json_brand] = QString::fromStdString(brand);
      obj[json_model] = QString::fromStdString(model);
      obj[json_quantity] = (int)quantity;
+     obj[json_img_path] = QString::fromStdString(imgPath);
 }
 
 Strumento::Tune Strumento::findTune(const std::string& to_find){
