@@ -4,9 +4,9 @@
 
 toolboxRow::toolboxRow(QWidget* parent):
 	QWidget(parent),
-	load(new QPushButton(QIcon::fromTheme("folder"),"",this)),
-	remove(new QPushButton(QIcon::fromTheme("process-stop"),"",this)),
-	refresh(new QPushButton(QIcon::fromTheme("view-refresh"),"",this)),
+	load(new QPushButton(QIcon::fromTheme("folder"),"Apri",this)),
+	remove(new QPushButton(QIcon::fromTheme("process-stop"),"Elimina",this)),
+	refresh(new QPushButton(QIcon::fromTheme("view-refresh"),"Refresh",this)),
 	layout(new QHBoxLayout(this))
 {
 	layout->addStretch();

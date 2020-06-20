@@ -55,6 +55,7 @@ insertView::insertView(QWidget* p):
      // in QHBoxLayout ImageControlBox e il form come era prima
      QHBoxLayout *insert_form = new QHBoxLayout(this);
      QVBoxLayout *form = new QVBoxLayout;
+     form->setSpacing(5);
 
     instrumentType->addItem("Scegli il tipo di strumento");
     instrumentType->addItem("Arco");
@@ -211,10 +212,11 @@ insertView::insertView(QWidget* p):
     buttonsLayout->setSpacing(5);
     form->addItem(buttonsLayout);
 
-    form->setSizeConstraint(QLayout::SetFixedSize);
+    insert_form->setSizeConstraint(QLayout::SetFixedSize);
 
     insert_form->addWidget(image);
     insert_form->addItem(form);
+
 
     slotDisableElements(0);
 
@@ -236,6 +238,8 @@ void insertView::slotRestart(){
     instrumentType->setCurrentIndex(0);
     instrumentType->show();
 
+    image->hide();
+
     generalInfo->hide();
     specificInfo->hide();
 
@@ -244,6 +248,7 @@ void insertView::slotRestart(){
     slotReset();
 
     instrumentType->setEnabled(true);
+    image->setEnabled(false);
     price->setEnabled(false);
     description->setEnabled(false);
     brand->setEnabled(false);
@@ -354,7 +359,7 @@ void insertView::slotDisableElements(int index) const
 
 
         instrumentType->setEnabled(true);
-	image->setEnabled(true);
+        image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -385,7 +390,7 @@ void insertView::slotDisableElements(int index) const
 
         generalInfo->show();
         specificInfo->show();
-	image->show();
+        image->show();
 
         price->show();
         description->show();
@@ -407,7 +412,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
-	image->setEnabled(true);
+        image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -434,7 +439,7 @@ void insertView::slotDisableElements(int index) const
         instrumentType->show();
         generalInfo->show();
         specificInfo->show();
-	image->show();
+        image->show();
 
         price->show();
         description->show();
@@ -460,7 +465,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
-	image->setEnabled(true);
+        image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -489,7 +494,7 @@ void insertView::slotDisableElements(int index) const
         instrumentType->show();
         generalInfo->show();
         specificInfo->show();
-	image->show();
+        image->show();
 
         price->show();
         description->show();
@@ -518,7 +523,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->show();
 
         instrumentType->setEnabled(true);
-	image->setEnabled(true);
+        image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -554,8 +559,8 @@ void insertView::slotDisableElements(int index) const
         instrumentType->show();
         generalInfo->hide();
         specificInfo->hide();
-	image->hide();
-	
+        image->hide();
+
         instrumentType->setEnabled(true);
         price->setEnabled(false);
         description->setEnabled(false);
@@ -578,7 +583,7 @@ void insertView::slotDisableElements(int index) const
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
-	image->setEnabled(false);
+        image->setEnabled(false);
     }
 }
 
@@ -670,14 +675,17 @@ void insertView::slotDisableCorda(int index) const
     default:
 
         cordaType->setCurrentIndex(0);
+        stringsNumber->hide();
         guitarType->hide();
 
         bassType->hide();
         isFretless->hide();
 
+
         pianoShape->hide();
         keysMaterial->hide();
 
+        stringsNumber->setEnabled(false);
         guitarType->setEnabled(false);
         bassType->setEnabled(false);
         isFretless->setEnabled(false);
