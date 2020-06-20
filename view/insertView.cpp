@@ -46,9 +46,15 @@ insertView::insertView(QWidget* p):
     fiatoMaterial(new QComboBox(this)),
 
     addItem(new QPushButton("Inserisci",this)),
-    resetFields(new QPushButton("Reset",this))
+    resetFields(new QPushButton("Reset",this)),
+
+    image(new ImageControlBox("", this)),
+    imgPath("")
 {
-    QVBoxLayout *form = new QVBoxLayout(this);
+     // In pratica il nuovo layout visualizzato è insert_form, che ha
+     // in QHBoxLayout ImageControlBox e il form come era prima
+     QHBoxLayout *insert_form = new QHBoxLayout(this);
+     QVBoxLayout *form = new QVBoxLayout;
 
     instrumentType->addItem("Scegli il tipo di strumento");
     instrumentType->addItem("Arco");
@@ -197,8 +203,6 @@ insertView::insertView(QWidget* p):
 
     form->addWidget(generalInfo);
     form->addWidget(specificInfo);
-
-
       
 
     QHBoxLayout* buttonsLayout= new QHBoxLayout;
@@ -209,15 +213,18 @@ insertView::insertView(QWidget* p):
 
     form->setSizeConstraint(QLayout::SetFixedSize);
 
+    insert_form->addWidget(image);
+    insert_form->addItem(form);
+
     slotDisableElements(0);
 
     connect(instrumentType,SIGNAL(activated(int)),this,SLOT(slotDisableElements(int)));
     connect(arcoType, SIGNAL(activated(int)), this, SLOT(slotDisableArco(int)));
     connect(cordaType, SIGNAL(activated(int)), this, SLOT(slotDisableCorda(int)));
     connect(percussioneType, SIGNAL(activated(int)), this, SLOT(slotDisablePercussione(int)));
+    connect(image, SIGNAL(signal_setImage(const QString&)), this, SLOT(slotSetImage(const QString&)));
     connect(resetFields,SIGNAL(clicked()),this,SLOT(slotReset()));
     connect(this,SIGNAL(rejected()),this,SLOT(slotRestart()));
-
 
 }
 
@@ -316,6 +323,7 @@ void insertView::slotDisableElements(int index) const
 
         generalInfo->show();
         specificInfo->show();
+	image->show();
 
         price->show();
         description->show();
@@ -346,6 +354,7 @@ void insertView::slotDisableElements(int index) const
 
 
         instrumentType->setEnabled(true);
+	image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -376,6 +385,7 @@ void insertView::slotDisableElements(int index) const
 
         generalInfo->show();
         specificInfo->show();
+	image->show();
 
         price->show();
         description->show();
@@ -397,6 +407,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
+	image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -423,6 +434,7 @@ void insertView::slotDisableElements(int index) const
         instrumentType->show();
         generalInfo->show();
         specificInfo->show();
+	image->show();
 
         price->show();
         description->show();
@@ -448,6 +460,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
+	image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -476,6 +489,7 @@ void insertView::slotDisableElements(int index) const
         instrumentType->show();
         generalInfo->show();
         specificInfo->show();
+	image->show();
 
         price->show();
         description->show();
@@ -504,6 +518,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->show();
 
         instrumentType->setEnabled(true);
+	image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
         brand->setEnabled(true);
@@ -539,7 +554,8 @@ void insertView::slotDisableElements(int index) const
         instrumentType->show();
         generalInfo->hide();
         specificInfo->hide();
-
+	image->hide();
+	
         instrumentType->setEnabled(true);
         price->setEnabled(false);
         description->setEnabled(false);
@@ -562,6 +578,7 @@ void insertView::slotDisableElements(int index) const
         isMetalSnare->setEnabled(false);
         fiatoType->setEnabled(false);
         fiatoMaterial->setEnabled(false);
+	image->setEnabled(false);
     }
 }
 
@@ -723,6 +740,10 @@ void insertView::slotDisablePercussione(int index) const
     }
 }
 
+void insertView::slotSetImage(const QString& new_path){
+     imgPath = new_path;
+}
+
     QComboBox* insertView::getInstrumentType() const {
         return instrumentType;
     }
@@ -827,6 +848,12 @@ void insertView::slotDisablePercussione(int index) const
     QPushButton* insertView::getResetFieldsButton() const {
         return resetFields;
     }
+
+QString insertView::getImgPath() const {
+     return imgPath;
+     // ritorna una copia non dovrebbe essere troppo grossa, e viene
+     // fatto solo una volta
+}
 
     void insertView::showWarningDialog(QWidget* p, QString what) const {
 

@@ -13,7 +13,7 @@
 #include <QWidget>
 #include <string>
 #include <QSpinBox>
-
+#include "imageControlBox.h"
 
 class insertView : public QDialog
 {
@@ -71,27 +71,32 @@ private:
 //Tromba
 
 //*******************************************
-    QPushButton *addItem; //Aggiunge un nuovo item alla lista di quelli disponibili(al magazzino)
-    QPushButton *resetFields; //Resetta i campi dell'item con i valori di default
+     QPushButton *addItem; //Aggiunge un nuovo item alla lista di quelli disponibili(al magazzino)
+     QPushButton *resetFields; //Resetta i campi dell'item con i valori di default
+
+     ImageControlBox* image;
+     QString imgPath;
 
    private slots:
 
-   void slotReset();
-   void slotRestart();
+     void slotReset();
+     void slotRestart();
+     void slotSetImage(const QString&);
 
 public:
 
    insertView(QWidget * =nullptr);
 
     //Strumento
-    QComboBox *getInstrumentType() const;
-    QLineEdit *getPrice() const;
-    QLineEdit *getDescription() const;
-    QLineEdit *getBrand() const;
-    QLineEdit *getModel() const;
-    QComboBox *getInstrumentTune() const;
-    QCheckBox *getIsSecondHand() const;
-    QSpinBox *getQuantity() const;
+     QComboBox *getInstrumentType() const;
+     QLineEdit *getPrice() const;
+     QLineEdit *getDescription() const;
+     QLineEdit *getBrand() const;
+     QLineEdit *getModel() const;
+     QComboBox *getInstrumentTune() const;
+     QCheckBox *getIsSecondHand() const;
+     QSpinBox *getQuantity() const;
+     QString getImgPath() const;
 
     //Arco
     QComboBox *getArcoType() const;
