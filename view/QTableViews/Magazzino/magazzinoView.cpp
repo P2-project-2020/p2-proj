@@ -66,10 +66,10 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         resultBar->addWidget(editEnabled);
         deleteSelected->setText("Elimina Selezionato");
         resultBar->addWidget(deleteSelected);
-        deleteSelected->setIcon(QIcon(":/icons/res/negative.svg"));
+        deleteSelected->setIcon(QIcon::fromTheme("list-remove"));
         deleteSelected->setIconSize(QSize(18,18));
         deleteAll->setText("Elimina Tutti");
-        deleteAll->setIcon(QIcon(":/icons/res/delete.svg"));
+        deleteAll->setIcon(QIcon::fromTheme("edit-delete"));
         deleteAll->setIconSize(QSize(18,18));
         resultBar->addWidget(deleteAll);
         addToCart->setText("Aggiungi al carrello");
@@ -77,7 +77,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         addNew->setIconSize(QSize(18,18));
         resultBar->addWidget(addToCart);
         addNew->setText("Nuovo prodotto");
-        addNew->setIcon(QIcon(":/icons/res/plus.svg"));
+        addNew->setIcon(QIcon::fromTheme("list-add"));
         addNew->setIconSize(QSize(18,18));
         resultBar->addWidget(addNew);
         search->addItem(resultBar);
