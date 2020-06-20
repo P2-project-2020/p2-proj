@@ -76,7 +76,6 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     this->layout()->setMenuBar(menuBar);
 
-    //core->magazzino_push_random();
     slotUpdatePage();
 
     connect(pagine, SIGNAL(currentChanged(int)), this, SLOT(slotUpdatePage()));
@@ -86,9 +85,8 @@ Controller::Controller(Model* m,QWidget *parent) :
     connect(Vmagazzino->getAddToCart(),SIGNAL(clicked()),this,SLOT(slotAddToCart())); //NEW
     connect(Vcarrello->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteCarrelloItem()));
     connect(Vcarrello->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetCarrello()));
-   // connect(Vcarrello->getLoadSample(),SIGNAL(clicked()),this,SLOT(slotLoadSample()));
     //salvataggio
-    //connect(this->loadSample,SIGNAL(clicked()),this,SLOT(slotLoadSample()));
+    connect(this->loadSample,SIGNAL(clicked()),this,SLOT(slotLoadSample()));
     connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
     //Per sapere che i dati sono stati modificati in real time
     connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
@@ -127,7 +125,7 @@ void Controller::slotLoadSample(){
 
     QJsonDocument doc;
     QByteArray data_json;
-    QFile input("sample.json");
+    QFile input(":/json/sample.json");
     if(input.open(QIODevice::ReadOnly | QIODevice::Text)){
         data_json = input.readAll();
         doc = doc.fromJson(data_json);

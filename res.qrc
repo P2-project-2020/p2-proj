@@ -9,4 +9,7 @@
     <qresource prefix="/images">
         <file>res/logo.png</file>
     </qresource>
+    <qresource prefix="/json">
+        <file>sample.json</file>
+    </qresource>
 </RCC>

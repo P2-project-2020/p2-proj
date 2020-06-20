@@ -191,44 +191,6 @@ void Model::magazzino_push_end(Strumento *instrument)
 	magazzino->push_back(instrument);
 }
 
-void Model::magazzino_push_random()
-{
-	int num;
-
-	for(int i=0;i<100; ++i){
-		num = rand() % 8;
-		switch(num){
-		case(0):
-			magazzino->push_back(new Violino());
-			break;
-		case(1):
-			magazzino->push_back(new Viola());
-			break;
-		case(2):
-			magazzino->push_back(new Sax());
-			break;
-		case(3):
-			magazzino->push_back(new Tromba());
-			break;
-		case(4):
-			magazzino->push_back(new Chitarra());
-			break;
-		case(5):
-			magazzino->push_back(new Basso());
-			break;
-		case(6):
-			magazzino->push_back(new Pianoforte());
-			break;
-		case(7):
-			magazzino->push_back(new KitBatteria());
-			break;
-
-		}
-
-
-	}
-}
-
 void Model::carrello_push_end(Strumento *instrument)
 {
 	carrello->push_back(instrument);

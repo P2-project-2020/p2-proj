@@ -21,7 +21,6 @@ public:
 // Pusha su list e sulla rispettiva lista in base al tipo
     void magazzino_push_end(Strumento*);
     void carrello_push_end(Strumento*);
-    void magazzino_push_random();
 
 //Ritorna elemento in un Container sulla base di un indice
     Strumento* magazzinoAt(unsigned int =0);
