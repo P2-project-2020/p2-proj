@@ -14,6 +14,7 @@
 #include <string>
 #include <QSpinBox>
 #include "imageControlBox.h"
+#include "model/hierarchy/strumento.h"
 
 class insertView : public QDialog
 {
@@ -73,7 +74,8 @@ private:
 //*******************************************
      QPushButton *addItem; //Aggiunge un nuovo item alla lista di quelli disponibili(al magazzino)
      QPushButton *resetFields; //Resetta i campi dell'item con i valori di default
-
+     QPushButton *editItem; //Utilizzabile solo per editare
+     
      ImageControlBox* image;
      QString imgPath;
 
@@ -85,7 +87,7 @@ private:
 
 public:
 
-   insertView(QWidget * =nullptr);
+     insertView(QWidget* = nullptr, Strumento* = nullptr);
 
     //Strumento
      QComboBox *getInstrumentType() const;

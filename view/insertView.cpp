@@ -14,7 +14,7 @@
 #include "model/hierarchy/strumento.h"
 
 
-insertView::insertView(QWidget* p):
+insertView::insertView(QWidget* p, Strumento* strumento):
     QDialog (p),
     instrumentType(new QComboBox(this)),
     generalInfo(new QGroupBox(this)),
@@ -46,6 +46,7 @@ insertView::insertView(QWidget* p):
     fiatoMaterial(new QComboBox(this)),
 
     addItem(new QPushButton("Inserisci",this)),
+    editItem(new QPushButton("Modifica",this)),
     resetFields(new QPushButton("Reset",this)),
 
     image(new ImageControlBox("", this)),
@@ -56,6 +57,8 @@ insertView::insertView(QWidget* p):
      QHBoxLayout *insert_form = new QHBoxLayout(this);
      QVBoxLayout *form = new QVBoxLayout;
      form->setSpacing(5);
+     editItem->hide();
+     editItem->setEnabled(false);
 
     instrumentType->addItem("Scegli il tipo di strumento");
     instrumentType->addItem("Arco");
@@ -93,7 +96,6 @@ insertView::insertView(QWidget* p):
     generalForm->addItem(quantityForm);
     generalInfo->setLayout(generalForm);
 
-
     QVBoxLayout* specificForm = new QVBoxLayout;
     specificForm->setSpacing(5);
 
@@ -126,8 +128,6 @@ insertView::insertView(QWidget* p):
     stringForm->addWidget(stringsNumber);
 
     specificForm->addItem(stringForm);
-
-
 
     guitarType->addItem("Scegli il tipo di chitarra");
     guitarType->addItem("Elettrica");
@@ -217,9 +217,46 @@ insertView::insertView(QWidget* p):
     insert_form->addWidget(image);
     insert_form->addItem(form);
 
-
     slotDisableElements(0);
 
+    if(strumento){
+	 // edit mode
+	 // if(dynamic_cast<Violino*>(strumento)){
+	 //      slotDisableElements(1);
+	 // }
+	 // if(dynamic_cast<Viola*>(strumento)){
+	 //      slotDisableElements(1);
+	 // }
+	 // if(dynamic_cast<Chitarra*>(strumento)){
+	 //      slotDisableElements(2);
+	 // }
+	 // if(dynamic_cast<Basso*>(strumento)){
+	 //      slotDisableElements(2);
+	 // }
+	 // if(dynamic_cast<Pianoforte*>(strumento)){
+	 //      slotDisableElements(2);
+	 // }
+	 // if(dynamic_cast<KitBatteria*>(strumento)){
+	 //      slotDisableElements(2);
+	 // }
+	 // if(dynamic_cast<Sax*>(strumento)){}
+	 // if(dynamic_cast<Tromba*>(strumento)){}
+
+	 instrumentType->setEnabled(false);
+	 arcoType->setEnabled(false);
+	 cordaType->setEnabled(false);
+	 guitarType->setEnabled(false);
+	 bassType->setEnabled(false);
+	 
+	 price->setText(QString::number(strumento->getPrice()));
+	 description->setText(QString::fromStdString(strumento->getDescription()));
+	 brand->setText(QString::fromStdString(strumento->getBrand()));
+	 model->setText(QString::fromStdString(strumento->getModel()));
+	 instrumentTune->setCurrentText(QString::fromStdString(Strumento::Tunes.at(strumento->tune())));
+	 isSecondHand->setChecked(strumento->isUsed());
+	 quantity->setValue(strumento->getQuantity());
+    }
+    
     connect(instrumentType,SIGNAL(activated(int)),this,SLOT(slotDisableElements(int)));
     connect(arcoType, SIGNAL(activated(int)), this, SLOT(slotDisableArco(int)));
     connect(cordaType, SIGNAL(activated(int)), this, SLOT(slotDisableCorda(int)));
