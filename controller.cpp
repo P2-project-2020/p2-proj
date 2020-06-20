@@ -102,20 +102,50 @@ QString Controller::getCurrentFile() const{ return currentFile;}
 /*PDF Print for receipt */
 void Controller::slotPrint() {
 
-        QPrinter printer;
+    QPrinter printer;//(QPrinter::HighResolution);
                 printer.setOutputFormat(QPrinter::PdfFormat);
                 printer.setPageOrientation(QPageLayout::Landscape);
                 printer.setOutputFileName("/Users/erik/Documents/p2-2020/p2-proj/magazzinoTable.pdf");
+               // printer.setPageMargins(12, 16, 12, 20, QPrinter::Millimeter);
+               //printer.setFullPage(false);
+
         // printer setup
 
         QPainter painter;
                 painter.begin(&printer);
+                //Stampa Header
+               /* QDialog *w ;
+                QVBoxLayout *verticalLayout = new QVBoxLayout();
+                w->setLayout(verticalLayout);
+                //verticalLayout->addWidget(new QImage(":/images/res/logo.png"));
+                verticalLayout->addWidget(new QPushButton("btn"));
+                verticalLayout->addWidget(new QLineEdit("text")); */
+/*
+
+                double xscale = printer.pageRect().width() / double(w->width());
+                double yscale = printer.pageRect().height() / double(w->height());
+                double scale = qMin(xscale, yscale);
+                painter.translate(printer.paperRect().center());
+                painter.scale(scale, scale);
+                painter.translate(-w->width()/ 2, -w->height()/ 2);
+                */
+
+                QImage img(":/images/res/logo.png");
+                painter.drawImage(QPoint(0,0),img);
+                painter.restore();
+
+                //Stampa tabella
                 TablePrinter tablePrinter(&painter, &printer);
                 QVector<int> columnStretch = QVector<int>() << 10 << 10 << 10 << 10 << 10 << 10 << 10 <<10 << 4;
                 if(!tablePrinter.printTable(Vmagazzino->getAdapter(), columnStretch)) {
                     qDebug() << tablePrinter.lastError();
                 }
+                QMessageBox::information(this,tr("Messaggio"),tr("PDF Magazzino generato correttamente"));
                 painter.end();
+
+                  //w->render(&painter);
+
+
 
 }
 
@@ -431,6 +461,7 @@ void Controller::slotInserisci(){
 }
 
 void Controller::slotAddToCart() {
+
     if(!Vmagazzino->getTable()->selectionModel()->hasSelection())
         QMessageBox::warning(this,"Attenzione!","Devi selezionare almeno un elemento!");
     else{
@@ -445,38 +476,40 @@ void Controller::slotAddToCart() {
 if(confirm == QMessageBox::Yes)
 
     for(auto i = 0; i< selectedIndexes.size();++i) {
+        //Converto riga del modello sorted in quella originale
+        int row = Vmagazzino->getFilter()->mapToSource
+         (QPersistentModelIndex(selectedIndexes[i])).row();
 
-        if(!core->magazzinoAt(selectedIndexes[i].row())->getQuantity())
+        qDebug() <<row;
+
+        if(!core->magazzinoAt(row)->getQuantity())
             QMessageBox::warning(this,"Attenzione!","Quantità esaurita, rifornire il magazzino!");
 
         else {
             bool ok;
-            unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(selectedIndexes[i].row())->getQuantity(), 1, &ok);
+            unsigned int quantity = QInputDialog::getInt(this, tr("Seleziona quantità"), tr("Quantità"), 1, 1, core->magazzinoAt(row)->getQuantity(), 1, &ok);
                     if(ok) {
 
                         bool aggiornato = false;
+
                         for(auto it = core->carrello_begin();it!=core->carrello_end(); ++it){
                             Strumento *instrument = *it;
+
                             int oldQuantity = instrument->getQuantity();
                             int newQuantity = oldQuantity + quantity;
-                            if(*(*it) == *(core->magazzinoAt(selectedIndexes[i].row()))){ //Sto inserendo in carrello un oggetto che c'è gia -> incremento quantita
+                            if(*(*it) == *(core->magazzinoAt(row))){ //Sto inserendo in carrello un oggetto che c'è gia -> incremento quantita
                                 instrument->setQuantity(newQuantity);
                                 aggiornato = true;
                             }
                         }
                         if(!aggiornato){ //Pusho un nuovo obj
-                        core->carrello_push_end(core->magazzinoAt(selectedIndexes[i].row())->clone());
+                        core->carrello_push_end(core->magazzinoAt
+                                                (row)->clone());
                         core->carrelloAt(core->getCarrelloSize()-1)->setQuantity(quantity);
                         }
 
-
-
-
                         /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
-                            /*if(quantity == core->magazzinoAt(selectedIndexes[i].row())->getQuantity())
-                                Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
-                            else*/
-                                core->magazzinoAt(selectedIndexes[i].row())->setQuantity(core->magazzinoAt(selectedIndexes[i].row())->getQuantity() - quantity);
+                                core->magazzinoAt(row)->setQuantity(core->magazzinoAt(row)->getQuantity() - quantity);
 
 
                         }
@@ -508,8 +541,10 @@ void Controller::slotDeleteMagazzinoItem()
             "Confermi di voler rimuovere lo strumento selezionato?", QMessageBox::Yes|QMessageBox::No);
 
 if(confirm == QMessageBox::Yes)
-    for(auto i = 0; i< selectedIndexes.size();++i)
+    for(auto i = 0; i< selectedIndexes.size();++i){
+            qDebug() << selectedIndexes[i].row() << selectedIndexes[i].model();
             Vmagazzino->getFilter()->removeRow(QPersistentModelIndex(selectedIndexes[i]).row());
+    }
 else
     return;
 
@@ -624,7 +659,9 @@ void Controller::resetCarrello(){
             Strumento *instrument = *it;
 
             if(*(*it) == *(core->carrelloAt(0))){ //Nel magazzino sono presenti ancora strumenti uguali a quello che si vuole rimuovere dal carrello -> incremento quantita
+                //qDebug()<<core->carrelloAt(0)->getQuantity() + instrument->getQuantity();
                 instrument->setQuantity( core->carrelloAt(0)->getQuantity() + instrument->getQuantity());
+                qDebug()<< instrument->getQuantity();
                 found = true;
             }
         }

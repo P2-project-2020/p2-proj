@@ -45,7 +45,8 @@ HEADERS += controller.h \
            view/QTableViews/Carrello/carrelloView.h \
            view/QTableViews/Magazzino/magazzinoAdapter.h \
            view/QTableViews/Magazzino/magazzinoFilter.h \
-           view/QTableViews/Magazzino/magazzinoView.h
+           view/QTableViews/Magazzino/magazzinoView.h \
+    view/PDF/tableviewtopdf.h
 SOURCES += controller.cpp \
            main.cpp \
            model/model.cpp \
@@ -76,5 +77,6 @@ SOURCES += controller.cpp \
            view/QTableViews/Carrello/carrelloView.cpp \
            view/QTableViews/Magazzino/magazzinoAdapter.cpp \
            view/QTableViews/Magazzino/magazzinoFilter.cpp \
-           view/QTableViews/Magazzino/magazzinoView.cpp
+           view/QTableViews/Magazzino/magazzinoView.cpp \
+    view/PDF/tableviewtopdf.cpp
 RESOURCES += res.qrc
