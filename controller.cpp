@@ -723,7 +723,7 @@ void Controller::slotUpdatePage(){
     /* AGGIORNAMENTO STATUS BAR */
 }
 
-/*
+
 void Controller::closeEvent(QCloseEvent *event) {
 
             if(!core->isDataSaved()){
@@ -736,5 +736,4 @@ void Controller::closeEvent(QCloseEvent *event) {
                this->close();
     }
 
-    */
 

@@ -32,7 +32,7 @@ private:
 public:
     Controller(Model*, QWidget * = nullptr);
     // Rileva il tentativo di chiusura della finestra, chiede se salvare i dati in caso essi non lo siano
-    //void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event);
     QString getCurrentFile() const;
     void resetMagazzino();
     void resetCarrello();
