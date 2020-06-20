@@ -35,10 +35,10 @@ void toolboxRow::initFileDialog(QFileDialog &dialog)
         mimeTypeFilters.append(mimeTypeName);
 
 	mimeTypeFilters.sort();
-
+	
 	dialog.setMimeTypeFilters(mimeTypeFilters);
-    dialog.selectMimeTypeFilter("image/jpg");
-	/* In pratica setta il file explorer in modo che /apra/ solo le immagini */
+	dialog.selectMimeTypeFilter("image/jpg");
+	/* In pratica setta il file explorer in modo che apra /solo/ le immagini */
 }
 
 void toolboxRow::slot_load(){
@@ -49,15 +49,9 @@ void toolboxRow::slot_load(){
 	QString filename;
 	while(!imgAccepted && dialog.exec() == QDialog::Accepted)
 	{
-		/* Ho provato a fare così per vedere se il file è buono, provo a varicarlo in una QImage e 
-		   vedetre se è nulla. Se ci sono metodi migliori non li conosco!! */
 		filename = dialog.selectedFiles().first();
 		QImage imgReader(QString("file:///").append(filename));
-        /*filename contiene la path completa, QImage cerca di caricare percorsi relativi, 
-		  quelli assoluti li comprende solo con file:/// davanti */
 		imgAccepted = imgReader.isNull();
-		/* All'inizio avevo fatto tramite QImageReader, così in caso di errore poteva dare un log più esteso.
-		   Salta fuori che per un bug non riusciva a leggere nessuna immagine haha ho perso 4 ore dio... */
 		if(!imgAccepted){
 			QMessageBox::information(this, QGuiApplication::applicationDisplayName(),
 									 tr("Impossibile caricare %1")
