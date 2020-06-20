@@ -130,6 +130,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     QPushButton *magazzinoView::getDeleteAll() const{ return deleteAll; }
     QPushButton *magazzinoView::getAddToCart() const { return addToCart; }
     insertView *magazzinoView::getAddView() const { return addView; }
+    void magazzinoView::setAddView(Strumento* strumento)  { this->addView = new insertView(this,strumento); }
 
     QLabel *magazzinoView::getResultsNumber() const{ return resultsNumber; }
 

@@ -29,6 +29,8 @@ private:
     QLabel *saveStatus;//Mostra in tempo reale lo stato dei dati ( salvati o meno)
     QString currentFile;//Il file di lavoro corrente
     QPushButton* loadSample;
+    QPushButton* printTable;
+    QPushButton* viewDetails;
 public:
     Controller(Model*, QWidget * = nullptr);
     // Rileva il tentativo di chiusura della finestra, chiede se salvare i dati in caso essi non lo siano
@@ -51,5 +53,6 @@ public slots:
     void slotResetTables();
     void slotDataChanged();
     void slotPrint();
+    void slotViewDetails();
 };
 #endif // CONTROLLER_H

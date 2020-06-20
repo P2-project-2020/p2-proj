@@ -29,6 +29,7 @@ class magazzinoView : public QWidget
         QPushButton *getAddToCart() const;
 
         insertView* getAddView() const;
+        void setAddView(Strumento*);
         QLabel *getResultsNumber() const;
         QLabel *getEditEnabled() const;
 

@@ -48,7 +48,9 @@ Controller::Controller(Model* m,QWidget *parent) :
     statusBar(new QHBoxLayout),
     itemCounter(new QLabel(this)),
     saveStatus(new QLabel(this)),
-    loadSample(new QPushButton(this))
+    loadSample(new QPushButton(this)),
+    printTable(new QPushButton(this)),
+    viewDetails(new QPushButton(this))
 {
 
     QGroupBox *logoBox = new QGroupBox();
@@ -68,10 +70,29 @@ Controller::Controller(Model* m,QWidget *parent) :
 
 
     loadSample->setText("Importa il file sample");
+    loadSample->setStyleSheet(
+                "\
+                                QPushButton {   \
+                                    background-color: rgba(31, 58, 147, 1); \
+                                    color:white;    \
+                                }   \
+                                QPushButton:checked{\
+                                    background-color: white;\
+                                    color : rgba(31, 58, 147, 1) \
+                                }\
+                                QPushButton:hover{  \
+                                    background-color: grey; \
+                                }  \
+                                ");
+    printTable->setText("Esporta in PDF");
+    viewDetails->setText("Visualizza Dettagli");
 
-    statusBar->addWidget(itemCounter,Qt::AlignRight);
-    statusBar->addWidget(saveStatus,Qt::AlignRight);
-    statusBar->addWidget(loadSample,Qt::AlignLeft);
+    statusBar->setSpacing(20);
+    statusBar->addWidget(itemCounter,  Qt::AlignRight);
+    statusBar->addWidget(saveStatus,  Qt::AlignRight);
+    statusBar->addWidget(viewDetails, 2, Qt::AlignCenter);
+    statusBar->addWidget(printTable, 8, Qt::AlignCenter);
+    statusBar->addWidget(loadSample, 0, Qt::AlignLeft);
     mainLayout->addItem(statusBar);
     setLayout(mainLayout);
 
@@ -88,16 +109,40 @@ Controller::Controller(Model* m,QWidget *parent) :
     connect(Vcarrello->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetCarrello()));
     //salvataggio
     connect(this->loadSample,SIGNAL(clicked()),this,SLOT(slotLoadSample()));
+    connect(this->printTable,SIGNAL(clicked()),this,SLOT(slotPrint()));
+    connect(this->viewDetails,SIGNAL(clicked()),this,SLOT(slotViewDetails()));
     connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
     //Per sapere che i dati sono stati modificati in real time
     connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
     connect(Vcarrello->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
 
-
 }
 
 QString Controller::getCurrentFile() const{ return currentFile;}
 
+void Controller::slotViewDetails(){
+    /*
+    int row = Vmagazzino->getFilter()->mapToSource
+     (QPersistentModelIndex(selectedIndexes[i])).row(); */
+
+    if(!Vmagazzino->getTable()->selectionModel()->hasSelection())
+        QMessageBox::warning(this,"Attenzione!","Devi selezionare un elemento!");
+    else if(!Vmagazzino->getTable()->selectionModel()->selectedRows().size() > 1 )
+            QMessageBox::warning(this,"Attenzione!","Puoi selezionare solo un elemento!");
+    else{
+    QModelIndexList selectedIndexes = Vmagazzino->getTable()->selectionModel()->selectedRows();
+
+
+            int row = Vmagazzino->getFilter()->mapToSource(QPersistentModelIndex(selectedIndexes[0])).row();
+            Vmagazzino->setAddView(core->magazzinoAt(row));
+            Vmagazzino->slotOpenInsertView();
+
+    }
+
+
+slotUpdatePage();
+
+}//slotViewDetails
 
 void Controller::printPdfTable(const QString filename){
 
@@ -149,7 +194,6 @@ void Controller::printPdfTable(const QString filename){
 }//printPdfTable
 
 
-/*PDF Print for receipt */
 void Controller::slotPrint() {
     QString filter = "PDF (*.pdf)";
        bool overr = false;
@@ -169,15 +213,14 @@ void Controller::slotPrint() {
                        QDir::currentPath(),
                        filter,&filter,QFileDialog::DontUseNativeDialog);
           //Se l'utente non ha inserito l'estensione la aggiungo
-          if (!filename.endsWith(".pdf"))
-              filename += ".pdf";
-
 
     if(filename.isEmpty())
         QMessageBox::warning(this,"Attenzione!","File scelto non valido");
-    else
+    else{
+        if (!filename.endsWith(".pdf"))
+            filename += ".pdf";
         printPdfTable(filename);
-
+    }
       }//Chiedo all'utente dove salvare
 
 
