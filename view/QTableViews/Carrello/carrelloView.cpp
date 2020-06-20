@@ -1,4 +1,6 @@
-#include "carrelloView.h"
+#include "view/QTableViews/Carrello/carrelloView.h"
+#include "view/QTableViews/tuneComboBoxItemDelegate.h"
+#include "view/QTableViews/materialComboBoxItemDelegate.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>

@@ -10,9 +10,9 @@
 #include <QComboBox>
 
 #include "model/model.h"
-#include "insertView.h"
-#include "magazzinoFilter.h"
-#include "magazzinoAdapter.h"
+#include "view/insertView.h"
+#include "view/QTableViews/Magazzino/magazzinoFilter.h"
+#include "view/QTableViews/Magazzino/magazzinoAdapter.h"
 
 class magazzinoView : public QWidget
 {

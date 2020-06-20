@@ -19,20 +19,6 @@ INCLUDEPATH += .
 HEADERS += controller.h \
            model/container.h \
            model/model.h \
-           view/carrelloAdapter.h \
-           view/carrelloFilter.h \
-           view/carrelloView.h \
-           view/filterExample.h \
-           view/imageControlBox.h \
-           view/imageView.h \
-           view/inputexception.h \
-           view/insertExample.h \
-           view/insertView.h \
-           view/magazzinoAdapter.h \
-           view/magazzinoFilter.h \
-           view/magazzinoView.h \
-           view/menu.h \
-           view/toolboxrow.h \
            model/hierarchy/arco.h \
            model/hierarchy/basso.h \
            model/hierarchy/chitarra.h \
@@ -46,23 +32,24 @@ HEADERS += controller.h \
            model/hierarchy/tromba.h \
            model/hierarchy/viola.h \
            model/hierarchy/violino.h \
-    view/tuneComboBoxItemDelegate.h \
-    view/materialComboBoxItemDelegate.h
+    view/QTableViews/Carrello/carrelloAdapter.h \
+    view/QTableViews/Carrello/carrelloFilter.h \
+    view/QTableViews/Carrello/carrelloView.h \
+    view/QTableViews/Magazzino/magazzinoView.h \
+    view/QTableViews/Magazzino/magazzinoAdapter.h \
+    view/QTableViews/Magazzino/magazzinoFilter.h \
+    view/QTableViews/materialComboBoxItemDelegate.h \
+    view/QTableViews/tuneComboBoxItemDelegate.h \
+    view/imageControlBox.h \
+    view/imageView.h \
+    view/inputexception.h \
+    view/insertView.h \
+    view/menu.h \
+    view/toolboxrow.h \
+
 SOURCES += controller.cpp \
            main.cpp \
            model/model.cpp \
-           view/carrelloAdapter.cpp \
-           view/carrelloFilter.cpp \
-           view/carrelloView.cpp \
-           view/imageControlBox.cpp \
-           view/imageView.cpp \
-           view/inputexception.cpp \
-           view/insertView.cpp \
-           view/magazzinoAdapter.cpp \
-           view/magazzinoFilter.cpp \
-           view/magazzinoView.cpp \
-           view/menu.cpp \
-           view/toolboxrow.cpp \
            model/hierarchy/arco.cpp \
            model/hierarchy/basso.cpp \
            model/hierarchy/chitarra.cpp \
@@ -75,9 +62,21 @@ SOURCES += controller.cpp \
            model/hierarchy/strumento.cpp \
            model/hierarchy/tromba.cpp \
            model/hierarchy/viola.cpp \
-           model/hierarchy/violino.cpp \
-    view/materialComboBoxItemDelegate.cpp \
-    view/tuneComboBoxItemDelegate.cpp
+           model/hierarchy/violino.cpp \ 
+    view/QTableViews/Carrello/carrelloAdapter.cpp \
+    view/QTableViews/Carrello/carrelloFilter.cpp \
+    view/QTableViews/Carrello/carrelloView.cpp \
+    view/QTableViews/Magazzino/magazzinoView.cpp \
+    view/QTableViews/Magazzino/magazzinoAdapter.cpp \
+    view/QTableViews/Magazzino/magazzinoFilter.cpp \
+    view/QTableViews/materialComboBoxItemDelegate.cpp \
+    view/QTableViews/tuneComboBoxItemDelegate.cpp \
+    view/imageControlBox.cpp \
+    view/imageView.cpp \
+    view/inputexception.cpp \
+    view/insertView.cpp \
+    view/menu.cpp \
+    view/toolboxrow.cpp \
 
 RESOURCES += \
     res.qrc

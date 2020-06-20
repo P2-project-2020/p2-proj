@@ -1,6 +1,6 @@
-#include "magazzinoView.h"
-#include "tuneComboBoxItemDelegate.h"
-#include "materialComboBoxItemDelegate.h"
+#include "view/QTableViews/Magazzino/magazzinoView.h"
+#include "view/QTableViews/tuneComboBoxItemDelegate.h"
+#include "view/QTableViews/materialComboBoxItemDelegate.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>

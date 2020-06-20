@@ -10,8 +10,8 @@
 #include <QComboBox>
 
 #include "model/model.h"
-#include "carrelloFilter.h"
-#include "carrelloAdapter.h"
+#include "view/QTableViews/Carrello/carrelloFilter.h"
+#include "view/QTableViews/Carrello/carrelloAdapter.h"
 
 class carrelloView : public QWidget
 {

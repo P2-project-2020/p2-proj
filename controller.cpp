@@ -264,8 +264,7 @@ void Controller::slotInserisci(){
         case 2: { //Corda
             int stringType = insert->getCordaType()->currentIndex();
             int stringsNumber = insert->getStringsNumber()->text().toInt();
-            if(!stringsNumber)
-                   throw inputException("Devi prima inserire il numero di corde!");
+
 
             switch(stringType) {
 
@@ -279,6 +278,8 @@ void Controller::slotInserisci(){
                        throw inputException("Devi prima inserire il tipo di chitarra!");
                 if(guitarModel == "")
                        throw inputException("Devi prima inserire il modello di chitarra!");
+                if(!stringsNumber)
+                       throw inputException("Devi prima inserire il numero di corde!");
 
                 toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, model, description, isSecondHand, stringsNumber, quantity);
             }
@@ -289,6 +290,8 @@ void Controller::slotInserisci(){
 
                 if(bassType == "Scegli il tipo di basso")
                        throw inputException("Devi prima inserire il tipo di basso!");
+                if(!stringsNumber)
+                       throw inputException("Devi prima inserire il numero di corde!");
 
                 toPush = new Basso(Basso::findType(bassType), price, brand, model, description, isSecondHand, stringsNumber, isFretless, quantity);
             }

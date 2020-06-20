@@ -3,8 +3,8 @@
 
 #include "view/inputexception.h"
 #include "view/menu.h"
-#include "view/magazzinoView.h"
-#include "view/carrelloView.h"
+#include "view/QTableViews/Magazzino/magazzinoView.h"
+#include "view/QTableViews/Carrello/carrelloView.h"
 #include "model/model.h"
 #include <QVBoxLayout>
 #include <QStatusBar>
@@ -25,7 +25,7 @@ private:
     QBoxLayout *mainLayout;
     QHBoxLayout *headerLayout;
     QHBoxLayout *statusBar;//La statusBar inferiore che emula il comportamente della QStatusBar
-    QLabel *itemCounter;//TMostra in tempo reale il numero di strumenti presenti
+    QLabel *itemCounter;//Mostra in tempo reale il numero di strumenti presenti
     QLabel *saveStatus;//Mostra in tempo reale lo stato dei dati ( salvati o meno)
     QString currentFile;//Il file di lavoro corrente
 public:
