@@ -40,7 +40,6 @@ HEADERS += controller.h \
            model/hierarchy/tromba.h \
            model/hierarchy/viola.h \
            model/hierarchy/violino.h \
-<<<<<<< HEAD
     view/QTableViews/Carrello/carrelloAdapter.h \
     view/QTableViews/Carrello/carrelloFilter.h \
     view/QTableViews/Carrello/carrelloView.h \
@@ -56,17 +55,6 @@ HEADERS += controller.h \
     view/menu.h \
     view/toolboxrow.h \
     view/PDF/tablePrinter.h \
-
-=======
-           view/QTableViews/materialComboBoxItemDelegate.h \
-           view/QTableViews/tuneComboBoxItemDelegate.h \
-           view/QTableViews/Carrello/carrelloAdapter.h \
-           view/QTableViews/Carrello/carrelloFilter.h \
-           view/QTableViews/Carrello/carrelloView.h \
-           view/QTableViews/Magazzino/magazzinoAdapter.h \
-           view/QTableViews/Magazzino/magazzinoFilter.h \
-           view/QTableViews/Magazzino/magazzinoView.h
->>>>>>> 5b40dfb43fa8b958db58f6056cc896e96b66d1c9
 SOURCES += controller.cpp \
            main.cpp \
            model/model.cpp \
@@ -88,7 +76,6 @@ SOURCES += controller.cpp \
            model/hierarchy/strumento.cpp \
            model/hierarchy/tromba.cpp \
            model/hierarchy/viola.cpp \
-<<<<<<< HEAD
            model/hierarchy/violino.cpp \ 
     view/QTableViews/Carrello/carrelloAdapter.cpp \
     view/QTableViews/Carrello/carrelloFilter.cpp \
@@ -106,17 +93,3 @@ SOURCES += controller.cpp \
     view/toolboxrow.cpp \
     view/PDF/tablePrinter.cpp \
 
-RESOURCES += \
-    res.qrc
-=======
-           model/hierarchy/violino.cpp \
-           view/QTableViews/materialComboBoxItemDelegate.cpp \
-           view/QTableViews/tunecomboboxitemdelegate.cpp \
-           view/QTableViews/Carrello/carrelloAdapter.cpp \
-           view/QTableViews/Carrello/carrelloFilter.cpp \
-           view/QTableViews/Carrello/carrelloView.cpp \
-           view/QTableViews/Magazzino/magazzinoAdapter.cpp \
-           view/QTableViews/Magazzino/magazzinoFilter.cpp \
-           view/QTableViews/Magazzino/magazzinoView.cpp
-RESOURCES += res.qrc
->>>>>>> 5b40dfb43fa8b958db58f6056cc896e96b66d1c9
