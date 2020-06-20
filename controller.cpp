@@ -250,6 +250,7 @@ void Controller::slotInserisci(){
         std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
         bool isSecondHand = insert->getIsSecondHand()->isChecked();
         unsigned int quantity = insert->getQuantity()->text().toUInt();
+	std::string path = (insert->getImgPath()).toStdString();
 
         if(type) {
 
@@ -277,12 +278,12 @@ void Controller::slotInserisci(){
 
             switch(arcType) {
             case 1: //Violino
-                toPush = new Violino(price, brand, model, description, isSecondHand, quantity);
+		 toPush = new Violino(price, brand, model, description, isSecondHand, quantity, path);
                 break;
             case 2: { //Viola
                 if(instrumentTune == "Scegli il tipo di tonalità")
                        throw inputException("Devi prima inserire la tonalità!");
-                toPush = new Viola(price, brand, model, description,Strumento::findTune(instrumentTune), isSecondHand, quantity);
+                toPush = new Viola(price, brand, model, description,Strumento::findTune(instrumentTune), isSecondHand, quantity, path);
             }
                 break;
             default:
@@ -313,7 +314,7 @@ void Controller::slotInserisci(){
                 if(!stringsNumber)
                        throw inputException("Devi prima inserire il numero di corde!");
 
-                toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, model, description, isSecondHand, stringsNumber, quantity);
+                toPush = new Chitarra(Chitarra::findType(guitarType), price, brand, model, description, isSecondHand, stringsNumber, quantity, path);
             }
                 break;
             case 2: { //Basso
@@ -325,7 +326,7 @@ void Controller::slotInserisci(){
                 if(!stringsNumber)
                        throw inputException("Devi prima inserire il numero di corde!");
 
-                toPush = new Basso(Basso::findType(bassType), price, brand, model, description, isSecondHand, stringsNumber, isFretless, quantity);
+                toPush = new Basso(Basso::findType(bassType), price, brand, model, description, isSecondHand, stringsNumber, isFretless, quantity, path);
             }
                 break;
             case 3: { //Pianoforte
@@ -337,7 +338,7 @@ void Controller::slotInserisci(){
                 if(keysMaterial == "Scegli il materiale dei tasti")
                        throw inputException("Devi prima inserire il materiale dei tasti!");
 
-                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, model, isSecondHand, description, quantity);
+                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, model, isSecondHand, description, quantity, path);
             }
                 break;
             default:
@@ -362,7 +363,7 @@ void Controller::slotInserisci(){
                 if(keysMaterial == "Scegli il materiale dei tasti")
                        throw inputException("Devi prima inserire il materiale dei tasti!");
 
-                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, model, isSecondHand, description, quantity);
+                toPush = new Pianoforte(Pianoforte::findShape(pianoShape), Pianoforte::findKeys(keysMaterial), price, brand, model, isSecondHand, description, quantity, path);
             }
                 break;
             case 2: { // Kit batteria
@@ -372,7 +373,7 @@ void Controller::slotInserisci(){
                 if(percussionMaterial == "Scegli il tipo di materiale")
                        throw inputException("Devi prima inserire il tipo di materiale!");
 
-                toPush = new KitBatteria(price, brand, model, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description, quantity);
+                toPush = new KitBatteria(price, brand, model, KitBatteria::findMaterial(percussionMaterial), isMetalSnare, isSecondHand, description, quantity, path);
 
             }
                 break;
@@ -398,11 +399,11 @@ void Controller::slotInserisci(){
         switch(fiatoType) {
 
             case 1:  //Tromba
-                toPush = new Tromba(Strumento::findTune(instrumentTune), price, brand, model, Fiato::findMaterial(windMaterial), isSecondHand, description, quantity);
+		 toPush = new Tromba(Strumento::findTune(instrumentTune), price, brand, model, Fiato::findMaterial(windMaterial), isSecondHand, description, quantity, path);
 
                 break;
             case 2: //Sax
-                toPush = new Sax(Strumento::findTune(instrumentTune), price, brand, model, Fiato::findMaterial(windMaterial), isSecondHand, quantity);
+		 toPush = new Sax(Strumento::findTune(instrumentTune), price, brand, model, Fiato::findMaterial(windMaterial), isSecondHand, quantity, path);
 
                 break;
             default:
