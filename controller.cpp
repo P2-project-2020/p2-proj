@@ -703,12 +703,19 @@ void Controller::slotUpdatePage(){
     }
 
     else if(pagine->currentIndex() == 1) {//Carrello
-            if(!carrelloSize)
+            if(!carrelloSize){
                 itemCounter->setText("<b>Nessun prodotto presente!</b>");
+                Vcarrello->getEditEnabled()->setText("");
+                Vcarrello->getResultsNumber()->setText("<b>Per iniziare, aggiungi un prodotto da magazzino</b>");
+                Vcarrello->getResultsNumber()->setStyleSheet("color : orange");
+            }
 
-             else
+             else{
                 itemCounter->setText("<u>" + QString::number(carrelloSize) + " prodotti presenti </u>");
-
+                Vcarrello->getEditEnabled()->setText("<u> Modifica abilitata! </u>");
+                Vcarrello->getResultsNumber()->setText("<b>" + QString::number(core->getCarrelloSize()) + " strumenti trovati</b>");
+                Vcarrello->getResultsNumber()->setStyleSheet("color : green");
+}
             }
 
     /* AGGIORNAMENTO STATUS BAR */

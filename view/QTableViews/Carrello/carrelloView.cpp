@@ -21,7 +21,8 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
     proceedAndBuy(new QPushButton),
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
-    resultsNumber(new QLabel)
+    resultsNumber(new QLabel),
+    editEnabled(new QLabel)
 {
 
 
@@ -48,7 +49,7 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
         resultBar->setSpacing(10);
 
         if(!core->getCarrelloSize()){
-            resultsNumber->setText("<b>Per iniziare, carica un salvataggio</b>");
+            resultsNumber->setText("<b>Per iniziare, aggiungi un prodotto da magazzino</b>");
             resultsNumber->setStyleSheet("color : orange");
         }else
         {
@@ -57,8 +58,8 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
         }
 
         resultBar->addWidget(resultsNumber);
-        //editEnabled->setText("");
-        //resultBar->addWidget(editEnabled);
+        editEnabled->setText("");
+        resultBar->addWidget(editEnabled);
         deleteSelected->setText("Rimuovi Selezionato");
         resultBar->addWidget(deleteSelected);
         //deleteSelected->setIcon(QIcon(":/res/img/negative.svg"));
@@ -103,7 +104,7 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
 
     carrelloFilter *carrelloView::getFilter() const{ return filter;}
 
-    //QLabel *carrelloView::getEditEnabled() const{ return editEnabled;}
+    QLabel *carrelloView::getEditEnabled() const{ return editEnabled;}
 
     QTableView *carrelloView::getTable() const{ return table;}
 
