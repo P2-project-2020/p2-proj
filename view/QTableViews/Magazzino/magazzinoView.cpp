@@ -36,7 +36,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
         box->setStyleSheet("font-size:13px;");
         QHBoxLayout *form = new QHBoxLayout();
         form->setSpacing(100);
-        searchLine->setPlaceholderText("Ricerca per categoria, tipo o brand");
+        searchLine->setPlaceholderText("Ricerca per quantità, strumento, brand, tipo, materiale...");
         form->addWidget(searchLine, Qt::AlignLeft);
         instrumentType->addItem("Tutto");
         instrumentType->addItem("Archi");
