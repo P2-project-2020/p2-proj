@@ -219,9 +219,7 @@ else{
     //Se l'utente non ha inserito l'estensione la aggiungo
   if (!filename.endsWith(".pdf"))
       filename += ".pdf";
-    else{
-        if (!filename.endsWith(".pdf"))
-            filename += ".pdf";
+
         pdfFactory->printTable(pagine->currentIndex(),filename);
         if(pagine->currentIndex() == 0)
             QMessageBox::information(this,QObject::tr("Messaggio"),QObject::tr( "Magazzino generato ed esportato correttamente"));
@@ -230,8 +228,6 @@ else{
 
     }
       }//Chiedo all'utente dove salvare
-
-}
 
 /*PDF Print for receipt */
 
