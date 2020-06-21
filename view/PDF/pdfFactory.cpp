@@ -142,11 +142,12 @@ bool PdfFactory::printReceipt(QString filename){
         </div><!--End InvoiceBot-->\
 </div><!--End Invoice--> \
 ";
-
+	    
              doc.setHtml(html);
-
+	     
                 doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
                 doc.print(&printer);
-
+		return true;
+		 
 }
 
