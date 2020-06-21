@@ -9,7 +9,6 @@ class Menu : public QMenuBar
     QWidget *parent;
     QMenu* menu ;
     QAction *nuovo;
-    QAction *print;
     QAction *save;
     QAction *saveAs;
     QAction* load ;
@@ -20,7 +19,6 @@ public:
     QAction *getSave() const;
     QAction *getSaveAs() const;
     QAction *getLoad() const;
-    QAction *getPrint() const;
     QAction *getExit() const;
 };
 

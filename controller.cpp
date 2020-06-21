@@ -211,15 +211,7 @@ void Controller::slotPrint() {
           filename = currentFile;
           overr = true;
    }else{
-          QFileDialog *fileDialog = new QFileDialog;
-          fileDialog->setDefaultSuffix("pdf");
-          filename=
-                  fileDialog->getSaveFileName(
-                       this,
-                       tr("Scegli dove salvare il file"),
-                       QDir::currentPath(),
-                       filter,&filter,QFileDialog::DontUseNativeDialog);
-          //Se l'utente non ha inserito l'estensione la aggiungo
+
 
     if(filename.isEmpty())
         QMessageBox::warning(this,"Attenzione!","File scelto non valido");
@@ -245,10 +237,9 @@ void Controller::slotPrintReceipt() {
 
     QString filter = "PDF (*.pdf)";
     QString filename;
-    QFileDialog *fileDialog = new QFileDialog;
-    fileDialog->setDefaultSuffix("pdf");
+    QFileDialog fileDialog;
     filename=
-            fileDialog->getSaveFileName(
+            fileDialog.getSaveFileName(
                  this,
                  tr("Scegli dove salvare il file"),
                  QDir::currentPath(),
@@ -312,7 +303,7 @@ void Controller::slotSave(){
     bool overr = false;
     QString filename;
    QAction* send = qobject_cast<QAction*>(sender());
-   if(send && send->text() == "Salva"){
+   if(send && send->text() == "Salva" && currentFile != ""){
        //Salvataggio sullo stesso file se la funzione e' chiamata da un certo oggetto
        filename = currentFile;
        overr = true;
