@@ -873,8 +873,19 @@ void Controller::slotUpdatePage(){
                 Vcarrello->getEditEnabled()->setText("<u> Modifica abilitata! </u>");
                 Vcarrello->getResultsNumber()->setText("<b>" + QString::number(core->getCarrelloSize()) + " strumenti trovati</b>");
                 Vcarrello->getResultsNumber()->setStyleSheet("color : green");
-}
-            }
+                }
+
+    }
+
+  if(carrelloSize || magazzinoSize){
+    if(core->isDataSaved()){
+        saveStatus->setText("Dati salvati");
+        saveStatus->setStyleSheet("color: green;");
+    }else{
+        saveStatus->setText("<u> Dati non salvati </u>");
+        saveStatus->setStyleSheet("color: red;");
+    }
+  }
 
     /* AGGIORNAMENTO STATUS BAR */
 
