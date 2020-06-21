@@ -250,6 +250,8 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
 	 
 	 image->show();
 	 image->setEnabled(true);
+	 if(strumento->getImgPath() != "")
+	      image->setImage(QString::fromStdString(strumento->getImgPath()));
 	 
 	 title->setEnabled(true);
 	 price->setEnabled(true);
