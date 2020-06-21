@@ -268,14 +268,15 @@ void Controller::slotSave(){
                     QDir::currentPath(),
                     json_filter,&json_filter,QFileDialog::DontUseNativeDialog);
 
-        if (!filename.endsWith(".json"))
-        filename += ".json";
-
+   
    //Se l'utente non ha inserito l'estensione la aggiungo
 
  if(filename.isEmpty())
      QMessageBox::warning(this,"Attenzione!","File scelto non valido");
  else{
+      if (!filename.endsWith(".json"))
+	   filename += ".json";
+      
      QFile output(filename);
      if(output.open(QIODevice::WriteOnly) | QIODevice::Text){
          QJsonObject saveObj;
