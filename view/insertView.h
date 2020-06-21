@@ -10,6 +10,7 @@
 #include <QGroupBox>
 #include <QLabel>
 #include <QDialog>
+#include <QTextEdit>
 #include <QWidget>
 #include <string>
 #include <QSpinBox>
@@ -23,9 +24,10 @@ private:
 
     QComboBox *instrumentType; //Arco | Corda | Percussione | Fiato
 
+    QLabel* title;
     QGroupBox* generalInfo;
     QLineEdit *price;
-    QLineEdit *description;
+    QTextEdit *description;
     QLineEdit *brand;
     QLineEdit *model;
     QComboBox *instrumentTune;
@@ -91,8 +93,9 @@ public:
 
     //Strumento
      QComboBox *getInstrumentType() const;
+     QLabel *getTitle() const;
      QLineEdit *getPrice() const;
-     QLineEdit *getDescription() const;
+     QTextEdit *getDescription() const;
      QLineEdit *getBrand() const;
      QLineEdit *getModel() const;
      QComboBox *getInstrumentTune() const;

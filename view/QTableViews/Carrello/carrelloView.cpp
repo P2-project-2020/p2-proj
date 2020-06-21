@@ -60,17 +60,17 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
         resultBar->addWidget(resultsNumber);
         editEnabled->setText("");
         resultBar->addWidget(editEnabled);
-        deleteSelected->setText("Rimuovi Selezionato");
+        deleteSelected->setText(" Rimuovi Selezionato");
         resultBar->addWidget(deleteSelected);
-        //deleteSelected->setIcon(QIcon(":/res/img/negative.svg"));
-        //deleteSelected->setIconSize(QSize(16,16));
-        deleteAll->setText("Svuota Carrello");
-        //deleteAll->setIcon(QIcon(":/res/img/delete.svg"));
-        //deleteAll->setIconSize(QSize(16,16));
+        deleteSelected->setIcon(QIcon::fromTheme("list-remove"));
+        deleteSelected->setIconSize(QSize(13,13));
+        deleteAll->setText(" Svuota Carrello");
+        deleteAll->setIcon(QIcon::fromTheme("edit-delete"));
+        deleteAll->setIconSize(QSize(13,13));
         resultBar->addWidget(deleteAll);
-        proceedAndBuy->setText("Procedi e Acquista");
-        //deleteAll->setIcon(QIcon(":/res/img/buy.svg"));
-        //deleteAll->setIconSize(QSize(16,16));
+        proceedAndBuy->setText(" Procedi e Acquista");
+        proceedAndBuy->setIcon(QIcon(":/icons/res/buy_icon.png"));
+        deleteAll->setIconSize(QSize(10,10));
         resultBar->addWidget(proceedAndBuy);
         search->addItem(resultBar);
 

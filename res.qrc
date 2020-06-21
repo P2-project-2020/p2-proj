@@ -1,13 +1,13 @@
 <RCC>
     <qresource prefix="/icons">
         <file>res/cart.png</file>
-        <file>res/delete.svg</file>
         <file>res/factory.png</file>
-        <file>res/negative.svg</file>
-        <file>res/plus.svg</file>
+        <file>res/PDF-icon.png</file>
+        <file>res/buy_icon.png</file>
     </qresource>
     <qresource prefix="/images">
         <file>res/logo.png</file>
+        <file>res/instruments.jpg</file>
     </qresource>
     <qresource prefix="/json">
         <file>sample.json</file>

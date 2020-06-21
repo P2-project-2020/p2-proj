@@ -17,9 +17,10 @@
 insertView::insertView(QWidget* p, const Strumento* strumento):
     QDialog (p),
     instrumentType(new QComboBox(this)),
+    title(new QLabel(this)),
     generalInfo(new QGroupBox(this)),
     price(new QLineEdit(this)),
-    description(new QLineEdit(this)),
+    description(new QTextEdit(this)),
     brand(new QLineEdit(this)),
     model(new QLineEdit(this)),
     instrumentTune(new QComboBox(this)),
@@ -49,7 +50,7 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
     editItem(new QPushButton("Modifica",this)),
     resetFields(new QPushButton("Reset",this)),
 
-    image(new ImageControlBox("", this)),
+    image(new ImageControlBox(":/images/res/instruments.jpg", this)),
     imgPath("")
 {
      // In pratica il nuovo layout visualizzato è insert_form, che ha
@@ -59,6 +60,10 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
      form->setSpacing(5);
      editItem->hide();
      editItem->setEnabled(false);
+
+     title->setText("");
+     form->addWidget(title);
+
 
     instrumentType->addItem("Scegli il tipo di strumento");
     instrumentType->addItem("Arco");
@@ -72,15 +77,22 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
 
     generalInfo->setTitle("Informazioni generali");
     price->setPlaceholderText("Prezzo strumento");
+    price->setToolTip("Prezzo");
     price->setValidator( new QDoubleValidator(0.01,100000,2,this));
     description->setPlaceholderText("Descrizione strumento");
+    description->setToolTip("Descrizione");
+    description->setLineWidth(200);
     brand->setPlaceholderText("Marca strumento");
+    brand->setToolTip("Marca");
     model->setPlaceholderText("Modello strumento");
+    model->setToolTip("Modello");
     instrumentTune->addItem("Scegli il tipo di tonalità");
+    instrumentTune->setToolTip("Tonalità");
     for(auto& tune : Strumento::Tunes)
 	 instrumentTune->addItem(QString::fromStdString(tune.second));
     
     isSecondHand->setText("Strumento di seconda mano");
+    isSecondHand->setToolTip("Condizione");
     QFormLayout * quantityForm = new QFormLayout;
     quantityForm->setSpacing(5);
     quantity->setRange(1,100000);
@@ -220,28 +232,11 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
     slotDisableElements(0);
 
     if(strumento){
-	 // edit mode
-	 // if(dynamic_cast<Violino*>(strumento)){
-	 //      slotDisableElements(1);
-	 // }
-	 // if(dynamic_cast<Viola*>(strumento)){
-	 //      slotDisableElements(1);
-	 // }
-	 // if(dynamic_cast<Chitarra*>(strumento)){
-	 //      slotDisableElements(2);
-	 // }
-	 // if(dynamic_cast<Basso*>(strumento)){
-	 //      slotDisableElements(2);
-	 // }
-	 // if(dynamic_cast<Pianoforte*>(strumento)){
-	 //      slotDisableElements(2);
-	 // }
-	 // if(dynamic_cast<KitBatteria*>(strumento)){
-	 //      slotDisableElements(2);
-	 // }
-	 // if(dynamic_cast<Sax*>(strumento)){}
-	 // if(dynamic_cast<Tromba*>(strumento)){}
 
+     title->setText(QString::fromStdString(strumento->className()).split(" ").value(0) + " " + QString::fromStdString(strumento->className()).split(" ").value(1));
+     title->setStyleSheet("font-weight: bold" );
+     title->show();
+     instrumentType->hide();
 	 instrumentType->setEnabled(false);
 	 arcoType->setEnabled(false);
 	 cordaType->setEnabled(false);
@@ -249,8 +244,17 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
 	 bassType->setEnabled(false);
 
 	 addItem->hide();
+
 	 image->show();
 	 image->setEnabled(true);
+     image->setEnabled(true);
+     title->setEnabled(true);
+     price->setEnabled(true);
+     description->setEnabled(true);
+     brand->setEnabled(true);
+     model->setEnabled(true);
+     isSecondHand->setEnabled(true);
+     quantity->setEnabled(true);
 	 generalInfo->show();
 	 generalInfo->setEnabled(true);
 	 instrumentTune->show();
@@ -284,6 +288,7 @@ void insertView::slotRestart(){
     instrumentType->show();
 
     image->hide();
+    title->hide();
 
     generalInfo->hide();
     specificInfo->hide();
@@ -294,6 +299,7 @@ void insertView::slotRestart(){
 
     instrumentType->setEnabled(true);
     image->setEnabled(false);
+    title->setEnabled(false);
     price->setEnabled(false);
     description->setEnabled(false);
     brand->setEnabled(false);
@@ -370,7 +376,7 @@ void insertView::slotDisableElements(int index) const
     case 1://Arco
 
         instrumentType->show();
-
+        title->hide();
         generalInfo->show();
         specificInfo->show();
 	image->show();
@@ -404,6 +410,7 @@ void insertView::slotDisableElements(int index) const
 
 
         instrumentType->setEnabled(true);
+        title->setEnabled(false);
         image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
@@ -432,7 +439,7 @@ void insertView::slotDisableElements(int index) const
         slotDisableCorda(0);
 
         instrumentType->show();
-
+        title->hide();
         generalInfo->show();
         specificInfo->show();
         image->show();
@@ -457,6 +464,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
+        title->setEnabled(false);
         image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
@@ -482,6 +490,7 @@ void insertView::slotDisableElements(int index) const
         slotDisablePercussione(0);
 
         instrumentType->show();
+        title->hide();
         generalInfo->show();
         specificInfo->show();
         image->show();
@@ -510,6 +519,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->hide();
 
         instrumentType->setEnabled(true);
+        title->setEnabled(false);
         image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
@@ -537,6 +547,7 @@ void insertView::slotDisableElements(int index) const
     case 4://Fiato
 
         instrumentType->show();
+        title->hide();
         generalInfo->show();
         specificInfo->show();
         image->show();
@@ -568,6 +579,7 @@ void insertView::slotDisableElements(int index) const
         fiatoMaterial->show();
 
         instrumentType->setEnabled(true);
+        title->setEnabled(false);
         image->setEnabled(true);
         price->setEnabled(true);
         description->setEnabled(true);
@@ -601,12 +613,15 @@ void insertView::slotDisableElements(int index) const
 
     default:
         instrumentType->setCurrentIndex(0);
+
         instrumentType->show();
+         title->hide();
         generalInfo->hide();
         specificInfo->hide();
         image->hide();
 
         instrumentType->setEnabled(true);
+        title->setEnabled(false);
         price->setEnabled(false);
         description->setEnabled(false);
         brand->setEnabled(false);
@@ -805,7 +820,7 @@ void insertView::slotSetImage(const QString& new_path){
         return price;
     }
 
-    QLineEdit* insertView::getDescription() const {
+    QTextEdit* insertView::getDescription() const {
         return description;
     }
 

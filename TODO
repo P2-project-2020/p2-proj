@@ -1,24 +1,10 @@
-* HIGH
-** DONE disabilitare celle che contengono informazione non editabile (quelle bianche)
-   CLOSED: [2020-06-19 ven 16:48]
-** TODO manca la connect per "procedi all'acquisto" e bisogna decidere se scarica il file pdf o un qualcosa che descriva l'acquisto
-** TODO manca all'uscita un messaggio di warning se lavoro non è stato salvato
-** DONE nell'inserimento del sax la descrizione non viene inserita
-CLOSED: [2020-06-20 sab 11:59]
-** DONE isnerimento piano non funzione perchè lancia la throw a riga 267-268 in controller -> spostare le due righe all'interno di case 1 e case 2
-CLOSED: [2020-06-19 ven 16:48]
-** DONE Colori per le uantità basse
-CLOSED: [2020-06-20 sab 12:02]
-* LOW
-** TODO correggere scritta "per iniziare caricare un salvataggio" che non si aggiorna quando è presente un file, ma solo quando viene spostato il filtraggio della famiglia;
-** TODO numero elementi non viene aggiornato quando si eliminano/inseriscono elementi, ma solo quando viene cambiato il filtro per famiglia strumenti o la ricerca;
-** TODO sistemare edit prezzo che va in negativo [HALF DONE non fa inserire in negativo, ma dà i range negativi];
+* HIGH/LOW
 ** TODO togliere commenti del vecchio progetto da tutti i file;
 ** TODO togliere warnings
-** TODO vista "dettagli" che mostri descrizione + immagine
-Fattibile con un QHBoxLayout coi widget ImageControlBox e QLabel per
-mostrare i campi =getImgPath()= e =getDescription()= di strumento*
 
 * OPTIONAL
-** DONE manca la gestione dell'immagine per lo strumento; 
-CLOSED: [2020-06-20 sab 12:00]
+** consegnare progetto a Ranzato
+
+GG WP.
+
+

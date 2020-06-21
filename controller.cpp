@@ -77,8 +77,13 @@ Controller::Controller(Model* m,QWidget *parent) :
                                     background-color: grey; \
                                 }  \
                                 ");
-    printTable->setText("Esporta in PDF");
-    viewDetails->setText("Visualizza Dettagli");
+    printTable->setText(" Esporta in PDF");
+    printTable->setIcon(QIcon(":/icons/res/PDF-icon.png"));
+    printTable->setIconSize(QSize(20,15));
+    viewDetails->setText(" Visualizza Dettagli");
+    viewDetails->setIcon(QIcon::fromTheme("system-search"));
+    viewDetails->setIconSize(QSize(13,13));
+
 
     statusBar->setSpacing(20);
     statusBar->addWidget(itemCounter,  Qt::AlignRight);
@@ -347,7 +352,7 @@ void Controller::slotInserisci(){
         int type= insert->getInstrumentType()->currentIndex();
 
         double price = insert->getPrice()->text().toDouble();
-        std::string description = insert->getDescription()->text().toStdString();
+        std::string description = insert->getDescription()->toPlainText().toStdString();
         std::string brand = insert->getBrand()->text().toStdString();
         std::string model = insert->getModel()->text().toStdString();
         std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
