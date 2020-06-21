@@ -34,10 +34,10 @@ bool PdfFactory::printTable(int pagina,QString filename)
 
             QPainter painter;
                     painter.begin(&printer);
-
+                    /*
                     QImage img(":/images/res/logo.png");
                     painter.drawImage(QPoint(0,0),img);
-                    painter.restore();
+                    painter.restore(); */
 
                     //Stampa tabella
                     TablePrinter tablePrinter(&painter, &printer);

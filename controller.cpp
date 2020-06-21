@@ -286,12 +286,11 @@ void Controller::slotLoadSample(){
 
 void Controller::slotSave(){
 
-    /*
    if(core->isDataSaved()){
         QMessageBox::information(this,"Informazione","No Worries! I dati correnti sono gia' salvati");
         return;
-    } */
- QString json_filter = "JSON (*.json)";
+    }
+ QString filter = "JSON (*.json)";
     bool overr = false;
     QString filename;
    QAction* send = qobject_cast<QAction*>(sender());
@@ -305,7 +304,7 @@ void Controller::slotSave(){
                     this,
                     tr("Scegli dove salvare il file"),
                     QDir::currentPath(),
-                    json_filter,&json_filter,QFileDialog::DontUseNativeDialog);
+                    filter,&filter,QFileDialog::DontUseNativeDialog);
 
    
    //Se l'utente non ha inserito l'estensione la aggiungo
@@ -578,7 +577,7 @@ void Controller::slotInserisci(){
    } catch (inputException exc ) {
         QMessageBox::warning(this,"Spono",exc.getErrore());
     }
-}
+}//slotInserisci
 
 void Controller::slotAddToCart() {
 
@@ -646,7 +645,7 @@ core->setDataSaved(false);
 
 slotUpdatePage();
 
-}
+}//slotAddToCart
 
 void Controller::slotDeleteMagazzinoItem()
 {
@@ -671,7 +670,7 @@ core->setDataSaved(false);
 
     }
 slotUpdatePage();
-}
+}//slotDeleteMagazzinoitem
 
 void Controller::slotDeleteCarrelloItem()
 {
@@ -714,7 +713,7 @@ core->setDataSaved(false);
 
     }
 slotUpdatePage();
-}
+}//slotDeleteCarrelloItem
 
 
 void Controller::slotResetMagazzino()
