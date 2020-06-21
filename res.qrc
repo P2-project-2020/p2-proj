@@ -12,4 +12,7 @@
     <qresource prefix="/json">
         <file>sample.json</file>
     </qresource>
+    <qresource prefix="/style">
+        <file>style/receiptcss.css</file>
+    </qresource>
 </RCC>
