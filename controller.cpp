@@ -129,15 +129,10 @@ QString Controller::getCurrentFile() const{ return currentFile;}
 
 void Controller::slotEditDetails(){
 
-    qDebug()<<"ok";
     insertView *insert = Vmagazzino->getEditView();
     Strumento* toEdit = insert->getStrumento();
 
-   // try {
-
         int type= insert->getInstrumentType()->currentIndex();
-
-        qDebug()<<type;
 
         double price = insert->getPrice()->text().toDouble();
         std::string description = insert->getDescription()->toPlainText().toStdString();
@@ -148,16 +143,16 @@ void Controller::slotEditDetails(){
         unsigned int quantity = insert->getQuantity()->text().toUInt();
         std::string path = (insert->getImgPath()).toStdString();
 
+        /*La gerarchia si occupa della validazione */
         toEdit->setPrice(price);
         toEdit->setDescription(description);
         toEdit->setBrand(brand);
         toEdit->setModel(model);
-        //toEdit->setTune(instrumentTune);
+        toEdit->setTune(Strumento::findTune(instrumentTune));
         toEdit->setUsed(isSecondHand);
         toEdit->setQuantity(quantity);
         toEdit->setImgPath(path);
-
-   // }catch()
+        /*La gerarchia si occupa della validazione */
 
         slotUpdatePage();
 
@@ -177,7 +172,7 @@ void Controller::slotViewDetails(){
     QModelIndexList selectedIndexes = Vmagazzino->getTable()->selectionModel()->selectedRows();
 
             int row = Vmagazzino->getFilter()->mapToSource(QPersistentModelIndex(selectedIndexes[0])).row();
-            Vmagazzino->setEditView(core->magazzinoAt(row));
+            Vmagazzino->getEditView()->setStrumento(core->magazzinoAt(row));
             Vmagazzino->slotOpenEditView();
 
     }

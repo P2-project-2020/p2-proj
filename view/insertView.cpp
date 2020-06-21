@@ -232,51 +232,8 @@ insertView::insertView(QWidget* p, Strumento* strumento):
     insert_form->addItem(form);
 
     slotDisableElements(0);
-
-    if(strumento){
-
-	 title->setText(QString::fromStdString(strumento->className()));
-	 title->setStyleSheet("font-weight: bold");
-	 title->show();
-	 instrumentType->hide();
-	 instrumentType->setEnabled(false);
-	 arcoType->setEnabled(false);
-	 cordaType->setEnabled(false);
-	 guitarType->setEnabled(false);
-	 bassType->setEnabled(false);
-	 
-	 addItem->hide();
-	 editItem->show();
-	 editItem->setEnabled(true);
-	 
-	 image->show();
-	 image->setEnabled(true);
-	 if(strumento->getImgPath() != "")
-	      image->setImage(QString::fromStdString(strumento->getImgPath()));
-	 
-	 title->setEnabled(true);
-	 price->setEnabled(true);
-	 description->setEnabled(true);
-	 brand->setEnabled(true);
-	 model->setEnabled(true);
-	 isSecondHand->setEnabled(true);
-	 quantity->setEnabled(true);
-
-	 generalInfo->show();
-	 generalInfo->setEnabled(true);
-
-	 instrumentTune->show();
-	 instrumentTune->setEnabled(true);
-	 
-	 price->setText(QString::number(strumento->getPrice()));
-	 description->setText(QString::fromStdString(strumento->getDescription()));
-	 brand->setText(QString::fromStdString(strumento->getBrand()));
-	 model->setText(QString::fromStdString(strumento->getModel()));
-	 instrumentTune->setCurrentText(QString::fromStdString(Strumento::Tunes.at(strumento->tune())));
-	 isSecondHand->setChecked(strumento->isUsed());
-	 quantity->setValue(strumento->getQuantity());
-    }
     
+    setStrumento(strumento);
     connect(instrumentType,SIGNAL(activated(int)),this,SLOT(slotDisableElements(int)));
     connect(arcoType, SIGNAL(activated(int)), this, SLOT(slotDisableArco(int)));
     connect(cordaType, SIGNAL(activated(int)), this, SLOT(slotDisableCorda(int)));
@@ -286,6 +243,8 @@ insertView::insertView(QWidget* p, Strumento* strumento):
     connect(this,SIGNAL(rejected()),this,SLOT(slotRestart()));
 
 }
+
+
 
 
 
@@ -673,6 +632,60 @@ void insertView::slotDisableArco(int index) const {
     }
 
 }
+
+
+void insertView::setStrumento(Strumento* s){
+
+    if(s){
+        instrumentPointer = s;
+     title->setText(QString::fromStdString(s->className()));
+     title->setStyleSheet("font-weight: bold");
+     title->show();
+     instrumentType->hide();
+     instrumentType->setEnabled(false);
+     arcoType->setEnabled(false);
+     cordaType->setEnabled(false);
+     guitarType->setEnabled(false);
+     bassType->setEnabled(false);
+
+     addItem->hide();
+     addItem->setEnabled(false);
+     editItem->show();
+     editItem->setEnabled(true);
+
+     image->show();
+     image->setEnabled(true);
+     if(s->getImgPath() != "")
+          image->setImage(QString::fromStdString(s->getImgPath()));
+
+     title->setEnabled(true);
+     price->setEnabled(true);
+     description->setEnabled(true);
+     brand->setEnabled(true);
+     model->setEnabled(true);
+     isSecondHand->setEnabled(true);
+     quantity->setEnabled(true);
+
+     generalInfo->show();
+     generalInfo->setEnabled(true);
+
+     instrumentTune->show();
+     instrumentTune->setEnabled(true);
+
+     price->setText(QString::number(s->getPrice()));
+     description->setText(QString::fromStdString(s->getDescription()));
+     brand->setText(QString::fromStdString(s->getBrand()));
+     model->setText(QString::fromStdString(s->getModel()));
+     instrumentTune->setCurrentText(QString::fromStdString(Strumento::Tunes.at(s->tune())));
+     isSecondHand->setChecked(s->isUsed());
+     quantity->setValue(s->getQuantity());
+    }
+
+
+
+
+}//setStrumento
+
 
 void insertView::slotDisableCorda(int index) const
 {
