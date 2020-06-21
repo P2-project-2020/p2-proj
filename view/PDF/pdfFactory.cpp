@@ -78,7 +78,7 @@ bool PdfFactory::printReceipt(QString filename){
     QString html = "<div id='invoice-POS'><center id='top'> \
             <div class='info'> \
               <h2>QMusicShop</h2> \
-               <h3> Ricevuta del:" + QDate::currentDate().toString() + "</h3> \
+               <h3> Ricevuta del: " + QDate::currentDate().toString("dd/MM/yyyy") + "</h3> \
             </div><!--End Info--> \
           </center><!--End InvoiceTop--> \
           \
