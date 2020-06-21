@@ -30,7 +30,7 @@
 **
 ****************************************************************************/
 
-#include "view/PDF/tableprinter.h"
+#include "view/PDF/tablePrinter.h"
 
 #include <QAbstractItemModel>
 #include <QPainter>

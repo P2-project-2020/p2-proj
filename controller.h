@@ -53,6 +53,7 @@ public slots:
     void slotResetTables();
     void slotDataChanged();
     void slotPrint();
+    void slotPrintReceipt();
     void slotViewDetails();
 };
 #endif // CONTROLLER_H

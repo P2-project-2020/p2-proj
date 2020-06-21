@@ -9,6 +9,7 @@
 #include <QInputDialog>
 #include <QGroupBox>
 #include <QSpinBox>
+#include <QTextDocument>
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -110,6 +111,7 @@ Controller::Controller(Model* m,QWidget *parent) :
     //salvataggio
     connect(this->loadSample,SIGNAL(clicked()),this,SLOT(slotLoadSample()));
     connect(this->printTable,SIGNAL(clicked()),this,SLOT(slotPrint()));
+    connect(Vcarrello->getProceedAndBuy(),SIGNAL(clicked()),this,SLOT(slotPrintReceipt()));
     connect(this->viewDetails,SIGNAL(clicked()),this,SLOT(slotViewDetails()));
     connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
     //Per sapere che i dati sono stati modificati in real time
@@ -237,6 +239,55 @@ void Controller::slotPrint() {
 }
 
 /*PDF Print for receipt */
+
+//NEW
+
+void Controller::slotPrintReceipt() {
+
+    QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), "*.pdf");
+    if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".pdf"); }
+
+    QPrinter printer(QPrinter::PrinterResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setPaperSize(QPrinter::A4);
+    printer.setOutputFileName(fileName);
+
+    QTextDocument doc;
+
+    QString test = "ciao";
+    doc.setHtml("<h1>QMusicShop</h1>\n<p>" + test + "Università degli studi di Padova</p>");
+
+    //doc.setPlainText(test);
+
+
+    doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
+    doc.print(&printer);
+
+    /*
+        while(core->getCarrelloSize()) {
+
+
+            for(auto it = core->magazzino_begin();it!=core->magazzino_end(); ++it){
+                Strumento *instrument = *it;
+
+
+            }
+
+
+
+            Vcarrello->getFilter()->removeRows(0,1);
+        }
+
+
+        core->setDataSaved(false);
+
+        slotUpdatePage();*/
+
+    QMessageBox::information(this,tr("Messaggio"),tr("PDF Scontrino generato correttamente"));
+
+    }//
+
+
 
 void Controller::slotLoadSample(){
 
