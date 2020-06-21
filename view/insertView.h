@@ -137,7 +137,7 @@ public:
 
     QPushButton *getAddItemButton() const;
     QPushButton *getEditItemButton() const;
-    void setStrumento(Strumento*);
+    void setStrumento(Strumento*,bool=true);
     QPushButton *getResetFieldsButton() const;
     void showWarningDialog(QWidget* = nullptr, QString ="") const;
 

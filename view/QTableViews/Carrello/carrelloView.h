@@ -12,6 +12,7 @@
 #include "model/model.h"
 #include "view/QTableViews/Carrello/carrelloFilter.h"
 #include "view/QTableViews/Carrello/carrelloAdapter.h"
+#include "view/insertView.h"
 
 class carrelloView : public QWidget
 {
@@ -30,6 +31,7 @@ class carrelloView : public QWidget
 
         QLabel *getResultsNumber() const;
         QLabel *getEditEnabled() const; //USELESS
+        insertView *getDetailView() const;
 
     private:
         Model *core;
@@ -47,15 +49,14 @@ class carrelloView : public QWidget
 
         QLabel *resultsNumber; //risultati della ricerca
         QLabel *editEnabled; //QPushButton *editEnable; USELESS
-
-
-
+        insertView *detailView;
 
     signals:
 
     public slots:
 
         void slotStartFiltering() const;
+        void slotOpenDetailView() const;
 };
 
 #endif // carrelloVIEW_H

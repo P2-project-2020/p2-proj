@@ -634,8 +634,7 @@ void insertView::slotDisableArco(int index) const {
 }
 
 
-void insertView::setStrumento(Strumento* s){
-
+void insertView::setStrumento(Strumento* s, bool editable){
     if(s){
         instrumentPointer = s;
      title->setText(QString::fromStdString(s->className()));
@@ -651,26 +650,27 @@ void insertView::setStrumento(Strumento* s){
      addItem->hide();
      addItem->setEnabled(false);
      editItem->show();
-     editItem->setEnabled(true);
+     editItem->setEnabled(editable);
+     resetFields->setEnabled(editable);
 
      image->show();
-     image->setEnabled(true);
+     image->setEnabled(editable);
      if(s->getImgPath() != "")
           image->setImage(QString::fromStdString(s->getImgPath()));
 
-     title->setEnabled(true);
-     price->setEnabled(true);
-     description->setEnabled(true);
-     brand->setEnabled(true);
-     model->setEnabled(true);
-     isSecondHand->setEnabled(true);
-     quantity->setEnabled(true);
+     title->setEnabled(editable);
+     price->setEnabled(editable);
+     description->setEnabled(editable);
+     brand->setEnabled(editable);
+     model->setEnabled(editable);
+     isSecondHand->setEnabled(editable);
+     quantity->setEnabled(editable);
 
      generalInfo->show();
-     generalInfo->setEnabled(true);
+     generalInfo->setEnabled(editable);
 
      instrumentTune->show();
-     instrumentTune->setEnabled(true);
+     instrumentTune->setEnabled(editable);
 
      price->setText(QString::number(s->getPrice()));
      description->setText(QString::fromStdString(s->getDescription()));
@@ -680,10 +680,6 @@ void insertView::setStrumento(Strumento* s){
      isSecondHand->setChecked(s->isUsed());
      quantity->setValue(s->getQuantity());
     }
-
-
-
-
 }//setStrumento
 
 

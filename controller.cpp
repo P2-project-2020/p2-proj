@@ -116,8 +116,8 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     //Edit ViewDetails
     connect(this->viewDetails,SIGNAL(clicked()),this,SLOT(slotViewDetails()));
-    bool slotEditOk = connect(this->Vmagazzino->getEditView()->getEditItemButton(),SIGNAL(clicked()),this,SLOT(slotEditDetails()));
-    qDebug()<<slotEditOk;
+    connect(this->Vmagazzino->getEditView()->getEditItemButton(),SIGNAL(clicked()),this,SLOT(slotEditDetails()));
+
     //Per sapere che i dati sono stati modificati in real time
     connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
     connect(Vcarrello->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
@@ -156,14 +156,17 @@ void Controller::slotEditDetails(){
 
         slotUpdatePage();
 
+        core->setDataSaved(false);
+
+        QMessageBox::information(this,tr("Messaggio"),tr("Strumento modificato correttamente"));
+
+
 
 }//slotEditDetails
 
 void Controller::slotViewDetails(){
-    /*
-    int row = Vmagazzino->getFilter()->mapToSource
-     (QPersistentModelIndex(selectedIndexes[i])).row(); */
 
+  if(pagine->currentIndex() == 0){
     if(!(Vmagazzino->getTable()->selectionModel()->hasSelection()))
         QMessageBox::warning(this,"Attenzione!","Devi selezionare un elemento!");
     else if(Vmagazzino->getTable()->selectionModel()->selectedRows().size() > 1 )
@@ -171,11 +174,28 @@ void Controller::slotViewDetails(){
     else{
     QModelIndexList selectedIndexes = Vmagazzino->getTable()->selectionModel()->selectedRows();
 
+
             int row = Vmagazzino->getFilter()->mapToSource(QPersistentModelIndex(selectedIndexes[0])).row();
             Vmagazzino->getEditView()->setStrumento(core->magazzinoAt(row));
             Vmagazzino->slotOpenEditView();
+    }//Ok, apro editView
 
-    }
+    }//Magazzino
+    else if (pagine->currentIndex() == 1){
+
+      if(!(Vcarrello->getTable()->selectionModel()->hasSelection()))
+          QMessageBox::warning(this,"Attenzione!","Devi selezionare un elemento!");
+      else if(Vcarrello->getTable()->selectionModel()->selectedRows().size() > 1 )
+              QMessageBox::warning(this,"Attenzione!","Puoi selezionare solo un elemento!");
+      else{
+      QModelIndexList selectedIndexes = Vcarrello->getTable()->selectionModel()->selectedRows();
+
+        int row = Vcarrello->getFilter()->mapToSource(QPersistentModelIndex(selectedIndexes[0])).row();
+        Vcarrello->getDetailView()->setStrumento(core->magazzinoAt(row),0);
+        Vcarrello->slotOpenDetailView();
+      }//Ok, apro viewDetail
+
+    } //Carrello
 
 //slotUpdatePage();
 

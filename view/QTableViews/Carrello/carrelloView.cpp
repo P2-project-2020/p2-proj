@@ -22,7 +22,8 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
     resultsNumber(new QLabel),
-    editEnabled(new QLabel)
+    editEnabled(new QLabel),
+    detailView(new insertView)
 {
 
 
@@ -100,6 +101,7 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
 
     }
 
+    insertView *carrelloView::getDetailView() const{ return detailView; }
     carrelloAdapter* carrelloView::getAdapter() const{ return adapter;}
 
     carrelloFilter *carrelloView::getFilter() const{ return filter;}
@@ -134,6 +136,12 @@ carrelloView::carrelloView(QWidget *parent, Model* model):
                 resultsNumber->setStyleSheet("color : orange");
             }
         }
+    }
+
+    void carrelloView::slotOpenDetailView() const{
+        detailView->setModal(true);
+        detailView->exec();//show
+
     }
 
 
