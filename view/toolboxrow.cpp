@@ -42,7 +42,22 @@ void toolboxRow::initFileDialog(QFileDialog &dialog)
 }
 
 void toolboxRow::slot_load(){
+
+    //filter= "JPG (*.jpg);; PNG(*.png)"
+    /*
+    QFileDialog *fileDialog = new QFileDialog;
+    fileDialog->setDefaultSuffix("pdf");
+    filename=
+            fileDialog->getSaveFileName(
+                 this,
+                 tr("Scegli dove salvare il file"),
+                 QDir::currentPath(),
+                 filter,&filter,QFileDialog::DontUseNativeDialog);
+    //Se l'utente non ha inserito l'estensione la aggiungo
+
+    */
 	QFileDialog dialog(this, tr("Open File"));
+
 	initFileDialog(dialog);
 
 	bool imgAccepted = false;

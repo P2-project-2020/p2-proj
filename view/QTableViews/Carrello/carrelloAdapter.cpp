@@ -46,34 +46,34 @@ QVariant carrelloAdapter::headerData(int section, Qt::Orientation orientation, i
 {
 
     if(role != Qt::DisplayRole)
-        return QVariant();
+     return QVariant();
 
     if (orientation == Qt::Horizontal)
     {
-        switch (section)
-        {
-            case 0:
-                return QString("Strumento");
-            case 1:
-                return QString("Tipo");
-            case 2:
-                return QString("Brand");
-            case 3:
-                return QString("Materiale");
-            case 4:
-                return QString("Tonalità");
-            case 5:
-                return QString("Descrizione");
-            case 6:
-                return QString("Condizione"); //Nuovo | Usato
-            case 7:
-                return QString("Prezzo");
-            case 8:
-             return QString("Quantità");
+     switch (section)
+     {
+     case 0:
+          return QString("Strumento"); // è la prima parola nel metodo className()
 
-            default:
-                return QVariant();
-        }
+     case 1:
+          return QString("Tipo"); // è la seconda parola nel ritorno del metodo className()
+     case 2:
+          return QString("Brand");
+     case 3:
+          return QString("Modello");
+     case 4:
+          return QString("Materiale");
+     case 5:
+          return QString("Tonalità");
+     case 6:
+          return QString("Condizione"); //Nuovo | Usato
+     case 7:
+          return QString("Prezzo");
+     case 8:
+          return QString("Quantità");
+     default:
+          return QVariant();
+     }
     }
     return QVariant();
 }
@@ -96,133 +96,75 @@ QVariant carrelloAdapter::data(const QModelIndex& index, int role) const
         case Qt::SizeHintRole:
             return QSize(500, 0 );
 
-        case Qt::DisplayRole:
-        {
-            switch(index.column())
-            {
+    case Qt::DisplayRole:
+    {
+     switch(index.column())
+     {
 
-            case 0:
-                 return QString::fromStdString(strumento->className()).split(" ").value(0);
-                /* a different (long) way to do that {
-                 if(dynamic_cast<Violino*>(strumento))
-                       return QString("Violino");
-                 else if(dynamic_cast<Viola*>(strumento))
-                            return QString("Viola");
-                 else if(dynamic_cast<Chitarra*>(strumento))
-                            return QString("Chitarra");
-                 else if(dynamic_cast<Basso*>(strumento))
-                            return QString("Basso");
-                 else if(dynamic_cast<Pianoforte*>(strumento))
-                            return QString("Pianoforte");
-                 else if(dynamic_cast<KitBatteria*>(strumento))
-                            return QString("Batteria");
-                 else if(dynamic_cast<Tromba*>(strumento))
-                            return QString("Tromba");
-                 else if(dynamic_cast<Sax*>(strumento))
-                            return QString("Sax");
-            }
-*/
-                 break;
+     case 0:
+          return QString::fromStdString(strumento->className()).split(" ").value(0);
+          break;
 
-            case 1:
-                return QString::fromStdString(strumento->className()).split(" ").value(1);
-/* a different (long) way to do that
-            {
-                if(dynamic_cast<Chitarra*>(strumento)){
-                    Chitarra *chitarra = dynamic_cast<Chitarra*>(strumento);
+     case 1:
+          return QString::fromStdString(strumento->className()).split(" ").value(1);
+          break;
+     case 2:
+          return QString::fromStdString(strumento->getBrand());
+          break;
+     case 3:
+          return QString::fromStdString(strumento->getModel());
+          break;
+     case 4:
+          return QString::fromStdString(strumento->getMaterial());
+          break;
+     case 5:
+          return QString::fromStdString(Strumento::Tunes.at(strumento->tune()));
+          break;
+     case 6:
+          return QString::fromStdString(strumento->isUsed() ? "Usato" : "Nuovo");
+          break;
+     case 7:
+          return QString::number(strumento->getPrice()) + " €";
+          break;
+     case 8:
+          return QString::number(strumento->getQuantity());
+     default:
+          return QVariant();
+          break;
+     }
+    }
+    case SortRole:{
 
-                    if(chitarra) {
+     switch (index.column()){
 
-                        if(chitarra->getType() == Chitarra::guitarType::classic)
-                            return QString("Classica");
-                        else if(chitarra->getType() == Chitarra::guitarType::acoustic)
-                            return QString("Acustica");
-                        else
-                            return QString("Elettrica");
-
-                    }
-
-                }
-
-                else if(dynamic_cast<Basso*>(strumento)){
-                    Basso *basso = dynamic_cast<Basso*>(strumento);
-                    if(basso) {
-
-                        if(basso->getType() == Basso::bassType::acoustic)
-                            return QString("Acustico");
-                        else
-                            return QString("Elettrico");
-
-                    }
-
-                }
-
-                else
-                    return QString("Standard");
-                }*/
-                break;
-
-            case 2:
-                return QString::fromStdString(strumento->getBrand());
-                break;
-            case 3:
-                return QString::fromStdString(strumento->getMaterial());
-                break;
-            case 4:
-                return QString::fromStdString(Strumento::Tunes.at(strumento->tune()));
-                break;
-            case 5:
-                return QString::fromStdString(strumento->getDescription());
-                break;
-            case 6:
-                return QString::fromStdString(strumento->isUsed() ? "Usato" : "Nuovo");
-                break;
-            case 7:
-                return QString::number(strumento->getPrice()) + " €";
-                break;
-            case 8:
-                return QString::number(strumento->getQuantity());
-                break;
-
-            default:
-                return QVariant();
-                break;
-            }
-        }
-
-        case SortRole: {
-
-            switch (index.column()){
-
-            case 0:
-                return this->index(row,index.column()).data();
-                break;
-            case 1:
-                return this->index(row,index.column()).data();
-                break;
-            case 2:
-                return this->index(row,index.column()).data();
-                break;
-            case 3:
-                return this->index(row,index.column()).data();
-                break;
-            case 4:
-                return this->index(row,index.column()).data();
-                break;
-            case 5:
-                return strumento->tune();
-                break;
-            case 6:
-                return strumento->isUsed();
-                break;
-            case 7:
-                return strumento->getPrice();
-            case 8:
-                return strumento->getQuantity();
-                break;
-
-
-        }
+     case 0:
+          return this->index(row,index.column()).data();
+          break;
+     case 1:
+          return this->index(row,index.column()).data();
+          break;
+     case 2:
+          return this->index(row,index.column()).data();
+          break;
+     case 3:
+          return this->index(row,index.column()).data();
+          break;
+     case 4:
+          return this->index(row,index.column()).data();
+          break;
+     case 5:
+          return this->index(row,index.column()).data();
+          break;
+     case 6:
+          return strumento->isUsed();
+          break;
+     case 7:
+          return strumento->getPrice();
+          break;
+     case 8:
+          return strumento->getQuantity();
+          break;
+     }
 
     }//UserRole --> Setting custom sorting role
     }
@@ -264,67 +206,59 @@ Qt::ItemFlags carrelloAdapter::flags(const QModelIndex& index) const
 
 }
 
-
-
-//REVISE
 bool carrelloAdapter::searchMatchRegex(unsigned int ind, const QRegExp& exp, const QString& instrumentType) const
 {
+     Strumento* strumento = core->magazzinoAt(ind);
+     if(instrumentType == "Tutto")
+         return ((QString::fromStdString(strumento->className())).contains(exp) ||
+                 (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+                 (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+                 (QString::number(strumento->getPrice())).contains(exp) ||
+                 (QString::fromStdString(strumento->getModel())).contains(exp));
 
-       Strumento* strumento = core->magazzinoAt(ind);
-          if(instrumentType == "Tutto")
-              return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                      (QString::fromStdString(strumento->getBrand())).contains(exp) ||
-                      (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
-                      (QString::number(strumento->getPrice())).contains(exp) ||
-                      (QString::fromStdString(strumento->getDescription())).contains(exp) ||
-                      (QString::fromStdString(strumento->getModel())).contains(exp));
-
-          else
-             if(instrumentType == "Archi") {
-              return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                      (QString::fromStdString(strumento->getBrand())).contains(exp) ||
-                      (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
-                      (QString::number(strumento->getPrice())).contains(exp) ||
-                      (QString::fromStdString(strumento->getDescription())).contains(exp) ||
-                      (QString::fromStdString(strumento->getModel())).contains(exp)) &&
-                     ((QString::fromStdString(strumento->className())).contains("Violino") ||
-                      (QString::fromStdString(strumento->className())).contains("Viola"));
-          }
-          else if(instrumentType == "Corde") {
-              return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                      (QString::fromStdString(strumento->getBrand())).contains(exp) ||
-                      (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
-                      (QString::number(strumento->getPrice())).contains(exp) ||
-                      (QString::fromStdString(strumento->getDescription())).contains(exp) ||
-                      (QString::fromStdString(strumento->getModel())).contains(exp)) &&
-                     ((QString::fromStdString(strumento->className())).contains("Chitarra") ||
-                      (QString::fromStdString(strumento->className())).contains("Basso") ||
-                      (QString::fromStdString(strumento->className())).contains("Pianoforte"));
-
-          }
-          else if(instrumentType == "Percussioni") {
-              ((QString::fromStdString(strumento->className())).contains(exp) ||
-               (QString::fromStdString(strumento->getBrand())).contains(exp) ||
-               (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
-               (QString::number(strumento->getPrice())).contains(exp) ||
-               (QString::fromStdString(strumento->getDescription())).contains(exp) ||
-               (QString::fromStdString(strumento->getModel())).contains(exp)) &&
-              ((QString::fromStdString(strumento->className())).contains("Batteria") ||
-               (QString::fromStdString(strumento->className())).contains("Pianoforte"));
-          }
-          else if(instrumentType == "Fiati") {
-           return ((QString::fromStdString(strumento->className())).contains(exp) ||
-                   (QString::fromStdString(strumento->getBrand())).contains(exp) ||
-                   (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
-                   (QString::number(strumento->getPrice())).contains(exp) ||
-                   (QString::fromStdString(strumento->getDescription())).contains(exp) ||
-                   (QString::fromStdString(strumento->getModel())).contains(exp)) &&
-                  ((QString::fromStdString(strumento->className())).contains("Tromba") ||
-                    (QString::fromStdString(strumento->className())).contains("Sax"));
-          }
-
-           return false;
+     else
+        if(instrumentType == "Archi") {
+         return ((QString::fromStdString(strumento->className())).contains(exp) ||
+                 (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+                 (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+                 (QString::number(strumento->getPrice())).contains(exp) ||
+                 (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+                ((QString::fromStdString(strumento->className())).contains("Violino") ||
+                 (QString::fromStdString(strumento->className())).contains("Viola"));
      }
+     else if(instrumentType == "Corde") {
+         return ((QString::fromStdString(strumento->className())).contains(exp) ||
+                 (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+                 (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+                 (QString::number(strumento->getPrice())).contains(exp) ||
+                 (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+                ((QString::fromStdString(strumento->className())).contains("Chitarra") ||
+                 (QString::fromStdString(strumento->className())).contains("Basso") ||
+                 (QString::fromStdString(strumento->className())).contains("Pianoforte"));
+
+     }
+     else if(instrumentType == "Percussioni") {
+         ((QString::fromStdString(strumento->className())).contains(exp) ||
+          (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+          (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+          (QString::number(strumento->getPrice())).contains(exp) ||
+          (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+         ((QString::fromStdString(strumento->className())).contains("Batteria") ||
+          (QString::fromStdString(strumento->className())).contains("Pianoforte"));
+     }
+     else if(instrumentType == "Fiati") {
+      return ((QString::fromStdString(strumento->className())).contains(exp) ||
+              (QString::fromStdString(strumento->getBrand())).contains(exp) ||
+              (QString::fromStdString(strumento->getMaterial())).contains(exp) ||
+              (QString::number(strumento->getPrice())).contains(exp) ||
+              (QString::fromStdString(strumento->getModel())).contains(exp)) &&
+             ((QString::fromStdString(strumento->className())).contains("Tromba") ||
+               (QString::fromStdString(strumento->className())).contains("Sax"));
+     }
+
+
+      return false;
+}
 
 
 
