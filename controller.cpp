@@ -203,18 +203,22 @@ void Controller::slotViewDetails(){
 
 void Controller::slotPrint() {
     QString filter = "PDF (*.pdf)";
-       bool overr = false;
-       QString filename;
-      QAction* send = qobject_cast<QAction*>(sender());
-      if(send && send->text() == "Salva"){
-          //Salvataggio sullo stesso file se la funzione e' chiamata da un certo oggetto
-          filename = currentFile;
-          overr = true;
-   }else{
+    QString filename;
+    QFileDialog fileDialog;
+    filename=
+            fileDialog.getSaveFileName(
+                 this,
+                 tr("Scegli dove salvare il file"),
+                 QDir::currentPath(),
+                 filter,&filter,QFileDialog::DontUseNativeDialog);
 
 
-    if(filename.isEmpty())
-        QMessageBox::warning(this,"Attenzione!","File scelto non valido");
+if(filename.isEmpty())
+  QMessageBox::warning(this,"Attenzione!","File scelto non valido");
+else{
+    //Se l'utente non ha inserito l'estensione la aggiungo
+  if (!filename.endsWith(".pdf"))
+      filename += ".pdf";
     else{
         if (!filename.endsWith(".pdf"))
             filename += ".pdf";
@@ -244,11 +248,12 @@ void Controller::slotPrintReceipt() {
                  tr("Scegli dove salvare il file"),
                  QDir::currentPath(),
                  filter,&filter,QFileDialog::DontUseNativeDialog);
-    //Se l'utente non ha inserito l'estensione la aggiungo
+
 
 if(filename.isEmpty())
   QMessageBox::warning(this,"Attenzione!","File scelto non valido");
 else{
+    //Se l'utente non ha inserito l'estensione la aggiungo
   if (!filename.endsWith(".pdf"))
       filename += ".pdf";
 
