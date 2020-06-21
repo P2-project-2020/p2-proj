@@ -127,7 +127,7 @@ void Controller::slotViewDetails(){
     int row = Vmagazzino->getFilter()->mapToSource
      (QPersistentModelIndex(selectedIndexes[i])).row(); */
 
-    if(!Vmagazzino->getTable()->selectionModel()->hasSelection())
+    if(!(Vmagazzino->getTable()->selectionModel()->hasSelection()))
         QMessageBox::warning(this,"Attenzione!","Devi selezionare un elemento!");
     else if(!Vmagazzino->getTable()->selectionModel()->selectedRows().size() > 1 )
             QMessageBox::warning(this,"Attenzione!","Puoi selezionare solo un elemento!");
@@ -244,13 +244,29 @@ void Controller::slotPrint() {
 
 void Controller::slotPrintReceipt() {
 
-    QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Export PDF", QString(), "*.pdf");
-    if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".pdf"); }
+    QString filter = "PDF (*.pdf)";
+    QString filename;
+    QFileDialog *fileDialog = new QFileDialog;
+    fileDialog->setDefaultSuffix("pdf");
+    filename=
+            fileDialog->getSaveFileName(
+                 this,
+                 tr("Scegli dove salvare il file"),
+                 QDir::currentPath(),
+                 filter,&filter,QFileDialog::DontUseNativeDialog);
+    //Se l'utente non ha inserito l'estensione la aggiungo
+
+if(filename.isEmpty())
+  QMessageBox::warning(this,"Attenzione!","File scelto non valido");
+else{
+  if (!filename.endsWith(".pdf"))
+      filename += ".pdf";
+
 
     QPrinter printer(QPrinter::PrinterResolution);
     printer.setOutputFormat(QPrinter::PdfFormat);
     printer.setPaperSize(QPrinter::A4);
-    printer.setOutputFileName(fileName);
+    printer.setOutputFileName(filename);
 
     QTextDocument doc;
 
@@ -363,7 +379,7 @@ void Controller::slotPrintReceipt() {
         slotUpdatePage();*/
 
     QMessageBox::information(this,tr("Messaggio"),tr("PDF Scontrino generato correttamente"));
-
+}//filename non vuoto
     }//
 
 
