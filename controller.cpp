@@ -105,12 +105,19 @@ Controller::Controller(Model* m,QWidget *parent) :
     connect(Vmagazzino->getAddToCart(),SIGNAL(clicked()),this,SLOT(slotAddToCart())); //NEW
     connect(Vcarrello->getDeleteSelected(),SIGNAL(clicked()),this,SLOT(slotDeleteCarrelloItem()));
     connect(Vcarrello->getDeleteAll(),SIGNAL(clicked()),this,SLOT(slotResetCarrello()));
-    //salvataggio
+
+    //Salvataggio e loading JSON
     connect(this->loadSample,SIGNAL(clicked()),this,SLOT(slotLoadSample()));
+    connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
+
+    //PDF print
     connect(this->printTable,SIGNAL(clicked()),this,SLOT(slotPrint()));
     connect(Vcarrello->getProceedAndBuy(),SIGNAL(clicked()),this,SLOT(slotPrintReceipt()));
+
+    //Edit ViewDetails
     connect(this->viewDetails,SIGNAL(clicked()),this,SLOT(slotViewDetails()));
-    connect(menuBar->getSave(),SIGNAL(triggered()),this,SLOT(slotSave()));
+    connect(this->Vmagazzino->getAddView()->getEditItemButton(),SIGNAL(clicked()),this,SLOT(slotEditViewDetails()));
+
     //Per sapere che i dati sono stati modificati in real time
     connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
     connect(Vcarrello->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
@@ -119,6 +126,43 @@ Controller::Controller(Model* m,QWidget *parent) :
 
 QString Controller::getCurrentFile() const{ return currentFile;}
 
+
+void Controller::slotEditViewDetails(){
+
+    insertView *insert = Vmagazzino->getAddView();
+    Strumento* toEdit = insert->getStrumento();
+
+   // try {
+
+        int type= insert->getInstrumentType()->currentIndex();
+
+        qDebug()<<type;
+
+        double price = insert->getPrice()->text().toDouble();
+        std::string description = insert->getDescription()->toPlainText().toStdString();
+        std::string brand = insert->getBrand()->text().toStdString();
+        std::string model = insert->getModel()->text().toStdString();
+        std::string instrumentTune = insert->getInstrumentTune()->currentText().toStdString();
+        bool isSecondHand = insert->getIsSecondHand()->isChecked();
+        unsigned int quantity = insert->getQuantity()->text().toUInt();
+        std::string path = (insert->getImgPath()).toStdString();
+
+        toEdit->setPrice(price);
+        toEdit->setDescription(description);
+        toEdit->setBrand(brand);
+        toEdit->setModel(model);
+        //toEdit->setTune(instrumentTune);
+        toEdit->setUsed(isSecondHand);
+        toEdit->setQuantity(quantity);
+        toEdit->setImgPath(path);
+
+   // }catch()
+
+        slotUpdatePage();
+
+
+}//slotEditViewDetails
+
 void Controller::slotViewDetails(){
     /*
     int row = Vmagazzino->getFilter()->mapToSource
@@ -126,11 +170,10 @@ void Controller::slotViewDetails(){
 
     if(!(Vmagazzino->getTable()->selectionModel()->hasSelection()))
         QMessageBox::warning(this,"Attenzione!","Devi selezionare un elemento!");
-    else if(!Vmagazzino->getTable()->selectionModel()->selectedRows().size() > 1 )
+    else if(Vmagazzino->getTable()->selectionModel()->selectedRows().size() > 1 )
             QMessageBox::warning(this,"Attenzione!","Puoi selezionare solo un elemento!");
     else{
     QModelIndexList selectedIndexes = Vmagazzino->getTable()->selectionModel()->selectedRows();
-
 
             int row = Vmagazzino->getFilter()->mapToSource(QPersistentModelIndex(selectedIndexes[0])).row();
             Vmagazzino->setAddView(core->magazzinoAt(row));

@@ -13,9 +13,6 @@
 
 #include "view/PDF/pdfFactory.h"
 
-
-
-
 class Controller : public QWidget
 {   Q_OBJECT
 private:
@@ -42,7 +39,6 @@ public:
     QString getCurrentFile() const;
     void resetMagazzino();
     void resetCarrello();
-    void printPdfTable(const QString);
 public slots:
     void slotSave();
     void slotLoad();
@@ -59,5 +55,6 @@ public slots:
     void slotPrint();
     void slotPrintReceipt();
     void slotViewDetails();
+    void slotEditViewDetails();
 };
 #endif // CONTROLLER_H

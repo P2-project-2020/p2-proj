@@ -14,8 +14,9 @@
 #include "model/hierarchy/strumento.h"
 
 
-insertView::insertView(QWidget* p, const Strumento* strumento):
+insertView::insertView(QWidget* p, Strumento* strumento):
     QDialog (p),
+    instrumentPointer(strumento),
     instrumentType(new QComboBox(this)),
     title(new QLabel(this)),
     generalInfo(new QGroupBox(this)),
@@ -930,6 +931,12 @@ void insertView::slotSetImage(const QString& new_path){
 
 QString insertView::getImgPath() const {
      return imgPath;
+     // ritorna una copia non dovrebbe essere troppo grossa, e viene
+     // fatto solo una volta
+}
+
+Strumento* insertView::getStrumento() const {
+     return instrumentPointer;
      // ritorna una copia non dovrebbe essere troppo grossa, e viene
      // fatto solo una volta
 }

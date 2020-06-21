@@ -22,6 +22,7 @@ class insertView : public QDialog
   Q_OBJECT
 private:
 
+    Strumento *instrumentPointer;
     QComboBox *instrumentType; //Arco | Corda | Percussione | Fiato
 
     QLabel* title;
@@ -89,7 +90,7 @@ private:
 
 public:
 
-     insertView(QWidget* = nullptr, const Strumento* = nullptr);
+     insertView(QWidget* = nullptr, Strumento* = nullptr);
 
     //Strumento
      QComboBox *getInstrumentType() const;
@@ -102,6 +103,7 @@ public:
      QCheckBox *getIsSecondHand() const;
      QSpinBox *getQuantity() const;
      QString getImgPath() const;
+     Strumento* getStrumento() const;
 
     //Arco
     QComboBox *getArcoType() const;
