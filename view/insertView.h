@@ -76,8 +76,9 @@ private:
 
 //*******************************************
      QPushButton *addItem; //Aggiunge un nuovo item alla lista di quelli disponibili(al magazzino)
-     QPushButton *resetFields; //Resetta i campi dell'item con i valori di default
      QPushButton *editItem; //Utilizzabile solo per editare
+     QPushButton *resetFields; //Resetta i campi dell'item con i valori di default
+
      
      ImageControlBox* image;
      QString imgPath;

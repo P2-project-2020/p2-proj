@@ -42,15 +42,17 @@ bool PdfFactory::printTable(int pagina,QString filename)
                     //Stampa tabella
                     TablePrinter tablePrinter(&painter, &printer);
                     QVector<int> columnStretch = QVector<int>() << 10 << 10 << 10 << 10 << 10 << 10 << 10 <<10 << 4;
-                     if(pagina ==0)
+                     if(pagina ==0){
                          if(!tablePrinter.printTable(magazzinoAdapter, columnStretch))
                              qDebug() << tablePrinter.lastError();
-                         else
-                            if(pagina == 1)
+                     }else
+                            if(pagina == 1){
                                 if(!tablePrinter.printTable(carrelloAdapter, columnStretch))
                                     qDebug() << tablePrinter.lastError();
+                         }
 
                     painter.end();
+                    return true;
 
     }//printPdfTable
 

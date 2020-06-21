@@ -132,8 +132,6 @@ void Controller::slotEditDetails(){
     insertView *insert = Vmagazzino->getEditView();
     Strumento* toEdit = insert->getStrumento();
 
-        int type= insert->getInstrumentType()->currentIndex();
-
         double price = insert->getPrice()->text().toDouble();
         std::string description = insert->getDescription()->toPlainText().toStdString();
         std::string brand = insert->getBrand()->text().toStdString();

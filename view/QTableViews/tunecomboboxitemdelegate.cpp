@@ -17,7 +17,7 @@ QWidget *TuneComboBoxItemDelegate::createEditor(QWidget *parent, const QStyleOpt
 {
     // Create the combobox and populate it
     QComboBox *cb = new QComboBox(parent);
-    const int row = index.row();
+    //const int row = index.row();
     for(auto& it: Strumento::Tunes )
     cb->addItem(QString::fromStdString(it.second));
     return cb;
