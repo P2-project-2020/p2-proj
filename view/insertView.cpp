@@ -221,6 +221,7 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
     QHBoxLayout* buttonsLayout= new QHBoxLayout;
     buttonsLayout->addWidget(addItem);
     buttonsLayout->addWidget(resetFields);
+    buttonsLayout->addWidget(editItem);
     buttonsLayout->setSpacing(5);
     form->addItem(buttonsLayout);
 
@@ -233,30 +234,34 @@ insertView::insertView(QWidget* p, const Strumento* strumento):
 
     if(strumento){
 
-     title->setText(QString::fromStdString(strumento->className()).split(" ").value(0) + " " + QString::fromStdString(strumento->className()).split(" ").value(1));
-     title->setStyleSheet("font-weight: bold" );
-     title->show();
-     instrumentType->hide();
+	 title->setText(QString::fromStdString(strumento->className()));
+	 title->setStyleSheet("font-weight: bold");
+	 title->show();
+	 instrumentType->hide();
 	 instrumentType->setEnabled(false);
 	 arcoType->setEnabled(false);
 	 cordaType->setEnabled(false);
 	 guitarType->setEnabled(false);
 	 bassType->setEnabled(false);
-
+	 
 	 addItem->hide();
-
+	 editItem->show();
+	 editItem->setEnabled(true);
+	 
 	 image->show();
 	 image->setEnabled(true);
-     image->setEnabled(true);
-     title->setEnabled(true);
-     price->setEnabled(true);
-     description->setEnabled(true);
-     brand->setEnabled(true);
-     model->setEnabled(true);
-     isSecondHand->setEnabled(true);
-     quantity->setEnabled(true);
+	 
+	 title->setEnabled(true);
+	 price->setEnabled(true);
+	 description->setEnabled(true);
+	 brand->setEnabled(true);
+	 model->setEnabled(true);
+	 isSecondHand->setEnabled(true);
+	 quantity->setEnabled(true);
+
 	 generalInfo->show();
 	 generalInfo->setEnabled(true);
+
 	 instrumentTune->show();
 	 instrumentTune->setEnabled(true);
 	 
@@ -911,6 +916,10 @@ void insertView::slotSetImage(const QString& new_path){
 
     QPushButton* insertView::getAddItemButton() const {
         return addItem;
+    }
+
+    QPushButton* insertView::getEditItemButton() const {
+        return editItem;
     }
 
     QPushButton* insertView::getResetFieldsButton() const {

@@ -133,8 +133,8 @@ public:
     QComboBox *getFiatoType() const;
     QComboBox *getFiatoMaterial() const;
 
-
     QPushButton *getAddItemButton() const;
+    QPushButton *getEditItemButton() const;
     QPushButton *getResetFieldsButton() const;
     void showWarningDialog(QWidget* = nullptr, QString ="") const;
 
