@@ -14,9 +14,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QAction>
-#include <QPrinter>
-#include <QPainter>
-#include <view/PDF/tablePrinter.h>
+
 
 #include <QDebug>
 
@@ -29,13 +27,6 @@
 #include "model/hierarchy/pianoforte.h"
 #include "model/hierarchy/tromba.h"
 #include "model/hierarchy/sax.h"
-
-
-
-/*
-#include "GERARCHIA IN BASE ALLE NECESSITÀ
-*/
-
 
 Controller::Controller(Model* m,QWidget *parent) :
     QWidget (parent),
@@ -51,7 +42,8 @@ Controller::Controller(Model* m,QWidget *parent) :
     saveStatus(new QLabel(this)),
     loadSample(new QPushButton(this)),
     printTable(new QPushButton(this)),
-    viewDetails(new QPushButton(this))
+    viewDetails(new QPushButton(this)),
+    pdfFactory(new PdfFactory(Vmagazzino->getAdapter(),Vcarrello->getAdapter(),core))
 {
 
     QGroupBox *logoBox = new QGroupBox();
@@ -145,65 +137,6 @@ void Controller::slotViewDetails(){
 
 }//slotViewDetails
 
-void Controller::printPdfTable(const QString filename){
-
-    QPrinter printer;//(QPrinter::HighResolution);
-                printer.setOutputFormat(QPrinter::PdfFormat);
-                printer.setPageOrientation(QPageLayout::Landscape);
-                printer.setOutputFileName(filename);
-               // printer.setPageMargins(12, 16, 12, 20, QPrinter::Millimeter);
-               //printer.setFullPage(false);
-
-        // printer setup
-
-        QPainter painter;
-                painter.begin(&printer);
-                //Stampa Header
-               /* QDialog *w ;
-                QVBoxLayout *verticalLayout = new QVBoxLayout();
-                w->setLayout(verticalLayout);
-                //verticalLayout->addWidget(new QImage(":/images/res/logo.png"));
-                verticalLayout->addWidget(new QPushButton("btn"));
-                verticalLayout->addWidget(new QLineEdit("text")); */
-/*
-
-                double xscale = printer.pageRect().width() / double(w->width());
-                double yscale = printer.pageRect().height() / double(w->height());
-                double scale = qMin(xscale, yscale);
-                painter.translate(printer.paperRect().center());
-                painter.scale(scale, scale);
-                painter.translate(-w->width()/ 2, -w->height()/ 2);
-                */
-
-                QImage img(":/images/res/logo.png");
-                painter.drawImage(QPoint(0,0),img);
-                painter.restore();
-
-                //Stampa tabella
-                TablePrinter tablePrinter(&painter, &printer);
-                QVector<int> columnStretch = QVector<int>() << 10 << 10 << 10 << 10 << 10 << 10 << 10 <<10 << 4;
-                 if(pagine->currentIndex() == 0) {
-                     if(!tablePrinter.printTable(Vmagazzino->getAdapter(), columnStretch)) {
-                         qDebug() << tablePrinter.lastError();
-                     }
-                     QMessageBox::information(this,tr("Messaggio"),tr("Magazzino generato ed esportato correttamente"));
-
-                 }
-                 else
-                     if(pagine->currentIndex() == 1){
-                         if(!tablePrinter.printTable(Vcarrello->getAdapter(), columnStretch)) {
-                             qDebug() << tablePrinter.lastError();
-                         }
-                         QMessageBox::information(this,tr("Messaggio"),tr("Carrello generato ed esportato correttamente"));
-                 }
-
-                painter.end();
-
-                  //w->render(&painter);
-
-
-
-}//printPdfTable
 
 
 void Controller::slotPrint() {
@@ -231,10 +164,14 @@ void Controller::slotPrint() {
     else{
         if (!filename.endsWith(".pdf"))
             filename += ".pdf";
-        printPdfTable(filename);
+        pdfFactory->printTable(pagine->currentIndex(),filename);
+        if(pagine->currentIndex() == 0)
+            QMessageBox::information(this,QObject::tr("Messaggio"),QObject::tr( "Magazzino generato ed esportato correttamente"));
+        else if(pagine->currentIndex() == 1)
+                QMessageBox::information(this,QObject::tr("Messaggio"),QObject::tr( "Carrello generato ed esportato correttamente"));
+
     }
       }//Chiedo all'utente dove salvare
-
 
 }
 
@@ -262,113 +199,15 @@ else{
   if (!filename.endsWith(".pdf"))
       filename += ".pdf";
 
+      pdfFactory->printReceipt(filename);
 
-    QPrinter printer(QPrinter::PrinterResolution);
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setPaperSize(QPrinter::A4);
-    printer.setOutputFileName(filename);
+      resetCarrello();
 
-    QTextDocument doc;
+      core->setDataSaved(false);
 
-    QString finalCss;
-    QFile baseCssFile(":/style/style/receiptcss.css");
-    if (baseCssFile.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        finalCss.append(baseCssFile.readAll().data());
-    }
+      slotUpdatePage();
 
-    doc.setDefaultStyleSheet("#invoice-POS{box-shadow:0 0 1in -.25in rgba(0,0,0,.5);padding:2mm;margin:0 auto;width:44mm;background:#fff}#invoice-POS ::selection{background:#f31544;color:#fff}#invoice-POS ::moz-selection{background:#f31544;color:#fff}#invoice-POS h1{font-size:1.5em;color:#222}#invoice-POS h2{font-size:.9em}#invoice-POS h3{font-size:1.2em;font-weight:300;line-height:2em}#invoice-POS p{font-size:.7em;color:#666;line-height:1.2em}#invoice-POS #bot,#invoice-POS #mid,#invoice-POS #top{border-bottom:1px solid #eee}#invoice-POS #top{min-height:100px}#invoice-POS #mid{min-height:80px}#invoice-POS #bot{min-height:50px}#invoice-POS #top .logo{height:60px;width:60px;background:url(http://michaeltruong.ca/images/logo1.png) no-repeat;background-size:60px 60px}#invoice-POS .clientlogo{float:left;height:60px;width:60px;background:url(http://michaeltruong.ca/images/client.jpg) no-repeat;background-size:60px 60px;border-radius:50px}#invoice-POS .info{display:block;margin-left:0}#invoice-POS .title{float:right}#invoice-POS .title p{text-align:right}#invoice-POS table{width:100%;border-collapse:collapse}#invoice-POS .tabletitle{font-size:.5em;background:#eee}#invoice-POS .service{border-bottom:1px solid #eee}#invoice-POS .item{width:24mm}#invoice-POS .itemtext{font-size:.5em}#invoice-POS #legalcopy{margin-top:5mm}");
-    QString html = "<div id='invoice-POS'><center id='top'> \
-            <div class='logo'></div> \
-            <div class='info'> \
-              <h2>SBISTechs Inc</h2> \
-            </div><!--End Info--> \
-          </center><!--End InvoiceTop--> \
-          \
-          <div id='mid'> \
-            <div class='info'> \
-              <h2>Contact Info</h2> \
-              <p> \
-                  Address : street city, state 0000</br> \
-                  Email   : JohnDoe@gmail.com</br> \
-                  Phone   : 555-555-5555</br> \
-              </p> \
-            </div> \
-          </div><!--End Invoice Mid--> \
-          \
-          <div id='bot'> \
-      \
-                          <div id='table'> \
-                              <table> \
-                                  <tr class='tabletitle'> \
-                                      <td class='item'><h2>Item</h2></td> \
-                                      <td class='Hours'><h2>Qty</h2></td> \
-                                      <td class='Rate'><h2>Sub Total</h2></td> \
-                                  </tr>";
-
-
-
-
-
-
-
-
-
-            double totalAmount = 0;
-
-
-            for(auto it = core->carrello_begin();it!=core->carrello_end(); ++it){
-
-                Strumento *instrument = *it;
-                QString item = QString::fromStdString(instrument->className() + " " + instrument->getBrand() + " " + instrument->getModel());
-                unsigned int quantity = instrument->getQuantity();
-                double price = instrument->getPrice();
-                totalAmount += price*quantity;
-
-                 html += "<tr class='service'> \
-                    <td class='tableitem'><p class='itemtext'>" + item + "</p></td> \
-                    <td class='tableitem'><p class='itemtext'>" + QString::number(quantity) + "</p></td> \
-                    <td class='tableitem'><p class='itemtext'>" + QString::number(price) + "</p></td> \
-                </tr>";
-
-
-            }
-
-
-            html += "<tr class='tabletitle'> \
-                        <td></td> \
-                        <td class='Rate'><h2>tax</h2></td> \
-                        <td class='payment'><h2>$419.25</h2></td> \
-                    </tr> \
-                    <tr class='tabletitle'> \
-                        <td></td> \
-                        <td class='Rate'><h2>Total</h2></td> \
-                        <td class='payment'><h2>" + QString::number(totalAmount) + "</h2></td> \
-                    </tr> \
-                </table> \
-            </div><!--End Table--> \
-            <div id='legalcopy'> \
-                <p class='legal'><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.  \
-                </p> \
-            </div> \
-\
-        </div><!--End InvoiceBot-->\
-</div><!--End Invoice--> \
-";
-
-             doc.setHtml(html);
-
-                doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
-                doc.print(&printer);
-
-
-            resetCarrello();
-
-        core->setDataSaved(false);
-
-        slotUpdatePage();
-
-    QMessageBox::information(this,tr("Messaggio"),tr("PDF Scontrino generato correttamente"));
+    QMessageBox::information(this,tr("Messaggio"),tr("PDF generato ed esportato correttamente"));
 }//filename non vuoto
     }//
 
@@ -464,13 +303,13 @@ void Controller::slotLoad(){
     }
 
     try{
-    QString json_filter = "JSON, (*.json)";
+    QString filter = "JSON, (*.json)";
         QString filename=
                 QFileDialog::getOpenFileName(
                     this,
                     tr("Scegli il file da aprire"),
                     QDir::currentPath(),
-                    json_filter,&json_filter,QFileDialog::DontUseNativeDialog);
+                    filter,&filter,QFileDialog::DontUseNativeDialog);
 
     if(filename.isEmpty())
         throw inputException("Attenzione! File scelto non valido");

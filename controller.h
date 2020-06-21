@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QTabWidget>
 
+#include "view/PDF/pdfFactory.h"
+
 
 
 
@@ -31,6 +33,8 @@ private:
     QPushButton* loadSample;
     QPushButton* printTable;
     QPushButton* viewDetails;
+    PdfFactory *pdfFactory;
+
 public:
     Controller(Model*, QWidget * = nullptr);
     // Rileva il tentativo di chiusura della finestra, chiede se salvare i dati in caso essi non lo siano
