@@ -3,8 +3,9 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = p2-proj
+TARGET = QMusicShop
 QT += widgets gui printsupport
+CONFIG += c++11
 INCLUDEPATH += .
 
 # You can make your code fail to compile if you use deprecated APIs.
