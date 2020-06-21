@@ -648,15 +648,11 @@ if(confirm == QMessageBox::Yes)
                         /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
                                 core->magazzinoAt(row)->setQuantity(core->magazzinoAt(row)->getQuantity() - quantity);
 
-                             QMessageBox::information(this,"Successo", "Prodotti inseriti correttamente");
                         }
                     }
 
                 }
-
-            else
-    return;
-
+QMessageBox::information(this,"Successo", "Prodotti inseriti correttamente");
 core->setDataSaved(false);
 
     }
