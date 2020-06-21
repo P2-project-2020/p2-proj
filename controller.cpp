@@ -609,8 +609,6 @@ if(confirm == QMessageBox::Yes)
         int row = Vmagazzino->getFilter()->mapToSource
          (QPersistentModelIndex(selectedIndexes[i])).row();
 
-        //qDebug() <<row;
-
         if(!core->magazzinoAt(row)->getQuantity())
             QMessageBox::warning(this,"Attenzione!","Quantità esaurita, rifornire il magazzino!");
 
@@ -784,7 +782,6 @@ void Controller::resetCarrello(){
 
             if(*(*it) == *(core->carrelloAt(0))){ //Nel magazzino sono presenti ancora strumenti uguali a quello che si vuole rimuovere dal carrello -> incremento quantita
                 instrument->setQuantity( core->carrelloAt(0)->getQuantity() + instrument->getQuantity());
-                //qDebug()<< instrument->getQuantity();
                 found = true;
             }
         }
@@ -806,7 +803,6 @@ void Controller::resetCarrello(){
 
 
 void Controller::slotResetTables(){
-    //qDebug()<<sender();
     QAction* send = qobject_cast<QAction*>(sender());
     if(send && send->text() == "Nuovo"){
  if(core->getCarrelloSize() || core->getMagazzinoSize()){
