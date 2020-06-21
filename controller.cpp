@@ -116,8 +116,8 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     //Edit ViewDetails
     connect(this->viewDetails,SIGNAL(clicked()),this,SLOT(slotViewDetails()));
-    connect(this->Vmagazzino->getAddView()->getEditItemButton(),SIGNAL(clicked()),this,SLOT(slotEditViewDetails()));
-
+    bool slotEditOk = connect(this->Vmagazzino->getAddView()->getEditItemButton(),SIGNAL(clicked()),this,SLOT(slotEditViewDetails()));
+    qDebug()<<slotEditOk;
     //Per sapere che i dati sono stati modificati in real time
     connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
     connect(Vcarrello->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
@@ -635,7 +635,7 @@ if(confirm == QMessageBox::Yes)
                         /* Sottraggo la quantita appena inserita in carrello dal magazzino*/
                                 core->magazzinoAt(row)->setQuantity(core->magazzinoAt(row)->getQuantity() - quantity);
 
-
+                             QMessageBox::information(this,"Successo", "Prodotti inseriti correttamente");
                         }
                     }
 
