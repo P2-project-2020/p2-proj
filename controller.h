@@ -55,6 +55,6 @@ public slots:
     void slotPrint();
     void slotPrintReceipt();
     void slotViewDetails();
-    void slotEditViewDetails();
+    void slotEditDetails();
 };
 #endif // CONTROLLER_H

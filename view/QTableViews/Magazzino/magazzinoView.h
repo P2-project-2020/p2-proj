@@ -29,7 +29,8 @@ class magazzinoView : public QWidget
         QPushButton *getAddToCart() const;
 
         insertView* getAddView() const;
-        void setAddView(Strumento*);
+        insertView* getEditView() const;
+        void setEditView(Strumento*);
         QLabel *getResultsNumber() const;
         QLabel *getEditEnabled() const;
 
@@ -49,6 +50,7 @@ class magazzinoView : public QWidget
         QComboBox *instrumentType;
 
         insertView *addView;
+        insertView *editView;
 
         QLabel *resultsNumber; //risultati della ricerca
         QLabel *editEnabled; //QPushButton *editEnable;
@@ -60,6 +62,7 @@ class magazzinoView : public QWidget
 
     public slots:
         void slotOpenInsertView() const;
+        void slotOpenEditView() const;
         void slotStartFiltering() const;
 };
 

@@ -116,7 +116,7 @@ Controller::Controller(Model* m,QWidget *parent) :
 
     //Edit ViewDetails
     connect(this->viewDetails,SIGNAL(clicked()),this,SLOT(slotViewDetails()));
-    bool slotEditOk = connect(this->Vmagazzino->getAddView()->getEditItemButton(),SIGNAL(clicked()),this,SLOT(slotEditViewDetails()));
+    bool slotEditOk = connect(this->Vmagazzino->getEditView()->getEditItemButton(),SIGNAL(clicked()),this,SLOT(slotEditDetails()));
     qDebug()<<slotEditOk;
     //Per sapere che i dati sono stati modificati in real time
     connect(Vmagazzino->getAdapter(),SIGNAL(dataChanged(QModelIndex,QModelIndex,QVector<int>)),this,SLOT(slotDataChanged()));
@@ -127,9 +127,10 @@ Controller::Controller(Model* m,QWidget *parent) :
 QString Controller::getCurrentFile() const{ return currentFile;}
 
 
-void Controller::slotEditViewDetails(){
+void Controller::slotEditDetails(){
 
-    insertView *insert = Vmagazzino->getAddView();
+    qDebug()<<"ok";
+    insertView *insert = Vmagazzino->getEditView();
     Strumento* toEdit = insert->getStrumento();
 
    // try {
@@ -161,7 +162,7 @@ void Controller::slotEditViewDetails(){
         slotUpdatePage();
 
 
-}//slotEditViewDetails
+}//slotEditDetails
 
 void Controller::slotViewDetails(){
     /*
@@ -176,8 +177,8 @@ void Controller::slotViewDetails(){
     QModelIndexList selectedIndexes = Vmagazzino->getTable()->selectionModel()->selectedRows();
 
             int row = Vmagazzino->getFilter()->mapToSource(QPersistentModelIndex(selectedIndexes[0])).row();
-            Vmagazzino->setAddView(core->magazzinoAt(row));
-            Vmagazzino->slotOpenInsertView();
+            Vmagazzino->setEditView(core->magazzinoAt(row));
+            Vmagazzino->slotOpenEditView();
 
     }
 

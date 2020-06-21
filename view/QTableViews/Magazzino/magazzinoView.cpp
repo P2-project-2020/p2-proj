@@ -23,6 +23,7 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     searchLine(new QLineEdit),
     instrumentType(new QComboBox),
     addView(new insertView),
+    editView(new insertView),
     resultsNumber(new QLabel),
     editEnabled(new QLabel)
 
@@ -120,6 +121,13 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
 
     }
 
+    void magazzinoView::slotOpenEditView() const{
+        editView->setModal(true);
+        editView->exec();//show
+
+    }
+
+
     magazzinoFilter *magazzinoView::getFilter() const{ return filter;}
 
     QLabel *magazzinoView::getEditEnabled() const{ return editEnabled;}
@@ -130,7 +138,8 @@ magazzinoView::magazzinoView(QWidget *parent, Model* model):
     QPushButton *magazzinoView::getDeleteAll() const{ return deleteAll; }
     QPushButton *magazzinoView::getAddToCart() const { return addToCart; }
     insertView *magazzinoView::getAddView() const { return addView; }
-    void magazzinoView::setAddView(Strumento* strumento)  { this->addView = new insertView(this,strumento); }
+    insertView *magazzinoView::getEditView() const { return editView; }
+    void magazzinoView::setEditView(Strumento* strumento)  { this->editView = new insertView(this,strumento); }
 
     QLabel *magazzinoView::getResultsNumber() const{ return resultsNumber; }
 
