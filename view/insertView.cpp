@@ -657,6 +657,8 @@ void insertView::setStrumento(Strumento* s, bool editable){
      image->setEnabled(editable);
      if(s->getImgPath() != "")
           image->setImage(QString::fromStdString(s->getImgPath()));
+     else
+	  image->setImage("res/instruments.jpg");
 
      title->setEnabled(editable);
      price->setEnabled(editable);
